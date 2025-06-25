@@ -1,9 +1,12 @@
-Rugby Barnacle Front-End Markdown
+# Rugby Barnacle Front-End Markdown
 
-<img src=“Rugly_Barncale_Logo” alt=“”/> 
-# Rugly Barnacle 
-## Start Date: May 20th 2025
-## Projected End Date:
+<img style="width=200px; height: 200px;" src="./public/assets/RuglyBarnacle_Logo.webp" alt="Rugly Barnacle Logo"/>
+
+### Buisness: Rugly Barnacle
+
+### Start Date: May 20th 2025
+
+### Projected End Date: WIP
 
 # ℹ️ About the Business
 
@@ -54,7 +57,7 @@ She now makes a variety of tufted products from coasters, mirrors, bath rugs, wa
 
 ### Routes
 
-- “/” - Home
+- "/” - Home
 - “/about” - About
 - “/gallery” - Gallery
 - “/cart” - Cart
@@ -131,9 +134,17 @@ src/
 
 ## Design
 
-### Overall Design
+<details>
+<summary> <strong> Entire website design board </strong> </summary>
 
-<img src=“Entire_Figma_map” alt=“”/>
+### Desktop
+
+  <img style="width=500px; height: 500px;" src="./public/assets/MVP - D-FrontEnd.png" alt="Rugly Barnacle desktop design board"/>
+
+### Mobile
+
+  <img style="width=500px; height: 500px;" src="./public/assets/MVP - D-FrontEnd.png" alt="Rugly Barnacle mobile design board"/>
+</details>
 
 ### Color Pallette:
 
