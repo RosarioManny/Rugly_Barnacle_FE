@@ -5,7 +5,7 @@ Rugby Barnacle Front-End Markdown
 ## Start Date: May 20th 2025
 ## Projected End Date:
 
-## About the Business
+# ℹ️ About the Business
 
 Rugby Barnacle is a LGBTQ+ business that sells custom and premade handcrafted tufted rugs.
 Custom orders are made to order while premade rugs can be bought as long as stock is available.
@@ -14,14 +14,14 @@ She now makes a variety of tufted products from coasters, mirrors, bath rugs, wa
 
 **For the remainder of this markdown, Rugly Barnacle will be referred to as RB**
 
-## Client Needs
+### **Client Needs**
 
 - Site should include Cart, Checkout, Gallery, Shop, About, Landing, Custom Orders, Contact, Footer, and Nav.
 - Site should contain a database that can access, edited, delete, and view products for owner.
 - Site should be inviting and have plenty of CTA opportunities.
 - Site will have a custom domain.
 
-## As A User
+### **As A User**
 
 - AAU I should be greeted with a landing page.
 - AAU I should have the ability to navigate the website immediately, via a navigation system.
@@ -33,14 +33,16 @@ She now makes a variety of tufted products from coasters, mirrors, bath rugs, wa
 - AAU I want to have access to several questions about the product, service and business.
 - AAU I want to be able to contact the business for any inquiries
 
-## Tech Stack
+# ℹ️ Web App Details
+
+### Tech Stack
 
 - **Language**: Typescript
 - **Framework**: React / Vite
 - **Styling**: Tailwind and CSS
 - **Payments**: Stripe
 
-## Features
+### Features
 
 - API Fetching
 - Dark/ Light Mode
@@ -50,7 +52,7 @@ She now makes a variety of tufted products from coasters, mirrors, bath rugs, wa
 - Custom Components
 - Accessibility
 
-## Routes
+### Routes
 
 - “/” - Home
 - “/about” - About
@@ -60,6 +62,72 @@ She now makes a variety of tufted products from coasters, mirrors, bath rugs, wa
 - “/shop” - Shop
 - “/shop/<item_id” - Individual Item Preview
 - “/faq” - FAQ
+
+<details>
+  <summary><strong>📁 File Structure</strong></summary>
+
+```bash
+src/
+├── app/
+│   ├── (auth)/                     # Auth-related routes (login, signup)
+│   │   ├── login/
+│   │   │   └── page.js
+│   │   └── signup/
+│   │       └── page.js
+│   ├── (marketing)/                # Public pages (home, about, contact)
+│   │   ├── page.js                 # Homepage
+│   │   ├── about/
+│   │   │   └── page.js
+│   │   └── contact/
+│   │       └── page.js
+│   ├── (shop)/                     # Product-related routes
+│   │   ├── products/
+│   │   │   ├── page.js             # Product listing
+│   │   │   └── [slug]/
+│   │   │       └── page.js         # Single product page
+│   │   ├── categories/
+│   │   │   └── [category]/
+│   │   │       └── page.js         # Category filter
+│   │   └── search/
+│   │       └── page.js             # Search results
+│   ├── cart/
+│   │   └── page.js                 # Shopping cart
+│   ├── checkout/
+│   │   ├── page.js                 # Checkout steps
+│   │   └── success/
+│   │       └── page.js             # Order success
+│   ├── account/                    # User dashboard
+│   │   ├── orders/
+│   │   │   └── page.js
+│   │   └── settings/
+│   │       └── page.js
+│   ├── api/                        # API routes (Stripe, cart actions)
+│   │   ├── cart/
+│   │   │   └── route.js
+│   │   └── checkout/
+│   │       └── route.js
+│   ├── layout.js                   # Root layout
+│   └── template.js                 # Reusable templates (e.g., product grid)
+├── components/
+│   ├── ui/                         # Reusable UI (buttons, modals)
+│   ├── product/                    # Product cards, gallery
+│   ├── cart/                       # Cart components
+│   └── checkout/                   # Checkout steps UI
+├── lib/
+│   ├── db.js                       # Database connection
+│   ├── stripe.js                   # Stripe payment logic
+│   └── utils.js                    # Helper functions
+├── public/
+│   ├── products/                   # Product images
+│   └── assets/                     # Logos, icons
+├── styles/
+│   ├── globals.css                 # Global styles
+│   └── components/                 # Component-specific CSS
+├── middleware.js                   # Auth & route protection
+└── package.json
+```
+
+</details>
 
 ## Design
 
