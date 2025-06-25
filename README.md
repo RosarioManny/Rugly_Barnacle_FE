@@ -60,7 +60,6 @@ She now makes a variety of tufted products from coasters, mirrors, bath rugs, wa
 - “/shop” - Shop
 - “/shop/<item_id” - Individual Item Preview
 - “/faq” - FAQ
--
 
 ## Design
 
@@ -70,14 +69,14 @@ She now makes a variety of tufted products from coasters, mirrors, bath rugs, wa
 
 ### Color Pallette:
 
-2. <span style="background-color:#FEB5FF; color: white; width:10px; height:auto; padding:4px; "> #FEB5FF</span>
-3. <span style="background-color:#5652E7; color: white; padding:4px; "> #5652E7</span>
-4. <span style="background-color:#202254; color: white; padding:4px; "> #202254</span>
-5. <span style="background-color:#114C56; color: white; padding:4px; "> #114C56</span>
-6. <span style="background-color:#00CEC5; color: white; padding:4px; "> #00CEC5</span>
-7. <span style="background-color:#9EECE2; color: black; padding:4px; "> #9EECE2</span>
-8. <span style="background-color:#F0F0F1; color: black; padding:4px; "> #F0F0F1</span>
-9. <span style="background-color:#F27B63; color: white; padding:4px; "> #F27B63</span>
+2. <span> #FEB5FF</span>
+3. <span> #5652E7</span>
+4. <span> #202254</span>
+5. <span> #114C56</span>
+6. <span> #00CEC5</span>
+7. <span> #9EECE2</span>
+8. <span> #F0F0F1</span>
+9. <span> #F27B63</span>
 
 ### Components & Buttons
 
