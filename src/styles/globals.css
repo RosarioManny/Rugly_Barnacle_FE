@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "tailwindcss";
+@theme {
+  --color-bittersweet: #f27b63;
+  --color-mauve: #FEB5FF;
+  --color-space_cadet: #202254;
+  --color-majorelle: #5652E7;
+  --color-midnight_green: #114C56;
+  --color-robin_egg: #00CEC5;
+  --color-breeze: #9EECE2;
+  --color-fleece: #F0F0F1;
+}
+
+/* 
+Color Pallete:
+  Tailwind    -    Hex Code  -  Color
+  fleece -------- '#F0F0F1', -- Light Grey
+  bittersweet --- '#f27b63', -- Orange
+  mauve --------- '#FEB5FF', -- Pink
+  space_cadet: -- '#202254', -- Dark Blue
+  majorelle ----- '#5652E7', -- Bright Purple
+  midnight_green -'#114C56', -- Dark Teal
+  robin_egg ----- '#00CEC5', -- Bright Teal
+  breeze -------- '#9EECE2', -- Light Teal
+*/
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}

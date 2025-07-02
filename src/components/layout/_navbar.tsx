@@ -4,24 +4,22 @@ import { Link } from "react-router-dom"
 export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false)
 
-
   return (
     <>
       {/* Nav Links */}
-      <section>
+      <section  className="text-red-500">
         <Link to="/"> Home </Link>
-        <Link 
-        to="/about" 
+        <span 
         onMouseEnter={() => {setIsOpen(!isOpen)}}
         onMouseLeave={() => {setIsOpen(!isOpen)}}
         > About 
         {isOpen && 
           <>
-            <Link to="/about">About</Link>
+            <Link to="/about">About Me</Link>
             <Link to="/faq">Faq</Link>
           </>
         }
-        </Link>
+        </span>
         <Link to="/shop"> Shop </Link>
         <Link to="/portfolio"> Portfolio </Link>
       </section>
