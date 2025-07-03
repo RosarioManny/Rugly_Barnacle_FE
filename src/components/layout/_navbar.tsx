@@ -5,34 +5,42 @@ export const NavBar = () => {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <>
-      {/* Nav Links */}
-      <section  className="text-red-500">
-        <Link to="/"> Home </Link>
-        <span 
-        onMouseEnter={() => {setIsOpen(!isOpen)}}
-        onMouseLeave={() => {setIsOpen(!isOpen)}}
-        > About 
-        {isOpen && 
-          <>
+    <nav className="">
+      {/* Nav Links */}  
+      <div className="navbar">
+        <Link to="/portfolio">Portfolio</Link>
+        {/* <Link to="/shop">Shop</Link> */}
+        <div className="dropdown">
+          <button className="dropbtn">Shop 
+            <i className="fa fa-caret-down"></i>
+          </button>
+          <div className="dropdown-content">
             <Link to="/about">About Me</Link>
             <Link to="/faq">Faq</Link>
-          </>
-        }
-        </span>
-        <Link to="/shop"> Shop </Link>
-        <Link to="/portfolio"> Portfolio </Link>
-      </section>
+            <Link to="/contact">Contact</Link>
+          </div>
+        </div> 
+        <div className="dropdown">
+          <button className="dropbtn">About 
+            <i className="fa fa-caret-down"></i>
+          </button>
+          <div className="dropdown-content">
+            <Link to="/about">About Me</Link>
+            <Link to="/faq">Faq</Link>
+            <Link to="/contact">Contact</Link>
+          </div>
+        </div> 
+      </div>
       {/* Home - Brand image small logo*/}
-      <section>
+      {/* <section>
         <Link to="/">
           <img src="/assets/Logo/Rugly_Barnacle_192x192.png"/>
         </Link>
-      </section>
+      </section> */}
       {/* Cart Link */}
-      <section>
+      {/* <section>
         <Link to="/cart"> Cart </Link>
-      </section>
-    </>
+      </section> */}
+    </nav>
   )
 }
