@@ -1,12 +1,17 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
+import  CartLogo  from "/assets/Icons/cart-large-minimalistic-svgrepo-com.svg"
 
 export const NavBar = () => {
   const [shopDropdownOpen, setShopDropdownOpen] = useState(false)
+  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
   const [isToggled, setIsToggled] = useState(false)
 
   const handleShopDropdown = () => {
     setShopDropdownOpen(!shopDropdownOpen)
+  }
+  const handleAboutDropdown = () => {
+    setAboutDropdownOpen(!aboutDropdownOpen)
   }
 
   const handleClick = () => {
@@ -14,33 +19,34 @@ export const NavBar = () => {
   }
 
   return (
-    <nav className="navbar flex justify-between items-center ">
+    <nav className="navbar max-h-[55px] flex justify-between items-center ">
+      
       {/* Home - Brand image small logo*/}
-      <section className="flex justify-center items-center">
+      <section className="flex justify-center items-center dropbtn">
         <Link className="brand-logo" to="/">
-          <img className="h-[52px] w-[52px] mx-6" src="/assets/Logo/Rugly_Barnacle_192x192.png"/>
+          <img className=" h-[52px] w-[52px] mx-6" src="/assets/Logo/Rugly_Barnacle_192x192.png"/>
         </Link>
       </section>
+
       {/* Desktop Navbar */}
       <section className="d-nav-links hidden md:flex">
-        <Link to="/portfolio">Portfolio</Link>
-        <Link to="/about">About</Link>
         <div className="dropdown">
+          {/* About Nav Button */}
           <button 
-            className="dropbtn pointer"
-            onClick={handleShopDropdown}>
-            Shop 
+            className="dropbtn"
+            onClick={handleAboutDropdown}>
+            About 
             <div 
               className={`
-              ${shopDropdownOpen ? "border-t-bittersweet rotate-x-180" : "border-t-majorelle"} 
+              ${aboutDropdownOpen ? "border-t-bittersweet rotate-x-180" : "border-t-majorelle"} 
               transition-transform duration-600 border-t-10 border-solid ease-in-out
-              caret-down`} 
-            />
+              caret-down`}/>
           </button>
-          {/* Dropdown Menu Items */}
+
+          {/* ABOUT Dropdown Items */}
           <div 
             className={`
-            ${shopDropdownOpen ? "max-h-96" : "max-h-0"}
+            ${aboutDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
             overflow-hidden transition-all duration-500 ease-in-out
             dropdown-content`}>
             <Link 
@@ -51,13 +57,71 @@ export const NavBar = () => {
             </Link>
             <Link 
               className="flex justify-center" 
-              to="/about"> 
+              to="/faq"> 
               <div className={`caret-right`} />
               <p>Faq </p>
             </Link>
             <Link 
               className="flex justify-center" 
+              to="/contact"> 
+              <div className={`caret-right`} />
+              <p>Contact</p>
+            </Link>
+          </div>
+        </div> 
+        
+          <button className="dropbtn">
+            <Link to="/portfolio">
+            Portfolio
+            </Link>
+          </button>
+  
+        <div className="dropdown">
+          {/* Shop Nav Button */}
+          <button 
+            className="dropbtn pointer"
+            onClick={handleShopDropdown}>
+            Shop 
+            <div 
+              className={`
+              ${shopDropdownOpen ? "border-t-bittersweet rotate-x-180" : "border-t-majorelle"} 
+              transition-transform duration-600 border-t-10 border-solid ease-in-out
+              caret-down`}/>
+          </button>
+
+          {/* SHOP Dropdown Items */}
+          <div 
+            className={`
+            ${shopDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
+            overflow-hidden transition-all duration-500 ease-in-out
+            dropdown-content`}>
+            <Link 
+              className="flex justify-center"  
               to="/about"> 
+              <div className={`caret-right`} />
+              <p>Rugs</p>
+            </Link>
+            <Link 
+              className="flex justify-center"  
+              to="/about"> 
+              <div className={`caret-right`} />
+              <p>Rugs</p>
+            </Link>
+            <Link 
+              className="flex justify-center"  
+              to="/about"> 
+              <div className={`caret-right`} />
+              <p>Rugs</p>
+            </Link>
+            <Link 
+              className="flex justify-center" 
+              to="/faq"> 
+              <div className={`caret-right`} />
+              <p>Stickers & More</p>
+            </Link>
+            <Link 
+              className="flex justify-center" 
+              to="/contact"> 
               <div className={`caret-right`} />
               <p>Contact</p>
             </Link>
@@ -102,8 +166,13 @@ export const NavBar = () => {
           </div>
       </section>
       {/* Cart Link */}
-      <section className="flex justify-center items-center">
-        <Link className="mx-6"to="/cart"> Cart </Link>
+      <section className="flex justify-center items-center dropbtn">
+        <button className="">
+          <Link className="m-6" to="/cart"> 
+            
+            <img className="h-10 w-10" src={CartLogo} alt="Cart-Icon" /> 
+          </Link>
+        </button>
       </section>
     </nav>
   )
