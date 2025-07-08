@@ -1,7 +1,8 @@
 import { Header } from "../../components/layout/_header"
-import { StartOrderBtn } from "../../components/ui/btn_startOrder"
+import { StartOrderBtn } from "../../components/ui/Btn_StartOrder"
 import { ContactUsBtn } from "../../components/ui/btn_contactUs"
-
+import { CategoryCard } from "../../components/ui/categoryCard"
+import { CartIcon, HeartIcon, RugIcon, SmileyfaceIcon, StarIcon } from "../../components/icons-svgs/SvgIcons"
 export const Home = () => {
 
   return (
@@ -17,6 +18,22 @@ export const Home = () => {
       <section>
         <div>
           <ul>
+            <CategoryCard 
+            svg={ <HeartIcon className="text-majorelle"/>}
+            svg_alt="Heart Svg"
+            description="I am the heart Icon"/>
+            <CategoryCard 
+            svg={ <SmileyfaceIcon className="text-majorelle"/>}
+            svg_alt="Heart Svg"
+            description="I am the Smile Icon"/>
+            <CategoryCard 
+            svg={ <StarIcon className="text-majorelle"/>}
+            svg_alt="Heart Svg"
+            description="I am the Star Icon"/>
+            <CategoryCard 
+            svg={ <RugIcon className="text-majorelle"/>}
+            svg_alt="Heart Svg"
+            description="I am the Rug Icon"/>
           </ul>
         </div>
       </section>

@@ -1,6 +1,6 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
-import  CartLogo  from "/assets/Icons/cart-large-minimalistic-svgrepo-com.svg"
+import { CartIcon } from "../icons-svgs/SvgIcons"
 
 export const NavBar = () => {
   const [shopDropdownOpen, setShopDropdownOpen] = useState(false)
@@ -17,12 +17,11 @@ export const NavBar = () => {
   const handleClick = () => {
     setIsToggled(!isToggled)
   }
-
   return (
     <nav className="navbar max-h-[55px] flex justify-between items-center ">
       
       {/* Home - Brand image small logo*/}
-      <section className="flex justify-center items-center dropbtn">
+      <section className="flex justify-center items-center hover:scale-110 transition-all ">
         <Link className="brand-logo" to="/">
           <img className=" h-[52px] w-[52px] mx-6" src="/assets/Logo/Rugly_Barnacle_192x192.png"/>
         </Link>
@@ -129,10 +128,10 @@ export const NavBar = () => {
         </div> 
       </section>
       {/* Mobile Navbar */}
-      <section className="flex md:hidden">
+      <section className="flex overscroll-none md:hidden">
         <button 
           onClick={handleClick} 
-          className="relative w-[50px] h-[40px] flex flex-col justify-center items-center space-y-1 p-2 z-10"
+          className="z-20 relative overscroll-none w-[50px] h-[40px] flex flex-col justify-center items-center space-y-1 p-2 z-10"
           aria-label="Mobile navigation menu - Three lined burger icon">
           <BurgerLine isToggled={isToggled} index={1} />
           <BurgerLine isToggled={isToggled} index={2} />
@@ -141,10 +140,10 @@ export const NavBar = () => {
           {/* Off-screen Menu */}
           <div 
             className={`
-              h-screen w-full fixed top-0 
+              h-screen w-full fixed top-0 overscroll-none
               flex items-center justify-center text-center 
               text-3xl transition-all ease-in-out duration-[1000ms]
-              bg-fleece
+              bg-fleece z-10
               ${isToggled ? 'right-0' : '-right-[800px]'}`}>
             <div className="flex flex-col h-fit text-white">
               {["shop", "about", "faq", "portfolio"].map((link) => (
@@ -166,11 +165,10 @@ export const NavBar = () => {
           </div>
       </section>
       {/* Cart Link */}
-      <section className="flex justify-center items-center dropbtn">
+      <section className="flex justify-center items-center ">
         <button className="">
           <Link className="m-6" to="/cart"> 
-            
-            <img className="h-10 w-10" src={CartLogo} alt="Cart-Icon" /> 
+            <CartIcon className="text-space_cadet hover:text-majorelle" />
           </Link>
         </button>
       </section>
