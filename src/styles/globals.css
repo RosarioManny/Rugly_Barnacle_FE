@@ -150,6 +150,30 @@ body {
   transition-duration: 500ms;
 }
 
+button {
+  font-family: Rethink-Sans;
+}
+
 .heading_text {
   font-family: Silk Flower;
+}
+
+.rethinkSans-text {
+  font-family: Rethink-Sans;
+}
+
+.gradient {
+  background: linear-gradient(-45deg, #202254, #5652E7 );
+  background-size: 400% 100%;
+  animation: gradient 10s ease infinite;
+}
+
+
+@keyframes gradient {
+  0% {
+    background-position: 0% -100%; /* Start from left */
+  }
+  50% {
+    background-position: 100% ;
+  }
 }
