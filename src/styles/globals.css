@@ -16,19 +16,19 @@
 /* Import Fonts */
 @font-face {
   font-family: "Silk Flower";
-  src: local('Silk Flower'), url('../../public/design/Silk\ Flower.otf') format('opentype');
+  src: local('Silk Flower'), url('../../design/Silk\ Flower.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Rethink-Sans";
-  src: local('RethinkSans-VariableFont'), url('../../public/design/RethinkSans-VariableFont_wght.ttf') format('truetype');
+  src: local('RethinkSans-VariableFont'), url('../../design/RethinkSans-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Montserrat";
-  src: local('Montserrat-Variable'), url('../../public/design/Montserrat-VariableFont_wght.ttf') format('truetype');
+  src: local('Montserrat-Variable'), url('../../design/Montserrat-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -163,17 +163,20 @@ button {
 }
 
 .gradient {
-  background: linear-gradient(-45deg, #202254, #5652E7 );
+  background: linear-gradient(-45deg, #5652E7, #202254 );
   background-size: 400% 100%;
-  animation: gradient 10s ease infinite;
+  animation: gradient 15s ease infinite;
 }
 
 
 @keyframes gradient {
   0% {
-    background-position: 0% -100%; /* Start from left */
+    background-position: 0% 50%;
   }
   50% {
-    background-position: 100% ;
+    background-position: 100% 100% ;
+  }
+  100% {
+    background-position: 0% 50%;
   }
 }
