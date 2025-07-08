@@ -10,7 +10,27 @@
   --color-midnight_green: #114C56;
   --color-robin_egg: #00CEC5;
   --color-breeze: #9EECE2;
-  --color-fleece: #F0F0F1;
+  --color-fleece: #F0F0F1; 
+}
+
+/* Import Fonts */
+@font-face {
+  font-family: "Silk Flower";
+  src: local('Silk Flower'), url('../../public/design/Silk\ Flower.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Rethink-Sans";
+  src: local('RethinkSans-VariableFont'), url('../../public/design/RethinkSans-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: local('Montserrat-Variable'), url('../../public/design/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
 }
 
 /* 
@@ -114,6 +134,22 @@ body {
   border-left: 7px solid #00CCCC;
 }
 
-/* .dropdown-content {
-  display: block;
-} */
+.btn_general {
+  padding: .5rem;
+  border-radius: .5rem;
+  background-color: #5652E7;
+  transition-property: all;
+  transition-duration: 500ms;
+}
+
+.btn_contact_us {
+  padding: .5rem;
+  border-radius: .5rem;
+  border:#5652E7 solid 1.5px;
+  transition-property: all;
+  transition-duration: 500ms;
+}
+
+.heading_text {
+  font-family: Silk Flower;
+}
