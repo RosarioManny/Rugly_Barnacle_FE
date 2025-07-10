@@ -1,14 +1,15 @@
 interface CategoryProps {
   svg: React.ReactNode;
-  svg_alt: string;
+  svgAlt?: string;
   description: string;
+  className: string;
 }
 
-export const CategoryCard = ({ svg, svg_alt="Svg Icon", description="" }: CategoryProps) => {
+export const CategoryCard = ({ svg, svgAlt="Svg Icon", description="", className }: CategoryProps) => {
   return (
-    <div>
+    <div aria-label={svgAlt} className={className} >
       {svg}
-      <p> { description } </p>
+      <p className="text-space_cadet"> { description } </p>
     </div>
   )
 }

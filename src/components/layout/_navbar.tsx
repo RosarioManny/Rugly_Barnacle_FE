@@ -21,7 +21,7 @@ export const NavBar = () => {
     <nav className="navbar max-h-[55px] flex justify-between items-center ">
       
       {/* Home - Brand image small logo*/}
-      <section className="flex justify-center items-center hover:scale-110 transition-all ">
+      <section className="flex justify-center items-center focus:scale-110 hover:scale-110 transition-all ">
         <Link className="brand-logo" to="/">
           <img className=" h-[52px] w-[52px] mx-6" src="/assets/Logo/Rugly_Barnacle_192x192.png"/>
         </Link>
@@ -151,7 +151,7 @@ export const NavBar = () => {
                   key={link} 
                   to={`/${link}`} 
                   onClick={handleClick} 
-                  className={`text-space_cadet hover:animate-pulse p-2 relative group pointer-cursor `}>
+                  className={`text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor `}>
                   {link.charAt(0).toUpperCase() + link.slice(1)}
                 </Link>
               ))}
@@ -168,7 +168,7 @@ export const NavBar = () => {
       <section className="flex justify-center items-center ">
         <button className="">
           <Link className="m-6" to="/cart"> 
-            <CartIcon className="text-space_cadet hover:text-majorelle" />
+            <CartIcon className="text-space_cadet focus:scale-110 hover:text-majorelle" />
           </Link>
         </button>
       </section>

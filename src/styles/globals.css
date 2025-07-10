@@ -59,6 +59,7 @@ body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
+/* NAVBAR */
 .navbar {
   overflow: hidden;
   background-color: #F0F0F1;
@@ -74,6 +75,8 @@ body {
 .brand-logo {
   padding: 0px;
 }
+
+/* NAV DROPDOWN */
 .dropdown {
   float: left;
   overflow: hidden;
@@ -137,6 +140,13 @@ body {
   border-left: 7px solid #00CCCC;
 }
 
+/* BUTTONS */
+button {
+  font-family: Rethink-Sans;
+  cursor: pointer;
+  color: #F0F0F1;
+}
+
 .btn_general {
   padding: .5rem;
   border-radius: .5rem;
@@ -148,18 +158,16 @@ body {
 .btn_contact_us {
   padding: .5rem;
   border-radius: .5rem;
-  border:#5652E7 solid 1.5px;
+  border:#5652E7 solid 3px;
   transition-property: all;
   transition-duration: 500ms;
 }
 
-button {
-  font-family: Rethink-Sans;
-  cursor: pointer;
-}
 
 .heading_text {
   font-family: Silk Flower;
+  font-size: 2rem;
+  
 }
 
 .rethinkSans-text {
@@ -167,9 +175,9 @@ button {
 }
 
 .gradient {
-  background: linear-gradient(-45deg, #5652E7, #202254 );
+  background: linear-gradient(-45deg,  #114C56, #202254 );
   background-size: 400% 100%;
-  animation: gradient 15s ease infinite;
+  animation: gradient 10s ease infinite;
 }
 
 
@@ -183,4 +191,9 @@ button {
   100% {
     background-position: 0% 50%;
   }
+}
+
+.section-container {
+  padding: 8px;
+  margin: 8px;
 }

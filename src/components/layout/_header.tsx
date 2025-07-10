@@ -14,10 +14,14 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
     <>
       <header className="
         gradient
-        md:grid md:grid-cols-[2fr_3fr] flex 
         relative justify-center items-center w-full object-cover h-[500px] 
         ">
-        <div className="flex flex-col gap-8 items-center text-center text-fleece justify-center">
+        <div className="flex h-full flex-col gap-4 items-center text-center text-fleece justify-center">
+          {img && (
+            <div className="flex justify-center items-center ">
+              <img className="h-40 " src={img} alt={img_alt} />
+            </div>
+          )}
           <p className="
           heading_text 
           md:text-5xl 
@@ -45,11 +49,6 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
             )}
           </div>
         </div>
-        {img && (
-          <div className="md:flex hidden w-full">
-            <img className="w-full" src={img} alt={img_alt} />
-          </div>
-        )}
       </header>
     </>
   )
