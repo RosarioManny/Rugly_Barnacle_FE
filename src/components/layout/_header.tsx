@@ -18,8 +18,8 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
         ">
         <div className="flex h-full flex-col gap-4 items-center text-center text-fleece justify-center">
           {img && (
-            <div className="flex justify-center items-center ">
-              <img className="h-40 " src={img} alt={img_alt} />
+            <div className="flex drop-shadow-lg/50 justify-center items-center ">
+              <img className="h-40 floating-item" src={img} alt={img_alt} />
             </div>
           )}
           <p className="

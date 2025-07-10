@@ -145,22 +145,21 @@ button {
   font-family: Rethink-Sans;
   cursor: pointer;
   color: #F0F0F1;
+  transition-property: all;
+  transition-duration: 500ms;
 }
+
 
 .btn_general {
   padding: .5rem;
   border-radius: .5rem;
   background-color: #5652E7;
-  transition-property: all;
-  transition-duration: 500ms;
 }
 
 .btn_contact_us {
   padding: .5rem;
   border-radius: .5rem;
   border:#5652E7 solid 3px;
-  transition-property: all;
-  transition-duration: 500ms;
 }
 
 
@@ -196,4 +195,29 @@ button {
 .section-container {
   padding: 8px;
   margin: 8px;
+}
+
+/* FOR FUN */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+    animation-timing-function: ease-out;
+  }
+  25% {
+    transform: rotate(5deg) translateY(-5px) scale(1.1);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: rotate(-3deg) translateY(-2px) scale(.95);
+    animation-timing-function: ease-out;
+  }
+  75% {
+    transform: rotate(4deg) translateY(-4px) scale(1.05);
+    animation-timing-function: ease-in;
+  }
+}
+
+/* Enhanced hover effect */
+.floating-item:hover {
+  animation: gentleFloat 3s ease-in-out infinite both;
 }
