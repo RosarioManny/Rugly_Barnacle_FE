@@ -9,7 +9,7 @@ export const CategoryCard = ({ svg, svgAlt="Svg Icon", description="", className
   return (
     <div aria-label={svgAlt} className={className} >
       {svg}
-      <p className="text-space_cadet"> { description } </p>
+      <p className="text-space_cadet subheading_text"> { description } </p>
     </div>
   )
 }

@@ -28,7 +28,7 @@
 }
 @font-face {
   font-family: "Montserrat";
-  src: local('Montserrat-Variable'), url('../../design/Montserrat-VariableFont_wght.ttf') format('truetype');
+  src: local('Montserrat-VariableFont'), url('../../design/Montserrat-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -47,16 +47,12 @@ Color Pallete:
 */
 
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Montserrat;
   line-height: 1.5;
-  font-weight: 400;
+  font-weight: 00;
   color-scheme: light dark;
   color: #202254;
   background-color: #F0F0F1;
-}
-
-body {
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 /* NAVBAR */
@@ -137,7 +133,13 @@ body {
   height: 0;
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
-  border-left: 7px solid #00CCCC;
+  border-left: 7px solid;
+}
+
+/* BODY TEXT */
+
+.body_text {
+  font-family: Montserrat;
 }
 
 /* BUTTONS */
@@ -151,15 +153,19 @@ button {
 
 
 .btn_general {
-  padding: .5rem;
+  padding: .5rem 1rem;
   border-radius: .5rem;
   background-color: #5652E7;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 .btn_contact_us {
   padding: .5rem;
   border-radius: .5rem;
   border:#5652E7 solid 3px;
+  font-size: 1.3rem;
+  font-weight: bold;
 }
 
 
@@ -169,8 +175,9 @@ button {
   
 }
 
-.rethinkSans-text {
+.subheading_text {
   font-family: Rethink-Sans;
+  font-weight: 900;
 }
 
 .gradient {
@@ -197,6 +204,30 @@ button {
   margin: 8px;
 }
 
+/* Categories and Action Section */
+.cta_container {
+  background-color: #FEB5FF;
+  height: fit-content;
+}
+.cta_container_curve {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.cta_container_curve svg {
+  position: relative;
+  display: block;
+  width: calc(201% + 1.3px);
+  height: 100px;
+}
+
+.cta_container_curve .shape-fill {
+  position: absolute;
+  fill: #FEB5FF;
+}
 /* FOR FUN */
 @keyframes gentleFloat {
   0%, 100% {

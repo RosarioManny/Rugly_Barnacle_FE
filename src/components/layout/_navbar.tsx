@@ -48,24 +48,16 @@ export const NavBar = () => {
             ${aboutDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
             overflow-hidden transition-all duration-500 ease-in-out
             dropdown-content`}>
+            {["about", "contact", "faq"].map((link) => (
             <Link 
-              className="flex justify-center"  
-              to="/about"> 
-              <div className={`caret-right`} />
-              <p>About Me</p>
+              key={link} 
+              to={`/${link}`} 
+              className={``}
+              >
+              <div className={`caret-right text-robin_egg`} />
+              <p> {link.charAt(0).toUpperCase() + link.slice(1)}</p> 
             </Link>
-            <Link 
-              className="flex justify-center" 
-              to="/faq"> 
-              <div className={`caret-right`} />
-              <p>Faq </p>
-            </Link>
-            <Link 
-              className="flex justify-center" 
-              to="/contact"> 
-              <div className={`caret-right`} />
-              <p>Contact</p>
-            </Link>
+            ))}
           </div>
         </div> 
         
