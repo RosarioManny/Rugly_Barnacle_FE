@@ -16,19 +16,19 @@
 /* Import Fonts */
 @font-face {
   font-family: "Silk Flower";
-  src: local('Silk Flower'), url('../../design/Silk\ Flower.otf') format('opentype');
+  src: local('Silk Flower'), url('../../assets/design/font/Silk\ Flower.otf') format('opentype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Rethink-Sans";
-  src: local('RethinkSans-VariableFont'), url('../../design/RethinkSans-VariableFont_wght.ttf') format('truetype');
+  src: local('RethinkSans-VariableFont'), url('../../assets/design/font/RethinkSans-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
 @font-face {
   font-family: "Montserrat";
-  src: local('Montserrat-VariableFont'), url('../../design/Montserrat-VariableFont_wght.ttf') format('truetype');
+  src: local('Montserrat-VariableFont'), url('../../assets/design/font/Montserrat-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -133,7 +133,7 @@ Color Pallete:
   height: 0;
   border-top: 7px solid transparent;
   border-bottom: 7px solid transparent;
-  border-left: 7px solid;
+  border-left: 10px solid;
 }
 
 /* BODY TEXT */
@@ -206,7 +206,7 @@ button {
 
 /* Categories and Action Section */
 .cta_container {
-  background-color: #FEB5FF;
+  background: #FEB5FF;
   height: fit-content;
 }
 .cta_container_curve {

@@ -1,13 +1,12 @@
-import { Header } from "../../components/layout/_header"
-import { StartOrderBtn } from "../../components/ui/Btn_StartOrder"
-import { ContactUsBtn } from "../../components/ui/btn_contactUs"
-import { CategoryCard } from "../../components/ui/categoryCard"
 import { HeartIcon, RugIcon, SmileyfaceIcon, StarIcon, CopyIcon} from "../../components/icons-svgs/SvgIcons"
-import type { FC, SVGProps } from "react"
-import { ShopBtn } from "../../components/ui/btn_shop"
 import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
-
-
+import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
+import { ContactUsBtn } from "../../components/ui/buttons/btn_contactUs"
+import { ShopBtn } from "../../components/ui/buttons/btn_shop"
+import { CategoryCard } from "../../components/ui/categoryCard"
+import { Header } from "../../components/layout/_header"
+import type { FC, SVGProps } from "react"
+import { Carousel } from "../../components/ui/carousel/Carousel"
 
 interface PromiseIcons {
   Icon: FC<SVGProps<SVGSVGElement>>;
@@ -15,8 +14,24 @@ interface PromiseIcons {
   description: string;
 }
 
+interface TempsProps {
+  name: string,
+  path: string
+}
+
 export const Home = () => {
 
+  const Temp: TempsProps[] = [
+    {"name": "Team", "path": "products/rugs/Closeup_AllThat.webp"},
+    {"name": "Ghose", "path": "products/rugs/Showcase_Gengar.webp"},
+    {"name": "Steal", "path": "products/rugs/Custom_Portrait.webp"},
+    {"name": "Self-Portrait", "path": "products/rugs/Custom_Portrait.webp"},
+    {"name": "AlFriet", "path": "products/rugs/Closeup_AllThat.webp"},
+    {"name": "asdas", "path": "products/rugs/Custom_Thumper.webp"},
+    {"name": "Gengar", "path": "products/rugs/Showcase_Gengar.webp"},
+    {"name": "All That", "path": "products/rugs/Closeup_AllThat.webp"},
+    {"name": "Ter", "path": "products/rugs/Custom_Thumper.webp"},
+  ]
   const promiseIcons: PromiseIcons[] = [
     {Icon: HeartIcon, alt: "Heart icon", description: "Personalized & Handcrafted"},
     {Icon: SmileyfaceIcon, alt: "Smiley face icon", description: "Satisfaction Guarenteed"},
@@ -50,7 +65,7 @@ export const Home = () => {
         tagline="Begin your dream rug!"
         btn_1={<StartOrderBtn/>}
         btn_2={<ContactUsBtn/>}
-        img="/assets/Logo/RuglyBarnacle_Logo.webp"
+        img="/assets/design/logo/RuglyBarnacle_Logo.webp"
         img_alt="Rugly Barnacle Logo"/>
       {/* Promises */}
       <section className="section-container">
@@ -70,7 +85,7 @@ export const Home = () => {
       <section className="section-container body_text divide-none divide-4">
         {/* Title */}
         <div className="flex justify-center gap-2 my-4">
-          <img className="flex justify-start h-10 w-10"src="/assets/Icons/X_Star_Teal-Blue.webp" alt="Teal Star decorator" />
+          <img className="flex justify-start h-10 w-10" src="/assets/design/icons/X_Star_Teal-Blue.webp" alt="Teal Star decorator" />
           <h1 className="heading_text"> Custom Rugs</h1>
         </div>
         {/* Price and Action */}
@@ -84,8 +99,8 @@ export const Home = () => {
             <p>
             Contact me directly to inquire more!
             </p>
-            <div className="flex border-solid w-fit pr-2 gap-2 rounded-2xl bg-breeze border-black justify-center items-center">
-              <button onClick={copyEmailBtn} className=" rounded-l-[14px] text-space_cadet hover:text-fleece  hover:bg-robin_egg " > 
+            <div className="flex border-solid pr-2 rounded-2xl bg-breeze border-black justify-center items-center">
+              <button onClick={copyEmailBtn} className="hover:bg-robin_egg rounded-l-2xl text-space_cadet hover:text-fleece hover:scale-110 " > 
                 <CopyIcon className="size-5 m-2 text-inherit"/>
               </button>
               <p id="email-address" className="p-2 subheading_text">
@@ -97,14 +112,19 @@ export const Home = () => {
       </section>
       <CtaWavesBg/>
       <section className="cta_container">
-        <div>
-          {/* <img src="" alt="" /> */}
-          <h1> For the Fans By the Fans</h1>
+        {/* Title */}
+        <div className="gap-3 mx-2 flex flex-col">
+          <img className="flex justify-start h-10 w-10" src="/assets/design/icons/Cross_Star_White.webp" alt="" />
+          <h1 className="heading_text ">For the Fans, By the Fans</h1>
         </div>
+        {/* Carousel */}
         <div>
-
+        
+        <Carousel items={Temp} />
+  
         </div>
-        <div className="">
+        {/* CTA  */}
+        <div className="flex justify-center my-2 py-2">
           <ShopBtn />
         </div>
       </section>
