@@ -1,4 +1,5 @@
 import { useCarousel } from "./useCarousel";
+import { CarouselItem } from "./CarouselItem";
 
 interface CarouselProps {
   items: Array<{
@@ -12,26 +13,17 @@ export const Carousel = ({ items }: CarouselProps) => {
 
   return (
     <div className="relative">
-      <button onClick={handlePrev}>Previous</button>
-      <button onClick={handleNext}>Next</button>
-
-      <div className="flex overflow-hidden">
-        {items.map((item, index) => (
-          <div 
-            key={`${item.name}-${index}`}
-            className={`
-              w-full flex-shrink-0
-              ${index === currentIdx ? "block" : "hidden"}
-              md:block md:w-1/3
-            `}
-          >
-            <img 
-              src={item.path} 
-              alt={item.name}
-              className="w-full h-auto"
-            />
-            <p>{item.name}</p>
-          </div>
+      
+        <button className="text-black" onClick={handlePrev}>Previous</button>
+        <button className="text-black" onClick={handleNext}>Next</button>
+      <div className={`flex overflow-hidden`}>
+        {items.map((item, idx) => (
+          <CarouselItem 
+            link={item.name}
+            img={item.path}
+            title={item.name}
+            key={`${item.name}-${idx}`}
+          /> 
         ))}
       </div>
     </div>

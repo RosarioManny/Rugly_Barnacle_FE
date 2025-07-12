@@ -23,7 +23,7 @@ export const NavBar = () => {
       {/* Home - Brand image small logo*/}
       <section className="flex justify-center items-center focus:scale-110 hover:scale-110 transition-all ">
         <Link className="brand-logo" to="/">
-          <img className=" h-[52px] w-[52px] mx-6" src="/assets/design/Logo/Rugly_Barnacle_192x192.png"/>
+          <img className=" h-[52px] w-[52px] mx-6" src="/assets/design/logo/Rugly_Barnacle_192x192.png" alt="Rugly Barnacle Abrreviated Logo - RB"/>
         </Link>
       </section>
 

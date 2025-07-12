@@ -1,8 +1,10 @@
 import { useState } from "react"
-
 interface CarouselProps {
-  items: string[];
-
+  
+  items: Array<{
+    name: string;
+    path: string;
+  }>;
 }
 
 export const useCarousel = ({ items = [] }: CarouselProps) => {
