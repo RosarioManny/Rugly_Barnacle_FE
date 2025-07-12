@@ -238,8 +238,7 @@ button {
   display: flex;
   flex-direction: column;
   place-items: center;
-  gap: 1rem;
-
+  gap: 1rem; 
 }
 /* FOR FUN */
 @keyframes gentleFloat {

@@ -6,7 +6,10 @@ export const NavBar = () => {
   const [shopDropdownOpen, setShopDropdownOpen] = useState(false)
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
   const [isToggled, setIsToggled] = useState(false)
-
+  const closeDropdown = () => {
+    if (shopDropdownOpen) setShopDropdownOpen(false)
+    if (aboutDropdownOpen) setAboutDropdownOpen(false)
+  }
   const handleShopDropdown = () => {
     setShopDropdownOpen(!shopDropdownOpen)
   }
@@ -53,6 +56,7 @@ export const NavBar = () => {
               key={link} 
               to={`/${link}`} 
               className={``}
+              onClick={closeDropdown}
               >
               <div className={`caret-right text-robin_egg`} />
               <p> {link.charAt(0).toUpperCase() + link.slice(1)}</p> 
@@ -81,43 +85,25 @@ export const NavBar = () => {
           </button>
 
           {/* SHOP Dropdown Items */}
-          <div 
-            className={`
-            ${shopDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
-            overflow-hidden transition-all duration-500 ease-in-out
-            dropdown-content`}>
-            <Link 
-              className="flex justify-center"  
-              to="/about"> 
-              <div className={`caret-right`} />
-              <p>Rugs</p>
-            </Link>
-            <Link 
-              className="flex justify-center"  
-              to="/about"> 
-              <div className={`caret-right`} />
-              <p>Rugs</p>
-            </Link>
-            <Link 
-              className="flex justify-center"  
-              to="/about"> 
-              <div className={`caret-right`} />
-              <p>Rugs</p>
-            </Link>
-            <Link 
-              className="flex justify-center" 
-              to="/faq"> 
-              <div className={`caret-right`} />
-              <p>Stickers & More</p>
-            </Link>
-            <Link 
-              className="flex justify-center" 
-              to="/contact"> 
-              <div className={`caret-right`} />
-              <p>Contact</p>
-            </Link>
+    
+            <div 
+              className={`
+              ${shopDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
+              overflow-hidden transition-all duration-500 ease-in-out
+              dropdown-content`}>
+              {["rugs", "mirror Rugs", "mug Rugs", "custom Rugs"].map((link) => (
+              <Link 
+                key={link} 
+                to={`/${link}`} 
+                className={``}
+                onClick={closeDropdown}
+                >
+                <div className={`caret-right text-robin_egg`} />
+                <p> {link.charAt(0).toUpperCase() + link.slice(1)}</p> 
+              </Link>
+              ))}
+            </div>
           </div>
-        </div> 
       </section>
       {/* Mobile Navbar */}
       <section className="flex overscroll-none md:hidden">

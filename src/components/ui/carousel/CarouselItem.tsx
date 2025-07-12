@@ -1,25 +1,29 @@
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
 
 interface CardProps {
-  img: string,
-  title: string,
-  link: string
+  img: string;
+  title: string;
+  link: string;
 }
 
 export const CarouselItem = ({ img, title, link }: CardProps) => {
   return (
-    <>
-    <div className="card_item_container size-90 ">
+    <div className="flex h-full flex-col">
       <Link 
-      to={`/${link}`}
-      className="size-full">
+        to={`/${link}`}
+        className="
+        relative block aspect-square w-full overflow-hidden rounded-lg
+        tranisition-all duration-200 hover:-translate-y-2 hover:drop-shadow-lg/50"
+      >
         <img 
-        className="rounded object-cover w-full h-full m-2" 
-        src={img}
-        alt="" />
+          className="h-full w-full object-cover transition-transform hover:scale-105 " 
+          src={img}
+          alt={title}
+        />
       </Link>
-      <p className="heading_text"> { title } </p>
+      <div className="mt-2 text-center">
+        <p className="heading_text text-space_cadet">{title}</p>
+      </div>
     </div>
-    </>
-  )
-}
+  );
+};

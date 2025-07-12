@@ -7,7 +7,6 @@ import { CategoryCard } from "../../components/ui/categoryCard"
 import { Header } from "../../components/layout/_header"
 import type { FC, SVGProps } from "react"
 import { Carousel } from "../../components/ui/carousel/Carousel"
-import { CarouselItem } from "../../components/ui/carousel/CarouselItem"
 
 interface PromiseIcons {
   Icon: FC<SVGProps<SVGSVGElement>>;
@@ -119,9 +118,8 @@ export const Home = () => {
           <h1 className="heading_text ">For the Fans, By the Fans</h1>
         </div>
         {/* Carousel */}
-        <div className="size-96 m-4">
+        <div className="">
             <Carousel items={Temp} />
-        {/* <Carousel items={Temp} /> */}
   
         </div>
         {/* CTA  */}

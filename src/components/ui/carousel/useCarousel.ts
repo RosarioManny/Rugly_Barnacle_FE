@@ -1,34 +1,39 @@
-import { useState } from "react"
+import { useState, useCallback } from "react";
+
 interface CarouselProps {
-  
-  items: Array<{
-    name: string;
-    path: string;
-  }>;
+  items: any[];
+  itemsToShow?: number;
 }
 
-export const useCarousel = ({ items = [] }: CarouselProps) => {
+export const useCarousel = ({ items = [], itemsToShow = 1 }: CarouselProps) => {
   const [currentIdx, setCurrentIdx] = useState(0);
   const totalItems = items.length;
-  console.log(totalItems, currentIdx)
+  const cardsToShow = window.innerWidth >= 768 ? 3 : 1
+  console.log(currentIdx)
 
-  const handlePrev = () => {
-    setCurrentIdx(prev => (
-      prev <= 0 ? totalItems - 1 : prev - 1)
-    );
+  const handlePrev = useCallback(() => {
+    setCurrentIdx(prev => (prev <= 0 ? totalItems - cardsToShow : prev - 1));
+  }, [totalItems]);
+
+  const handleNext = useCallback(() => {
+    setCurrentIdx(prev => (prev >= totalItems - cardsToShow ? 0 : prev + 1));
+  }, [totalItems]);
+
+  const handleDragEnd = (e: any, info: any) => {
+    if (info.offset.x > 50) {
+      handlePrev();
+    } else if (info.offset.x < -50) {
+      handleNext();
+    }
   };
 
-  const handleNext = () => {
-    setCurrentIdx(prev => (
-      prev >= totalItems - 1 ? 0 : prev + 1)
-    );
-  };
-
-  return { 
+  return {
     currentIdx,
     handleNext,
     handlePrev,
+    handleDragEnd,
     canGoPrev: currentIdx > 0,
     canGoNext: currentIdx < totalItems - 1,
+    itemsToShow
   };
 };

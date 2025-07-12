@@ -1,3 +1,4 @@
+import { motion, AnimatePresence } from "framer-motion";
 import { useCarousel } from "./useCarousel";
 import { CarouselItem } from "./CarouselItem";
 
@@ -9,23 +10,61 @@ interface CarouselProps {
 }
 
 export const Carousel = ({ items }: CarouselProps) => {
-  const { currentIdx, handleNext, handlePrev } = useCarousel({ items });
+  const { 
+    currentIdx, 
+    handleNext, 
+    handlePrev, 
+    handleDragEnd,
+    itemsToShow,
+  } = useCarousel({ 
+    items,
+    itemsToShow: typeof window !== 'undefined' && window.innerWidth >= 768 ? 3 : 1
+  });
+
+  const itemWidth = 100 / itemsToShow;
 
   return (
-    <div className="relative">
+    <div className="relative w-full overflow-hidden">
+      {/* Navigation Arrows */}
+      <button 
+        onClick={handlePrev}
+        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-md text-space_cadet bg-white/50 p-3 shadow-md backdrop-blur-sm"
+      >
+        &lt;
+      </button>
       
-        <button className="text-black" onClick={handlePrev}>Previous</button>
-        <button className="text-black" onClick={handleNext}>Next</button>
-      <div className={`flex overflow-hidden`}>
+      <button 
+        onClick={handleNext}
+        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 text-space_cadet rounded-md bg-white/50 p-3 shadow-md backdrop-blur-sm"
+      >
+      &gt;
+      </button>
+
+      {/* Carousel Track */}
+      <motion.div
+        drag="x"
+        onDragEnd={handleDragEnd}
+        dragConstraints={{ left: 0, right: 0 }}
+        animate={{
+          x: `-${currentIdx * itemWidth}%`,
+          transition: { type: "spring", stiffness: 300, damping: 30 }
+        }}
+        className="flex py-4 cursor-grab active:cursor-grabbing"
+      >
         {items.map((item, idx) => (
-          <CarouselItem 
-            link={item.name}
-            img={item.path}
-            title={item.name}
+          <motion.div
             key={`${item.name}-${idx}`}
-          /> 
+            className={`flex-shrink-0 p-2`}
+            style={{ width: `${itemWidth}%` }}
+          >
+            <CarouselItem 
+              link={item.name}
+              img={item.path}
+              title={item.name}
+            />
+          </motion.div>
         ))}
-      </div>
+      </motion.div>
     </div>
   );
 };
