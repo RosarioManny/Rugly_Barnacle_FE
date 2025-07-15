@@ -45,7 +45,7 @@ export const NewsLetterForm = () => {
             aria-describedby="email-error"
             placeholder="youremailhere@site.com" 
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            className="bg-white w-2/3 rounded-r-2xl pl-2 py-2">
+            className="bg-white md:w-xs w-2/3 rounded-r-2xl pl-2 py-2">
           </input>
         </form>
       </section>

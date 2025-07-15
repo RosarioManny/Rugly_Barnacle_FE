@@ -70,7 +70,7 @@ export const Home = () => {
       <section aria-label="Promises Section" className="section-container">
           <ul className="grid grid-cols-2 md:flex justify-center">
             {promiseIcons.map(({ Icon, alt, description }, idx) => (
-              <li>
+              <li key={`${alt}-${idx}`}>
                 <CategoryCard 
                   className="flex flex-col items-center text-center p-4 gap-2"
                   key={`promise-icon-${idx}`}
