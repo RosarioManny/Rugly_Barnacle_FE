@@ -151,7 +151,6 @@ button {
   transition-duration: 500ms;
 }
 
-
 .btn_general {
   padding: .5rem 1rem;
   border-radius: .5rem;
@@ -159,6 +158,7 @@ button {
   font-size: 1.3rem;
   font-weight: bold;
 }
+
 
 .btn_contact_us {
   padding: .5rem;

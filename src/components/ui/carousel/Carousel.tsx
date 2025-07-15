@@ -28,14 +28,14 @@ export const Carousel = ({ items }: CarouselProps) => {
       {/* Navigation Arrows */}
       <button 
         onClick={handlePrev}
-        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-md text-space_cadet bg-white/50 p-3 shadow-md backdrop-blur-sm"
+        className="absolute left-4 top-1/2 z-10 -translate-y-1/2 rounded-md text-space_cadet bg-majorelle p-3 shadow-md backdrop-blur-sm"
       >
         &lt;
       </button>
       
       <button 
         onClick={handleNext}
-        className="absolute right-4 top-1/2 z-10 -translate-y-1/2 text-space_cadet rounded-md bg-white/50 p-3 shadow-md backdrop-blur-sm"
+        className="active:bg-robin_egg absolute right-4 top-1/2 z-10 -translate-y-1/2 text-space_cadet rounded-md bg-majorelle p-3 shadow-md backdrop-blur-sm"
       >
       &gt;
       </button>
