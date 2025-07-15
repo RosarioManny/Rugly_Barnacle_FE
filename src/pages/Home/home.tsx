@@ -110,7 +110,7 @@ export const Home = () => {
           </div>
         </div>
       </section>
-      <CtaWavesBg/>
+      <CtaWavesBg className="fill-mauve"/>
       <section className="cta_container">
         {/* Title */}
         <div className="gap-3 mx-2 flex flex-col">
@@ -127,9 +127,6 @@ export const Home = () => {
           <ShopBtn />
         </div>
       </section>
-      <h1  className="text-breeze">
-        I am the home page 🏠
-      </h1>
     </>
   )
 }
