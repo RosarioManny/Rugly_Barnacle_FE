@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 export const ShopBtn = () => {
   return (
       <button className="
-        btn_general btn_start_order 
+        btn_general
         flex items-center gap-2 group
         drop-shadow-sm/50
         hover:bg-robin_egg hover:scale-105 

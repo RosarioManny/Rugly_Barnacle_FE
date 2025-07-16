@@ -21,10 +21,13 @@ export const NavBar = () => {
     setIsToggled(!isToggled)
   }
   return (
-    <nav className="navbar max-h-[55px] flex justify-between items-center ">
+    <nav className="
+    navbar 
+    max-h-[15vh] 
+    grid grid-cols-3 items-center ">
       
       {/* Home - Brand image small logo*/}
-      <section className="flex justify-center items-center focus:scale-110 hover:scale-110 transition-all ">
+      <section className="justify-self-start focus:scale-110 hover:scale-110 transition-all ">
         <Link className="brand-logo" to="/">
           <img className=" h-[52px] w-[52px] mx-6" src="/assets/design/logo/Rugly_Barnacle_192x192.png" alt="Rugly Barnacle Abrreviated Logo - RB"/>
         </Link>
@@ -65,8 +68,8 @@ export const NavBar = () => {
           </div>
         </div> 
         
-          <button className="dropbtn">
-            <Link to="/portfolio">
+          <button className="">
+            <Link className="" to="/portfolio">
             Portfolio
             </Link>
           </button>
@@ -106,10 +109,14 @@ export const NavBar = () => {
           </div>
       </section>
       {/* Mobile Navbar */}
-      <section className="flex overscroll-none md:hidden">
+      <section className=" justify-self-center md:hidden">
         <button 
           onClick={handleClick} 
-          className="z-20 relative overscroll-none w-[50px] h-[40px] flex flex-col justify-center items-center space-y-1 p-2 z-10"
+          className="
+          z-20 relative overscroll-none 
+          w-[50px] h-[40px] 
+          
+          space-y-1 p-2 z-10"
           aria-label="Mobile navigation menu - Three lined burger icon">
           <BurgerLine isToggled={isToggled} index={1} />
           <BurgerLine isToggled={isToggled} index={2} />
@@ -134,16 +141,26 @@ export const NavBar = () => {
                 </Link>
               ))}
             </div>
-            <img 
-              className="bottom-10 absolute h-40"
-              src="/icons-logos/Nomad-logo-White-Transparent.png" 
-              alt="Rugly Barnacle logo with writing"
-              loading="lazy"
-            />
+            <Link 
+            to="/" 
+            className="absolute bottom-10"
+            onClick={handleClick}>
+              <img 
+                className="
+                duration-300 transform-all ease-in
+                hover:scale-105
+                active:scale-105 
+                focus:scale-105
+                h-20"
+                src="/assets/design/logo/Rugly_Barnacle_192x192.png" 
+                alt="Rugly Barnacle small logo"
+                loading="lazy"
+              />
+            </Link>
           </div>
       </section>
       {/* Cart Link */}
-      <section className="flex justify-center items-center ">
+      <section className="justify-self-end">
         <button className="">
           <Link className="m-6" to="/cart"> 
             <CartIcon className="text-space_cadet focus:scale-110 hover:text-majorelle" />
