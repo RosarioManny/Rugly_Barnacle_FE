@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useCarousel } from "./useCarousel";
 import { CarouselItem } from "./CarouselItem";
 
