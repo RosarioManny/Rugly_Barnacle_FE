@@ -4,7 +4,7 @@ export const StartOrderBtn = () => {
   return (
       <button className="
         btn_general btn_start_order
-        duration-100
+        duration-100 drop-shadow-sm/50
         hover:bg-robin_egg hover:scale-105
         active:bg-robin_egg active:scale-105 
         focus:bg-robin_egg focus:scale-105"> 

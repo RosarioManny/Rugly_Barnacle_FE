@@ -96,7 +96,7 @@ export const Home = () => {
         {/* Price and Action */}
         <div className=" flex flex-col items-center text-center gap-4">
           <img 
-          className="w-full rounded-xl" 
+          className="w-full rounded-xl drop-shadow-md/40" 
           src="/products/prices/General_Pricing_Poster.webp" 
           alt="General Pricing Poster - Pricing's vary by design, size, quantity, colors and intricacy. 
           Estimates are is: 3ft is $150+ ; 4ft is $250; 5ft is $350; 6ft and more is $450." />
@@ -108,12 +108,14 @@ export const Home = () => {
             <p>
             Contact me directly to inquire more!
             </p>
-            <div className="flex border-solid pr-2 rounded-2xl bg-breeze border-black justify-center items-center">
+            <div className="flex border-solid pr-2 rounded-2xl bg-breeze drop-shadow-sm border-black justify-center items-center">
               <button 
               onClick={copyEmailBtn}
               aria-describedby="email-address"
               aria-label="Copy Email Button"
-              className=" rounded-l-2xl text-space_cadet hover:bg-robin_egg hover:text-fleece hover:scale-110 " > 
+              className=" 
+              rounded-l-2xl text-space_cadet 
+              hover:bg-robin_egg hover:text-fleece hover:scale-110 " > 
                 <CopyIcon className="size-5 m-2 text-inherit"/>
               </button>
               <p id="email-address" className="p-2 subheading_text">

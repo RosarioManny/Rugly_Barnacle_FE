@@ -6,6 +6,7 @@ export const ShopBtn = () => {
       <button className="
         btn_general btn_start_order 
         flex items-center gap-2 group
+        drop-shadow-sm/50
         hover:bg-robin_egg hover:scale-105 
         active:bg-robin_egg active:scale-105 
         focus:bg-robin_egg focus:scale-105"> 

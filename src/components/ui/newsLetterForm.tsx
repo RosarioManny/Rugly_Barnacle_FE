@@ -1,4 +1,4 @@
-import { FormEvent, ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 // ChangeEvent and FormEvent are effective TS types for the event.targets. 
 // Allowing TS to know what will be happening to an element. 
 // See handleChange for more.
