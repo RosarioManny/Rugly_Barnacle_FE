@@ -211,6 +211,7 @@ button {
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  padding: 0 0 4rem 0;
 }
 .cta_container_curve {
   bottom: 0;
