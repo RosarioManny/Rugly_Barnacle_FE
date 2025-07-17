@@ -20,6 +20,8 @@ const config: Config = {
       },
       fontFamily: {
         DM_Serif_Text: ['DM Serif Text', 'serif'], // Added fallback font
+        Silk_flower: ['Silk Flower', 'serif'], // Added fallback font
+        Rethink_Sans: ['Rethink-Sans', 'serif'], // Added fallback font
       }
     }
   },

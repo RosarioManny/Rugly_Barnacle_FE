@@ -1,6 +1,8 @@
 import { Header } from "../../components/layout/_header"
 import { FaqCard } from "../../components/ui/faq/faqCard"
 import { useState } from "react"
+import { ShopBtn } from "../../components/ui/buttons/btn_shop"
+import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
 
 interface faqProps {
   question: string,
@@ -8,7 +10,6 @@ interface faqProps {
 }
 
 export const Faq = () => {
-  const [isToggled, setIsToggled] = useState(false);
 
   const faqItems: faqProps[]= [
     {question: "What fabric do you use?", answer: "Natural and sustainable wool yarn"},
@@ -25,17 +26,19 @@ export const Faq = () => {
         tagline="Generally asked quesitons, to answer your curiousities."
         />
         {/* TITLE */}
-        <section>
-          <h1> FAQ </h1>
-          <img 
-          className="flex justify-start h-10 w-10" 
-          src="/assets/design/icons/Cross_Star_White.webp" 
-          aria-hidden="true" 
-          alt="Cross Star Design Marker" />
-          <p> Here are some frequently asked questions. Hope to answer your curiousities. </p>
+        <section className="my-8 flex flex-col justify-center text-center">
+          <div className="flex justify-center text-center">
+            <img 
+            className="flex align-start h-10 w-10" 
+            src="/assets/design/icons/Cross_Star_Teal-Blue.webp" 
+            aria-hidden="true" 
+            alt="Cross Star Design Marker" />
+            <h1 className="heading_text  mx-4"> FAQ </h1>
+          </div>
+          <p className="body_text"> Here are some frequently asked questions. Hope to answer your curiousities. </p>
         </section>
         {/* FAQ DROPDOWN */}
-        <section className="py-16 px-4">
+        <section className="my-16 px-4">
           <ul className="
           bg-space_cadet p-4 rounded-xl
           flex flex-col gap-2">
@@ -48,7 +51,15 @@ export const Faq = () => {
             ))}
           </ul>
         </section>
-        <section></section>
+        <CtaWavesBg className="fill-mauve"/>
+        <section className="flex justify-center items-center pb-16 bg-mauve">
+          <img 
+            className="flex align-start h-10 w-10 mr-4" 
+            src="/assets/design/icons/Cross_Star_White.webp" 
+            aria-hidden="true" 
+            alt="Cross Star Design Marker" />
+          <ShopBtn/>
+        </section>
       </main>
     </>
   )
