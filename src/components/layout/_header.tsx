@@ -11,22 +11,38 @@ interface HeaderProps {
 export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: HeaderProps) => {
 
   return (
-    <>
-      <header className="
-        gradient
-        
-        relative justify-center items-center w-full object-cover h-[75vh] 
-        ">
+      <header className=
+        {`${img ? "" : "gradient"}
+        relative w-full h-[75vh] overflow-hidden object-cover `}
+        >
+          {/* IMAGE BG (when provided) */}
+          {img && (
+            <div className="absolute inset-0 -z-10">
+              <img 
+              className="size-full object-cover "
+              src={img} 
+              alt={img_alt || "Header background"}  />
+              <div className="absolute inset-0 bg-gradient-to-r from-space_cadet/90 via-space_cadet/70 to-transparent"/>
+            </div>
+          )}
+
+        {/* CONTENT */}
         <section className="
-        flex flex-col md:flex-row gap-4 justify-center items-center 
-        h-full text-center text-fleece ">
-          <div className="">
-            {img && (
-              <div className="flex w-full drop-shadow-lg/50 justify-center items-center ">
-                <img className="h-40 md:h-64 floating-item" src={img} alt={img_alt} />
+          relative z-10
+          flex flex-col gap-4 justify-center items-center 
+          md:flex-row
+          h-full text-center text-fleece"
+        >
+            {/* FALLBACK IMAGE */}
+            {!img && (
+              <div className="z-20 flex w-full drop-shadow-lg/50 justify-center items-center ">
+                <img 
+                  className="h-46 md:h-64 floating-item" 
+                  src="/assets/design/logo/RuglyBarnacle_Logo.webp" 
+                  alt="Rugly Barnacle Logo" 
+                />
               </div>
             )}
-          </div>
           <div className="flex md:w-[50%] text-center items-center flex-col gap-6 justify-center">
             <p className="
             heading_text 
@@ -59,6 +75,5 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
           </div>
         </section>
       </header>
-    </>
   )
 }

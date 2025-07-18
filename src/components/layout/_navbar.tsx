@@ -46,7 +46,7 @@ export const NavBar = () => {
   }
 
   return (
-    <nav className="navbar max-h-[10] grid grid-cols-3 align-center items-center">
+    <nav className="navbar  max-h-[10] grid grid-cols-3 align-center items-center">
       {/* Home - Brand image small logo*/}
       <section className="flex justify-self-start items-center focus:scale-110 hover:scale-110 transition-all">
         <Link className="brand-logo" to="/">
@@ -73,7 +73,7 @@ export const NavBar = () => {
           <div 
             className={`
             ${aboutDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
-            overflow-hidden transition-all duration-500 ease-in-out
+            overflow-hidden transition-all duration-500 ease-in-out mt-[1.5px]
             dropdown-content`}>
             {aboutSubMenu.map((link) => (
             <Link 
@@ -88,13 +88,10 @@ export const NavBar = () => {
             ))}
           </div>
         </div> 
-        
-        <button>
+
           <Link to="/portfolio">
             Portfolio
           </Link>
-        </button>
-  
         <div className="dropdown">
           {/* Shop Nav Button */}
           <button 
@@ -134,7 +131,7 @@ export const NavBar = () => {
       <section className="justify-self-center md:hidden">
         <button 
           onClick={handleClick} 
-          className="z-20 relative overscroll-none w-[50px] h-[40px] space-y-1 p-2 z-10"
+          className="z-30 relative overscroll-none w-[50px] h-[40px] space-y-1 p-2"
           aria-label="Mobile navigation menu - Three lined burger icon">
           <BurgerLine isToggled={isToggled} index={1} />
           <BurgerLine isToggled={isToggled} index={2} />
@@ -150,7 +147,7 @@ export const NavBar = () => {
             flex items-center justify-center text-center 
             text-3xl 
             transition-all ease-in-out duration-[1000ms] delay-100
-            bg-fleece z-10
+            bg-fleece z-20
             ${isToggled ? 'right-0' : '-right-[800px]'}`}>
         
           {/* Main Menu */}
@@ -168,7 +165,7 @@ export const NavBar = () => {
               About
               <div className={`caret-right text-majorelle`} />
             </button>
-            <button>
+            <button className="flex justify-center items-center text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor">
               <Link 
                 to="/portfolio" 
                 onClick={handleClick} 

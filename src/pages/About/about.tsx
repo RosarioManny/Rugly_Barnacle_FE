@@ -4,12 +4,11 @@ import { ShopBtn } from "../../components/ui/buttons/btn_shop"
 export const About = () => {
 
   return (
-    <main className="" aria-label="About Me Page">
+    <main aria-label="About Me Page">
       <Header
         title="About Me"
         tagline="Learn what Rugly Barnacle is about!"
-        img="/assets/design/logo/RuglyBarnacle_Logo.webp"
-        img_alt="Rugly Barnacle Logo"/>
+        />
         {/* TITLE */}
         <section className="flex flex-col items-center text-center"> 
           <img 
@@ -20,7 +19,7 @@ export const About = () => {
           <h1 className="heading_text "> What is Rugly Barnacle</h1>
         </section>
         {/* CONTENT */}
-        <section className="text-center">
+        <section className="text-center mx-2">
           <p>
             Hi! I'm Emilie, the tuft broad behind the Rugly Barnacle!
             Tufting rugs started as a COVID hobby and quickly became my absolute passion and business. 
@@ -32,7 +31,7 @@ export const About = () => {
         </section>
         {/* CALL-TO-ACTION */}
         <section className="py-16 flex flex-col items-center text-center ">
-          <p>Love what we’re about? Checkout our rug to see which one you like!</p>
+          <p className="m-2">Love what we’re about? Checkout our rug to see which one you like!</p>
           <div className="flex my-8">
             <img 
             className="flex justify-start mx-4 h-10 w-10" 

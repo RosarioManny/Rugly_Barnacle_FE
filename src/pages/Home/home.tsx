@@ -64,8 +64,7 @@ export const Home = () => {
         tagline="Begin your dream rug!"
         btn_1={<StartOrderBtn/>}
         btn_2={<ContactUsBtn/>}
-        img="/assets/design/logo/RuglyBarnacle_Logo.webp"
-        img_alt="Rugly Barnacle Logo"/>
+        />
       {/* Promises */}
       <section aria-label="Promises Section" className="section-container">
           <ul className="grid grid-cols-2 md:flex justify-center">
