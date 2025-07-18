@@ -26,7 +26,7 @@ export const Faq = () => {
         tagline="Generally asked quesitons, to answer your curiousities."
         />
         {/* TITLE */}
-        <section className="my-8 flex flex-col justify-center text-center">
+        <section className="my-8 flex flex-col gap-4 justify-center text-center">
           <div className="flex justify-center text-center">
             <img 
             className="flex align-start h-10 w-10" 
@@ -38,7 +38,7 @@ export const Faq = () => {
           <p className="body_text"> Here are some frequently asked questions. Hope to answer your curiousities. </p>
         </section>
         {/* FAQ DROPDOWN */}
-        <section className="my-16 px-4">
+        <section className="my-8 px-4">
           <ul className="
           bg-space_cadet p-4 rounded-xl
           flex flex-col gap-2">

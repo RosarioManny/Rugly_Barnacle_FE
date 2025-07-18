@@ -14,6 +14,7 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
     <>
       <header className="
         gradient
+        
         relative justify-center items-center w-full object-cover h-[75vh] 
         ">
         <section className="

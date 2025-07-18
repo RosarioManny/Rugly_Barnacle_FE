@@ -16,7 +16,7 @@ export const FaqCard = ({ question, answer }: faqCardProps) => {
       {/* QUESTION */}
       <section className="
       subheading_text 
-      underline text-md my-4
+      text-md my-4 text-bold
       flex justify-between items-center">
         <p>{question}</p>
         <button 
