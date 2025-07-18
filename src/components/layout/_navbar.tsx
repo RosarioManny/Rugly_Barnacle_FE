@@ -1,8 +1,9 @@
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import { CartIcon } from "../icons-svgs/SvgIcons"
-import { motion, AnimatePresence } from "framer-motion"
 
+const shopSubMenu = ["shop all", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
+const aboutSubMenu = ["about me", "contact", "faq"]
 export const NavBar = () => {
   const [shopDropdownOpen, setShopDropdownOpen] = useState(false)
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
@@ -45,11 +46,11 @@ export const NavBar = () => {
   }
 
   return (
-    <nav className="navbar max-h-[15vh] grid grid-cols-3 items-center">
+    <nav className="navbar max-h-[10] grid grid-cols-3 align-center items-center">
       {/* Home - Brand image small logo*/}
-      <section className="justify-self-start focus:scale-110 hover:scale-110 transition-all">
+      <section className="flex justify-self-start items-center focus:scale-110 hover:scale-110 transition-all">
         <Link className="brand-logo" to="/">
-          <img className="h-[52px] w-[52px] mx-6" src="/assets/design/logo/Rugly_Barnacle_192x192.png" alt="Rugly Barnacle Abrreviated Logo - RB"/>
+          <img className="size-12 mx-6" src="/assets/design/logo/Rugly_Barnacle_192x192.png" alt="Rugly Barnacle Abrreviated Logo - RB"/>
         </Link>
       </section>
 
@@ -74,7 +75,7 @@ export const NavBar = () => {
             ${aboutDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
             overflow-hidden transition-all duration-500 ease-in-out
             dropdown-content`}>
-            {["about", "contact", "faq"].map((link) => (
+            {aboutSubMenu.map((link) => (
             <Link 
               key={link} 
               to={`/${link}`} 
@@ -88,8 +89,8 @@ export const NavBar = () => {
           </div>
         </div> 
         
-        <button className="">
-          <Link className="" to="/portfolio">
+        <button>
+          <Link to="/portfolio">
             Portfolio
           </Link>
         </button>
@@ -108,14 +109,15 @@ export const NavBar = () => {
           </button>
 
           {/* SHOP Dropdown Items */}
+          {/* TODO: Fix Links to actual Shop Category Pages */}
           <div 
             className={`
             ${shopDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
             overflow-hidden transition-all duration-500 ease-in-out
             dropdown-content`}>
-            {["rugs", "mirror Rugs", "mug Rugs", "custom Rugs"].map((link) => (
+            {shopSubMenu.map((link, idx) => (
             <Link 
-              key={link} 
+              key={`${link}-${idx}`} 
               to={`/${link}`} 
               className={``}
               onClick={closeDropdown}
@@ -184,9 +186,9 @@ export const NavBar = () => {
               <div className={`caret-left text-bittersweet`} />
               Back
             </button>
-            {["rugs", "custom Rugs", "mug Rugs", "mirror Rugs", "stickers & More"].map((link) => (
+            {shopSubMenu.map((link, idx) => (
               <Link 
-                key={link} 
+                key={`${link}-${idx}`} 
                 to={`/${link.replace(/\s+/g, '-').toLowerCase()}`} 
                 onClick={handleClick} 
                 className="text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor">
@@ -203,7 +205,7 @@ export const NavBar = () => {
               <div className={`caret-left text-bittersweet`} />
               Back
             </button>
-            {["about me", "contact", "faq"].map((link) => (
+            {aboutSubMenu.map((link) => (
               <Link 
                 key={link} 
                 to={`/${link.replace(/\s+/g, '-').toLowerCase()}`} 
@@ -231,8 +233,8 @@ export const NavBar = () => {
 
       {/* Cart Link */}
       <section className="justify-self-end">
-        <button className="">
-          <Link className="m-6" to="/cart"> 
+        <button className="my-2 flex ">
+          <Link className="" to="/cart"> 
             <CartIcon className="text-space_cadet focus:scale-110 hover:text-majorelle" />
           </Link>
         </button>

@@ -1,6 +1,5 @@
 import { Header } from "../../components/layout/_header"
 import { ShopBtn } from "../../components/ui/buttons/btn_shop"
-import { Shop } from "../Shop/shop"
 
 export const About = () => {
 

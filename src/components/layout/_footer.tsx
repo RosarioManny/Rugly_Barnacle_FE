@@ -22,8 +22,8 @@ export const Footer = () => {
   const links: string[] = [ "shop",  "about", "portfolio", "faq"];
   return (
     <>
-      <div className="relative">
-        <CtaWavesBg className="absolute  w-full h-auto fill-space_cadet -translate-y-full"/>
+      <div className="relative mt-1">
+        <CtaWavesBg className="absolute w-full h-auto fill-space_cadet -translate-y-full"/>
       </div>
       <footer className="bg-space_cadet w-full relative">
         <div className="w-full flex justify-end">
