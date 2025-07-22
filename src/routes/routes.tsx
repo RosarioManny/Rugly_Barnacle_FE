@@ -15,6 +15,7 @@ export const AppRoutes = () => {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about-me' element={<About />} />
+        
         <Route path='/portfolio' element={<Portfolio />} />
         <Route path='/cart' element={<Cart />} />
         <Route path='/shop' element={<Shop />} />
