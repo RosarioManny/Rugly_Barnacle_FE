@@ -4,7 +4,8 @@ interface imageInfoProps {
   alt: string
 }
 export const Portfolio = () => {
-
+  
+  // TEMP DATA
   const imageInfo: imageInfoProps[] = [
     {path: "/products/rugs/Showcase_Gengar.webp", alt: ""},
     {path: "/products/rugs/Showcase_AllThat.webp", alt: ""},
@@ -16,13 +17,12 @@ export const Portfolio = () => {
     <main aria-label="Portfolio Page">
       <Header
       title="Portfolio"
+      tagline="A showcase of all my works. Checkout what I can do!"
       img="/products/rugs/Showcase_AllThat.webp"
       img_alt="TV show All that logo rug"
       ></Header>
+      {/* PORTFOLIO INTRO */}
       <section>
-        <h1 className="heading_text"> 
-          Designs 
-        </h1>
         <p>
           Step into my tufted universe—where Pokémon pals, sports showdowns, and wild personal creations burst off the floor in rug form! 
           Every piece here (from mirror rugs that jazz up your walls to mug rugs that cozy up your coffee) is handmade with obsessive love for fandoms and
@@ -30,6 +30,7 @@ export const Portfolio = () => {
           idea is too nerdy, niche, or wonderfully weird to bring to life in yarn!
         </p>
       </section>
+      {/* PHOTO GALLERY */}
       <section>
         <ul className="grid grid-cols-2 md:grid-cols-3">
           { imageInfo.map(({path, alt }, idx) => (

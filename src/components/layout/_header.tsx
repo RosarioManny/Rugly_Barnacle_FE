@@ -22,7 +22,7 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
               className="size-full object-cover "
               src={img} 
               alt={img_alt || "Header background"}  />
-              <div className="absolute inset-0 bg-gradient-to-r from-space_cadet/90 via-space_cadet/70 to-transparent"/>
+              <div className="absolute inset-0 bg-gradient-to-tr from-space_cadet  to-majorelle/20"/>
             </div>
           )}
 
@@ -55,7 +55,7 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
               <p className="
               rethinkSans-text 
               md:text-2xl 
-              text-justify
+              text-center
               text-xl italic">
                 {tagline}
               </p>

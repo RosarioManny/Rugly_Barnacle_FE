@@ -2,7 +2,7 @@ import { useState } from "react"
 import { Link } from "react-router-dom"
 import { CartIcon } from "../icons-svgs/SvgIcons"
 
-const shopSubMenu = ["shop all", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
+const shopSubMenu = ["shop", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
 const aboutSubMenu = ["about me", "contact", "faq"]
 export const NavBar = () => {
   const [shopDropdownOpen, setShopDropdownOpen] = useState(false)
@@ -11,37 +11,40 @@ export const NavBar = () => {
   const [mobileShopOpen, setMobileShopOpen] = useState(false)
   const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
 
+  // Close all Dropdowns
   const closeDropdown = () => {
     if (shopDropdownOpen) setShopDropdownOpen(false)
     if (aboutDropdownOpen) setAboutDropdownOpen(false)
   }
-
+  // Shop Dropdown
   const handleShopDropdown = () => {
     setShopDropdownOpen(!shopDropdownOpen)
   }
-
+  // About Dropdown
   const handleAboutDropdown = () => {
     setAboutDropdownOpen(!aboutDropdownOpen)
   }
 
+  // Reset mobile dropdowns when closing menu
   const handleClick = () => {
     setIsToggled(!isToggled)
-    // Reset mobile dropdowns when closing menu
     if (isToggled) {
       setMobileShopOpen(false)
       setMobileAboutOpen(false)
     }
   }
 
+  // Mobile Shop Menu
   const toggleMobileShop = () => {
     setMobileShopOpen(!mobileShopOpen)
     // Close about if it's open
     if (mobileAboutOpen) setMobileAboutOpen(false)
   }
 
+  // Mobile About Menu
   const toggleMobileAbout = () => {
-    setMobileAboutOpen(!mobileAboutOpen)
-    // Close shop if it's open
+  setMobileAboutOpen(!mobileAboutOpen)
+  // Close shop if it's open
     if (mobileShopOpen) setMobileShopOpen(false)
   }
 
@@ -146,7 +149,7 @@ export const NavBar = () => {
             h-screen w-full fixed top-0 overscroll-none
             flex items-center justify-center text-center 
             text-3xl 
-            transition-all ease-in-out duration-[1000ms] delay-100
+            transition-all ease-in-out duration-[700ms] delay-[50ms]
             bg-fleece z-20
             ${isToggled ? 'right-0' : '-right-[800px]'}`}>
         
@@ -195,7 +198,11 @@ export const NavBar = () => {
           </div>
 
           {/* About Submenu */}
-          <div className={`flex flex-col  w-full fixed transition-all ease-in-out duration-[500ms] ${mobileAboutOpen ? 'right-0' : '-right-[800px]'}`}>
+          <div className={`
+            flex flex-col w-full fixed 
+            transition-all ease-in-out duration-[500ms] 
+            ${mobileAboutOpen ? 'right-0' : '-right-[800px]'}`}
+          >
             <button 
               onClick={toggleMobileAbout}
               className="flex gap-2 justify-center items-center text-space_cadet/60 focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor">

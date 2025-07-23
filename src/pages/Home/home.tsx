@@ -20,7 +20,7 @@ interface TempsProps {
 }
 
 export const Home = () => {
-
+  // TEMP DATA
   const Temp: TempsProps[] = [
     {"name": "Team", "path": "products/rugs/Closeup_AllThat.webp"},
     {"name": "Ghose", "path": "products/rugs/Showcase_Gengar.webp"},
@@ -32,6 +32,7 @@ export const Home = () => {
     {"name": "All That", "path": "products/rugs/Closeup_AllThat.webp"},
     {"name": "Ter", "path": "products/rugs/Custom_Thumper.webp"},
   ]
+  // Promise Icons
   const promiseIcons: PromiseIcons[] = [
     {Icon: HeartIcon, alt: "Heart icon", description: "Personalized & Handcrafted"},
     {Icon: SmileyfaceIcon, alt: "Smiley face icon", description: "Satisfaction Guarenteed"},
@@ -39,6 +40,7 @@ export const Home = () => {
     {Icon: StarIcon, alt: "Star icon", description: "Quality Materials"},
   ]
 
+  // Copy Email Button
   const copyEmailBtn = async () => {
     const email = "theruglybarnacle@gmail.com"
 

@@ -1,6 +1,6 @@
 import { Header } from "../../components/layout/_header"
 import { FaqCard } from "../../components/ui/faq/faqCard"
-import { useState } from "react"
+
 import { ShopBtn } from "../../components/ui/buttons/btn_shop"
 import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
 
@@ -10,7 +10,7 @@ interface faqProps {
 }
 
 export const Faq = () => {
-
+  // TEMP DATA
   const faqItems: faqProps[]= [
     {question: "What fabric do you use?", answer: "Natural and sustainable wool yarn"},
     {question: "How long to make a custom rug?", answer: "1-2 weeks depending on complexity and size. Timeframe will be discussed in request."},
@@ -33,7 +33,7 @@ export const Faq = () => {
             src="/assets/design/icons/Cross_Star_Teal-Blue.webp" 
             aria-hidden="true" 
             alt="Cross Star Design Marker" />
-            <h1 className="heading_text  mx-4"> FAQ </h1>
+            <h1 className="heading_text mx-4"> FAQ </h1>
           </div>
           <p className="body_text"> Here are some frequently asked questions. Hope to answer your curiousities. </p>
         </section>

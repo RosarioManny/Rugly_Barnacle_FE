@@ -16,16 +16,16 @@ export const Footer = () => {
     {Social: EtsyLogo},
     {Social: TikTokLogo},
     {Social: InstagramLogo},
+  ];
 
-  ]
-  
   const links: string[] = [ "shop",  "about", "portfolio", "faq"];
+
   return (
     <>
-      <div className="relative mt-1">
-        <CtaWavesBg className="absolute w-full h-auto fill-space_cadet -translate-y-full"/>
-      </div>
       <footer className="bg-space_cadet w-full relative">
+        <div className="relative">
+          <CtaWavesBg className="absolute w-full h-auto fill-space_cadet -translate-y-full"/>
+        </div>
         <div className="w-full flex justify-end">
           <img className=" size-16" src="assets/design/icons/X_Star_Pink.webp" aria-hidden="true" alt="X-Star Design Marker" />
         </div>
