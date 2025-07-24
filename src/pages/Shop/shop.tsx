@@ -1,14 +1,49 @@
 // TODO: import productCard
 
 import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
+import { ProductCard } from "../../components/product/productCard"
 
+interface cardProps {
+  path: string,
+  price: number,
+  title: string,
+  img_alt: string,
+  dimensions: string,
+  genre: string,
+  id: number,
+}
 export const Shop = () => {
 
 // TODO: Create filter Options
 // TODO: fetchAllProducts
 // TODO: fetchProductCategory
-
-
+  // TEMP DATA 
+  const cardContent: cardProps[]= [
+    { path:"public/products/rugs/Closeup_AllThat.webp",
+      img_alt:"Alt That Logo Rug",
+      price:123.99,
+      title:"All That Logo",
+      dimensions:"3 x 3",
+      genre:"rug",
+      id: 1
+    },
+    { path:"public/products/rugs/Custom_Thumper.webp",
+      img_alt:"Thumper Rug",
+      price:2123.99,
+      title:"Thumper",
+      dimensions:"3 x 3",
+      genre:"rug",
+      id: 2
+    },
+    { path:"public/products/rugs/Rug_Naruto.webp",
+      img_alt:"Naruto Rug",
+      price:12.99,
+      title:"Naruto Rug",
+      dimensions:"3 x 3",
+      genre:"rug",
+      id: 3
+    },
+    ]
   return (
     <main aria-label="Shop Page">
       {/* Category Selector */}
@@ -27,7 +62,8 @@ export const Shop = () => {
             All Products 
         </h1>
       </section>
-      {/* SORT BY */}
+      {/* SORT BY
+      TODO: Create Filter Systems */}
       <section className="flex justify-between px-4">
         <select>
           <option value="featured">Featured</option>
@@ -43,6 +79,27 @@ export const Shop = () => {
         {/* Amount of current Products found in filter results */}
         <p> 10/23</p>
       </section>
+      {/* Product Listings 
+      TODO: Create Product Card
+      */}
+      <section id="product-listings">
+        <ul className="mx-2 grid grid-cols-2 gap-2 md:grid-cols-3">   
+          {cardContent.map(({ path, price, title, img_alt, dimensions, genre, id}, idx) => (
+            <ProductCard 
+            id={id}
+            key={`${title}-${idx}`}
+            path={path}
+            img_alt={img_alt}
+            price={price}
+            title={title}
+            dimensions={dimensions}
+            genre={genre}
+            />
+          ))}
+        </ul>
+      
+      </section>
+      {/* Call To Action */}
       <section className="bg-mauve heading_text flex flex-col text-center  gap-5 justify-center items-center">
         
           <img 

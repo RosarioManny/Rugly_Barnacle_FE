@@ -27,7 +27,12 @@ export const Footer = () => {
           <CtaWavesBg className="absolute w-full h-auto fill-space_cadet -translate-y-full"/>
         </div>
         <div className="w-full flex justify-end">
-          <img className=" size-16" src="assets/design/icons/X_Star_Pink.webp" aria-hidden="true" alt="X-Star Design Marker" />
+          <img 
+            className="size-16" 
+            src="assets/design/icons/X_Star_Pink.webp" 
+            aria-hidden="true" 
+            alt="X-Star Design Marker" 
+          />
         </div>
         <main aria-label="Footer Content" className="text-center flex flex-col items-center">
         {/* NEWSLETTER */}

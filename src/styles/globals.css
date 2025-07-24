@@ -153,13 +153,16 @@ Color Pallete:
 .heading_text {
   font-family: Silk Flower;
   font-size: 2rem;
-  
 }
 
 .subheading_text {
   font-family: Rethink-Sans;
   font-weight: 900;
   font-size: 1rem;
+}
+
+.rethink-sans {
+  font-family: Rethink-Sans;
 }
 
 /* BUTTONS */

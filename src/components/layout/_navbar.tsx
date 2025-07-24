@@ -49,7 +49,7 @@ export const NavBar = () => {
   }
 
   return (
-    <nav className="navbar  max-h-[10] grid grid-cols-3 align-center items-center">
+    <nav className="navbar rethink-sans max-h-[10] grid grid-cols-3 align-center items-center">
       {/* Home - Brand image small logo*/}
       <section className="flex justify-self-start items-center focus:scale-110 hover:scale-110 transition-all">
         <Link className="brand-logo" to="/">
@@ -154,7 +154,10 @@ export const NavBar = () => {
             ${isToggled ? 'right-0' : '-right-[800px]'}`}>
         
           {/* Main Menu */}
-          <div className={`flex flex-col h-fit text-white transition-all duration-100  ${mobileShopOpen || mobileAboutOpen ? 'opacity-0' : 'opacity-100 delay-250'}`}>
+          <div 
+            className={`flex flex-col h-fit text-white transition-all duration-100  
+            ${mobileShopOpen || mobileAboutOpen ? 'opacity-0' : 'opacity-100 delay-250'}`}
+          >
             <button 
               onClick={toggleMobileShop}
               className="flex gap-2 justify-center items-center text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor">
@@ -179,7 +182,10 @@ export const NavBar = () => {
           </div>
 
           {/* Shop Submenu */}
-          <div className={`flex flex-col  w-full fixed transition-all ease-in-out duration-[500ms] ${mobileShopOpen ? 'right-0' : '-right-[800px]'}`}>
+          <div 
+            className={`flex flex-col  w-full fixed transition-all ease-in-out duration-[500ms] 
+            ${mobileShopOpen ? 'right-0' : '-right-[800px]'}`}
+            >
             <button 
               onClick={toggleMobileShop}
               className="flex gap-2 justify-center items-center text-space_cadet/60 focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor">
@@ -214,7 +220,8 @@ export const NavBar = () => {
                 key={link} 
                 to={`/${link.replace(/\s+/g, '-').toLowerCase()}`} 
                 onClick={handleClick} 
-                className="text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor">
+                className="text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor"
+              >
                 {link.charAt(0).toUpperCase() + link.slice(1)}
               </Link>
             ))}

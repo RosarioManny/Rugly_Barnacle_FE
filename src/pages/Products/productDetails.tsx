@@ -5,6 +5,7 @@ export const ProductDetails = () => {
   
   return (
     <>
+    Hello
     </>
   )
 }
