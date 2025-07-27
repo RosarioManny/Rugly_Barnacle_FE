@@ -13,17 +13,26 @@ export const ProductCard = ({ id, path, price, title, img_alt, dimensions, genre
   return (
     <Link to={`/shop/${id}`}>
       <li
-      className="border-solid border-3 border-majorelle rounded-2xl w-full"
-      aria-label={`${title} product card`}>
+        className="
+          group transform-color duration-[300ms] 
+          hover:text-majorelle focus:text-majorelle active:text-majorelle
+          hover:outline-robin_egg focus:outline-robin_egg active:outline-robin_egg 
+          outline-solid outline-3 outline-majorelle 
+          rounded-2xl w-full"
+        aria-label={`${title} product card`}
+      >
+        {/* Product Content */}
         <div>
-          <img className="overflow-hidden"src={path} alt={img_alt} />
+          <img className="rounded-t-2xl" src={path} alt={img_alt} />
           {/* Product Info */}
-          <div>
-            <p className="font-black"> { title }</p>
+          <div className="p-2">
+            <p className="font-semibold transform-color duration-[300ms]"> { title }</p>
             <p> { dimensions }</p>
             <p className="text-majorelle/70"> Genre: { genre }</p>
           </div>
-          <p>$ {price} </p>
+          <div className="flex justify-end px-4 font-bold">
+            <p>${price}</p>
+          </div>
         </div>
       </li>
     </Link>

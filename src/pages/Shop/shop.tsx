@@ -48,23 +48,32 @@ export const Shop = () => {
     <main aria-label="Shop Page">
       {/* Category Selector */}
       <section>
-
+        <h1 className="heading_text p-4">Categories</h1>
+        {/* CATEGORY CAROUSEL */}
+        <div>
+          <div>
+            <svg></svg>
+            <p>All Rugs</p>
+          </div>
+        </div>
       </section>
       {/* Product Title */}
-      <section className="flex items-start justify-center heading_text py-10">
-        <img 
-          className="flex align-start h-8 w-8" 
-          src="/assets/design/icons/Cross_Star_Teal-Blue.webp" 
-          aria-hidden="true" 
-          alt="Cross Star Design Marker" />
-          <h1>
-          {/* Product Category */}
-            All Products 
-        </h1>
-      </section>
+      <section className="flex flex-col justify-center py-10">
+        <div className="flex justify-center">
+          <img 
+            className="flex align-start h-8 w-8" 
+            src="/assets/design/icons/Cross_Star_Teal-Blue.webp" 
+            aria-hidden="true" 
+            alt="Cross Star Design Marker" />
+            <h1 className="heading_text ">
+            {/* Product Category */}
+            {/* productCategory */}
+              All Products 
+            </h1>
+        </div>
       {/* SORT BY
       TODO: Create Filter Systems */}
-      <section className="flex justify-between px-4">
+      <div className="flex items-center justify-between px-2">
         <select>
           <option value="featured">Featured</option>
           <option value="">A to Z</option>
@@ -76,8 +85,13 @@ export const Shop = () => {
           <option value="">Large to Small</option>
           <option value="">Small to Large</option>
         </select>
-        {/* Amount of current Products found in filter results */}
-        <p> 10/23</p>
+        {/* Amount of current Products found in filter results
+        TODO: fetchFoundCount */}
+        <p> 
+          {/* {fetchCount} */}
+          10/23
+        </p>
+      </div>
       </section>
       {/* Product Listings 
       TODO: Create Product Card

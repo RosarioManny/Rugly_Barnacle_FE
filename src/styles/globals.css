@@ -17,20 +17,23 @@
 @font-face {
   font-family: "Silk Flower";
   src: local('Silk Flower'), url('../../assets/design/font/Silk\ Flower.otf') format('opentype');
-  font-weight: normal;
+  font-weight: 100 900;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "Rethink-Sans";
   src: local('RethinkSans-VariableFont'), url('../../assets/design/font/RethinkSans-VariableFont_wght.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 100 900;
   font-style: normal;
+  font-display: swap;
 }
 @font-face {
   font-family: "Montserrat";
   src: local('Montserrat-VariableFont'), url('../../assets/design/font/Montserrat-VariableFont_wght.ttf') format('truetype');
-  font-weight: normal;
+  font-weight: 100 900;
   font-style: normal;
+  font-display: swap;
 }
 
 /* 
