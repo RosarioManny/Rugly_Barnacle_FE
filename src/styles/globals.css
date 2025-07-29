@@ -60,7 +60,8 @@ Color Pallete:
 
 /* NAVBAR */
 .navbar {
-  overflow: hidden;
+  /* overflow: hidden; */
+  z-index: 40;
   background-color: #F0F0F1;
   border-bottom: solid 2px #5652E7;
 }
@@ -93,6 +94,7 @@ Color Pallete:
 }
 .dropbtn:hover {
   background-color: rgba(86, 82, 231, .1);
+
 }
 
 .dropdown-content {
@@ -107,11 +109,12 @@ Color Pallete:
   z-index: 1;
   margin: 1.56px 0 0 0;
   cursor: pointer;
+  z-index: 50;
 }
 
 .dropdown-content a {
   float: none;
-  color: black;
+  color: #202254;
   padding: 5px 5px;
   text-decoration: none;
   display: flex;
@@ -123,6 +126,7 @@ Color Pallete:
 .dropdown-content a:hover {
   background-color: rgba(86, 82, 231, .2);
   transition: all 250ms ease-out;
+  cursor: pointer;
 } 
 
 .caret-down {
@@ -182,7 +186,7 @@ button {
   border-radius: .5rem;
   background-color: #5652E7;
   font-size: 1.3rem;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 
@@ -191,7 +195,7 @@ button {
   border-radius: .5rem;
   border:#5652E7 solid 3px;
   font-size: 1.3rem;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 .gradient {

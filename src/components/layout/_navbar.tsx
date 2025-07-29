@@ -4,6 +4,7 @@ import { CartIcon } from "../icons-svgs/SvgIcons"
 
 const shopSubMenu = ["shop", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
 const aboutSubMenu = ["about me", "contact", "faq"]
+
 export const NavBar = () => {
   const [shopDropdownOpen, setShopDropdownOpen] = useState(false)
   const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
@@ -76,7 +77,7 @@ export const NavBar = () => {
           <div 
             className={`
             ${aboutDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
-            overflow-hidden transition-all duration-500 ease-in-out mt-[1.5px]
+            overflow-hidden transition-all duration-500 ease-in-out mt-[1.5px] 
             dropdown-content`}>
             {aboutSubMenu.map((link) => (
             <Link 
@@ -142,8 +143,6 @@ export const NavBar = () => {
         </button>
         
         {/* OFF-SCREEN Menu */}
-
-        
         <div 
           className={`
             h-screen w-full fixed top-0 overscroll-none

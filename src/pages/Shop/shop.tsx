@@ -2,6 +2,8 @@
 
 import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
 import { ProductCard } from "../../components/product/productCard"
+import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, HandWaveIcon, MirrorIcon} from "../../components/icons-svgs/SvgIcons"
+import type { FC, SVGProps } from "react"
 
 interface cardProps {
   path: string,
@@ -12,6 +14,11 @@ interface cardProps {
   genre: string,
   id: number,
 }
+interface CategoryIconProps {
+  Icon: FC<SVGProps<SVGSVGElement>>;
+  alt: string;
+  description: string;
+}
 export const Shop = () => {
 
 // TODO: Create filter Options
@@ -19,43 +26,60 @@ export const Shop = () => {
 // TODO: fetchProductCategory
   // TEMP DATA 
   const cardContent: cardProps[]= [
-    { path:"public/products/rugs/Closeup_AllThat.webp",
-      img_alt:"Alt That Logo Rug",
-      price:123.99,
-      title:"All That Logo",
-      dimensions:"3 x 3",
-      genre:"rug",
-      id: 1
-    },
-    { path:"public/products/rugs/Custom_Thumper.webp",
-      img_alt:"Thumper Rug",
-      price:2123.99,
-      title:"Thumper",
-      dimensions:"3 x 3",
-      genre:"rug",
-      id: 2
-    },
-    { path:"public/products/rugs/Rug_Naruto.webp",
-      img_alt:"Naruto Rug",
-      price:12.99,
-      title:"Naruto Rug",
-      dimensions:"3 x 3",
-      genre:"rug",
-      id: 3
-    },
+      { path:"public/products/rugs/Closeup_AllThat.webp",
+        img_alt:"Alt That Logo Rug",
+        price:123.99,
+        title:"All That Logo",
+        dimensions:"3 x 3",
+        genre:"rug",
+        id: 1
+      },
+      { path:"public/products/rugs/Custom_Thumper.webp",
+        img_alt:"Thumper Rug",
+        price:2123.99,
+        title:"Thumper",
+        dimensions:"3 x 3",
+        genre:"rug",
+        id: 2
+      },
+      { path:"public/products/rugs/Rug_Naruto.webp",
+        img_alt:"Naruto Rug",
+        price:12.99,
+        title:"Naruto Rug",
+        dimensions:"3 x 3",
+        genre:"rug",
+        id: 3
+      },
     ]
+  const categoryIcons: CategoryIconProps[] = [
+    {Icon: StarIcon, alt: "All Products Category - Star Icon", description: "All items"},
+    {Icon: BrushIcon, alt: "Custom Rug Category - Brush Icon", description: "Custom rugs"},
+    {Icon: RoundRugIcon, alt: "Rug Category - Round Rug Icon", description: "Rugs"},
+    {Icon: MugIcon, alt: "Mug Rugs Category - Mug Icon", description: "Mug rugs"},
+    {Icon: HandWaveIcon, alt: "Wrist Rug - Hand Icon", description: "Wrist rugs"},
+    {Icon: MirrorIcon, alt: "Mirror rugs Category - Mirror Icon", description: "Mirror rugs"},
+    {Icon: StickerSmileIcon, alt: "Stickers & More Category - Smiley Sticker Icon", description: "Stickers & more"},
+  ]
   return (
     <main aria-label="Shop Page">
       {/* Category Selector */}
       <section>
         <h1 className="heading_text p-4">Categories</h1>
         {/* CATEGORY CAROUSEL */}
-        <div>
-          <div>
-            <svg></svg>
-            <p>All Rugs</p>
-          </div>
-        </div>
+        <ul 
+          className="md:mx-4 mx-2 overflow-x-auto scrollbar-hide whitespace-nowrap flex items-center"
+          style={{ scrollbarWidth: 'none' }} 
+        >
+          {categoryIcons.map(({ Icon, alt, description }, idx) => (
+            <li
+            className="inline-flex mx-4 justify-center items-center flex-col text-center flex-shrink-0"
+            key={`category-${idx}`}
+            >
+              <Icon className="size-10 md:size-16 text-space_cadet hover:text-majorelle"/>
+              <p className="text-sm">{description}</p>
+            </li>
+          ))}
+        </ul>
       </section>
       {/* Product Title */}
       <section className="flex flex-col justify-center py-10">

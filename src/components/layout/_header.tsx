@@ -43,7 +43,7 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
                 />
               </div>
             )}
-          <div className="flex md:w-[50%] text-center items-center flex-col gap-6 justify-center">
+          <div className="flex mx-8 md:w-[50%] text-center items-center flex-col gap-6 justify-center">
             <p className="
             heading_text 
             justify-self-start
