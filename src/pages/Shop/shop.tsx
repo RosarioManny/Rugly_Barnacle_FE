@@ -2,7 +2,7 @@
 
 import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
 import { ProductCard } from "../../components/product/productCard"
-import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, HandWaveIcon, MirrorIcon} from "../../components/icons-svgs/SvgIcons"
+import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, HandWaveIcon, KeyboardIcon, MirrorIcon} from "../../components/icons-svgs/SvgIcons"
 import type { FC, SVGProps } from "react"
 
 interface cardProps {
@@ -26,7 +26,7 @@ export const Shop = () => {
 // TODO: fetchProductCategory
   // TEMP DATA 
   const cardContent: cardProps[]= [
-      { path:"public/products/rugs/Closeup_AllThat.webp",
+      { path:"/products/rugs/Closeup_AllThat.webp",
         img_alt:"Alt That Logo Rug",
         price:123.99,
         title:"All That Logo",
@@ -34,7 +34,7 @@ export const Shop = () => {
         genre:"rug",
         id: 1
       },
-      { path:"public/products/rugs/Custom_Thumper.webp",
+      { path:"/products/rugs/Custom_Thumper.webp",
         img_alt:"Thumper Rug",
         price:2123.99,
         title:"Thumper",
@@ -42,7 +42,7 @@ export const Shop = () => {
         genre:"rug",
         id: 2
       },
-      { path:"public/products/rugs/Rug_Naruto.webp",
+      { path:"/products/rugs/Rug_Naruto.webp",
         img_alt:"Naruto Rug",
         price:12.99,
         title:"Naruto Rug",
@@ -56,7 +56,7 @@ export const Shop = () => {
     {Icon: BrushIcon, alt: "Custom Rug Category - Brush Icon", description: "Custom rugs"},
     {Icon: RoundRugIcon, alt: "Rug Category - Round Rug Icon", description: "Rugs"},
     {Icon: MugIcon, alt: "Mug Rugs Category - Mug Icon", description: "Mug rugs"},
-    {Icon: HandWaveIcon, alt: "Wrist Rug - Hand Icon", description: "Wrist rugs"},
+    {Icon: KeyboardIcon, alt: "Wrist Rug - Keyboard Icon", description: "Wrist rugs"},
     {Icon: MirrorIcon, alt: "Mirror rugs Category - Mirror Icon", description: "Mirror rugs"},
     {Icon: StickerSmileIcon, alt: "Stickers & More Category - Smiley Sticker Icon", description: "Stickers & more"},
   ]
@@ -67,16 +67,16 @@ export const Shop = () => {
         <h1 className="heading_text p-4">Categories</h1>
         {/* CATEGORY CAROUSEL */}
         <ul 
-          className="md:mx-4 mx-2 overflow-x-auto scrollbar-hide whitespace-nowrap flex items-center"
+          className="md:mx-4 mx-2 overflow-x-auto scrollbar-hide whitespace-nowrap md:justify-center flex items-center"
           style={{ scrollbarWidth: 'none' }} 
         >
           {categoryIcons.map(({ Icon, alt, description }, idx) => (
             <li
-            className="inline-flex mx-4 justify-center items-center flex-col text-center flex-shrink-0"
+            className="inline-flex mx-4 group cursor-pointer justify-center items-center flex-col text-center flex-shrink-0"
             key={`category-${idx}`}
-            >
-              <Icon className="size-10 md:size-16 text-space_cadet hover:text-majorelle"/>
-              <p className="text-sm">{description}</p>
+            > 
+            <Icon className="size-10 md:size-12 text-space_cadet group-hover:text-majorelle"/>  
+            <p className="text-sm group-hover:text-majorelle">{description}</p>
             </li>
           ))}
         </ul>
