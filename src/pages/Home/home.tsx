@@ -7,6 +7,8 @@ import { CategoryCard } from "../../components/ui/categoryCard"
 import { Header } from "../../components/layout/_header"
 import type { FC, SVGProps } from "react"
 import { Carousel } from "../../components/ui/carousel/Carousel"
+import { Emailbtn } from "../../components/ui/buttons/btn_copyEmail"
+
 
 interface PromiseIcons {
   Icon: FC<SVGProps<SVGSVGElement>>;
@@ -39,25 +41,6 @@ export const Home = () => {
     {Icon: RugIcon, alt: "Rug icon", description: "One-of-a-kind Rugs"},
     {Icon: StarIcon, alt: "Star icon", description: "Quality Materials"},
   ]
-
-  // Copy Email Button
-  const copyEmailBtn = async () => {
-    const email = "theruglybarnacle@gmail.com"
-
-    try {
-      await navigator.clipboard.writeText(email);
-      alert(`Copied ${email} to clipboard.`)
-    } catch (err) {
-      console.error("Failed to copy:", err)
-        const textArea = document.createElement("textarea");
-          textArea.value = email;
-            document.body.appendChild(textArea);
-              textArea.select();
-                document.execCommand("copy");
-                  document.body.removeChild(textArea);
-      alert(`Copied (fallback): ${email}` )
-    }
-  }
 
   return (
     <main aria-label="Home Page">
@@ -109,20 +92,7 @@ export const Home = () => {
             <p>
             Contact me directly to inquire more!
             </p>
-            <div className="flex border-solid pr-2 rounded-2xl bg-breeze drop-shadow-sm border-black justify-center items-center">
-              <button 
-              onClick={copyEmailBtn}
-              aria-describedby="email-address"
-              aria-label="Copy Email Button"
-              className=" 
-              rounded-l-2xl text-space_cadet 
-              hover:bg-robin_egg hover:text-fleece hover:scale-110 " > 
-                <CopyIcon className="size-5 m-2 text-inherit"/>
-              </button>
-              <p id="email-address" className="p-2 subheading_text">
-                @theruglybarnacle@gmail.com
-              </p>
-            </div>
+            <Emailbtn />
           </div>
         </div>
       </section>
