@@ -1,24 +1,10 @@
 import { Header } from "../../components/layout/_header"
 import { FaqCard } from "../../components/ui/faq/faqCard"
-
 import { ShopBtn } from "../../components/ui/buttons/btn_shop"
 import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
-
-interface faqProps {
-  question: string,
-  answer: string
-}
+import { faqItems } from "./faqQuestions"
 
 export const Faq = () => {
-
-  // TEMP DATA
-  const faqItems: faqProps[]= [
-    {question: "What fabric do you use?", answer: "Natural and sustainable wool yarn"},
-    {question: "How long to make a custom rug?", answer: "1-2 weeks depending on complexity and size. Timeframe will be discussed in request."},
-    {question: "Do you do more than just rugs?", answer: "I create rug mirrors, wrist rugs, stickers and do tufting lessons."},
-    {question: "Do you only do custom rugs?", answer: "No, you can always browse my pre-made rugs. "},
-    {question: "How do I care for my rug?", answer: "Make sure to clean the rug at least every 6-8 months for best longevity. More if in a frequently messy areas."},
-  ]
   
   return (
     <>
@@ -26,6 +12,8 @@ export const Faq = () => {
         <Header 
         title="FAQ"
         tagline="Generally asked quesitons, to answer your curiousities."
+        img="/gallery/Product_Display_Pokemon_Wristrug_Edited_2.jpg"
+        img_alt=""
         />
         {/* TITLE */}
         <section className="my-8 flex flex-col gap-4 justify-center text-center">

@@ -18,8 +18,8 @@ export const Portfolio = () => {
       <Header
       title="Portfolio"
       tagline="A showcase of all my works. Checkout what I can do!"
-      img="/products/rugs/Showcase_AllThat.webp"
-      img_alt="TV show All that logo rug"
+      img="/gallery/Product_Display_Assorted_3.jpg"
+      img_alt="Assorted variety of rugs"
       ></Header>
       {/* PORTFOLIO INTRO */}
       <section>

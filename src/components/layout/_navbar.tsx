@@ -1,54 +1,31 @@
-import { useState } from "react"
 import { Link } from "react-router-dom"
 import { CartIcon } from "../icons-svgs/SvgIcons"
+import { useDropdownHandlers, useMobileHandlers } from "../../hooks/navbar"
+
 
 const shopSubMenu = ["shop", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
-const aboutSubMenu = ["about me", "contact", "faq"]
+const aboutSubMenu = ["about", "contact", "faq"]
 
 export const NavBar = () => {
-  const [shopDropdownOpen, setShopDropdownOpen] = useState(false)
-  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
-  const [isToggled, setIsToggled] = useState(false)
-  const [mobileShopOpen, setMobileShopOpen] = useState(false)
-  const [mobileAboutOpen, setMobileAboutOpen] = useState(false)
 
-  // Close all Dropdowns
-  const closeDropdown = () => {
-    if (shopDropdownOpen) setShopDropdownOpen(false)
-    if (aboutDropdownOpen) setAboutDropdownOpen(false)
-  }
-  // Shop Dropdown
-  const handleShopDropdown = () => {
-    setShopDropdownOpen(!shopDropdownOpen)
-  }
-  // About Dropdown
-  const handleAboutDropdown = () => {
-    setAboutDropdownOpen(!aboutDropdownOpen)
-  }
+  const {
+    closeDropdown,
+    handleShopDropdown,
+    handleAboutDropdown,
+    shopDropdownOpen,
+    aboutDropdownOpen
+  } = useDropdownHandlers()
 
-  // Reset mobile dropdowns when closing menu
-  const handleClick = () => {
-    setIsToggled(!isToggled)
-    if (isToggled) {
-      setMobileShopOpen(false)
-      setMobileAboutOpen(false)
-    }
-  }
+  const {
+    handleClick,
+    toggleMobileShop,
+    toggleMobileAbout,
+    isToggled,
+    mobileShopOpen,
+    mobileAboutOpen
+  } = useMobileHandlers()
 
-  // Mobile Shop Menu
-  const toggleMobileShop = () => {
-    setMobileShopOpen(!mobileShopOpen)
-    // Close about if it's open
-    if (mobileAboutOpen) setMobileAboutOpen(false)
-  }
-
-  // Mobile About Menu
-  const toggleMobileAbout = () => {
-  setMobileAboutOpen(!mobileAboutOpen)
-  // Close shop if it's open
-    if (mobileShopOpen) setMobileShopOpen(false)
-  }
-
+  
   return (
     <nav className="navbar rethink-sans max-h-[10] grid grid-cols-3 align-center items-center">
       {/* Home - Brand image small logo*/}

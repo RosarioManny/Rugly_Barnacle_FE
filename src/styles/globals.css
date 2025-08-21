@@ -165,7 +165,7 @@ Color Pallete:
 
 .subheading_text {
   font-family: Rethink-Sans;
-  font-size: 1.2rem;
+  font-size: 1.3rem;
 }
 
 
@@ -188,6 +188,7 @@ button {
   background-color: #5652E7;
   font-size: 1.3rem;
   font-weight: 600;
+  max-width: 60%
 }
 
 
