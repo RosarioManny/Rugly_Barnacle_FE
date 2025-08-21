@@ -39,7 +39,7 @@ export const Carousel = ({ items }: CarouselProps) => {
         className="active:bg-robin_egg hover:bg-robin_egg focus:bg-robin_egg
         absolute right-4 top-1/2 z-10 -translate-y-1/2 text-fleece rounded-md bg-majorelle p-3 shadow-md backdrop-blur-sm"
       >
-      &gt;
+        &gt;
       </button>
 
       {/* Carousel Track */}
@@ -51,7 +51,7 @@ export const Carousel = ({ items }: CarouselProps) => {
           x: `-${currentIdx * itemWidth}%`,
           transition: { type: "spring", stiffness: 300, damping: 30 }
         }}
-        className="flex py-4 cursor-grab active:cursor-grabbing"
+        className="md:grid-row-1 flex py-4 cursor-grab active:cursor-grabbing"
       >
         {items.map((item, idx) => (
           <motion.div

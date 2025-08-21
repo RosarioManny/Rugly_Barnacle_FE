@@ -21,9 +21,8 @@ export const Footer = () => {
   const links: string[] = [ "shop",  "about", "portfolio", "faq"];
 
   return (
-    <>
-      <footer className="bg-space_cadet w-full relative">
-        <div className="relative">
+      <footer className="bg-space_cadet w-full">
+        <div className="relative ">
           <CtaWavesBg className="absolute w-full h-auto fill-space_cadet -translate-y-full"/>
         </div>
         <div className="w-full flex justify-end">
@@ -104,6 +103,5 @@ export const Footer = () => {
           </section>
         </main>
       </footer>
-    </>
   )
 }

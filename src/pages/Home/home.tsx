@@ -1,4 +1,4 @@
-import { HeartIcon, RugIcon, SmileyfaceIcon, StarIcon, CopyIcon} from "../../components/icons-svgs/SvgIcons"
+import { HeartIcon, RugIcon, SmileyfaceIcon, StarIcon} from "../../components/icons-svgs/SvgIcons"
 import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
 import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
 import { ContactUsBtn } from "../../components/ui/buttons/btn_contactUs"
@@ -8,12 +8,14 @@ import { Header } from "../../components/layout/_header"
 import type { FC, SVGProps } from "react"
 import { Carousel } from "../../components/ui/carousel/Carousel"
 import { Emailbtn } from "../../components/ui/buttons/btn_copyEmail"
+import { copyEmailBtn } from "../../hooks/CopyEmail"
 
 
 interface PromiseIcons {
   Icon: FC<SVGProps<SVGSVGElement>>;
   alt: string;
   description: string;
+  title: string;
 }
 
 interface TempsProps {
@@ -24,22 +26,17 @@ interface TempsProps {
 export const Home = () => {
   // TEMP DATA
   const Temp: TempsProps[] = [
-    {"name": "Team", "path": "products/rugs/Closeup_AllThat.webp"},
-    {"name": "Ghose", "path": "products/rugs/Showcase_Gengar.webp"},
-    {"name": "Steal", "path": "products/rugs/Custom_Portrait.webp"},
-    {"name": "Self-Portrait", "path": "products/rugs/Custom_Portrait.webp"},
-    {"name": "AlFriet", "path": "products/rugs/Closeup_AllThat.webp"},
-    {"name": "asdas", "path": "products/rugs/Custom_Thumper.webp"},
-    {"name": "Gengar", "path": "products/rugs/Showcase_Gengar.webp"},
     {"name": "All That", "path": "products/rugs/Closeup_AllThat.webp"},
-    {"name": "Ter", "path": "products/rugs/Custom_Thumper.webp"},
+    {"name": "Gengar", "path": "products/rugs/Showcase_Gengar.webp"},
+    {"name": "Self-Portrait", "path": "products/rugs/Custom_Portrait.webp"},
+    {"name": "Thumper", "path": "products/rugs/Custom_Thumper.webp"},
   ]
   // Promise Icons
   const promiseIcons: PromiseIcons[] = [
-    {Icon: HeartIcon, alt: "Heart icon", description: "Personalized & Handcrafted"},
-    {Icon: SmileyfaceIcon, alt: "Smiley face icon", description: "Satisfaction Guarenteed"},
-    {Icon: RugIcon, alt: "Rug icon", description: "One-of-a-kind Rugs"},
-    {Icon: StarIcon, alt: "Star icon", description: "Quality Materials"},
+    {Icon: HeartIcon, alt: "Heart icon", description: "Handcrafter with care", title: "Personalized & Handcrafted"},
+    {Icon: StarIcon, alt: "Star icon", description: "Soft, durable and quality yarn", title: "Quality Materials"},
+    {Icon: SmileyfaceIcon, alt: "Smiley face icon", description: "Exactly as you like. No exceptions!", title: "Satisfaction Guarenteed"},
+    {Icon: RugIcon, alt: "Rug icon", description: "No two are ever the same!", title: "One-of-a-kind Rugs"},
   ]
 
   return (
@@ -52,22 +49,23 @@ export const Home = () => {
         />
       {/* Promises */}
       <section aria-label="Promises Section" className="section-container">
-          <ul className="grid grid-cols-2 md:flex justify-center">
-            {promiseIcons.map(({ Icon, alt, description }, idx) => (
-              <li key={`${alt}-${idx}`}>
-                <CategoryCard 
-                  className="flex flex-col items-center text-center p-4 gap-2"
-                  key={`promise-icon-${idx}`}
-                  svg={<Icon className="transition-all duration-300 hover:scale-105 focus:scale-105 h-20 text-majorelle" />}
-                  svgAlt={alt}
-                  description={description}
-                />
-              </li>
-            ))}
-          </ul>
+        <ul className="grid grid-cols-2 md:flex justify-center">
+          {promiseIcons.map(({ Icon, alt, description, title }, idx) => (
+            <li key={`${alt}-${idx}`}>
+              <CategoryCard 
+                className="flex flex-col items-center text-center p-4 gap-2"
+                key={`promise-icon-${idx}`}
+                svg={<Icon className="transition-all duration-300 hover:scale-105 focus:scale-105 h-20 text-majorelle" />}
+                svgAlt={alt}
+                title={title}
+                description={description}
+              />
+            </li>
+          ))}
+        </ul>
       </section>
       {/* CUSTOM RUGS */}
-      <section className="section-container body_text divide-none divide-4">
+      <section className="section-container body_text">
         {/* Title */}
         <div className="flex justify-center gap-2 my-4">
           <img 
@@ -78,26 +76,28 @@ export const Home = () => {
           <h1 className="heading_text"> Custom Rugs</h1>
         </div>
         {/* Price and Action */}
-        <div className=" flex flex-col items-center text-center gap-4">
+        <div className=" flex flex-col md:flex-row justify-center items-center text-center gap-4">
           <img 
-          className="w-full rounded-xl drop-shadow-md/40" 
+          className="md:w-md w-sm rounded-xl drop-shadow-md/40" 
           src="/products/prices/General_Pricing_Poster.webp" 
           alt="General Pricing Poster - Pricing's vary by design, size, quantity, colors and intricacy. 
           Estimates are is: 3ft is $150+ ; 4ft is $250; 5ft is $350; 6ft and more is $450." />
-          <p className="body-text">
-            Submit a form to begin your custom rug!
-          </p>
-          <StartOrderBtn/>
-          <div className="flex flex-col gap-4">
+          <div className="body_text flex flex-col gap-4 justify-center items-center">
             <p>
-            Contact me directly to inquire more!
+              Submit a form to begin your custom rug!
             </p>
-            <Emailbtn />
+            <StartOrderBtn/>
+            <div className="flex flex-col items-center gap-4">
+              <p>
+              Contact me directly to inquire more!
+              </p>
+              <Emailbtn onClick={copyEmailBtn}/>
+            </div>
           </div>
         </div>
       </section>
       <CtaWavesBg className="fill-mauve"/>
-      <section className="cta_container">
+      <section className="cta_container absolute">
         {/* Title */}
         <div className="gap-3 mx-2 flex flex-col">
           <img 
@@ -110,10 +110,9 @@ export const Home = () => {
         {/* Carousel */}
         <div className="">
             <Carousel items={Temp} />
-  
         </div>
         {/* CTA  */}
-        <div className="flex justify-center my-2 py-2">
+        <div className="z-20 flex items-center md:justify-end justify-center my-6 mx-20">
           <ShopBtn />
         </div>
       </section>

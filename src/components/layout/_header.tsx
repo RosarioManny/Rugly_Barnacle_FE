@@ -30,7 +30,7 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
         <section className="
           relative z-10
           flex flex-col gap-4 justify-center items-center 
-          md:flex-row
+          md:flex-row-reverse
           h-full text-center text-fleece"
         >
             {/* FALLBACK IMAGE */}

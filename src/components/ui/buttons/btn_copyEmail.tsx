@@ -11,8 +11,10 @@ export const Emailbtn = ({ onClick = () => {} }: EmailbtnProps) => (
     aria-describedby="email-address"
     aria-label="Copy Email Button"
     className=" 
-    rounded-l-2xl text-space_cadet flex
-    hover:bg-robin_egg hover:text-fleece hover:scale-110 " > 
+    rounded-2xl text-space_cadet flex align-center items-center
+    hover:bg-robin_egg hover:text-fleece hover:scale-105
+    
+    " > 
       <CopyIcon className="size-5 m-2 text-inherit"/>
       <p id="email-address" className="p-2 subheading_text">
         @theruglybarnacle@gmail.com
