@@ -1,10 +1,11 @@
 import { Header } from "../../components/layout/_header"
-import { ShopBtn } from "../../components/ui/buttons/btn_shop"
+import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
+import { Emailbtn } from "../../components/ui/buttons/btn_copyEmail"
 
 export const Contact = () => {
 
   return (
-    <main aria-label="Contact Page">
+    <main aria-label="Contact Page" className="">
       <Header
         title="Contact"
         tagline="Let's keep in touch!"
@@ -16,31 +17,22 @@ export const Contact = () => {
           src="/assets/design/icons/X_Star_Pink.webp" 
           aria-hidden="true" 
           alt="Cross Star Design Marker" />
-          <h1 className="heading_text "> Contacts</h1>
+          <h1 className="heading_text "> Contacts </h1>
         </section>
         {/* CONTENT */}
-        <section className="text-center mx-2">
-          <p>
-            Hi! I'm Emilie, the tuft broad behind the Rugly Barnacle!
-            Tufting rugs started as a COVID hobby and quickly became my absolute passion and business. 
-            Every Rugly Barnacle piece is a celebration of the fandom community — because it's for the fan, by the fan.
-            So, if you're looking for a custom rug that's made just for you, look no further! 
-            Let me bring your favorite character, symbol, logo, art piece or any design of your wildest dream to life in rug form! 
-            Each rug is one of a kind and 100% handmade to exceed every customer's expectation. Ready?
-          </p>
-        </section>
-        {/* CALL-TO-ACTION */}
-        <section className="py-16 flex flex-col items-center text-center ">
-          <p className="m-2">Love what we’re about? Checkout our rug to see which one you like!</p>
-          <div className="flex my-8">
-            <img 
-            className="flex justify-start mx-4 h-10 w-10" 
-            src="/assets/design/icons/Cross_Star_White.webp" 
-            aria-hidden="true" 
-            alt="Cross Star Design Marker" />
-            <ShopBtn/>
+        <section className="flex flex-col gap-6 text-center mb-20">
+          <div className="">
+            <p>Call number</p>
+            <p>218-312-2133</p>
           </div>
-          <img className="w-full " src="/assets/design/logo/Banner_Blue_Logo_Phrase.webp" alt="" />
+          <div className="flex flex-col gap-6 justify-center items-center">
+            <p>Email Address</p>
+            <Emailbtn />
+          </div>
+          <div>
+            <p>Looking to create a custom rug?</p>
+            <StartOrderBtn />
+          </div>
         </section>
     </main>
   )

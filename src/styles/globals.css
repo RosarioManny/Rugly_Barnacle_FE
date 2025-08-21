@@ -159,7 +159,7 @@ Color Pallete:
 
 .heading_text {
   font-family: Silk Flower;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 .subheading_text {
@@ -283,3 +283,4 @@ button {
 .floating-item:hover {
   animation: gentleFloat 3s ease-in-out infinite both;
 }
+

@@ -47,8 +47,8 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
             <p className="
             heading_text 
             justify-self-start
-            md:text-5xl 
-            text-4xl">
+            md:text-6xl 
+            text-5xl">
               {title}
             </p>
             { tagline &&(
