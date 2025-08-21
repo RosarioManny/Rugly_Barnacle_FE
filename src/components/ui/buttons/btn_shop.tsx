@@ -1,8 +1,7 @@
 import { Link } from "react-router-dom"
 
 
-export const ShopBtn = () => {
-  return (
+export const ShopBtn = () => (
       <button className="
         btn_general
         flex items-center gap-2 group
@@ -20,4 +19,3 @@ export const ShopBtn = () => {
             caret-right text-mauve group-hover:translate-x-1 `}/>
       </button>
   )
-}

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
-export const CheckoutBtn = () => {
-  return (
+export const CheckoutBtn = () => (
+  
       <button className="
         btn_general 
         drop-shadow-sm/50
@@ -13,4 +13,3 @@ export const CheckoutBtn = () => {
         </Link>
       </button>
   )
-}

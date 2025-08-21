@@ -32,7 +32,7 @@ export const About = () => {
             </p>
         </section>
         {/* CALL-TO-ACTION */}
-        <section className="py-10 flex body_text font-medium flex-col items-center text-center ">
+        <section className="py-14 flex body_text font-medium flex-col items-center text-center ">
           <p className="m-2">Love what we’re about? Checkout our rug to see which one you like!</p>
           <div className="flex my-8">
             <img 

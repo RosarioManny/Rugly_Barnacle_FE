@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom"
-export const ContactUsBtn = () => {
-  return (
+export const ContactUsBtn = () => (
     <button className="
     btn_contact_us drop-shadow-sm/30
     active:border-robin_egg active:scale-105 
@@ -11,4 +10,3 @@ export const ContactUsBtn = () => {
       </Link>
     </button>
   )
-}

@@ -3,6 +3,7 @@
 import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
 import { ProductCard } from "../../components/product/productCard"
 import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, HandWaveIcon, KeyboardIcon, MirrorIcon} from "../../components/icons-svgs/SvgIcons"
+import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
 import type { FC, SVGProps } from "react"
 
 interface cardProps {
@@ -11,7 +12,7 @@ interface cardProps {
   title: string,
   img_alt: string,
   dimensions: string,
-  genre: string,
+  category: string,
   id: number,
 }
 interface CategoryIconProps {
@@ -31,7 +32,7 @@ export const Shop = () => {
         price:123.99,
         title:"All That Logo",
         dimensions:"3 x 3",
-        genre:"rug",
+        category:"rug",
         id: 1
       },
       { path:"/products/rugs/Custom_Thumper.webp",
@@ -39,7 +40,7 @@ export const Shop = () => {
         price:2123.99,
         title:"Thumper",
         dimensions:"3 x 3",
-        genre:"rug",
+        category:"rug",
         id: 2
       },
       { path:"/products/rugs/Rug_Naruto.webp",
@@ -47,7 +48,7 @@ export const Shop = () => {
         price:12.99,
         title:"Naruto Rug",
         dimensions:"3 x 3",
-        genre:"rug",
+        category:"rug",
         id: 3
       },
     ]
@@ -69,11 +70,13 @@ export const Shop = () => {
         <ul 
           className="md:mx-4 mx-2 overflow-x-auto scrollbar-hide whitespace-nowrap md:justify-center flex items-center"
           style={{ scrollbarWidth: 'none' }} 
+          aria-label="Category Selection"
         >
           {categoryIcons.map(({ Icon, alt, description }, idx) => (
             <li
             className="inline-flex mx-4 group cursor-pointer justify-center items-center flex-col text-center flex-shrink-0"
             key={`category-${idx}`}
+            aria-label={alt}
             > 
             <Icon className="size-10 md:size-12 text-space_cadet group-hover:text-majorelle"/>  
             <p className="text-sm group-hover:text-majorelle">{description}</p>
@@ -122,7 +125,7 @@ export const Shop = () => {
       */}
       <section id="product-listings">
         <ul className="mx-2 grid grid-cols-2 gap-2 md:grid-cols-3">   
-          {cardContent.map(({ path, price, title, img_alt, dimensions, genre, id}, idx) => (
+          {cardContent.map(({ path, price, title, img_alt, dimensions, category, id}, idx) => (
             <ProductCard 
             id={id}
             key={`${title}-${idx}`}
@@ -131,15 +134,15 @@ export const Shop = () => {
             price={price}
             title={title}
             dimensions={dimensions}
-            genre={genre}
+            category={category}
             />
           ))}
         </ul>
       
       </section>
       {/* Call To Action */}
-      <section className="bg-mauve heading_text flex flex-col text-center  gap-5 justify-center items-center">
-        
+      <CtaWavesBg className="fill-mauve mt-20"/>
+      <section className="bg-mauve heading_text flex flex-col text-center pb-20 gap-5 justify-center items-center">
           <img 
             className="flex align-start h-8 w-8" 
             src="/assets/design/icons/Cross_Star_Teal-Blue.webp" 
@@ -148,7 +151,6 @@ export const Shop = () => {
             <p>Don’t see what you’re looking for? </p>
             <StartOrderBtn/>
             <p>Create your custom rug</p>
-        
       </section>
     </main>
   )

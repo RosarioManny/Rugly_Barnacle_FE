@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom"
 
-export const StartOrderBtn = () => {
-  return (
+export const StartOrderBtn = () => (
       <button className="
         btn_general 
         duration-100 drop-shadow-sm/50
@@ -13,4 +12,3 @@ export const StartOrderBtn = () => {
         </Link>
       </button>
   )
-}
