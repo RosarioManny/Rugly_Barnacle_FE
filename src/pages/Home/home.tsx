@@ -35,14 +35,14 @@ export const Home = () => {
   const promiseIcons: PromiseIcons[] = [
     {Icon: HeartIcon, alt: "Heart icon", description: "Handcrafter with care", title: "Personalized & Handcrafted"},
     {Icon: StarIcon, alt: "Star icon", description: "Soft, durable and quality yarn", title: "Quality Materials"},
-    {Icon: SmileyfaceIcon, alt: "Smiley face icon", description: "Exactly as you like. No exceptions!", title: "Satisfaction Guarenteed"},
+    {Icon: SmileyfaceIcon, alt: "Smiley face icon", description: "Exactly as you like. No exceptions!", title: "Satisfaction Guaranteed"},
     {Icon: RugIcon, alt: "Rug icon", description: "No two are ever the same!", title: "One-of-a-kind Rugs"},
   ]
 
   return (
     <main aria-label="Home Page">
       <Header
-        title="Where you dream design becomes a rug reality"
+        title="Where your dream design becomes a rug reality"
         tagline="Begin your dream rug!"
         btn_1={<StartOrderBtn/>}
         btn_2={<ContactUsBtn/>}
