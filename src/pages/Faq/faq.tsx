@@ -13,7 +13,7 @@ export const Faq = () => {
         title="FAQ"
         tagline="Generally asked quesitons, to answer your curiousities."
         img="/gallery/Product_Display_Pokemon_Wristrug_Edited_2.jpg"
-        img_alt=""
+        img_alt="Variety of pokemon rugs. "
         />
         {/* TITLE */}
         <section className="my-8 flex flex-col gap-4 justify-center text-center">

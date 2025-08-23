@@ -1,6 +1,6 @@
 import api from '../apiConfig.ts';
 
-interface Property {
+export interface Property {
   id: number;
   name: string;
   display_name: string;
@@ -15,14 +15,14 @@ interface Category {
 export interface Product {
   id: number;
   name: string;
-  price: string; // or number if you parse it
+  price: number;
   category: Category;
   description: string;
   dimensions: string;
   quantity: number;
   properties: Property[];
-  created_at: string;
-  updated_at: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 // Get list of Products

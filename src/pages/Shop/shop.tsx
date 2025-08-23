@@ -1,57 +1,53 @@
 // TODO: import productCard
-
+import { useState, useEffect, useRef} from "react"
 import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
-import { ProductCard } from "../../components/product/productCard"
-import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, HandWaveIcon, KeyboardIcon, MirrorIcon} from "../../components/icons-svgs/SvgIcons"
+import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardIcon, MirrorIcon} from "../../components/icons-svgs/SvgIcons"
 import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
 import type { FC, SVGProps } from "react"
+import { ProductCard } from "../../components/ui/product/productCard"
+import { getProducts } from "../../lib/api/Product/productServices"
+import type { Product } from "../../lib/api/Product/productServices"
+import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 
-interface cardProps {
-  path: string,
-  price: number,
-  title: string,
-  img_alt: string,
-  dimensions: string,
-  category: string,
-  id: number,
-}
 interface CategoryIconProps {
   Icon: FC<SVGProps<SVGSVGElement>>;
   alt: string;
   description: string;
 }
-export const Shop = () => {
 
-// TODO: Create filter Options
-// TODO: fetchAllProducts
-// TODO: fetchProductCategory
-  // TEMP DATA 
-  const cardContent: cardProps[]= [
-      { path:"/products/rugs/Closeup_AllThat.webp",
-        img_alt:"Alt That Logo Rug",
-        price:123.99,
-        title:"All That Logo",
-        dimensions:"3 x 3",
-        category:"rug",
-        id: 1
-      },
-      { path:"/products/rugs/Custom_Thumper.webp",
-        img_alt:"Thumper Rug",
-        price:2123.99,
-        title:"Thumper",
-        dimensions:"3 x 3",
-        category:"rug",
-        id: 2
-      },
-      { path:"/products/rugs/Rug_Naruto.webp",
-        img_alt:"Naruto Rug",
-        price:12.99,
-        title:"Naruto Rug",
-        dimensions:"3 x 3",
-        category:"rug",
-        id: 3
-      },
-    ]
+export const Shop = () => {
+  const [products, setProducts ] = useState<Product[]>([])
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const hasFetched = useRef(false)
+
+  useEffect(() => {
+    if (!hasFetched.current) {
+      hasFetched.current = true;
+      fetchProducts();
+    }
+  }, []);
+
+  const fetchProducts = async () => {
+    try {
+      setLoading(true);
+      const data = await getProducts()
+      setProducts(data)
+      setError(null)
+    } catch(err) {
+      setError("Failed to fetch promise")
+    } finally {
+      setLoading(false)
+    }
+  };
+
+
+  if (loading) {
+    return (
+      <Spinner  />
+    );
+  }
+
   const categoryIcons: CategoryIconProps[] = [
     {Icon: StarIcon, alt: "All Products Category - Star Icon", description: "All items"},
     {Icon: BrushIcon, alt: "Custom Rug Category - Brush Icon", description: "Custom rugs"},
@@ -61,6 +57,8 @@ export const Shop = () => {
     {Icon: MirrorIcon, alt: "Mirror rugs Category - Mirror Icon", description: "Mirror rugs"},
     {Icon: StickerSmileIcon, alt: "Stickers & More Category - Smiley Sticker Icon", description: "Stickers & more"},
   ]
+
+  if (error) return <div>Error: {error}</div>;
   return (
     <main aria-label="Shop Page">
       {/* Category Selector */}
@@ -124,17 +122,17 @@ export const Shop = () => {
       TODO: Create Product Card
       */}
       <section id="product-listings">
-        <ul className="mx-2 grid grid-cols-2 gap-2 md:grid-cols-3">   
-          {cardContent.map(({ path, price, title, img_alt, dimensions, category, id}, idx) => (
+        <ul className="md:mx-8 flex-shink-1 mx-2 grid grid-cols-2 md:gap-4 gap-2 md:grid-cols-3">
+          {products.map((product, idx) => (
             <ProductCard 
-            id={id}
-            key={`${title}-${idx}`}
-            path={path}
-            img_alt={img_alt}
-            price={price}
-            title={title}
-            dimensions={dimensions}
-            category={category}
+            id={product.id}
+            key={`${product.name}-${idx}`}
+            // path={path}
+            // img_alt={img_alt}
+            price={product.price}
+            name={product.name}
+            dimensions={product.dimensions}
+            category={product.category.name}
             />
           ))}
         </ul>
