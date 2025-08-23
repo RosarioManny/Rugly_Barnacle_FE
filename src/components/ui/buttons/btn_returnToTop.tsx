@@ -27,16 +27,19 @@ export const ReturnToTop = () => {
   };
 
   return (
-    <>
-      {isVisible && (
-        <button
-          onClick={scrollToTop}
-          className="fixed bottom-6 right-6 z-50 bg-majorelle text-white p-3 rounded-full shadow-lg hover:bg-purple-700 transition-all duration-300 transform hover:scale-110 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-50"
-          aria-label="Return to top"
-        >
-          <span className="text-lg">↑</span>
-        </button>
-      )}
-    </>
+    <button
+      onClick={scrollToTop}
+      className={`
+        fixed bottom-6 right-6 z-50 bg-majorelle text-fleece p-2 rounded-lg shadow-lg 
+        hover:bg-bittersweet transition-all duration-300 transform hover:scale-110 
+        focus:bg-bittersweet focus:ring-2 focus:ring-robin_egg focus:ring-opacity-50
+        ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}
+        transition-all duration-500 ease-in-out
+      `}
+      aria-label="Return to top"
+    >
+      <span className="text-lg">↑</span>
+      <p>Top</p>
+    </button>
   );
 };

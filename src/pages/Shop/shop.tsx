@@ -8,6 +8,7 @@ import { ProductCard } from "../../components/ui/product/productCard"
 import { getProducts } from "../../lib/api/Product/productServices"
 import type { Product } from "../../lib/api/Product/productServices"
 import { Spinner } from "../../components/ui/loaders/loadingSpinner"
+import { ReturnToTop } from "../../components/ui/buttons/btn_returnToTop";
 
 interface CategoryIconProps {
   Icon: FC<SVGProps<SVGSVGElement>>;
@@ -150,6 +151,7 @@ export const Shop = () => {
             <StartOrderBtn/>
             <p>Create your custom rug</p>
       </section>
+      <ReturnToTop />
     </main>
   )
 }
