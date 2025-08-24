@@ -8,12 +8,14 @@ interface ProductCardProps {
   img_alt?: string,
   dimensions: string,
   category: string,
+  quantity: number,
 }
-export const ProductCard = ({ id, path, price, name, img_alt, dimensions, category }: ProductCardProps) => {
+export const ProductCard = ({ id, path, price, name, img_alt, dimensions, category, quantity }: ProductCardProps) => {
   return (
     <Link to={`/shop/${id}`}>
       <li
         className="
+          text-space_cadet
           group transform-color duration-[300ms] 
           hover:text-majorelle focus:text-majorelle active:text-majorelle
           hover:outline-robin_egg focus:outline-robin_egg active:outline-robin_egg 
@@ -30,13 +32,18 @@ export const ProductCard = ({ id, path, price, name, img_alt, dimensions, catego
           loading="lazy"
           />
           {/* Product Info */}
-          <div className="p-2 text-[.9rem] flex flex-col gap-1">
+          <div className="p-2 text-[.9rem] flex flex-col body_text">
             <p className="font-medium transform-color duration-[300ms] truncate"> { name }</p>
             <p> { dimensions }</p>
-            <p className=""> Category: { category }</p>
+            <p className="text-majorelle">{ category }</p>
           </div>
-          <div className="flex justify-end m-2">
-            <p className="font-bold text-md text-majorelle">${price}</p>
+          <div className="flex justify-end items-center m-2">
+            {quantity ? (
+              <p className="font-bold text-sm ">${price}</p> 
+            ) : (
+              <p className="font-bold text-bittersweet">SOLD</p>
+            )
+            }
           </div>
         </div>
       </li>

@@ -28,9 +28,9 @@ export const Footer = () => {
         <div className="w-full flex justify-end">
           <img 
             className="size-16" 
-            src="assets/design/icons/X_Star_Pink.webp" 
+            src="/assets/design/icons/X_Star_Pink.webp" 
             aria-hidden="true" 
-            alt="X-Star Design Marker" 
+            alt="Pink X-Star Design Marker" 
           />
         </div>
         <main aria-label="Footer Content" className="text-center flex flex-col items-center">

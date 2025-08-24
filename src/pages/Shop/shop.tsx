@@ -134,10 +134,10 @@ export const Shop = () => {
             name={product.name}
             dimensions={product.dimensions}
             category={product.category.name}
+            quantity={product.quantity}
             />
           ))}
         </ul>
-      
       </section>
       {/* Call To Action */}
       <CtaWavesBg className="fill-mauve mt-20"/>
