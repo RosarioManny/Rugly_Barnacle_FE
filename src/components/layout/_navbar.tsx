@@ -2,11 +2,11 @@ import { Link } from "react-router-dom"
 import { CartIcon } from "../icons-svgs/SvgIcons"
 import { useDropdownHandlers, useMobileHandlers } from "../../hooks/navbar"
 
-
 const shopSubMenu = ["shop", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
 const aboutSubMenu = ["about", "contact", "faq"]
 
 export const NavBar = () => {
+
 
   const {
     closeDropdown,
@@ -25,7 +25,6 @@ export const NavBar = () => {
     mobileAboutOpen
   } = useMobileHandlers()
 
-  
   return (
     <nav className="navbar rethink-sans max-h-[10] grid grid-cols-3 align-center items-center">
       {/* Home - Brand image small logo*/}

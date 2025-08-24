@@ -1,7 +1,7 @@
 // TODO: import productCard
 import { useState, useEffect, useRef} from "react"
 import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
-import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardIcon, MirrorIcon} from "../../components/icons-svgs/SvgIcons"
+import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardIcon, MirrorIcon, DangerIcon} from "../../components/icons-svgs/SvgIcons"
 import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
 import type { FC, SVGProps } from "react"
 import { ProductCard } from "../../components/ui/product/productCard"
@@ -42,12 +42,9 @@ export const Shop = () => {
     }
   };
 
-
-  if (loading) {
-    return (
-      <Spinner  />
-    );
-  }
+  // LOADING STATE
+  if (loading) return <Spinner  />;
+  
 
   const categoryIcons: CategoryIconProps[] = [
     {Icon: StarIcon, alt: "All Products Category - Star Icon", description: "All items"},
@@ -59,7 +56,14 @@ export const Shop = () => {
     {Icon: StickerSmileIcon, alt: "Stickers & More Category - Smiley Sticker Icon", description: "Stickers & more"},
   ]
 
-  if (error) return <div>Error: {error}</div>;
+  if (error) return <div >Error: {error}</div>;
+  if (error || products === null) {
+    return ( 
+      <div className=" h-[100vh] justify-center flex flex-col gap-5 items-center">
+        <DangerIcon className="text-bittersweet"/>
+        <div className="error-message text-bittersweet font-bold">Error: {error ? `${error}` : "Difficulty getting products. Check back soon!" }</div>
+      </div>)
+  }
   return (
     <main aria-label="Shop Page">
       {/* Category Selector */}

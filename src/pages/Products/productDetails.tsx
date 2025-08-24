@@ -39,13 +39,8 @@ export const ProductDetails = () => {
     }
   }, [id]) // Add id as dependency
   
-  const quantity = productDetails?.quantity
-
-  console.log(Boolean(0))
-  if (loading) {
-    return <Spinner />
-  }
-
+  if (loading) return <Spinner />
+  
   if (error || productDetails === null) {
     return ( 
       <div className=" h-[100vh] justify-center flex flex-col gap-5 items-center">
@@ -53,6 +48,7 @@ export const ProductDetails = () => {
         <div className="error-message text-bittersweet font-bold">Error: {error ? `${error}` : "Item doesn't Exist" }</div>
       </div>)
   }
+
   return (
     <main className="mx-4 mt-4 mb-20 h-fit" aria-label={`${productDetails.name} Details Page`}>
       <section aria-label="Product Infomation" className="h-fit">

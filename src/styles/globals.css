@@ -188,7 +188,9 @@ button {
   background-color: #5652E7;
   font-size: 1.3rem;
   font-weight: 600;
-  max-width: 60%
+  width: auto;
+  height: auto;
+  max-width: 65%;
 }
 .btn_addToCart {
   padding: .5rem 1rem;
