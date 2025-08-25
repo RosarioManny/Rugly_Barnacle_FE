@@ -107,7 +107,7 @@ Color Pallete:
   min-width: 160px;
   box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  margin: 1.56px 0 0 0;
+  margin: .1px 0 0 0;
   cursor: pointer;
   z-index: 50;
 }
@@ -123,8 +123,8 @@ Color Pallete:
   gap: 1rem;
 }
 
-.dropdown-content a:hover {
-  background-color: rgba(86, 82, 231, .2);
+a:hover {
+  background-color: rgba(86, 82, 231, .1);
   transition: all 250ms ease-out;
   cursor: pointer;
 } 
@@ -296,3 +296,34 @@ button {
   animation: gentleFloat 3s ease-in-out infinite both;
 }
 
+@keyframes wobble {
+  0%, 100%{
+    transform: translateX(0) rotate(8deg);
+  }
+  50% {
+    
+    transform: translateX(-3px) rotate(-8deg);
+  }
+}
+
+.yarn-animation {
+  animation: wobble 3s ease-in-out infinite both;
+}
+
+@keyframes starFade {
+  0% {
+    opacity: .5;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(180deg) scale(1.4);
+  }
+  100% {
+    opacity: .5;
+    transform: rotate(360deg) scale(1);
+  }
+}
+.star-fade-animation {
+  animation: starFade 4s linear infinite;
+}
