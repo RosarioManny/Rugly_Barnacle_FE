@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { CtaWavesBg } from "../icons-svgs/ctaWavesBg"
-import { InstagramLogo, TikTokLogo, EtsyLogo } from "../icons-svgs/socialMediaIcons"
+import { CtaWavesBg } from "../ui/icons-svgs/ctaWavesBg"
+import { InstagramLogo, TikTokLogo, EtsyLogo } from "../ui/icons-svgs/socialMediaIcons"
 import { NewsLetterForm } from "../ui/newsLetterForm"
 import type { FC, SVGProps } from "react"
 // ChangeEvent and FormEvent are effective TS types for the event.targets. 
@@ -23,7 +23,7 @@ export const Footer = () => {
   return (
       <footer className="bg-space_cadet w-full">
         <div className="relative ">
-          <CtaWavesBg className="absolute w-full h-auto fill-space_cadet -translate-y-full"/>
+          <CtaWavesBg className="absolute w-full h-auto fill-space_cadet top-[2px] -translate-y-full"/>
         </div>
         <div className="w-full flex justify-end">
           <img 

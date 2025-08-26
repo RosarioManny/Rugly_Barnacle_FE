@@ -183,14 +183,13 @@ button {
 }
 
 .btn_general {
-  padding: .5rem 1rem;
+  padding: .8rem;
   border-radius: .5rem;
   background-color: #5652E7;
   font-size: 1.3rem;
   font-weight: 600;
   width: auto;
-  height: auto;
-  max-width: 65%;
+  max-width: 100%; 
 }
 .btn_addToCart {
   padding: .5rem 1rem;
@@ -231,6 +230,7 @@ button {
 .section-container {
   padding: 8px;
   margin: 8px;
+  width: 100%;
 }
 
 /* Categories and Action Section */

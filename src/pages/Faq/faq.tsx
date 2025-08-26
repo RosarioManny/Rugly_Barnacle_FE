@@ -1,7 +1,7 @@
 import { Header } from "../../components/layout/_header"
 import { FaqCard } from "../../components/ui/faq/faqCard"
 import { ShopBtn } from "../../components/ui/buttons/btn_shop"
-import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
+import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
 import { faqItems } from "./faqQuestions"
 
 export const Faq = () => {

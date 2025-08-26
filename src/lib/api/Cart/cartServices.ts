@@ -1,6 +1,6 @@
 import api from "../apiConfig"
 
-interface Cart {
+export interface CartInfo {
   id: number,
   session_key: string,
 }
@@ -8,7 +8,7 @@ interface Cart {
 // get current cart for user
 export const getCart = async () => {
   try {
-    const response = await api.get<Cart>("cart/");
+    const response = await api.get<CartInfo>("cart/");
     return response.data
 
   } catch(err: any) {

@@ -1,5 +1,5 @@
-import { HeartIcon, RugIcon, SmileyfaceIcon, StarIcon} from "../../components/icons-svgs/SvgIcons"
-import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
+import { HeartIcon, RugIcon, SmileyfaceIcon, StarIcon} from "../../components/ui/icons-svgs/SvgIcons"
+import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
 import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
 import { ContactUsBtn } from "../../components/ui/buttons/btn_contactUs"
 import { ShopBtn } from "../../components/ui/buttons/btn_shop"
@@ -40,7 +40,7 @@ export const Home = () => {
   ]
 
   return (
-    <main aria-label="Home Page">
+    <main aria-label="Home Page" className="">
       <Header
         title="Where your dream design becomes a rug reality"
         tagline="Begin your dream rug!"
@@ -48,7 +48,7 @@ export const Home = () => {
         btn_2={<ContactUsBtn/>}
         />
       {/* Promises */}
-      <section aria-label="Promises Section" className="section-container">
+      <section aria-label="Promises Section" className="w-full">
         <ul className="grid grid-cols-2 md:flex justify-center">
           {promiseIcons.map(({ Icon, alt, description, title }, idx) => (
             <li key={`${alt}-${idx}`}>
@@ -65,39 +65,54 @@ export const Home = () => {
         </ul>
       </section>
       {/* CUSTOM RUGS */}
-      <section className="section-container body_text">
+      <section className="my-8 md:p-8 w-full body_text">
         {/* Title */}
-        <div className="flex justify-center gap-2 my-4">
+        <div className="flex justify-center items-center gap-2 my-4 md:my-8">
           <img 
-          className="flex justify-start h-10 w-10" 
-          src="/assets/design/icons/X_Star_Teal-Blue.webp" 
-          aria-hidden="true"
-          alt="Teal Star decorator" />
-          <h1 className="heading_text"> Custom Rugs</h1>
+            className="h-8 w-8 md:h-10 md:w-10" 
+            src="/assets/design/icons/X_Star_Teal-Blue.webp" 
+            aria-hidden="true"
+            alt="Teal Star decorator" 
+          />
+          <h1 className="heading_text text-2xl md:text-3xl lg:text-4xl">Custom Rugs</h1>
         </div>
+        
         {/* Price and Action */}
-        <div className=" flex flex-col md:flex-row justify-center items-center text-center gap-4">
-          <img 
-          className="md:w-md w-sm rounded-xl drop-shadow-md/40" 
-          src="/products/prices/General_Pricing_Poster.webp" 
-          alt="General Pricing Poster - Pricing's vary by design, size, quantity, colors and intricacy. 
-          Estimates are is: 3ft is $150+ ; 4ft is $250; 5ft is $350; 6ft and more is $450." />
-          <div className="body_text flex flex-col gap-4 justify-center items-center">
-            <p>
+        <div className="flex flex-col lg:flex-row justify-center items-center mx-3 gap-6 md:gap-8 lg:gap-12">
+          {/* Image */}
+          <div className="w-full max-w-md lg:max-w-lg xl:max-w-xl">
+            <img 
+              className="w-full rounded-xl drop-shadow-md object-cover" 
+              src="/products/prices/General_Pricing_Poster.webp" 
+              alt="General Pricing Poster - Pricing's vary by design, size, quantity, colors and intricacy. 
+              Estimates are: 3ft is $150+ ; 4ft is $250; 5ft is $350; 6ft and more is $450." 
+            />
+          </div>
+          
+          {/* Content */}
+          <div className="flex flex-col gap-4 md:gap-6 justify-center items-center text-center w-full max-w-md">
+            <p className="text-base md:text-lg lg:text-xl">
               Submit a form to begin your custom rug!
             </p>
-            <StartOrderBtn/>
-            <div className="flex flex-col items-center gap-4">
-              <p>
-              Contact me directly to inquire more!
+            
+            <div className="w-fit">
+              <StartOrderBtn />
+            </div>
+            
+            <div className="flex flex-col items-center gap-3 md:gap-4 w-full">
+              <p className="text-sm md:text-base lg:text-lg">
+                Contact me directly to inquire more!
               </p>
-              <Emailbtn onClick={copyEmailBtn}/>
+              
+              <div className="w-fit">
+                <Emailbtn onClick={copyEmailBtn} />
+              </div>
             </div>
           </div>
         </div>
       </section>
-      <CtaWavesBg className="fill-mauve"/>
-      <section className="cta_container absolute">
+      <CtaWavesBg className="fill-mauve top-2 "/>
+      <section className="cta_container  absolute">
         {/* Title */}
         <div className="gap-3 mx-2 flex flex-col">
           <img 

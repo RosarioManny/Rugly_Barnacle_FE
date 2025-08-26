@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom"
 import { getProduct } from "../../lib/api/Product/productservices"
 import type { Product } from "../../lib/api/Product/productservices"
 import { Spinner } from "../../components/ui/loaders/loadingSpinner"
-import { DangerIcon } from "../../components/icons-svgs/SvgIcons"
+import { DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
 import { AddToCartBtn } from "../../components/ui/buttons/btn_addToCart"
 
 export const ProductDetails = () => {

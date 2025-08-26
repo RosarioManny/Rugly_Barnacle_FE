@@ -1,13 +1,14 @@
 import { ShopBtn } from "../../components/ui/buttons/btn_shop";
 import { getCart } from "../../lib/api/Cart/cartServices"
 import { useState, useEffect } from "react";
-import { DangerIcon } from "../../components/icons-svgs/SvgIcons";
+import { DangerIcon } from "../../components/ui/icons-svgs/SvgIcons";
 import { Spinner } from "../../components/ui/loaders/loadingSpinner";
 import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder";
+import type { CartInfo } from "../../lib/api/Cart/cartServices"
 
 
 export const Cart = () => {
-  const [cart, setCart] = useState(null)
+  const [cart, setCart] = useState<CartInfo | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -19,6 +20,7 @@ export const Cart = () => {
       const data = await getCart()
       
       setCart(data)
+      console.log(cart)
     } catch(err) {
       setError("Failed to fetch / create cart")
     } finally {

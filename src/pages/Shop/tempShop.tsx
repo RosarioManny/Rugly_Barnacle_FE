@@ -1,4 +1,4 @@
-import { BallOfYarnIcon } from "../../components/icons-svgs/SvgIcons"
+import { BallOfYarnIcon } from "../../components/ui/icons-svgs/SvgIcons"
 
 export const TempShop = () => {
   return (

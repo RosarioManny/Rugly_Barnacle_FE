@@ -1,8 +1,8 @@
 // TODO: import productCard
 import { useState, useEffect, useRef} from "react"
 import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
-import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardIcon, MirrorIcon, DangerIcon} from "../../components/icons-svgs/SvgIcons"
-import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
+import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardIcon, MirrorIcon, DangerIcon} from "../../components/ui/icons-svgs/SvgIcons"
+import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
 import type { FC, SVGProps } from "react"
 import { ProductCard } from "../../components/ui/product/productCard"
 import { getProducts } from "../../lib/api/Product/productservices"

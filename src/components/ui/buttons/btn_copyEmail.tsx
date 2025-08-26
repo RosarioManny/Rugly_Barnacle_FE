@@ -1,4 +1,4 @@
-import { CopyIcon } from "../../icons-svgs/SvgIcons"
+import { CopyIcon } from "../icons-svgs/SvgIcons"
 
 interface EmailbtnProps {
   onClick?: () => void;
@@ -16,7 +16,7 @@ export const Emailbtn = ({ onClick = () => {} }: EmailbtnProps) => (
     
     " > 
       <CopyIcon className="size-5 m-2 text-inherit"/>
-      <p id="email-address" className="p-2 subheading_text">
+      <p id="email-address" className="p-2">
         @theruglybarnacle@gmail.com
       </p>
     </button>

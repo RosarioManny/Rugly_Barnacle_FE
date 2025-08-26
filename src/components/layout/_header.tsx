@@ -60,7 +60,7 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
                 {tagline}
               </p>
             )}
-            <div className="flex text-xl gap-2">
+            <div className="flex text-lg gap-2">
               {btn_1 && (
                 <>
                   {btn_1}
