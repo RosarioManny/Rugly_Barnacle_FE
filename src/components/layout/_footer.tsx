@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { CtaWavesBg } from "../ui/icons-svgs/ctaWavesBg"
 import { InstagramLogo, TikTokLogo, EtsyLogo } from "../ui/icons-svgs/socialMediaIcons"
-import { NewsLetterForm } from "../ui/newsLetterForm"
+// import { NewsLetterForm } from "../ui/newsLetterForm"
 import type { FC, SVGProps } from "react"
 // ChangeEvent and FormEvent are effective TS types for the event.targets. 
 // Allowing TS to know what will be happening to an element. 
@@ -35,7 +35,7 @@ export const Footer = () => {
         </div>
         <main aria-label="Footer Content" className="text-center flex flex-col items-center">
         {/* NEWSLETTER */}
-          <NewsLetterForm/>
+          {/* <NewsLetterForm/> */}
           {/* SOCIALS */}
           <section className="my-4">
             <h2 className="
