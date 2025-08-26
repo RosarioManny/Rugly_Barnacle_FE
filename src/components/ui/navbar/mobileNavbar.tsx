@@ -11,7 +11,7 @@ export const MobileNavbar = ( { shopSubMenu=[], aboutSubMenu=[] }: MobileNavbarP
 
   const {
     handleClick,
-    toggleMobileShop,
+    // toggleMobileShop,
     toggleMobileAbout,
     isToggled,
     mobileShopOpen,

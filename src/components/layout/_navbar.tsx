@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
-import { CartIcon } from "../icons-svgs/SvgIcons"
+// import { CartIcon } from "../icons-svgs/SvgIcons"
 import { useDropdownHandlers } from "../../hooks/navbar"
-import { EtsyLogo } from "../icons-svgs/socialMediaIcons"
+// import { EtsyLogo } from "../icons-svgs/socialMediaIcons"
 import { MobileNavbar } from "../ui/navbar/mobileNavbar"
 
 // const shopSubMenu = ["shop", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
@@ -12,9 +12,9 @@ export const NavBar = () => {
 
   const {
     closeDropdown,
-    handleShopDropdown,
+    // handleShopDropdown,
     handleAboutDropdown,
-    shopDropdownOpen,
+    // shopDropdownOpen,
     aboutDropdownOpen
   } = useDropdownHandlers()
 
@@ -124,19 +124,3 @@ export const NavBar = () => {
     </nav>
   )
 }
-
-// Define Burger Line props
-interface BurgerLineProps {
-  isToggled: boolean;
-  index: 1 | 2 | 3;
-}
-
-const BurgerLine = ({ isToggled, index }: BurgerLineProps) => {
-  const lineClass = `rounded bg-space_cadet block h-1 w-10 transition-transform duration-300 ease-in-out`;
-  const transforms = [
-    isToggled ? "rotate-45 translate-y-2" : "",
-    isToggled ? "opacity-0" : "opacity-100",
-    isToggled ? "-rotate-45 -translate-y-2" : "",
-  ];
-  return <span aria-label={`Mobile burger line ${index}`} className={`${lineClass} ${transforms[index - 1]}`} />;
-};
