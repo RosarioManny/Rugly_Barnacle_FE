@@ -20,6 +20,7 @@ export const useCarousel = ({ items = [], itemsToShow = 1 }: CarouselProps) => {
   }, [totalItems]);
 
   const handleDragEnd = (e: any, info: any) => {
+    console.log(e)
     if (info.offset.x > 50) {
       handlePrev();
     } else if (info.offset.x < -50) {

@@ -5,8 +5,8 @@ import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardI
 import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
 import type { FC, SVGProps } from "react"
 import { ProductCard } from "../../components/ui/product/productCard"
-import { getProducts } from "../../lib/api/Product/productServices"
-import type { Product } from "../../lib/api/Product/productServices"
+import { getProducts } from "../../lib/api/Product/productservices"
+import type { Product } from "../../lib/api/Product/productservices"
 import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { ReturnToTop } from "../../components/ui/buttons/btn_returnToTop";
 

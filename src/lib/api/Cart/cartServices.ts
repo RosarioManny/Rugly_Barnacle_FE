@@ -7,9 +7,8 @@ interface Cart {
 // TODO: getCart - /cart/
 // get current cart for user
 export const getCart = async () => {
-
   try {
-    const response = await api.get("cart/");
+    const response = await api.get<Cart>("cart/");
     return response.data
 
   } catch(err: any) {

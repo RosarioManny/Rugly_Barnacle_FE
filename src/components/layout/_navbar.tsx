@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
-// import { CartIcon } from "../icons-svgs/SvgIcons"
 import { useDropdownHandlers } from "../../hooks/navbar"
-// import { EtsyLogo } from "../icons-svgs/socialMediaIcons"
 import { MobileNavbar } from "../ui/navbar/mobileNavbar"
+// import { CartIcon } from "../icons-svgs/SvgIcons"
+// import { EtsyLogo } from "../icons-svgs/socialMediaIcons"
 
 // const shopSubMenu = ["shop", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
 const aboutSubMenu = ["about", "contact", "faq"]

@@ -3,11 +3,11 @@ import { useMobileHandlers } from "../../../hooks/navbar";
 import { BurgerLine } from "./Burgerline";
 
 interface MobileNavbarProps {
-  shopSubMenu?: string[];
+  // shopSubMenu?: string[];
   aboutSubMenu: string[];
 }
 
-export const MobileNavbar = ( { shopSubMenu=[], aboutSubMenu=[] }: MobileNavbarProps) => {
+export const MobileNavbar = ( { aboutSubMenu=[] }: MobileNavbarProps) => {
 
   const {
     handleClick,

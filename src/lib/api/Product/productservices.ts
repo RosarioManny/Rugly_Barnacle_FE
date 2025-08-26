@@ -39,7 +39,7 @@ const getProducts = async (): Promise<Product[]> => {
 // Get a single product by ID
 const getProduct = async(id: number): Promise<Product> => {
   try {
-    const response = await api.get<Product>(`products/${id}/`);
+    const response = await api.get<Product>(`/products/${id}/`);
     return response.data;
   }
   catch (err: any) {
