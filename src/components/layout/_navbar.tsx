@@ -24,7 +24,7 @@ export const NavBar = () => {
         z-40 pr-6 
         bg-fleece border-b-solid border-b-2 border-b-majorelle 
         rethink-sans 
-        max-h-[10] 
+        max-h-[5rem]  min-h-[3.5rem]
         flex md:grid md:grid-cols-2 justify-between items-center">
       {/* Home - Brand image small logo*/}
       <section className="flex justify-self-start items-center focus:scale-110 hover:scale-110 transition-all">
