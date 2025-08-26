@@ -1,0 +1,329 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "tailwindcss";
+@theme {
+  --color-bittersweet: #f27b63;
+  --color-mauve: #FEB5FF;
+  --color-space_cadet: #202254;
+  --color-majorelle: #5652E7;
+  --color-midnight_green: #114C56;
+  --color-robin_egg: #00CEC5;
+  --color-breeze: #9EECE2;
+  --color-fleece: #F0F0F1; 
+}
+
+/* Import Fonts */
+@font-face {
+  font-family: "Silk Flower";
+  src: local('Silk Flower'), url('../../assets/design/font/Silk\ Flower.otf') format('opentype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Rethink-Sans";
+  src: local('RethinkSans-VariableFont'), url('../../assets/design/font/RethinkSans-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Montserrat";
+  src: local('Montserrat-VariableFont'), url('../../assets/design/font/Montserrat-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 
+Color Pallete:
+  Tailwind    -    Hex Code  -  Color
+  fleece -------- '#F0F0F1', -- Light Grey
+  bittersweet --- '#f27b63', -- Orange
+  mauve --------- '#FEB5FF', -- Pink
+  space_cadet: -- '#202254', -- Dark Blue
+  majorelle ----- '#5652E7', -- Bright Purple
+  midnight_green -'#114C56', -- Dark Teal
+  robin_egg ----- '#00CEC5', -- Bright Teal
+  breeze -------- '#9EECE2', -- Light Teal
+*/
+
+:root {
+  font-family: Montserrat;
+  line-height: 1.5;
+  font-weight: 00;
+  color-scheme: light dark;
+  color: #202254;
+  background-color: #F0F0F1;
+}
+
+/* NAVBAR */
+.navbar {
+  /* overflow: hidden; */
+  z-index: 40;
+  background-color: #F0F0F1;
+  border-bottom: solid 2px #5652E7;
+}
+
+.d-nav-links a  {
+  color: #5652E7;
+  padding: 14px;
+  text-decoration: none;
+}
+
+.brand-logo {
+  padding: 0px;
+}
+
+/* NAV DROPDOWN */
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  color: #5652E7;
+  padding: 14.25px ;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+}
+.dropbtn:hover {
+  background-color: rgba(86, 82, 231, .1);
+
+}
+
+.dropdown-content {
+  position: absolute;
+  background-color: #F0F0F1;
+  border-right: solid 2px #5652E7;
+  border-left: solid 2px #5652E7;
+  border-bottom: solid 2px #5652E7;
+  border-radius: 0 0 .5rem .5rem;
+  min-width: 160px;
+  box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  margin: .1px 0 0 0;
+  cursor: pointer;
+  z-index: 50;
+}
+
+.dropdown-content a {
+  float: none;
+  color: #202254;
+  padding: 5px 5px;
+  text-decoration: none;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  gap: 1rem;
+}
+
+a:hover {
+  background-color: rgba(86, 82, 231, .1);
+  transition: all 250ms ease-out;
+  cursor: pointer;
+} 
+
+.caret-down {
+  width: 0;
+  height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+}
+.caret-right {
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-left: 10px solid;
+}
+
+.caret-left {
+  width: 0;
+  height: 0;
+  border-top: 7px solid transparent;
+  border-bottom: 7px solid transparent;
+  border-right: 10px solid;
+}
+
+/* FONTS AND TEXT */
+
+p, .body_text {
+  font-family: Montserrat;
+  font-size: 1rem;
+}
+
+h1, .heading_text {
+  font-family: Silk Flower;
+  font-size: 2rem;
+}
+
+h2, .subheading_text {
+  font-family: Rethink-Sans;
+  font-size: 1.3rem;
+}
+
+
+.rethink-sans {
+  font-family: Rethink-Sans;
+}
+
+/* BUTTONS */
+button {
+  font-family: Rethink-Sans;
+  cursor: pointer;
+  color: #F0F0F1;
+  transition-property: all;
+  transition-duration: 500ms;
+}
+
+.btn_general {
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+  background-color: #5652E7;
+  font-size: 1.3rem;
+  font-weight: 600;
+  width: auto;
+  height: auto;
+  max-width: 65%;
+}
+.btn_addToCart {
+  padding: .5rem 1rem;
+  border-radius: .5rem;
+  background-color: #5652E7;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+
+.btn_contact_us {
+  padding: .5rem;
+  border-radius: .5rem;
+  border:#5652E7 solid 3px;
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.gradient {
+  background: linear-gradient(-45deg,  #114C56, #202254 );
+  background-size: 400% 100%;
+  animation: gradient 10s ease infinite;
+}
+
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 100% ;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.section-container {
+  padding: 8px;
+  margin: 8px;
+}
+
+/* Categories and Action Section */
+.cta_container {
+  background: #FEB5FF;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+  /* gap: 1rem; */
+  position: relative;
+  padding: 0 0 4rem 0;
+}
+.cta_container_curve {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+}
+
+.cta_container_curve svg {
+  position: relative;
+  display: block;
+  width: calc(201% + 1.3px);
+  height: 100px;
+}
+
+.cta_container_curve .shape-fill {
+  position: absolute;
+  fill: #FEB5FF;
+}
+
+/* CARD ITEM */
+
+.card_item_container {
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  gap: 1rem; 
+}
+/* FOR FUN */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: rotate(0deg) translateY(0);
+    animation-timing-function: ease-out;
+  }
+  25% {
+    transform: rotate(5deg) translateY(-5px) scale(1.1);
+    animation-timing-function: ease-in;
+  }
+  50% {
+    transform: rotate(-3deg) translateY(-2px) scale(.95);
+    animation-timing-function: ease-out;
+  }
+  75% {
+    transform: rotate(4deg) translateY(-4px) scale(1.05);
+    animation-timing-function: ease-in;
+  }
+}
+
+/* Enhanced hover effect */
+.floating-item:hover {
+  animation: gentleFloat 3s ease-in-out infinite both;
+}
+
+@keyframes wobble {
+  0%, 100%{
+    transform: translateX(0) rotate(8deg);
+  }
+  50% {
+    
+    transform: translateX(-3px) rotate(-8deg);
+  }
+}
+
+.yarn-animation {
+  animation: wobble 3s ease-in-out infinite both;
+}
+
+@keyframes starFade {
+  0% {
+    opacity: .5;
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: rotate(180deg) scale(1.4);
+  }
+  100% {
+    opacity: .5;
+    transform: rotate(360deg) scale(1);
+  }
+}
+.star-fade-animation {
+  animation: starFade 4s linear infinite;
+}
