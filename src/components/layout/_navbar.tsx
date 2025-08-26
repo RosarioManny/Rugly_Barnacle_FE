@@ -105,7 +105,7 @@ export const NavBar = () => {
       </section>
 
       {/* Mobile Navbar */}
-      <section className="justify-between md:hidden">
+      <section className="z-50 justify-between md:hidden">
         <MobileNavbar 
           // shopSubMenu={shopSubMenu} 
           aboutSubMenu={aboutSubMenu}  
