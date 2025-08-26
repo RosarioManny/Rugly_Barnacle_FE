@@ -12,13 +12,15 @@ export const About = () => {
         img_alt="Owner looking at a floor filled with rugs"
         />
         {/* TITLE */}
-        <section className="flex flex-col items-center text-center"> 
+        <section className="flex m-2 flex-col items-center text-center"> 
           <img 
           className="flex justify-start h-14 w-14" 
           src="/assets/design/icons/X_Star_Pink.webp" 
           aria-hidden="true" 
           alt="Cross Star Design Marker" />
-          <h1 className="heading_text "> What is Rugly Barnacle</h1>
+          <h1 className="heading_text ">
+            What is Rugly Barnacle
+          </h1>
         </section>
         {/* CONTENT */}
         <section className="body_text text-center mx-2">

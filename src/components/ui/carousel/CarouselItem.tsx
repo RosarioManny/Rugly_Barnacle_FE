@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 interface CardProps {
   img: string;
   title: string;
-  link: string;
+  link?: string;
 }
 
-export const CarouselItem = ({ img, title, link }: CardProps) => {
+export const CarouselItem = ({ img, title, link="" }: CardProps) => {
   return (
     <div className="flex h-full flex-col">
       <Link 

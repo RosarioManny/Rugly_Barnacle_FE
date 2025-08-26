@@ -60,7 +60,7 @@ export const Carousel = ({ items }: CarouselProps) => {
             style={{ width: `${itemWidth}%` }}
           >
             <CarouselItem 
-              link={item.name}
+              // link={item.name}
               img={item.path}
               title={item.name}
             />
