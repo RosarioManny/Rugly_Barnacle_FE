@@ -1,4 +1,4 @@
-import { FormEvent, ChangeEvent, useState } from "react";
+import { ChangeEvent, FormEvent, useState } from "react";
 // ChangeEvent and FormEvent are effective TS types for the event.targets. 
 // Allowing TS to know what will be happening to an element. 
 // See handleChange for more.
@@ -25,8 +25,12 @@ export const NewsLetterForm = () => {
   };
   
   return (
-    <section className="m-4">
-        <h1 className="text-20 text-mauve heading_text underline"> Join the Newsletter</h1>
+    <section className="my-4">
+        <h1 className="
+        heading_text 
+        my-3
+        text-20 text-mauve 
+        underline underline-offset-6 decoration-2 decoration-wavy"> Join the Newsletter</h1>
         <form className="" onSubmit={handleSubmit}>
           <button 
             className="
@@ -43,9 +47,9 @@ export const NewsLetterForm = () => {
             name="email"
             type="email"
             aria-describedby="email-error"
-            placeholder="youremailhere@site.com" 
+            placeholder="youremail@site.com" 
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            className="bg-white md:w-xs w-2/3 rounded-r-2xl pl-2 py-2">
+            className="bg-white md:w-xs w-2/3 max-h-[40px] rounded-r-2xl pl-2 py-2">
           </input>
         </form>
       </section>

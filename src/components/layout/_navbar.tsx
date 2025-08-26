@@ -1,37 +1,35 @@
-import { useState } from "react"
 import { Link } from "react-router-dom"
 import { CartIcon } from "../icons-svgs/SvgIcons"
+import { useDropdownHandlers } from "../../hooks/navbar"
+import { EtsyLogo } from "../icons-svgs/socialMediaIcons"
+import { MobileNavbar } from "../ui/navbar/mobileNavbar"
+
+// const shopSubMenu = ["shop", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
+const aboutSubMenu = ["about", "contact", "faq"]
 
 export const NavBar = () => {
-  const [shopDropdownOpen, setShopDropdownOpen] = useState(false)
-  const [aboutDropdownOpen, setAboutDropdownOpen] = useState(false)
-  const [isToggled, setIsToggled] = useState(false)
-  const closeDropdown = () => {
-    if (shopDropdownOpen) setShopDropdownOpen(false)
-    if (aboutDropdownOpen) setAboutDropdownOpen(false)
-  }
-  const handleShopDropdown = () => {
-    setShopDropdownOpen(!shopDropdownOpen)
-  }
-  const handleAboutDropdown = () => {
-    setAboutDropdownOpen(!aboutDropdownOpen)
-  }
 
-  const handleClick = () => {
-    setIsToggled(!isToggled)
-  }
+
+  const {
+    closeDropdown,
+    handleShopDropdown,
+    handleAboutDropdown,
+    shopDropdownOpen,
+    aboutDropdownOpen
+  } = useDropdownHandlers()
+
+
   return (
-    <nav className="navbar max-h-[55px] flex justify-between items-center ">
-      
+    <nav className="navbar rethink-sans max-h-[10] flex md:grid md:grid-cols-2 justify-between  pr-6 items-center">
       {/* Home - Brand image small logo*/}
-      <section className="flex justify-center items-center focus:scale-110 hover:scale-110 transition-all ">
+      <section className="flex justify-self-start items-center focus:scale-110 hover:scale-110 transition-all">
         <Link className="brand-logo" to="/">
-          <img className=" h-[52px] w-[52px] mx-6" src="/assets/design/logo/Rugly_Barnacle_192x192.png" alt="Rugly Barnacle Abrreviated Logo - RB"/>
+          <img className="size-12 mx-6" src="/assets/design/logo/Rugly_Barnacle_192x192.png" alt="Rugly Barnacle Abrreviated Logo - RB"/>
         </Link>
       </section>
 
       {/* Desktop Navbar */}
-      <section className="d-nav-links hidden md:flex">
+      <section className="d-nav-links hidden md:justify-end md:flex">
         <div className="dropdown">
           {/* About Nav Button */}
           <button 
@@ -49,9 +47,9 @@ export const NavBar = () => {
           <div 
             className={`
             ${aboutDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
-            overflow-hidden transition-all duration-500 ease-in-out
+            overflow-hidden transition-all duration-500 ease-in-out mt-[1.5px] 
             dropdown-content`}>
-            {["about", "contact", "faq"].map((link) => (
+            {aboutSubMenu.map((link) => (
             <Link 
               key={link} 
               to={`/${link}`} 
@@ -64,15 +62,15 @@ export const NavBar = () => {
             ))}
           </div>
         </div> 
-        
-          <button className="dropbtn">
-            <Link to="/portfolio">
+
+          <Link className="dropbtn" to="/portfolio">
             Portfolio
-            </Link>
-          </button>
-  
-        <div className="dropdown">
-          {/* Shop Nav Button */}
+          </Link>
+          <Link className="dropbtn" to="/shop">
+            Shop
+          </Link>
+        {/* <div className="dropdown">
+          Shop Nav Button
           <button 
             className="dropbtn pointer"
             onClick={handleShopDropdown}>
@@ -84,75 +82,49 @@ export const NavBar = () => {
               caret-down`}/>
           </button>
 
-          {/* SHOP Dropdown Items */}
-    
-            <div 
-              className={`
+          SHOP Dropdown Items
+          <div 
+            className={`
               ${shopDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
               overflow-hidden transition-all duration-500 ease-in-out
               dropdown-content`}>
-              {["rugs", "mirror Rugs", "mug Rugs", "custom Rugs"].map((link) => (
+            {shopSubMenu.map((link, idx) => (
               <Link 
-                key={link} 
-                to={`/${link}`} 
-                className={``}
-                onClick={closeDropdown}
-                >
-                <div className={`caret-right text-robin_egg`} />
-                <p> {link.charAt(0).toUpperCase() + link.slice(1)}</p> 
-              </Link>
-              ))}
-            </div>
+              key={`${link}-${idx}`} 
+              to={`/${link}`} 
+              className={``}
+              onClick={closeDropdown}
+              >
+              <div className={`caret-right text-robin_egg`} />
+              <p> {link.charAt(0).toUpperCase() + link.slice(1)}</p> 
+            </Link>
+            ))}
           </div>
+        </div> */}
+            {/* TODO: Fix Links to actual Shop Category Pages */}
       </section>
+
       {/* Mobile Navbar */}
-      <section className="flex overscroll-none md:hidden">
-        <button 
-          onClick={handleClick} 
-          className="z-20 relative overscroll-none w-[50px] h-[40px] flex flex-col justify-center items-center space-y-1 p-2 z-10"
-          aria-label="Mobile navigation menu - Three lined burger icon">
-          <BurgerLine isToggled={isToggled} index={1} />
-          <BurgerLine isToggled={isToggled} index={2} />
-          <BurgerLine isToggled={isToggled} index={3} />
-        </button>
-          {/* Off-screen Menu */}
-          <div 
-            className={`
-              h-screen w-full fixed top-0 overscroll-none
-              flex items-center justify-center text-center 
-              text-3xl transition-all ease-in-out duration-[1000ms]
-              bg-fleece z-10
-              ${isToggled ? 'right-0' : '-right-[800px]'}`}>
-            <div className="flex flex-col h-fit text-white">
-              {["shop", "about", "faq", "portfolio"].map((link) => (
-                <Link 
-                  key={link} 
-                  to={`/${link}`} 
-                  onClick={handleClick} 
-                  className={`text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor `}>
-                  {link.charAt(0).toUpperCase() + link.slice(1)}
-                </Link>
-              ))}
-            </div>
-            <img 
-              className="bottom-10 absolute h-40"
-              src="/icons-logos/Nomad-logo-White-Transparent.png" 
-              alt="Rugly Barnacle logo with writing"
-              loading="lazy"
-            />
-          </div>
+      <section className="justify-between md:hidden">
+        <MobileNavbar 
+          // shopSubMenu={shopSubMenu} 
+          aboutSubMenu={aboutSubMenu}  
+        /> 
       </section>
+
       {/* Cart Link */}
-      <section className="flex justify-center items-center ">
-        <button className="">
-          <Link className="m-6" to="/cart"> 
+      {/* <section className="justify-self-end">
+        <button className="my-2 flex ">
+          Version 2 
+          <Link className="" to="/cart"> 
             <CartIcon className="text-space_cadet focus:scale-110 hover:text-majorelle" />
           </Link>
         </button>
-      </section>
+      </section> */}
     </nav>
   )
 }
+
 // Define Burger Line props
 interface BurgerLineProps {
   isToggled: boolean;
