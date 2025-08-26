@@ -9,7 +9,7 @@ export const StartOrderBtn = () => (
     focus:bg-robin_egg focus:scale-105
     w-40 /* Add this to make button fill container */
     "> 
-    <Link to="">
+    <Link to="https://www.etsy.com/listing/1525283934/custom-rug-personalized-rug-custom-anime">
       Start Order
     </Link>
   </button>

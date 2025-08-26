@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 
 export const InstagramLogo = ({ className = "" }) => (
-  <Link to="" aria-label="Instagram Logo and Link">
+  <Link to="https://www.instagram.com/theruglybarnacle/?hl=en" aria-label="Instagram Logo and Link">
     <svg 
     width="40px" 
     height="40px" 
@@ -43,7 +43,7 @@ export const InstagramLogo = ({ className = "" }) => (
 )
 
 export const TikTokLogo = ({ className = ""}) => (
-  <Link to=""  aria-label="TikTok Logo and Link">
+  <Link to="https://www.tiktok.com/@theruglybarnacle" aria-label="TikTok Logo and Link">
     <svg 
     className={`${className}`}
     fill="currentColor"
@@ -74,8 +74,8 @@ export const TikTokLogo = ({ className = ""}) => (
   </Link>
 )
 
-export const EtsyLogo = ({ className = ""}) => ( 
-  <Link to="">
+export const EtsyLogo = ({ className = "" }) => ( 
+  <Link to="https://www.etsy.com/shop/TheRuglyBarnacle">
     <svg 
     className={`${className}`}
     fill="currentColor"

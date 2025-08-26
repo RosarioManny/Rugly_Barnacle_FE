@@ -18,7 +18,13 @@ export const Footer = () => {
     {Social: InstagramLogo},
   ];
 
-  const links: string[] = [ "shop",  "about", "portfolio", "faq"];
+  const links: { title: string; path: string }[] = [  
+    {title: "home", path: ""}, 
+    {title: "about", path: "about"}, 
+    {title: "faq", path: "faq"}, 
+    {title: "portfolio", path: "portfolio"}, 
+    {title: "shop", path: "shop"}, 
+  ];
 
   return (
       <footer className="bg-space_cadet w-full">
@@ -34,7 +40,7 @@ export const Footer = () => {
           />
         </div>
         <main aria-label="Footer Content" className="text-center flex flex-col items-center">
-        {/* NEWSLETTER */}
+          {/* NEWSLETTER */}
           {/* <NewsLetterForm/> */}
           {/* SOCIALS */}
           <section className="my-4">
@@ -45,14 +51,15 @@ export const Footer = () => {
               Follow Me!
             </h2>
             <ul className="flex space-x-6 m-2">
-              {socialMedia.map(({ Social }, idx) => (
+              {socialMedia.map(({ Social}, idx) => (
                 <li key={`${Social}-${idx} group-text-fleece`}>
                   <Social  
-                  className="
-                  pointer duration-300  ease-in-out
-                  size-10 text-fleece hover:text-breeze hover:scale-105 
-                  active:text-breeze active:scale-105 
-                  focus:text-breeze focus:scale-105"
+                    className="
+                      pointer duration-300  ease-in-out
+                      size-10 text-fleece 
+                      hover:text-breeze hover:scale-105 
+                      active:text-breeze active:scale-110
+                      focus:text-breeze focus:scale-105"
                   />
                 </li>
               ))}
@@ -66,8 +73,10 @@ export const Footer = () => {
             underline underline-offset-6 "> 
               Contact Me!
             </h2>
-            <p> 718-111-2223</p>
-            <p> myemail@anaddress.com</p>
+            <div className="body_text">
+              <p> 718-111-2223</p>
+              <p> myemail@anaddress.com</p>
+            </div>
           </section>
           {/* QUICK LINKS */}
           <section className="my-4 flex flex-col items-center">
@@ -77,18 +86,22 @@ export const Footer = () => {
               underline underline-offset-6 ">
               Quick link
             </h2>
-            <ul className="text-fleece flex space-x-4 m-4">
-            {links.map((link, idx) => (
-              <li key={`${link}-${idx}`}>
+            <ul className="text-fleece flex flex-col items-center gap-3 my-4">
+            {links.map(( { title, path}, idx) => (
+              <li className="flex text-center items-center " key={`${title}-${idx}`}>
                 <Link 
-                  to={`/${link}`} 
-                  className="
-                    pointer duration-300  ease-in-out
-                    size-10 text-fleece 
-                    hover:text-breeze 
-                    active:text-breeze  
-                    focus:text-breeze">
-                  {link.charAt(0).toUpperCase() + link.slice(1)}
+                  to={`/${path}`}
+                  className=" group"
+                >
+                  <p className="
+                    pointer duration-200 transform transition-all
+                    text-fleece body_text 
+                    group-hover:text-breeze group-hover:scale-120 
+                    group-active:text-breeze group-active:scale-120
+                    group-focus:text-breeze group-focus:scale-120 
+                    ">
+                    {title.charAt(0).toUpperCase() + title.slice(1)}
+                  </p>
                 </Link>
               </li>
             ))}
