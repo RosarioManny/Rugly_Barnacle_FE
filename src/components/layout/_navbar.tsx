@@ -20,11 +20,19 @@ export const NavBar = () => {
 
 
   return (
-    <nav className="navbar rethink-sans max-h-[10] flex md:grid md:grid-cols-2 justify-between  pr-6 items-center">
+    <nav className="
+        z-40 pr-6 
+        bg-fleece border-b-solid border-b-2 border-b-majorelle 
+        rethink-sans 
+        max-h-[10] 
+        flex md:grid md:grid-cols-2 justify-between items-center">
       {/* Home - Brand image small logo*/}
       <section className="flex justify-self-start items-center focus:scale-110 hover:scale-110 transition-all">
         <Link className="brand-logo" to="/">
-          <img className="size-12 mx-6" src="/assets/design/logo/Rugly_Barnacle_192x192.png" alt="Rugly Barnacle Abrreviated Logo - RB"/>
+          <img 
+            className="size-12 mx-6" 
+            src="/assets/design/logo/Rugly_Barnacle_192x192.png" 
+            alt="Rugly Barnacle Abrreviated Logo - RB"/>
         </Link>
       </section>
 

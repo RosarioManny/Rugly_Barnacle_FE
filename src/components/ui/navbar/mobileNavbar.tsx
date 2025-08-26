@@ -24,7 +24,7 @@ export const MobileNavbar = ( { aboutSubMenu=[] }: MobileNavbarProps) => {
     <>
       <button 
         onClick={handleClick} 
-        className="z-30 relative overscroll-none w-[50px] h-[40px] space-y-1 p-2"
+        className="z-40 relative overscroll-none w-[50px] h-[40px] space-y-1 p-2"
         aria-label="Mobile navigation menu - Three lined burger icon">
         <BurgerLine isToggled={isToggled} index={1} />
         <BurgerLine isToggled={isToggled} index={2} />
@@ -34,12 +34,12 @@ export const MobileNavbar = ( { aboutSubMenu=[] }: MobileNavbarProps) => {
       {/* OFF-SCREEN Menu */}
       <div 
         className={`
-          h-screen w-full fixed top-0 overscroll-none
+          h-[100dvh] w-full fixed top-0 left-0 overscroll-none // Use dvh instead of screen
           flex items-center justify-center text-center 
           text-3xl 
           transition-all ease-in-out duration-[700ms] delay-[50ms]
-          bg-fleece z-20
-          ${isToggled ? 'right-0' : '-right-[800px]'}`}
+          bg-fleece z-30
+            ${isToggled ? 'translate-x-0' : 'translate-x-full'}`}
       >
       {/* Main Menu */}
       <div 
