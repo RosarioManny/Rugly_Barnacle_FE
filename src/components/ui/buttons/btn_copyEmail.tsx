@@ -1,5 +1,5 @@
 import { CopyIcon } from "../icons-svgs/SvgIcons"
-import { copyEmailBtn } from "../../../hooks/CopyEmail"
+import { copyEmailBtn } from "../../../hooks/button/CopyEmail"
 
 
 export const Emailbtn = () => (

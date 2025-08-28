@@ -21,7 +21,7 @@ export const Footer = () => {
   const links: { title: string; path: string }[] = [  
     {title: "home", path: ""}, 
     {title: "about", path: "about"}, 
-    {title: "faq", path: "faq"}, 
+    {title: "FAQ", path: "faq"}, 
     {title: "portfolio", path: "portfolio"}, 
     {title: "shop", path: "shop"}, 
   ];
@@ -74,8 +74,7 @@ export const Footer = () => {
               Contact Me!
             </h2>
             <div className="body_text">
-              <p> 718-111-2223</p>
-              <p> myemail@anaddress.com</p>
+              <p> theruglybarnacle@gmail.com</p>
             </div>
           </section>
           {/* QUICK LINKS */}

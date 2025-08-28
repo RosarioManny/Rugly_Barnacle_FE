@@ -1,27 +1,13 @@
 // import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
 import { Header } from "../../components/layout/_header"
 import { useState, useEffect } from "react"
+import { ReturnToTop } from "../../components/ui/buttons"
+import { portfolioImages } from "./portfolioImages"
+import type { imageInfoProps } from "./portfolioImages"
 
-
-interface imageInfoProps {
-  path: string,
-  alt: string
-}
 
 export const Portfolio = () => {
   const [selectedImage, setSelectedImage] = useState<imageInfoProps | null>(null);
-
-  // rug, mugrug, wristrug, mirror rug, custom rugs
-  // TEMP DATA
-  const imageInfo: imageInfoProps[] = [
-    {path: "/products/rugs/Showcase_Gengar.webp", alt: "Pixel art Gengar rug"},
-    {path: "/products/rugs/Showcase_AllThat.webp", alt: "All That tv show logo rug"},
-    {path: "/products/rugs/Rug_Naruto.webp", alt: "Naruto Sharigen eyes"},
-    {path: "/products/rugs/Custom_Portrait.webp", alt: "Custom self portrait rug"},
-    {path: "/products/rugs/Custom_JLY.webp", alt: "Jesus loves you rug"},
-    {path: "/gallery/Product_Display_Pokemon_Wristrug_Edited_2.jpg", alt: "Various pokemon wrist rugs - Gengar, Squirtle, Pikachu, Charmander, Bulbasaur and Snorlax"},
-    {path: "/products/rugs/Product_Display_Pokemon_1.jpg", alt: "Pixel art of a gameboy pokemon trainer sprite and pikachu"},
-  ]
 
   const handleImageClick = (img: imageInfoProps) => {
     setSelectedImage(img);
@@ -55,37 +41,38 @@ export const Portfolio = () => {
     <main aria-label="Portfolio Page">
       <Header
         title="Portfolio"
-        tagline="A showcase of all my works. Checkout what I can do!"
+        tagline="A showcase of all my completed commissions."
         img="/gallery/Product_Display_Assorted_3.jpg"
         img_alt="Assorted variety of rugs"
       />
       
-      <section className="flex m-2 gap-2 flex-col items-center text-center"> 
+      <section className="flex my-4 gap-2 flex-col items-center text-center"> 
         <img 
           className="flex justify-start h-10 w-10" 
           src="/assets/design/icons/X_Star_Teal-Blue.webp" 
           aria-hidden="true" 
           alt="Cross Star Design Marker" 
         />
-        <h1 className="heading_text">
-          What I can do!
-        </h1>
       </section>
       
       {/* PORTFOLIO INTRO */}
-      <section className="body_text text-center my-6 mx-4">
-        <p>
-          Step into my tufted universe—where Pokémon pals, sports showdowns, and wild personal creations burst off the floor in rug form! 
-          Every piece here (from mirror rugs that jazz up your walls to mug rugs that cozy up your coffee) is handmade with obsessive love for fandoms and
-          one-of-a-kind ideas. Whether you're here to browse Snorlax rugs or dream up a custom design that'll make your friends gasp, this gallery proves no
-          idea is too nerdy, niche, or wonderfully weird to bring to life in yarn!
+      <section className="body_text flex justify-center text-center my-4 py-4  mx-4 ">
+        <p className="body_text md:max-w-2/3">
+        Welcome to my rug hall of fame! Every rug tells a story. From epic sports logos
+        and cuddy pet portraits to Pokémon, anime icons, and quirky text rugs, this page
+        is packed with some of my favorite tufted creations. Think of it as a hihglight
+        reel of all the wild, weird and wonderful commissions I've brought to life -- maybe
+        yours will be the next one to join the lineup!
         </p>
       </section>
       
       {/* PHOTO GALLERY */}
-      <section className="pb-20 flex flex-col justify-center items-center">
-        <ul className="grid gap-1 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-          {imageInfo.map(({path, alt}, idx) => (
+      <section className="pb-20 mb-20 mx-2 flex flex-1 flex-col justify-center items-center">
+        <ul className="
+        w-full
+        grid gap-1 grid-cols-1 
+        md:grid-cols-2 lg:grid-cols-3">
+          {portfolioImages.map(({path, alt}, idx) => (
             <li 
               className="w-full h-90 cursor-pointer overflow-hidden group" 
               key={`${idx}-${alt}`}
@@ -128,6 +115,7 @@ export const Portfolio = () => {
           </div>
         </div>
       )}
+      <ReturnToTop />
     </main>
   )
 }

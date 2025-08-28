@@ -22,24 +22,48 @@ interface TempsProps {
 export const Home = () => {
   // TEMP DATA
   const Temp: TempsProps[] = [
-    {"name": "All That", "path": "products/rugs/Closeup_AllThat.webp"},
-    {"name": "Gengar", "path": "products/rugs/Showcase_Gengar.webp"},
-    {"name": "Self-Portrait", "path": "products/rugs/Custom_Portrait.webp"},
-    {"name": "Thumper", "path": "products/rugs/Custom_Thumper.webp"},
+    {
+      "name": "Sport", 
+      "path": "/products/rugs/Rug_Boston_Celtics_Champions.webp"
+    },
+    {
+      "name": "Pokemon", 
+      "path": "products/rugs/Showcase_Gengar.webp"
+    },
+    {
+      "name": "Portrait",
+      "path": "/products/rugs/Brent_Faiyez.webp"
+    },
+    { 
+      "name": "Disney", 
+      "path": "products/rugs/Custom_Thumper.webp"
+    },
+    { 
+      "name": "Anime", 
+      "path": "/products/rugs/Rug_One_Piece_Skull.webp"
+    },
+    { 
+      "name": "Movies", 
+      "path": "/products/rugs/Rug_Star_Wars_Rebel_Resistance.webp"
+    },
+    { 
+      "name": "Customized", 
+      "path": "/products/rugs/Rug_Kirby_Jigglypuff.webp"
+    },
+
   ]
   // Promise Icons
   const promiseIcons: PromiseIcons[] = [
-    {Icon: HeartIcon, alt: "Heart icon", description: "Handcrafter with care", title: "Personalized & Handcrafted"},
+    {Icon: HeartIcon, alt: "Heart icon", description: "Handmade with care", title: "Personalized & Handcrafted"},
+    {Icon: RugIcon, alt: "Rug icon", description: "No two are ever the same!", title: "One-of-a-Kind Rugs"},
     {Icon: StarIcon, alt: "Star icon", description: "Soft, durable and quality yarn", title: "Quality Materials"},
     {Icon: SmileyfaceIcon, alt: "Smiley face icon", description: "Exactly as you like. No exceptions!", title: "Satisfaction Guaranteed"},
-    {Icon: RugIcon, alt: "Rug icon", description: "No two are ever the same!", title: "One-of-a-kind Rugs"},
   ]
 
   return (
     <main aria-label="Home Page" className="">
       <Header
         title="Where your dream design becomes a rug reality"
-        tagline="Begin your dream rug!"
         btn_1={<StartOrderBtn/>}
         btn_2={<ContactUsBtn/>}
         />
@@ -49,7 +73,7 @@ export const Home = () => {
           {promiseIcons.map(({ Icon, alt, description, title }, idx) => (
             <li key={`${alt}-${idx}`}>
               <CategoryCard 
-                className="flex flex-col items-center text-center p-4 gap-2"
+                className="flex flex-col justify-center items-center text-center p-4 gap-2"
                 key={`promise-icon-${idx}`}
                 svg={<Icon className="transition-all duration-300 hover:scale-105 focus:scale-105 h-20 text-majorelle" />}
                 svgAlt={alt}
@@ -116,7 +140,10 @@ export const Home = () => {
           src="/assets/design/icons/Cross_Star_White.webp" 
           aria-hidden="true" 
           alt="Cross Star Design Marker" />
-          <h2 className="heading_text ">For the Fans, By the Fans</h2>
+          <div>
+            <h2 className="heading_text ">For the Fans, By the Fans</h2>
+            {/* <p className="text-xs text-space_cadet/50"> Custom rugs suggested and made for customers! </p> */}
+          </div>
         </div>
         {/* Carousel */}
         <div className="">

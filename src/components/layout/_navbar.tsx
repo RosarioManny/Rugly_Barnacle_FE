@@ -5,7 +5,7 @@ import { MobileNavbar } from "../ui/navbar/mobileNavbar"
 // import { EtsyLogo } from "../icons-svgs/socialMediaIcons"
 
 // const shopSubMenu = ["shop", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
-const aboutSubMenu = ["about", "contact", "faq"]
+const aboutSubMenu = ["about", "contact", "FAQ"]
 
 export const NavBar = () => {
 
