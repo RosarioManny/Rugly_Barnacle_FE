@@ -30,22 +30,22 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
         {/* CONTENT */}
         <section className="
           relative z-10
-          flex flex-col gap-4 justify-center items-center 
+          flex flex-col justify-center items-center gap-4
           md:flex-row-reverse
           h-full text-center text-fleece"
         >
             {/* FALLBACK IMAGE */}
             {!img && (
-              <div className="z-20 flex w-full drop-shadow-lg/50 justify-center items-center ">
+              <div className="z-20 flex w-full md:max-w-2/3 lg:max-w-1/2 drop-shadow-lg/50 justify-center items-center ">
                 <img 
                   loading="lazy"
-                  className="h-46 md:h-64 floating-item" 
+                  className="h-46 md:h-64 object-cover floating-item" 
                   src="/assets/design/logo/RuglyBarnacle_Logo.webp" 
                   alt="Rugly Barnacle Logo" 
                 />
               </div>
             )}
-          <div className="flex mx-8 md:w-[50%] text-center items-center flex-col gap-6 justify-center">
+          <div className="flex mx-8 md:w-1/2 text-center items-center flex-col gap-6 justify-center">
             <p className="
             heading_text 
             justify-self-start

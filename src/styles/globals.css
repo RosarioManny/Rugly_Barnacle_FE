@@ -88,6 +88,8 @@ Color Pallete:
 }
 .dropbtn:hover {
   background-color: rgba(86, 82, 231, .1);
+  transition: all 250ms ease-out;
+  cursor: pointer;
 
 }
 
@@ -117,11 +119,6 @@ Color Pallete:
   gap: 1rem;
 }
 
-a:hover {
-  background-color: rgba(86, 82, 231, .1);
-  transition: all 250ms ease-out;
-  cursor: pointer;
-} 
 
 .caret-down {
   width: 0;
@@ -203,9 +200,9 @@ button {
 }
 
 .gradient {
-  background: linear-gradient(-45deg,  #114C56, #202254 );
+  background: linear-gradient(-45deg, #114C56, #202254 );
   background-size: 400% 100%;
-  animation: gradient 10s ease infinite;
+  animation: gradient 8s ease infinite;
 }
 
 

@@ -55,7 +55,7 @@ export const Footer = () => {
                 <li key={`${Social}-${idx} group-text-fleece`}>
                   <Social  
                     className="
-                      pointer duration-300  ease-in-out
+                      pointer duration-300 ease-in-out
                       size-10 text-fleece 
                       hover:text-breeze hover:scale-105 
                       active:text-breeze active:scale-110

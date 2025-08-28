@@ -61,11 +61,25 @@ export const NavBar = () => {
             <Link 
               key={link} 
               to={`/${link}`} 
-              className={``}
+              className={`dropbtn group`}
               onClick={closeDropdown}
+            >
+              <div className={`
+                caret-right text-robin_egg 
+                pointer duration-200 transform transition-all
+                text-fleece body_text 
+                group-hover:text-bittersweet 
+                group-active:text-bittersweet 
+                group-focus:text-bittersweet `} />
+              <p className="
+                pointer duration-200 transform transition-all
+                text-space_cadet body_text 
+                group-hover:text-majorelle
+                group-active:text-majorelle
+                group-focus:text-majorelle"
               >
-              <div className={`caret-right text-robin_egg`} />
-              <p> {link.charAt(0).toUpperCase() + link.slice(1)}</p> 
+                {link.charAt(0).toUpperCase() + link.slice(1)}
+              </p> 
             </Link>
             ))}
           </div>
