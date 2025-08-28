@@ -30,7 +30,7 @@ export const Contact = () => {
           </div>
           <div className="flex flex-col gap-6 justify-center items-center">
             <p className="underline subheading_text">Email Address:</p>
-            <Emailbtn />
+            <Emailbtn/>
           </div>
           <div className="flex flex-col items-center gap-4">
             <p>Looking to create a custom rug?</p>

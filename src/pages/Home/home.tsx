@@ -8,8 +8,6 @@ import { Header } from "../../components/layout/_header"
 import type { FC, SVGProps } from "react"
 import { Carousel } from "../../components/ui/carousel/Carousel"
 import { Emailbtn } from "../../components/ui/buttons/btn_copyEmail"
-import { copyEmailBtn } from "../../hooks/CopyEmail"
-
 
 interface PromiseIcons {
   Icon: FC<SVGProps<SVGSVGElement>>;
@@ -83,7 +81,7 @@ export const Home = () => {
           <div className="w-full max-w-md lg:max-w-lg xl:max-w-xl">
             <img 
               className="w-full rounded-xl drop-shadow-md object-cover" 
-              src="/products/prices/General_Pricing_Poster.webp" 
+              src="/products/prices/NEW_8_28_25_General_Price.webp" 
               alt="General Pricing Poster - Pricing's vary by design, size, quantity, colors and intricacy. 
               Estimates are: 3ft is $150+ ; 4ft is $250; 5ft is $350; 6ft and more is $450." 
             />
@@ -105,7 +103,7 @@ export const Home = () => {
               </p>
               
               <div className="w-fit">
-                <Emailbtn onClick={copyEmailBtn} />
+                <Emailbtn />
               </div>
             </div>
           </div>

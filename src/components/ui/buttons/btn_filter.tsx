@@ -1,4 +1,4 @@
-export const filterBtn = () => {
+export const FilterBtn = () => {
 
   return (
     <select>

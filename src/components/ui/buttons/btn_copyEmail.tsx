@@ -1,13 +1,11 @@
 import { CopyIcon } from "../icons-svgs/SvgIcons"
+import { copyEmailBtn } from "../../../hooks/CopyEmail"
 
-interface EmailbtnProps {
-  onClick?: () => void;
-}
 
-export const Emailbtn = ({ onClick = () => {} }: EmailbtnProps) => (
+export const Emailbtn = () => (
   <div className="w-fit flex justify-center border-solid rounded-2xl bg-breeze drop-shadow-sm border-black">
     <button 
-    onClick={onClick}
+    onClick={copyEmailBtn}
     aria-describedby="email-address"
     aria-label="Copy Email Button"
     className=" 
