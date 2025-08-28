@@ -19,6 +19,7 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
           {img && (
             <div className="absolute inset-0 -z-10">
               <img 
+              loading="lazy"
               className="size-full object-cover "
               src={img} 
               alt={img_alt || "Header background"}  />
@@ -37,6 +38,7 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
             {!img && (
               <div className="z-20 flex w-full drop-shadow-lg/50 justify-center items-center ">
                 <img 
+                  loading="lazy"
                   className="h-46 md:h-64 floating-item" 
                   src="/assets/design/logo/RuglyBarnacle_Logo.webp" 
                   alt="Rugly Barnacle Logo" 

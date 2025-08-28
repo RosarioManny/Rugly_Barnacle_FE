@@ -34,7 +34,7 @@ export const About = () => {
             </p>
         </section>
         {/* CALL-TO-ACTION */}
-        <section className="py-14 flex body_text font-medium flex-col items-center text-center ">
+        <section className="py-14 mb-32 flex body_text font-medium flex-col items-center text-center ">
           <p className="m-2">Love what we’re about? Checkout our rug to see which one you like!</p>
           <div className="flex my-8">
             <img 
@@ -44,7 +44,10 @@ export const About = () => {
             alt="Cross Star Design Marker" />
             <ShopBtn/>
           </div>
-          <img className="w-full p-2 rounded-2xl" src="public/gallery/Personal_Emilie_7.webp" alt="Owner, Emilie C. & their dog, Hercules, sitting on floor filled with rugs" />
+          <img 
+            className="w-full p-2 md:max-h-2/3 md:max-w-2/3 lg:max-h-1/2 lg:max-w-1/2 rounded-2xl" 
+            src="public/gallery/Personal_Emilie_7.webp" 
+            alt="Owner, Emilie C. & their dog, Hercules, sitting on floor filled with rugs" />
           <p className="text-[.7rem]">(My dog Hercules and I)</p>
         </section>
     </main>

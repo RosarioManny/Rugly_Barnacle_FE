@@ -1,13 +1,11 @@
 import { HeartIcon, RugIcon, SmileyfaceIcon, StarIcon} from "../../components/ui/icons-svgs/SvgIcons"
+import { StartOrderBtn, ContactUsBtn, ShopBtn, Emailbtn } from "../../components/ui/buttons/index"
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
-import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
-import { ContactUsBtn } from "../../components/ui/buttons/btn_contactUs"
-import { ShopBtn } from "../../components/ui/buttons/btn_shop"
+import { Carousel } from "../../components/ui/carousel/Carousel"
 import { CategoryCard } from "../../components/ui/categoryCard"
 import { Header } from "../../components/layout/_header"
 import type { FC, SVGProps } from "react"
-import { Carousel } from "../../components/ui/carousel/Carousel"
-import { Emailbtn } from "../../components/ui/buttons/btn_copyEmail"
+
 
 interface PromiseIcons {
   Icon: FC<SVGProps<SVGSVGElement>>;

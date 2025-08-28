@@ -1,14 +1,13 @@
 // TODO: import productCard
-import { useState, useEffect, useRef} from "react"
-import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
-import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardIcon, MirrorIcon, DangerIcon} from "../../components/ui/icons-svgs/SvgIcons"
+import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardIcon, MirrorIcon, DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
+import { StartOrderBtn, ReturnToTop } from "../../components/ui/buttons/index"
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
-import type { FC, SVGProps } from "react"
 import { ProductCard } from "../../components/ui/product/productCard"
 import { getProducts } from "../../lib/api/Product/productservices"
 import type { Product } from "../../lib/api/Product/productservices"
 import { Spinner } from "../../components/ui/loaders/loadingSpinner"
-import { ReturnToTop } from "../../components/ui/buttons/btn_returnToTop";
+import { useState, useEffect, useRef} from "react"
+import type { FC, SVGProps } from "react"
 
 interface CategoryIconProps {
   Icon: FC<SVGProps<SVGSVGElement>>;

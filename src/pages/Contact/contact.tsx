@@ -1,6 +1,5 @@
 import { Header } from "../../components/layout/_header"
-import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder"
-import { Emailbtn } from "../../components/ui/buttons/btn_copyEmail"
+import { StartOrderBtn , Emailbtn} from "../../components/ui/buttons/index"
 
 export const Contact = () => {
 
