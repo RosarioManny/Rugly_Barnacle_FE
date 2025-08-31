@@ -23,10 +23,6 @@ export const Contact = () => {
         </section>
         {/* CONTENT */}
         <section className="flex flex-col gap-6 text-center pb-20">
-          <div className="">
-            <p className="underline subheading_text" >Phone:</p>
-            <p>218-312-2133</p>
-          </div>
           <div className="flex flex-col gap-6 justify-center items-center">
             <p className="underline subheading_text">Email Address:</p>
             <Emailbtn/>

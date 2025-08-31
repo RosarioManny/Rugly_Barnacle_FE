@@ -1,9 +1,10 @@
 // import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
 import { Header } from "../../components/layout/_header"
 import { useState, useEffect } from "react"
-import { ReturnToTop } from "../../components/ui/buttons"
+import { ReturnToTop, StartOrderBtn} from "../../components/ui/buttons"
 import { portfolioImages } from "./portfolioImages"
 import type { imageInfoProps } from "./portfolioImages"
+
 
 
 export const Portfolio = () => {
@@ -44,6 +45,7 @@ export const Portfolio = () => {
         tagline="A showcase of all my completed commissions."
         img="/gallery/Product_Display_Assorted_3.jpg"
         img_alt="Assorted variety of rugs"
+        btn_1={<StartOrderBtn/>}
       />
       
       <section className="flex my-4 gap-2 flex-col items-center text-center"> 
@@ -60,7 +62,7 @@ export const Portfolio = () => {
         <p className="body_text md:max-w-2/3">
         Welcome to my rug hall of fame! Every rug tells a story. From epic sports logos
         and cuddy pet portraits to Pokémon, anime icons, and quirky text rugs, this page
-        is packed with some of my favorite tufted creations. Think of it as a hihglight
+        is packed with some of my favorite tufted creations. Think of it as a highlight
         reel of all the wild, weird and wonderful commissions I've brought to life -- maybe
         yours will be the next one to join the lineup!
         </p>

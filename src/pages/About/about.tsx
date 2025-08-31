@@ -1,5 +1,5 @@
 import { Header } from "../../components/layout/_header"
-import { ShopBtn } from "../../components/ui/buttons/btn_shop"
+import { ShopBtn, StartOrderBtn } from "../../components/ui/buttons/index"
 import { Link } from "react-router-dom"
 
 export const About = () => {
@@ -24,7 +24,7 @@ export const About = () => {
           </h1>
         </section>
         {/* CONTENT */}
-        <section className="flex justify-center text-center my-4 py-4  mx-4 ">
+        <section className="flex flex-col items-center justify-center text-center my-4 py-4 gap-4 mx-4 ">
           <p className=" body_text max-w-2/3">
             Hi! I'm Emilie, the tuft broad behind the Rugly Barnacle!
             Tufting rugs started as a COVID hobby and quickly became my absolute passion and business. 
@@ -32,12 +32,11 @@ export const About = () => {
             So, if you're looking for a custom rug that's made just for you, look no further! 
             Let me bring your favorite character, symbol, logo, art piece or any design of your wildest dream to life in rug form! 
             Each rug is one of a kind and 100% handmade to exceed every customer's expectation. 
-            <Link 
-              className="font-semibold text-majorelle" 
-              to="https://www.etsy.com/listing/1525283934/custom-rug-personalized-rug-custom-anime"> 
-              Ready?
-            </Link>
+            Ready?
           </p>
+          {/* <div>
+            <StartOrderBtn />
+          </div> */}
         </section>
         {/* CALL-TO-ACTION */}
         <section className="py-14 mb-32 flex font-medium flex-col items-center text-center ">
@@ -52,7 +51,7 @@ export const About = () => {
           </div>
           <img 
             className="w-full p-2 md:max-h-2/3 md:max-w-2/3 lg:max-h-1/2 lg:max-w-1/2 rounded-2xl" 
-            src="public/gallery/Personal_Emilie_7.webp" 
+            src="/gallery/Personal_Emilie_7.webp" 
             alt="Owner, Emilie C. & their dog, Hercules, sitting on floor filled with rugs" />
           <p className="text-[.7rem]">(Me and my dog Hercules)</p>
         </section>

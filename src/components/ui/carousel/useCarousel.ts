@@ -1,4 +1,4 @@
-import { useState, useCallback, useEffect} from "react";
+import { useState, useCallback, } from "react";
 
 interface CarouselProps {
   items: any[];
@@ -7,19 +7,10 @@ interface CarouselProps {
 
 export const useCarousel = ({ items = [], itemsToShow = 1 }: CarouselProps) => {
   const [currentIdx, setCurrentIdx] = useState(0);
-  const [cardsToShow, setCardsToShow] = useState(1)
+  const cardsToShow = window.innerWidth >= 768 ? 3 : 1
   const totalItems = items.length;
-  // console.log(currentIdx)
 
-  useEffect(() => {
-    const handleResize = () => {
-      setCardsToShow(window.innerWidth >= 768 ? 3 : 1)
-    };
 
-    handleResize();
-    window.addEventListener('resize', handleResize);
-      return () => window.removeEventListener('resize', handleResize);
-  }, [])
   const handlePrev = useCallback(() => {
     setCurrentIdx(prev => (prev <= 0 ? totalItems - cardsToShow : prev - 1));
   }, [totalItems]);
@@ -29,11 +20,15 @@ export const useCarousel = ({ items = [], itemsToShow = 1 }: CarouselProps) => {
   }, [totalItems]);
 
   const handleDragEnd = (e: any, info: any) => {
-    console.log(e)
+    console.log(e);
+    
+    // Scroll by just 1 item regardless of cardsToShow
     if (info.offset.x > 50) {
-      handlePrev();
+      // Swipe right - go to previous single item
+      setCurrentIdx(prev => (prev <= 0 ? totalItems - 1 : prev - 1));
     } else if (info.offset.x < -50) {
-      handleNext();
+      // Swipe left - go to next single item  
+      setCurrentIdx(prev => (prev >= totalItems - 1 ? 0 : prev + 1));
     }
   };
 
