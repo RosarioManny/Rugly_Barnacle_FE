@@ -11,7 +11,7 @@ export const Faq = () => {
       <main aria-label="Frequently Asked Questions Page">
         <Header 
         title="Frequently Asked Questions "
-        tagline="Generally asked quesitons, to answer your curiousities."
+        tagline="Generally asked quesitons, to answer your curiosities."
         img="/gallery/Product_Display_Pokemon_Wristrug_Edited_2.jpg"
         img_alt="Variety of pokemon rugs. "
         />
@@ -41,7 +41,7 @@ export const Faq = () => {
           </ul>
         </section>
         <CtaWavesBg className="fill-mauve"/>
-        <section className="flex justify-center items-center pb-16 bg-mauve">
+        <section className="flex justify-center items-center pb-14 md:pb-36 bg-mauve">
           <img 
             className="flex align-start h-10 w-10 mr-4" 
             src="/assets/design/icons/Cross_Star_White.webp" 

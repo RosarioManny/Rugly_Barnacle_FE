@@ -5,7 +5,7 @@ export const ShopBtn = () => (
       <button className="
         btn_general
         flex items-center gap-2 group
-        drop-shadow-sm/50
+        drop-shadow-sm/50 duration-600 
         hover:bg-robin_egg hover:scale-105 
         active:bg-robin_egg active:scale-105 
         focus:bg-robin_egg focus:scale-105"> 
@@ -15,7 +15,9 @@ export const ShopBtn = () => (
           {/* Caret */}
         <div 
             className={`
-            transition-transform duration-600 border-t-10 border-solid ease-in-out
-            caret-right text-mauve group-hover:translate-x-1 `}/>
+            transition-all duration-400 
+            border-t-10 border-solid ease-in-out
+            caret-right text-mauve 
+            group-hover:text-midnight_green group-hover:translate-x-1 `}/>
       </button>
   )

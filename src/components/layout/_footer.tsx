@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { CtaWavesBg } from "../ui/icons-svgs/ctaWavesBg"
 import { InstagramLogo, TikTokLogo, EtsyLogo } from "../ui/icons-svgs/socialMediaIcons"
+import { Emailbtn } from "../ui/buttons";
 // import { NewsLetterForm } from "../ui/newsLetterForm"
 import type { FC, SVGProps } from "react"
 // ChangeEvent and FormEvent are effective TS types for the event.targets. 
@@ -73,9 +74,7 @@ export const Footer = () => {
             underline underline-offset-6 "> 
               Contact Me!
             </h2>
-            <div className="body_text">
-              <p> theruglybarnacle@gmail.com</p>
-            </div>
+            <Emailbtn/>
           </section>
           {/* QUICK LINKS */}
           <section className="my-4 flex flex-col items-center">

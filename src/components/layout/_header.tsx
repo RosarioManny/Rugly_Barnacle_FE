@@ -1,4 +1,3 @@
-
 interface HeaderProps {
   title: string;
   img?: string;
@@ -10,8 +9,10 @@ interface HeaderProps {
 
 export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: HeaderProps) => {
 
+
   return (
-      <header className=
+      <header 
+        className=
         {`${img ? "" : "gradient"}
         relative w-full h-[70vh] overflow-hidden object-fit z-10`}
         >

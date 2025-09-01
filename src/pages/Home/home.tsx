@@ -23,15 +23,15 @@ export const Home = () => {
   // TEMP DATA
   const Temp: TempsProps[] = [
     {
-      "name": "Sport", 
+      "name": "Sports", 
       "path": "/products/rugs/Rug_Boston_Celtics_Champions.webp"
     },
     {
-      "name": "Pokemon", 
+      "name": "Pokémon", 
       "path": "products/rugs/Showcase_Gengar.webp"
     },
     {
-      "name": "Portrait",
+      "name": "Portraits",
       "path": "/products/rugs/Brent_Faiyez.webp"
     },
     { 
@@ -47,7 +47,7 @@ export const Home = () => {
       "path": "/products/rugs/Rug_Star_Wars_Rebel_Resistance.webp"
     },
     { 
-      "name": "Customized", 
+      "name": "Custom", 
       "path": "/products/rugs/Rug_Kirby_Jigglypuff.webp"
     },
 
@@ -141,7 +141,7 @@ export const Home = () => {
           aria-hidden="true" 
           alt="Cross Star Design Marker" />
           <div>
-            <h2 className="heading_text ">For the Fans, By the Fans</h2>
+            <h2 className="heading_text ">For the Fans, By A Fans</h2>
             {/* <p className="text-xs text-space_cadet/50"> Custom rugs suggested and made for customers! </p> */}
           </div>
         </div>

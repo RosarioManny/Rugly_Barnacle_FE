@@ -1,7 +1,7 @@
 export const faqItems = [
     {
       question: "What materials do you use?", 
-      answer: "I use high-quality acrylic or wool yarn, a tufting gun, and a sturdy"
+      answer: "I use high-quality acrylic or wool yarn, a tufting gun, and a sturdy primary cloth with a non-slip rug backing."
     },
     {
       question: " How long does it take to make a rug?", 
@@ -32,8 +32,11 @@ export const faqItems = [
       answer: "Yes, I can ship worldwide"
     },
     {
+      question: "Do you only make rugs of cartoons and nerdy things?", 
+      answer: "No! I can make a rug for any design you want! Abstract? Sure! Scenic? You betcha!"
+    },
+    {
       question: "Do you have a dog?", 
       answer: "Yes, his name is Hercules. You can see him in the about page! 😁"
     },
-
 ]

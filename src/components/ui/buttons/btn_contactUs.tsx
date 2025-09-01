@@ -6,7 +6,7 @@ export const ContactUsBtn = () => (
     focus:border-robin_egg focus:scale-105 
     hover:border-robin_egg hover:scale-105"> 
       <Link to="/contact">
-      Contact Us
+      Contact Me
       </Link>
     </button>
   )
