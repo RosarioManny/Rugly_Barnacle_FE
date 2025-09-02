@@ -141,7 +141,7 @@ export const Home = () => {
           aria-hidden="true" 
           alt="Cross Star Design Marker" />
           <div>
-            <h2 className="heading_text ">For the Fans, By A Fans</h2>
+            <h2 className="heading_text ">For the Fans, By A Fan</h2>
             {/* <p className="text-xs text-space_cadet/50"> Custom rugs suggested and made for customers! </p> */}
           </div>
         </div>
