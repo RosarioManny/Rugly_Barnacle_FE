@@ -1,5 +1,5 @@
 import { Header } from "../../components/layout/_header"
-import { FaqCard } from "../../components/ui/faq/faqCard"
+import { FaqCard } from "./faqCard"
 import { ShopBtn } from "../../components/ui/buttons/btn_shop"
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
 import { faqItems } from "./faqQuestions"
@@ -12,7 +12,7 @@ export const Faq = () => {
         <Header 
         title="Frequently Asked Questions "
         tagline="Generally asked quesitons, to answer your curiosities."
-        img="/gallery/Product_Display_Pokemon_Wristrug_Edited_2.jpg"
+        img="/gallery/Product_Display_Pokemon_Wristrug_Edited_2.webp"
         img_alt="Variety of pokemon rugs. "
         />
         {/* TITLE */}

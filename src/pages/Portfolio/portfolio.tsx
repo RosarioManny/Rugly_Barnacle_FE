@@ -4,6 +4,9 @@ import { useState, useEffect } from "react"
 import { ReturnToTop, StartOrderBtn} from "../../components/ui/buttons"
 import { portfolioImages } from "./portfolioImages"
 import type { imageInfoProps } from "./portfolioImages"
+import { PortfolioItem } from "./portfolioItem"
+
+
 
 
 
@@ -43,7 +46,7 @@ export const Portfolio = () => {
       <Header
         title="Portfolio"
         tagline="A showcase of all my completed commissions."
-        img="/gallery/Product_Display_Assorted_3.jpg"
+        img="/gallery/Product_Display_Assorted_Edited_2.webp"
         img_alt="Assorted variety of rugs"
         btn_1={<StartOrderBtn/>}
       />
@@ -75,6 +78,14 @@ export const Portfolio = () => {
         grid gap-1 grid-cols-1 
         md:grid-cols-2 lg:grid-cols-3">
           {portfolioImages.map(({path, alt}, idx) => (
+            <PortfolioItem 
+              key={`${idx}-${alt}`}
+              onClick={handleImageClick}
+              index={idx}
+              path={path} 
+              alt={alt}/>
+          ))}
+          {/* {portfolioImages.map(({path, alt}, idx) => (
             <li 
               className="w-full h-90 cursor-pointer overflow-hidden group" 
               key={`${idx}-${alt}`}
@@ -86,7 +97,7 @@ export const Portfolio = () => {
                 alt={alt} 
               />
             </li>
-          ))}
+          ))} */}
         </ul>
       </section>
 

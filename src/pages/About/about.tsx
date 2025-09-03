@@ -9,7 +9,7 @@ export const About = () => {
       <Header
         title="About Me"
         tagline="Learn what Rugly Barnacle is about!"
-        img="/gallery/Personal_Emilie_22.jpg"
+        img="/gallery/Personal_Emilie_22.webp"
         img_alt="Owner looking at a floor filled with rugs"
         />
         {/* TITLE */}

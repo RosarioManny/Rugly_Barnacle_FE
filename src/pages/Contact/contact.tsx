@@ -6,8 +6,8 @@ export const Contact = () => {
   return (
     <main aria-label="Contact Page" className="md:pb-20">
       <Header
-        img="/gallery/Product_Display_Pokemon_2.jpg"
-        img_alt=""
+        img="/gallery/Product_Display_Pokemon_Edited_2.webp"
+        img_alt="Pokemon Yellow Pokemon Trainer & Pikachu sprites"
         title="Contact"
         tagline="Let's keep in touch!"
         
