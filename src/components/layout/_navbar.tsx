@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
 import { useDropdownHandlers } from "../../hooks/navbar"
 import { MobileNavbar } from "../ui/navbar/mobileNavbar"
-// import { CartIcon } from "../icons-svgs/SvgIcons"
-// import { EtsyLogo } from "../icons-svgs/socialMediaIcons"
+import { CartIcon } from "../ui/icons-svgs/SvgIcons"
 
-// const shopSubMenu = ["shop", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
+
+const shopSubMenu = ["shop", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
 const aboutSubMenu = ["about", "contact", "FAQ"]
 
 export const NavBar = () => {
@@ -12,9 +12,9 @@ export const NavBar = () => {
 
   const {
     closeDropdown,
-    // handleShopDropdown,
+    handleShopDropdown,
     handleAboutDropdown,
-    // shopDropdownOpen,
+    shopDropdownOpen,
     aboutDropdownOpen
   } = useDropdownHandlers()
 
@@ -25,7 +25,7 @@ export const NavBar = () => {
         bg-fleece border-b-solid border-b-2 border-b-majorelle 
         rethink-sans 
         max-h-[5rem]  min-h-[3.5rem]
-        flex md:grid md:grid-cols-2 justify-between items-center">
+        flex md:grid md:grid-cols-3 justify-between items-center">
       {/* Home - Brand image small logo*/}
       <section className="flex justify-self-start items-center focus:scale-110 hover:scale-110 transition-all">
         <Link className="brand-logo" to="/">
@@ -37,7 +37,7 @@ export const NavBar = () => {
       </section>
 
       {/* Desktop Navbar */}
-      <section className="d-nav-links hidden md:justify-end md:flex">
+      <section className="d-nav-links hidden justify-self-center md:justify-end md:flex">
         <div className="dropdown">
           {/* About Nav Button */}
           <button 
@@ -88,11 +88,11 @@ export const NavBar = () => {
           <Link className="dropbtn" to="/portfolio">
             Portfolio
           </Link>
-          <Link className="dropbtn" to="/shop">
+          {/* <Link className="dropbtn" to="/shop">
             Shop
-          </Link>
-        {/* <div className="dropdown">
-          Shop Nav Button
+          </Link> */}
+        <div className="dropdown">
+          {/* Shop Nav Button */}
           <button 
             className="dropbtn pointer"
             onClick={handleShopDropdown}>
@@ -104,7 +104,7 @@ export const NavBar = () => {
               caret-down`}/>
           </button>
 
-          SHOP Dropdown Items
+          {/* SHOP Dropdown Items */}
           <div 
             className={`
               ${shopDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
@@ -122,27 +122,27 @@ export const NavBar = () => {
             </Link>
             ))}
           </div>
-        </div> */}
+        </div>
             {/* TODO: Fix Links to actual Shop Category Pages */}
       </section>
 
       {/* Mobile Navbar */}
       <section className="z-50 justify-between md:hidden">
         <MobileNavbar 
-          // shopSubMenu={shopSubMenu} 
+          shopSubMenu={shopSubMenu} 
           aboutSubMenu={aboutSubMenu}  
         /> 
       </section>
 
       {/* Cart Link */}
-      {/* <section className="justify-self-end">
-        <button className="my-2 flex ">
-          Version 2 
+      <section className="justify-self-end">
+        <button className="my-2 flex">
+          {/* Version 2  */}
           <Link className="" to="/cart"> 
-            <CartIcon className="text-space_cadet focus:scale-110 hover:text-majorelle" />
+            <CartIcon className="text-space_cadet focus:scale-110 hover:scale-110 transform-all duration-300 hover:text-majorelle" />
           </Link>
         </button>
-      </section> */}
+      </section>
     </nav>
   )
 }

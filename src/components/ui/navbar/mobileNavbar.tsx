@@ -3,15 +3,15 @@ import { useMobileHandlers } from "../../../hooks/navbar";
 import { BurgerLine } from "./Burgerline";
 
 interface MobileNavbarProps {
-  // shopSubMenu?: string[];
+  shopSubMenu?: string[];
   aboutSubMenu: string[];
 }
 
-export const MobileNavbar = ( { aboutSubMenu=[] }: MobileNavbarProps) => {
+export const MobileNavbar = ( { aboutSubMenu=[], shopSubMenu=[] }: MobileNavbarProps) => {
 
   const {
     handleClick,
-    // toggleMobileShop,
+    toggleMobileShop,
     toggleMobileAbout,
     isToggled,
     mobileShopOpen,
@@ -53,7 +53,7 @@ export const MobileNavbar = ( { aboutSubMenu=[] }: MobileNavbarProps) => {
           <Link to="/shop">
             Shop
           </Link>
-          {/* <div className={`caret-right text-majorelle`} /> */}
+          <div className={`caret-right text-majorelle`} />
         </button>
         
         <button 
@@ -75,7 +75,7 @@ export const MobileNavbar = ( { aboutSubMenu=[] }: MobileNavbarProps) => {
       </div>
 
       {/* Shop Submenu */}
-      {/* <div 
+      <div 
         className={`flex flex-col  w-full fixed transition-all ease-in-out duration-[500ms] 
         ${mobileShopOpen ? 'right-0' : '-right-[800px]'}`}
       >
@@ -95,7 +95,7 @@ export const MobileNavbar = ( { aboutSubMenu=[] }: MobileNavbarProps) => {
               {link.charAt(0).toUpperCase() + link.slice(1)}
           </Link>
         ))}
-      </div> */}
+      </div>
 
       {/* About Submenu */}
       <div className={`
