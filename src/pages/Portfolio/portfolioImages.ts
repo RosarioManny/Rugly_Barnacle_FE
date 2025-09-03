@@ -20,5 +20,8 @@ export const portfolioImages: imageInfoProps[] = [
   {path: "/products/rugs/Rug_Masanting.webp", alt: "Masanting rug"},
   {path: "/products/rugs/Rug_One_Piece_Skull.webp", alt: "One Piece Red-Haired Pirates rug"},
   {path: "/products/rugs/Rug_Star_Wars_Rebel_Resistance.webp", alt: "Star Wars Dark & Light Side rug"},
-  {path: "/products/rugs/Wristrug_Banjo_Kazoo.jpeg", alt: "Banjo-Kazooie wrist rug"},
+  {path: "/products/rugs/Wristrug_Banjo_Kazoo.webp", alt: "Banjo-Kazooie wrist rug"},
+  {path: "/products/rugs/Rug_NY_Rangers.webp", alt: "New York Rangers rug"},
+  {path: "/products/rugs/Rugs_Brownstone_Boys.webp", alt: "Brownstone Boys Silhouette Portrait rug"},
+  {path: "/products/rugs/Rug_SSBM_CD.webp", alt: "Super Smash Bros. Game Disc rug"},
 ]
