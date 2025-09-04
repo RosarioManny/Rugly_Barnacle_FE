@@ -1,9 +1,25 @@
 import api from "../apiConfig"
 
-export interface CartInfo {
-  id: number,
-  session_key: string,
+export interface CartItem {
+  id: number;
+  product: number;
+  product_name: string;
+  product_price: string;
+  quantity: number;
+  subtotal: number;
+  added_at: string;
 }
+
+export interface CartInfo {
+  id: number;
+  session_key: string;
+  created_at: string;
+  updated_at: string;
+  items: CartItem[]; // Array of CartItem objects
+  total: number;
+  item_count: number;
+}
+
 // get current cart for user
 export const getCart = async () => {
   try {
@@ -19,7 +35,7 @@ export const getCart = async () => {
 
 export const addToCart = async (  product_id: number, quantity: number = 1 ) => {
   try {
-    console.log('CSRF Token from cookie:', document.cookie);
+    // console.log('CSRF Token from cookie:', document.cookie);
     
     const response = await api.post("/cart/add-to-cart/", {
       product_id,
@@ -29,9 +45,9 @@ export const addToCart = async (  product_id: number, quantity: number = 1 ) => 
     console.log("Item added to cart!", response.data);
     return response.data;
   } catch(err) {
-    console.log("Full error:", err);
-    console.log("Error response:", err.response);
-    console.log("Error headers:", err.response?.headers);
+    // console.log("Full error:", err);
+    // console.log("Error response:", err.response);
+    // console.log("Error headers:", err.response?.headers);
     throw err;
   }
 }

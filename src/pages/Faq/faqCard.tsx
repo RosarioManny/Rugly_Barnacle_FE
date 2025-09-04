@@ -14,7 +14,7 @@ export const FaqCard = ({ question, answer }: faqCardProps) => {
   return (
     <li 
     onClick={handleToggle}
-    className="h-fit bg-fleece p-4 rounded-xl">
+    className="h-fit  cursor-pointer  bg-fleece p-4 rounded-xl">
       {/* QUESTION */}
       <div className="
         subheading_text 
@@ -32,7 +32,7 @@ export const FaqCard = ({ question, answer }: faqCardProps) => {
       </div>
       {/* ANSWER */}
       <motion.div 
-        className={`w-full rounded-b-2xl bg-firebrick overflow-hidden `}
+        className={`w-fullrounded-b-2xl bg-firebrick overflow-hidden `}
         initial={false}
         animate={{
           height: isToggled ? 'auto' : 0,

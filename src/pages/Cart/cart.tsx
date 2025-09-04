@@ -1,52 +1,15 @@
 import { ShopBtn } from "../../components/ui/buttons/btn_shop";
-import { getCart } from "../../lib/api/Cart/cartServices"
-import { useState, useEffect } from "react";
-import { DangerIcon } from "../../components/ui/icons-svgs/SvgIcons";
+import { useCart } from "../../hooks/useCart"
+import { DangerIcon, RefreshIcon } from "../../components/ui/icons-svgs/SvgIcons";
 import { Spinner } from "../../components/ui/loaders/loadingSpinner";
 import { StartOrderBtn } from "../../components/ui/buttons/btn_startOrder";
-import type { CartInfo } from "../../lib/api/Cart/cartServices"
+
 
 
 export const Cart = () => {
-  const [cart, setCart] = useState<CartInfo | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
-
-  const fetchCart = async() => {
-    try {
-      setLoading(true)
-      setError(null)
-
-      const data = await getCart()
-      
-      setCart(data)
-      console.log(cart)
-    } catch(err) {
-      setError("Failed to fetch / create cart")
-    } finally {
-      setLoading(false)
-    }
-  }
-
-  // Console.log vv
-  useEffect(() => {
-    if (cart) {
-      console.log("Cart updated:", cart);
-      console.log("Cart Items :: ", cart.items)
-      // console.log("Cart ID:", cart.id);
-    }
-  }, [cart]);
-
-  // Cart Fetching
-  useEffect(() => {
-    try {
-      fetchCart()
-      // console.log(cart)
-    } catch(err) {
-      setError("Cart unable to be loaded. Try again later.")
-    }
-  },[])
-  
+  const { cart, loading, error, fetchCart } = useCart();
+  const cartItemCount = cart?.item_count;
+  console.log(cartItemCount)
   if (loading) return <Spinner />
 
   if (error || cart === null) {
@@ -62,22 +25,35 @@ export const Cart = () => {
   // TODO: fetchCartDetails
 
   return (
-    <main className="h-[100vh]" aria-label="Cart Page">
-      <h1 className="heading_text text-center mb-4 mt-16">Your Cart</h1>
-      {cart && (
-        <div className="text-center flex gap-5 justify-center items-center">
-          <div className="flex flex-col gap-5 items-center">
-            <p className="">
-              Your Cart is Empty. <br/> Go checkout some rugs!
-            </p>
-            <ShopBtn/>
-          </div>
-          <div className="flex flex-col gap-5 items-center">
-            <p>Would you like a custom rug?</p>
-            <StartOrderBtn />
-          </div>
+    <main className="h-[100vh] flex items-center" aria-label="Cart Page">
+      <section className="w-[70%] bg-gray-300 rounded-xl mx-10">
+        <div className="flex justify-between items-center m-4">
+          <h1 className="heading_text ">Your Cart</h1>
+          <button className="group hover:scale-105 flex items-center gap-2 text-space_cadet" onClick={fetchCart}> 
+            <p className="group-hover:text-majorelle  transform-all duration-300 ease-in"> Refresh</p>
+            <RefreshIcon className="group-hover:text-majorelle size-7 transform-all duration-300 ease-in "/> 
+          </button>
         </div>
-      )}
+        {cartItemCount && (
+          <div className="text-center flex gap-5 justify-center items-center">
+            <div className="flex flex-col gap-5 items-center">
+              <p className="">
+                Your Cart is Empty. <br/> Go checkout some rugs!
+              </p>
+              <ShopBtn/>
+            </div>
+            <div className="flex flex-col gap-5 items-center">
+              <p>Would you like a custom rug?</p>
+              <StartOrderBtn />
+            </div>
+          </div>
+        )}
+      </section>
+      <section className="w-[1fr]">
+        <div>
+          Hello
+        </div>
+      </section>
     </main>
   )
 }

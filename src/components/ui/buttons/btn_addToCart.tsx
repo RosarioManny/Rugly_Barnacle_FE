@@ -31,8 +31,8 @@ export const AddToCartBtn = ({
     <button 
       onClick={handleAddToCart}
       className="
-        btn_addToCart 
-        w-full
+        btn_general 
+        w-full h-[55px]
         duration-100 drop-shadow-sm/50
         hover:bg-robin_egg hover:scale-105
         active:bg-robin_egg active:scale-105 

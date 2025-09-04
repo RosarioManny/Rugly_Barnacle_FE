@@ -179,9 +179,10 @@ button {
   background-color: #5652E7;
   font-size: 1.3rem;
   font-weight: 600;
-  width: auto;
+  width: fit-content;
   max-width: 100%; 
 }
+
 .btn_addToCart {
   padding: .5rem 1rem;
   border-radius: .5rem;

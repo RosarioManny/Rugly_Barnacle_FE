@@ -3,7 +3,7 @@ import axios from "axios";
 const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL || 'http://localhost:8000';
 
 // 
-const getCookie = (name) => {
+const getCookie = (name: string) => {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
         const cookies = document.cookie.split(';');
@@ -25,10 +25,10 @@ const api = axios.create({
 });
 
 api.interceptors.request.use((config) => {
-    if (['post', 'put', 'delete', 'patch'].includes(config.method?.toLowerCase())) {
+    if (['post', 'put', 'delete', 'patch'].includes(config.method?.toLowerCase() ?? '')) {
         const csrfToken = getCookie('csrftoken');
         if (csrfToken) {
-        config.headers['X-CSRFToken'] = csrfToken;
+        config.headers.set('X-CSRFToken', csrfToken)
         }
     }
     return config;

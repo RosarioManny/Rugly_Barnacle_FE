@@ -27,9 +27,10 @@ export const Faq = () => {
           </div>
         </section>
         {/* FAQ DROPDOWN */}
-        <section className="my-8 px-4">
+        <section className="my-8 flex items-center justify-center px-4">
           <ul className="
           bg-space_cadet p-4 rounded-xl
+          md:w-2/3 
           flex flex-col gap-2">
             {faqItems.map(({question, answer}, idx) => (
               <FaqCard
