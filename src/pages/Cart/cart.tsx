@@ -28,10 +28,20 @@ export const Cart = () => {
     }
   }
 
+  // Console.log vv
+  useEffect(() => {
+    if (cart) {
+      console.log("Cart updated:", cart);
+      console.log("Cart Items :: ", cart.items)
+      // console.log("Cart ID:", cart.id);
+    }
+  }, [cart]);
+
+  // Cart Fetching
   useEffect(() => {
     try {
       fetchCart()
-      console.log(cart)
+      // console.log(cart)
     } catch(err) {
       setError("Cart unable to be loaded. Try again later.")
     }
@@ -55,13 +65,15 @@ export const Cart = () => {
     <main className="h-[100vh]" aria-label="Cart Page">
       <h1 className="heading_text text-center mb-4 mt-16">Your Cart</h1>
       {cart && (
-        <div className="text-center flex flex-col justify-center items-center">
-          <p className="my-10">
-            Your Cart is Empty. <br/> Go checkout some rugs!
-          </p>
-          <ShopBtn/>
-          <div>
-            <p>Would like a custom rug?</p>
+        <div className="text-center flex gap-5 justify-center items-center">
+          <div className="flex flex-col gap-5 items-center">
+            <p className="">
+              Your Cart is Empty. <br/> Go checkout some rugs!
+            </p>
+            <ShopBtn/>
+          </div>
+          <div className="flex flex-col gap-5 items-center">
+            <p>Would you like a custom rug?</p>
             <StartOrderBtn />
           </div>
         </div>

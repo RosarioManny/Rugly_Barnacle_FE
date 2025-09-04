@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
+// API
 import { getProduct } from "../../lib/api/Product/productservices"
 import type { Product } from "../../lib/api/Product/productservices"
+// COMPONENTS
 import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
 import { AddToCartBtn } from "../../components/ui/buttons/btn_addToCart"
@@ -10,10 +12,12 @@ export const ProductDetails = () => {
   const [productDetails, setProductDetails] = useState<Product | null>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [cartMessage, setCartMessage] = useState<string | null>(null)
 
   // useParams returns an object, you need to extract the id
   const { id } = useParams<{ id: string }>()
 
+  // console.log("Cookie >", document.cookie)
   const fetchProduct = async (productId: string) => {
     try {
       setLoading(true)
@@ -31,10 +35,21 @@ export const ProductDetails = () => {
     }
   }
 
+  const handleSuccessMsg = () => {
+    setCartMessage("Item added to cart successfully!");
+    setTimeout(() => setCartMessage(null), 3000); // Clear message after 3 seconds
+  };
+
+  const handleErrorMsg = (error: string) => {
+    setCartMessage(error);
+    setTimeout(() => setCartMessage(null), 5000); // Clear message after 5 seconds
+  };
+
   useEffect(() => {
     if (id) {
       fetchProduct(id)
     } else {
+      console.log(productDetails)
       setError("Product not found")
     }
   }, [id]) // Add id as dependency
@@ -50,7 +65,18 @@ export const ProductDetails = () => {
   }
 
   return (
-    <main className="mx-4 mt-4 mb-20 h-fit" aria-label={`${productDetails.name} Details Page`}>
+    <main className="md:mx-20 m-4 mb-20 h-fit" aria-label={`${productDetails.name} Details Page`}>
+      {cartMessage && (
+        <div className={`
+          fixed top-4 right-4 p-4 rounded-md z-50 
+          ${ cartMessage.includes("error") || cartMessage.includes("Error") ? 
+            "bg-bittersweet text-white" 
+            : 
+            "bg-robin_egg text-space_cadet"
+        }`}>
+          {cartMessage}
+        </div>
+      )}
       <section aria-label="Product Infomation" className="h-fit">
         <div className="flex overflow-hidden gap-4 justify-center">
           <img 
@@ -59,9 +85,11 @@ export const ProductDetails = () => {
             aria-hidden="true" 
             alt="Cross Star Design Marker" 
           />
-          <div className="bg-white p-4 rounded-lg ">
-
-            <img className="size-fit object-cover "src="/products/rugs/Custom_Thumper.webp" alt="" />
+          <div className="bg-white h-[70vh]  rounded-lg ">
+            <img 
+              className="object-cover p-2 h-full"
+              src="/products/rugs/Custom_Thumper.webp" 
+              alt="" />
           </div>
         </div>
         <div className="body_text flex justify-start flex-col my-4">
@@ -92,7 +120,12 @@ export const ProductDetails = () => {
           </div>
         )}
         <div className="flex w-full justify-center">
-          <AddToCartBtn />
+          <AddToCartBtn
+            quantity={1}
+            product_id={productDetails.id}
+            onError={handleErrorMsg}
+            onSuccess={handleSuccessMsg}
+          />
         </div>
         {/*TODO: Add to Cart Btn */}
       </section>

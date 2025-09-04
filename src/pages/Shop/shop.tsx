@@ -35,7 +35,7 @@ export const Shop = () => {
       setProducts(data)
       setError(null)
     } catch(err) {
-      setError("Failed to fetch promise")
+      setError("Failed to retrieve products. Please check back soon.")
     } finally {
       setLoading(false)
     }
@@ -55,12 +55,12 @@ export const Shop = () => {
     {Icon: StickerSmileIcon, alt: "Stickers & More Category - Smiley Sticker Icon", description: "Stickers & more"},
   ]
 
-  if (error) return <div >Error: {error}</div>;
+  // if (error) return <div >Error: {error}</div>;
   if (error || products === null) {
     return ( 
-      <div className=" h-[100vh] justify-center flex flex-col gap-5 items-center">
-        <DangerIcon className="text-bittersweet"/>
-        <div className="error-message text-bittersweet font-bold">Error: {error ? `${error}` : "Difficulty getting products. Check back soon!" }</div>
+      <div className=" h-[100vh] mx-8 text-center justify-center flex flex-col gap-5 items-center">
+        <DangerIcon className="text-bittersweet animate-pulse"/>
+        <div className="error-message flex text-bittersweet font-bold">Error: <br/> {error ? `${error}` : "Difficulty getting products. Check back soon!" }</div>
       </div>)
   }
   return (
