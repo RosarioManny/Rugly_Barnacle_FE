@@ -1,44 +1,31 @@
 // import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
 import { Header } from "../../components/layout/_header"
-import { useState, useEffect } from "react"
+import { useEffect } from "react"
 import { ReturnToTop, StartOrderBtn} from "../../components/ui/buttons"
 import { portfolioImages } from "./portfolioImages"
-import type { imageInfoProps } from "./portfolioImages"
 import { PortfolioItem } from "./portfolioItem"
-
-
-
-
+import { usePortfolioModal } from "../../hooks/portfolio/imageModal"
 
 export const Portfolio = () => {
-  const [selectedImage, setSelectedImage] = useState<imageInfoProps | null>(null);
+  const { 
+    closeModal,
+    selectedImage,
+    handleBackdropClick,
+    handleImageClick 
+  } = usePortfolioModal()
 
-  const handleImageClick = (img: imageInfoProps) => {
-    setSelectedImage(img);
-    document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-  };
-
-  const closeModal = () => {
-    setSelectedImage(null);
-    document.body.style.overflow = 'auto'; // Re-enable scrolling
-  };
-
-  const handleBackdropClick = (e: React.MouseEvent) => {
-    if (e.target === e.currentTarget) {
-      closeModal();
-    }
-  };
-
-  // Close modal with Escape key
   useEffect(() => {
-    const handleEscape = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') {
-        closeModal();
-      }
+    const preloadCriticalImages = () => {
+      portfolioImages.slice(0, 4).forEach(({ path }) => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = path;
+        document.head.appendChild(link);
+      });
     };
-
-    window.addEventListener('keydown', handleEscape);
-    return () => window.removeEventListener('keydown', handleEscape);
+    
+    preloadCriticalImages();
   }, []);
 
   return (
@@ -85,19 +72,6 @@ export const Portfolio = () => {
               path={path} 
               alt={alt}/>
           ))}
-          {/* {portfolioImages.map(({path, alt}, idx) => (
-            <li 
-              className="w-full h-90 cursor-pointer overflow-hidden group" 
-              key={`${idx}-${alt}`}
-              onClick={() => handleImageClick({path, alt})}
-            >
-              <img 
-                className=" object-cover w-full h-full transition-transform duration-300 group-hover:scale-105" 
-                src={path} 
-                alt={alt} 
-              />
-            </li>
-          ))} */}
         </ul>
       </section>
 

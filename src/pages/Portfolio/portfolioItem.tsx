@@ -37,21 +37,31 @@ export const PortfolioItem = ({ path, alt, index, onClick }: PortfolioItemProps)
 
   return (
     <motion.li
-      
       ref={ref}
-      className="w-full h-90 cursor-pointer overflow-hidden group"
+      className="
+        w-full h-90 
+        cursor-pointer overflow-hidden group 
+        transition-all duration-300 ease-in-out
+        hover:ring-solid hover:ring-3 hover:ring-robin_egg"
       onClick={handleClick}
       initial={{ opacity: 0, y: 50 }}
       animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 50 }}
       transition={{ duration: 0.6, ease: "easeOut", delay: index * 0.1 }} // Stagger animations too
     >
-      <div className={`relative w-full h-full ${isLoaded ? '' : 'bg-space_cadet/30 animate-pulse'}`}>
+      <div 
+        className={`
+          relative w-full h-full 
+          transition-all duration-300 ease-in-out
+          group-hover:scale-105 group-hover:opacity-90 
+          ${isLoaded ? '' : 'bg-space_cadet/30 animate-pulse'}`}
+      >
         {shouldLoad && (
           <img 
-            className="object-cover w-full h-full transition-transform duration-300 group-hover:scale-105"
+            className="object-cover w-full h-full transition-all duration-300 group-hover:opacity-50 group-hover:scale-105"
             src={path}
             alt={alt}
             loading="lazy"
+            decoding='async'
             onLoad={() => setIsLoaded(true)}
             style={{ 
               opacity: isLoaded ? 1 : 0, 
