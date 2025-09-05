@@ -37,7 +37,7 @@ export const useCart = () => {
   useEffect(() => {
     if (cart) {
       console.log("Cart updated:", cart);
-      console.log("Cart Items :: ", cart.items)
+      console.log("Cart Items :: ", cart.items[0])
       // console.log("Cart ID:", cart.id);
     }
   }, [cart]);

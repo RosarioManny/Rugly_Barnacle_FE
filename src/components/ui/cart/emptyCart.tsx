@@ -1,4 +1,4 @@
-import { ShopBtn, StartOrderBtn } from "../../../components/ui/buttons"
+import { ShopBtn, StartOrderBtn } from "../buttons"
 
 export const EmptyCart = () => {
   

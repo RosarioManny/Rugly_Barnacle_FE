@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 export const ContactUsBtn = () => (
     <button className="
     btn_contact_us drop-shadow-sm/30
-    w-fit
     max-w-[135px] h-[55px]
     active:border-robin_egg active:scale-105 
     focus:border-robin_egg focus:scale-105 

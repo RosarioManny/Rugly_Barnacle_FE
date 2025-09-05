@@ -173,12 +173,12 @@ button {
 }
 
 .btn_general {
-  padding: .8rem;
+  padding: .7rem;
   border-radius: .5rem;
   background-color: #5652E7;
   font-size: 1.3rem;
   font-weight: 600;
-  width: fit-content;
+  min-width: fit-content;
   max-width: 100%; 
 }
 

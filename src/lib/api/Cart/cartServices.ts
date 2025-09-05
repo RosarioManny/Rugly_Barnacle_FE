@@ -7,7 +7,8 @@ export interface CartItem {
   product_price: string;
   quantity: number;
   subtotal: number;
-  added_at: string;
+  added_at?: string;
+  dimensions: string;
 }
 
 export interface CartInfo {
