@@ -87,7 +87,7 @@ export const Cart = () => {
           </div>
 
           {/* Checkout Section */}
-          <div className="w-full lg:w-96 bg-white rounded-xl shadow-sm p-6 h-fit sticky top-8">
+          <div className="w-full lg:w-96 bg-white rounded-xl shadow-md p-6 h-fit sticky top-8">
             <div className="mb-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-2">Order Summary</h2>
               <p className="text-xs text-bittersweet/60 mb-4">
@@ -119,13 +119,13 @@ export const Cart = () => {
             </div>
             
             <p className="text-xs text-gray-500 mt-4 text-center">
-              Free shipping on orders over $50
+              Free shipping on orders over $150
             </p>
           </div>
         </div>
 
         {/* Advisories */}
-        <section className="mt-8 bg-white rounded-xl p-6">
+        <section className="mb-48 mt-8  bg-white shadow-sm rounded-xl p-6">
           <h3 className="font-semibold text-gray-900 mb-3">Important Information</h3>
           <p className="text-sm text-gray-600 leading-relaxed">
             The price and availability of items at RuglyBarnacle.com are subject to change. 
