@@ -21,10 +21,11 @@ export const NavBar = () => {
 
   return (
     <nav className="
-        z-40 pr-6 
-        bg-fleece border-b-solid border-b-2 border-b-majorelle 
+        z-40 
+        bg-fleece 
+        border-b-solid border-b-2 border-b-majorelle 
         rethink-sans 
-        max-h-[5rem]  min-h-[3.5rem]
+        max-h-[5rem] min-h-[3.5rem]
         flex md:grid md:grid-cols-3 justify-between items-center">
       {/* Home - Brand image small logo*/}
       <section className="flex justify-self-start items-center focus:scale-110 hover:scale-110 transition-all">
@@ -136,10 +137,17 @@ export const NavBar = () => {
 
       {/* Cart Link */}
       <section className="justify-self-end">
-        <button className="my-2 flex">
+        <button 
+          className="flex-shrink-0 p-2 hover:bg-majorelle/30 rounded-full transition-colors duration-200 group"
+          aria-label="Cart Icon">
           {/* Version 2  */}
           <Link className="" to="/cart"> 
-            <CartIcon className="text-space_cadet focus:scale-110 hover:scale-110 transform-all duration-300 hover:text-majorelle" />
+            <CartIcon className="
+              size-8 md:size-9
+              group-hover:scale-110  group-hover:text-majorelle
+              group-focus:scale-110
+              transform-all duration-200 text-space_cadet"
+            />
           </Link>
         </button>
       </section>
