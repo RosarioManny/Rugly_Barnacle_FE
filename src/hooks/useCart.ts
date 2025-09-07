@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback} from "react"
-import { type CartInfo, getCart } from "../lib/api/Cart/cartServices"
+import { addToCart, type CartInfo, getCart, removeFromCart } from "../lib/api/Cart/cartServices"
 
 
 export const useCart = () => {
@@ -7,6 +7,7 @@ export const useCart = () => {
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  // Fetch Cart
   const fetchCart = useCallback(async () => {
     try {
       setLoading(true)
@@ -22,12 +23,48 @@ export const useCart = () => {
     }
   }, [])
 
+  // Add cartItem
+  const addItemToCart = useCallback(async (productId: number, quantity: number = 1) => {
+    try {
+      setLoading(true)
+      const updatedCart = await addToCart(productId, quantity)
+      setCart(updatedCart)
+      return updatedCart
+    } catch(err) {
+      setError("Failed to update cart")
+      throw err
+    } finally {
+      setLoading(false)
+    }
+  }, [])
+
+  // Remove cartItem
+  const removeItemFromCart = useCallback(async (productId: number, quantity: number = 1) => {
+    try {
+      setLoading(true)
+      
+      const updatedCart = await removeFromCart(productId, quantity)
+      setCart(prevCart => {
+        if( !prevCart ) return updatedCart;
+        
+        return {
+          ...updatedCart,
+          items: [...updatedCart.items]
+        }
+      })
+      return updatedCart
+    } catch( err ) {
+      setError("Failed to remove item. :(")
+      throw err
+    } finally {
+      setLoading(false)
+    }
+  }, [cart])
   
   // Cart Fetching on mount
   useEffect(() => {
     try {
       fetchCart()
-      // console.log(cart)
     } catch(err) {
       setError("Cart unable to be loaded. Try again later.")
     }
@@ -37,8 +74,6 @@ export const useCart = () => {
   useEffect(() => {
     if (cart) {
       console.log("Cart updated:", cart);
-      console.log("Cart Items :: ", cart.items[0])
-      // console.log("Cart ID:", cart.id);
     }
   }, [cart]);
 
@@ -47,6 +82,8 @@ export const useCart = () => {
     loading,
     error, 
     fetchCart,
-    setCart
+    setCart,
+    addItemToCart,
+    removeItemFromCart
   }
 }

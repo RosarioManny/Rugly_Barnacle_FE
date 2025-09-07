@@ -1,4 +1,6 @@
-import { addToCart } from "../../../lib/api/Cart/cartServices"
+import { useCart } from "../../../hooks/useCart";
+import { useState } from "react";
+import { Spinner } from "../loaders/loadingSpinner";
 
 interface AddToCartBtnProps {
   product_id: number;
@@ -13,10 +15,13 @@ export const AddToCartBtn = ({
     onSuccess,
     onError
   }: AddToCartBtnProps) => {
+    const [isAdding, setIsAdding] = useState(false)
+    const { addItemToCart } = useCart()
 
   const handleAddToCart = async () => {
     try {
-      await addToCart(product_id, quantity);
+      setIsAdding(true)
+      await addItemToCart(product_id, quantity);
       onSuccess?.()
       console.log(`Handler added x${quantity} item(s) - ID: ${product_id}, to cart` )
     } 
@@ -24,20 +29,26 @@ export const AddToCartBtn = ({
       const errorMessage = err.response?.data?.error || "Error: Failed to add to cart";
       onError?.(errorMessage);
       console.error("Add to cart error:", errorMessage);
+    } finally {
+      setIsAdding(false)
     }
   }
 
   return (
     <button 
       onClick={handleAddToCart}
-      className="
+      className=
+        {`
         btn_general 
         w-full h-[55px]
         duration-100 drop-shadow-sm/50
         hover:bg-robin_egg hover:scale-105
-        active:bg-robin_egg active:scale-105 
-        focus:bg-robin_egg focus:scale-105"> 
-          Add to Cart
+        focus:bg-robin_egg focus:scale-105
+        `}> 
+          <p className={` ${isAdding ? "animate-pulse" : ""}`}>
+
+            {isAdding ? "Adding..." : "Add to Cart"}
+          </p>
     </button>
   )
 }

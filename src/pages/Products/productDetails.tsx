@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom"
 // API
+import { useCart } from "../../hooks/useCart"
 import { getProduct } from "../../lib/api/Product/productservices"
 import type { Product } from "../../lib/api/Product/productservices"
 // COMPONENTS
@@ -72,7 +73,7 @@ export const ProductDetails = () => {
           ${ cartMessage.includes("error") || cartMessage.includes("Error") ? 
             "bg-bittersweet text-white" 
             : 
-            "bg-robin_egg text-space_cadet"
+            "bg-robin_egg top-20 text-space_cadet"
         }`}>
           {cartMessage}
         </div>

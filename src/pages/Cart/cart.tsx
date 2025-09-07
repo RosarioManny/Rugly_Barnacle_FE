@@ -5,21 +5,28 @@ import { EmptyCart } from "../../components/ui/cart/emptyCart";
 import { CheckoutBtn } from "../../components/ui/buttons";
 import type { CartItem } from "../../lib/api/Cart/cartServices";
 import { useCart } from "../../hooks/useCart"
-import { Link } from "react-router-dom";
 import { useEffect, useState} from "react";
 
 export const Cart = () => {
-  const { cart, loading, error, fetchCart } = useCart();
+  const { cart, loading, error, fetchCart, removeItemFromCart } = useCart();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   
   useEffect(() => {
     if (cart?.items && Array.isArray(cart.items)) {
       const validItems = cart.items.filter(item => item !== null && item !== undefined) as CartItem[];
-      setCartItems(validItems);
+      setCartItems(validItems)
     } else {
-      setCartItems([]);
+      setCartItems([])
     }
   }, [cart]);
+
+  const handleItemRemove = async (productId: number ) => {
+    try {
+      await removeItemFromCart(productId)
+    } catch(err) {
+      console.error("Failed to Remove", err )
+    }
+  };
 
   if (loading) {
     return (
@@ -32,15 +39,15 @@ export const Cart = () => {
   if (error || cart === null) {
     return ( 
       <div className="min-h-screen flex flex-col gap-5 items-center justify-center">
-        <DangerIcon className="text-bittersweet size-16" />
+        <DangerIcon className="text-bittersweet size-16 animate-pulse" />
         <div className="error-message text-bittersweet font-bold text-center px-4">
-          Error: {error || "Difficulty getting cart. Check back later"}
+          Error: <br/> { "Difficulty getting cart. Check back later"}
         </div>
         <button 
           onClick={fetchCart}
-          className="px-6 py-2 bg-majorelle text-white rounded-lg hover:bg-majorelle/90 transition-colors"
+          className="px-6 py-2 font-semibold bg-majorelle text-white rounded-lg hover:bg-robin_egg hover:scale-110 ease-in-out duration-300 transition-all"
         >
-          Try Again
+          Retry
         </button>
       </div>
     );
@@ -60,7 +67,7 @@ export const Cart = () => {
           {/* Cart Items Section */}
           <div className="flex-1 bg-white rounded-xl shadow-sm p-6">
             <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
-              <h2 className="text-xl font-semibold text-gray-900">Your Items ({cartItems.length})</h2>
+              <h2 className="text-xl font-semibold text-gray-900">Your Items:  <b className="text-majorelle">{cartItems.length}</b></h2>
               <button 
                 className="group flex items-center gap-2 text-gray-600 hover:text-majorelle transition-colors duration-200"
                 onClick={fetchCart}
@@ -73,12 +80,12 @@ export const Cart = () => {
             {cartItems.length > 0 ? (
               <ul className="divide-y divide-gray-200">
                 {cartItems.map((item, idx) => (
-                  <Link to={`/shop/${item.id}`}>
+                
                     <OccupiedCart
+                      onRemove={handleItemRemove}
                       key={`${item.id}-${item.added_at}-${idx}`}
                       {...item}
                     />
-                  </Link>
                 ))}
               </ul>
             ) : (

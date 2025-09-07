@@ -3,6 +3,7 @@ import { useDropdownHandlers } from "../../hooks/navbar"
 import { MobileNavbar } from "../ui/navbar/mobileNavbar"
 import { CartIcon } from "../ui/icons-svgs/SvgIcons"
 import { useCart } from "../../hooks/useCart" // Import the cart hook
+// import { useEffect, useState } from "react"
 
 const shopSubMenu = ["shop", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
 const aboutSubMenu = ["about", "contact", "FAQ"]
@@ -15,10 +16,18 @@ export const NavBar = () => {
     shopDropdownOpen,
     aboutDropdownOpen
   } = useDropdownHandlers()
+  // const [cartItemCount, setCartItemCount] = useState(0)
 
-  // Get cart data to display item count
   const { cart } = useCart()
   const cartItemCount = cart?.items?.length || 0
+
+  // useEffect(() => {
+  //   try {
+  //     setCartItemCount(cart?.items?.length)
+  //   } catch(err) {
+  //     console.error(err.message)
+  //   }
+  // })
 
   return (
     <nav className="
@@ -149,7 +158,7 @@ export const NavBar = () => {
       {/* Cart Link with Item Count */}
       <section className="justify-self-end mr-4 md:mr-6 relative">
         <button 
-          className="flex-shrink-0 p-2 hover:bg-majorelle/30 rounded-full transition-colors duration-200 group relative"
+          className="flex-shrink-0 p-3 hover:bg-majorelle/30 rounded-full transition-colors duration-200 group relative"
           aria-label={`Cart with ${cartItemCount} items`}
         >
           <Link to="/cart"> 
@@ -172,7 +181,7 @@ export const NavBar = () => {
                 px-1
                 border-2 border-fleece
                 shadow-sm
-                group-hover:bg-majorelle
+                group-hover:bg-robin_egg
               ">
                 {cartItemCount > 99 ? '99+' : cartItemCount}
               </span>

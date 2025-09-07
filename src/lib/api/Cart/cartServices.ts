@@ -52,4 +52,21 @@ export const addToCart = async (  product_id: number, quantity: number = 1 ) => 
     throw err;
   }
 }
+
+export const removeFromCart = async (product_id: number, quantity: number = 1): Promise<CartInfo> => {
+  try {
+    const response = await api.delete("/cart/remove-from-cart/", {
+      data: {
+        product_id,
+        quantity
+      }
+    });
+
+    console.log("Item removed from cart!", response.data);
+    return response.data;
+  } catch(err) {
+    console.error("Error removing item from cart", err)
+    throw err
+  }
+}
 // TODO: getCartItems - /cart/items/<int:id>/
