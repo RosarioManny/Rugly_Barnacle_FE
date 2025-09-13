@@ -61,4 +61,10 @@ const getProductsByCategory = async (categorySlug: string): Promise<Product[]> =
   }
 }
 
+// Get all product Images
+// const getProductImages = async (): Promise<Product> => {
+//   try {
+//     const response = await api.get()
+//   }
+// }
 export { getProducts, getProduct, getProductsByCategory }

@@ -25,6 +25,7 @@ export const Shop = () => {
     if (!hasFetched.current) {
       hasFetched.current = true;
       fetchProducts();
+      console.log("Products >>", products)
     }
   }, []);
 
@@ -40,6 +41,11 @@ export const Shop = () => {
       setLoading(false)
     }
   };
+
+  useEffect(() => {
+    console.log("Products >>", products)
+  })
+
 
   // LOADING STATE
   if (loading) return <Spinner  />;
