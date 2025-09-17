@@ -94,7 +94,7 @@ export const ProductDetails = () => {
             { productDetails.images ? (
               <img 
               className="object-cover  p-2 "
-              src={productDetails.images[0]}
+              src={productDetails.images?.[0]}
               alt="" />
             ) : (
               <img 

@@ -1,7 +1,6 @@
 // import { useEffect } from "react"
 import { useEffect } from "react";
 import { Link } from "react-router-dom"
-import type { ImageProps } from "../../lib/api/Product/productservices"
 
 interface ProductCardProps {
   key: string,

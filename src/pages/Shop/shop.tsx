@@ -17,8 +17,7 @@ interface CategoryIconProps {
 
 export const Shop = () => {
   const [products, setProducts ] = useState<Product[]>([])
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  const [status, setStatus] = useState< 'loading' | 'error' | 'success' | 'idle' >('idle');
   const hasFetched = useRef(false)
   const productCount = products.length
 
@@ -33,14 +32,13 @@ export const Shop = () => {
 
   const fetchProducts = async () => {
     try {
-      setLoading(true);
+      setStatus('loading');
       const data = await getProducts()
       setProducts(data)
-      setError(null)
     } catch(err) {
-      setError("Failed to retrieve products. Please check back soon.")
+      setStatus('error')
     } finally {
-      setLoading(false)
+      setStatus('idle')
     }
   };
 
@@ -53,9 +51,8 @@ export const Shop = () => {
 
 
   // LOADING STATE
-  if (loading) return <Spinner  />;
+  if (status === 'loading') return <Spinner  />;
   
-
   const categoryIcons: CategoryIconProps[] = [
     {Icon: StarIcon, alt: "All Products Category Button - Star Icon", description: "All items"},
     {Icon: BrushIcon, alt: "Custom Rug Category Button - Brush Icon", description: "Custom rugs"},
@@ -66,12 +63,16 @@ export const Shop = () => {
     {Icon: StickerSmileIcon, alt: "Stickers & More Category Button - Smiley Sticker Icon", description: "Stickers & more"},
   ]
 
-  // if (error) return <div >Error: {error}</div>;
-  if (error || products === null) {
+  // ERROR STATE
+  if ( status === 'error') {
     return ( 
       <div className=" h-[100vh] mx-8 text-center justify-center flex flex-col gap-5 items-center">
         <DangerIcon className="text-bittersweet animate-pulse"/>
-        <div className="error-message flex text-bittersweet font-bold">Error: <br/> {error ? `${error}` : "Difficulty getting products. Check back soon!" }</div>
+        <div className="error-message flex text-bittersweet font-bold">
+          Error: 
+            <br/> 
+          Difficulty getting products. Check back soon!
+        </div>
       </div>)
   }
   return (
