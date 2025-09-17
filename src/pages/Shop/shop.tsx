@@ -20,6 +20,8 @@ export const Shop = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const hasFetched = useRef(false)
+  const productCount = products.length
+
 
   useEffect(() => {
     if (!hasFetched.current) {
@@ -43,8 +45,11 @@ export const Shop = () => {
   };
 
   useEffect(() => {
-    console.log("Products >>", products)
-  })
+    if (products) {
+      console.log(productCount)
+      console.log(products[80]?.images)
+    }
+  }, [products])
 
 
   // LOADING STATE
@@ -52,13 +57,13 @@ export const Shop = () => {
   
 
   const categoryIcons: CategoryIconProps[] = [
-    {Icon: StarIcon, alt: "All Products Category - Star Icon", description: "All items"},
-    {Icon: BrushIcon, alt: "Custom Rug Category - Brush Icon", description: "Custom rugs"},
-    {Icon: RoundRugIcon, alt: "Rug Category - Round Rug Icon", description: "Rugs"},
-    {Icon: MugIcon, alt: "Mug Rugs Category - Mug Icon", description: "Mug rugs"},
-    {Icon: KeyboardIcon, alt: "Wrist Rug - Keyboard Icon", description: "Wrist rugs"},
-    {Icon: MirrorIcon, alt: "Mirror rugs Category - Mirror Icon", description: "Mirror rugs"},
-    {Icon: StickerSmileIcon, alt: "Stickers & More Category - Smiley Sticker Icon", description: "Stickers & more"},
+    {Icon: StarIcon, alt: "All Products Category Button - Star Icon", description: "All items"},
+    {Icon: BrushIcon, alt: "Custom Rug Category Button - Brush Icon", description: "Custom rugs"},
+    {Icon: RoundRugIcon, alt: "Rug Category Button - Round Rug Icon", description: "Rugs"},
+    {Icon: MugIcon, alt: "Mug Rugs Category Button - Mug Icon", description: "Mug rugs"},
+    {Icon: KeyboardIcon, alt: "Wrist Rug Category Button - Keyboard Icon", description: "Wrist rugs"},
+    {Icon: MirrorIcon, alt: "Mirror rugs Category Button - Mirror Icon", description: "Mirror rugs"},
+    {Icon: StickerSmileIcon, alt: "Stickers & More Category Button - Smiley Sticker Icon", description: "Stickers & more"},
   ]
 
   // if (error) return <div >Error: {error}</div>;
@@ -82,12 +87,14 @@ export const Shop = () => {
         >
           {categoryIcons.map(({ Icon, alt, description }, idx) => (
             <li
-            className="inline-flex mx-4 group cursor-pointer justify-center items-center flex-col text-center flex-shrink-0"
+            className=""
             key={`category-${idx}`}
             aria-label={alt}
             > 
-            <Icon className="size-10 md:size-12 text-space_cadet group-hover:text-majorelle"/>  
-            <p className="text-sm group-hover:text-majorelle">{description}</p>
+              <button className="inline-flex mx-4 group cursor-pointer justify-center items-center flex-col text-center flex-shrink-0"> 
+                <Icon className="size-10 md:size-12 text-space_cadet group-hover:text-majorelle"/>  
+                <p className="text-sm text-space_cadet group-hover:text-majorelle">{description}</p>
+              </button>
             </li>
           ))}
         </ul>
@@ -122,28 +129,28 @@ export const Shop = () => {
         </select>
         {/* Amount of current Products found in filter results
         TODO: fetchFoundCount */}
-        <p> 
+        <p className="font-semibold opacity-50"> 
           {/* {fetchCount} */}
-          10/23
+          {productCount} Items
         </p>
       </div>
       </section>
       {/* Product Listings 
       TODO: Create Product Card
       */}
-      <section id="product-listings">
+      <section aria-label="product-listings">
         <ul className="md:mx-8 flex-shink-1 mx-2 grid grid-cols-2 md:gap-4 gap-2 md:grid-cols-3">
           {products.map((product, idx) => (
             <ProductCard 
-            id={product.id}
-            key={`${product.name}-${idx}`}
-            // path={path}
-            // img_alt={img_alt}
-            price={product.price}
-            name={product.name}
-            dimensions={product.dimensions}
-            category={product.category.name}
-            quantity={product.quantity}
+              id={product.id}
+              key={`${product.name}-${idx}`}
+              price={product.price}
+              name={product.name}
+              dimensions={product.dimensions}
+              category={product.category.name}
+              quantity={product.quantity}
+              image={product.images?.[0]?.image}
+              img_alt={`${product.name}`}
             />
           ))}
         </ul>

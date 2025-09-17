@@ -11,6 +11,12 @@ interface Category {
   name: string;
   slug: string;
 }
+export interface ImageProps {
+  id: number,
+  image: string,
+  is_primary: boolean,
+  thumbnail: string
+}
 
 export interface Product {
   id: number;
@@ -23,6 +29,7 @@ export interface Product {
   properties: Property[];
   created_at?: string;
   updated_at?: string;
+  images?: ImageProps[];
 }
 
 // Get list of Products

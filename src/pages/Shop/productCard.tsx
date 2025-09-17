@@ -1,9 +1,12 @@
-import { useEffect } from "react"
+// import { useEffect } from "react"
+import { useEffect } from "react";
 import { Link } from "react-router-dom"
+import type { ImageProps } from "../../lib/api/Product/productservices"
 
 interface ProductCardProps {
+  key: string,
   id?: number,
-  path?: string,
+  image?: string,
   price: number,
   name: string,
   img_alt?: string,
@@ -12,10 +15,16 @@ interface ProductCardProps {
   quantity: number,
 }
 
-export const ProductCard = ({ id, path, price, name, img_alt, dimensions, category, quantity }: ProductCardProps) => {
+export const ProductCard = ({ key, id, image, price, name, img_alt, dimensions, category, quantity }: ProductCardProps) => {
+  useEffect(() => {
+    if(image) { 
+      console.log("image >> ",image)
+    }
+  }, [image])
   return (
     <Link to={`/shop/${id}`}>
       <li
+        key={key}
         className="
           text-space_cadet
           group transform-color duration-[300ms] 
@@ -27,13 +36,13 @@ export const ProductCard = ({ id, path, price, name, img_alt, dimensions, catego
       >
         {/* Product Content */}
         <div className=" rounded-t-xl flex-1 relative overflow-hidden">
-          {path ? 
+          {image ? 
           (
             <img 
-            className="w-full h-[50%] object-cover group-hover:scale-105 transition-transform duration-300" 
-            src={path}
-            alt={img_alt} 
-            loading="lazy"
+              className="w-full items-center flex h-[55%] object-cover group-hover:scale-105 transition-transform duration-300" 
+              src={image}
+              alt={img_alt} 
+              loading="lazy"
             />
           ) : (
             <div className="

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
-import { useParams } from "react-router-dom"
+import { useParams, Link } from "react-router-dom"
 // API
-import { useCart } from "../../hooks/useCart"
+// import { useCart } from "../../hooks/useCart"
 import { getProduct } from "../../lib/api/Product/productservices"
 import type { Product } from "../../lib/api/Product/productservices"
 // COMPONENTS
@@ -11,8 +11,7 @@ import { AddToCartBtn } from "../../components/ui/buttons/btn_addToCart"
 
 export const ProductDetails = () => {
   const [productDetails, setProductDetails] = useState<Product | null>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState<string | null>(null)
+  const [status, setStatus] = useState< 'loading' | 'error' | 'success' | 'idle' >('idle')
   const [cartMessage, setCartMessage] = useState<string | null>(null)
 
   // useParams returns an object, you need to extract the id
@@ -21,8 +20,7 @@ export const ProductDetails = () => {
   // console.log("Cookie >", document.cookie)
   const fetchProduct = async (productId: string) => {
     try {
-      setLoading(true)
-      setError(null)
+      setStatus('loading')
 
       const numericId = Number(productId);
 
@@ -30,9 +28,9 @@ export const ProductDetails = () => {
 
       setProductDetails(data)
     } catch (err) {
-      setError("Failed to fetch product")
+      setStatus('error')
     } finally {
-      setLoading(false)
+      setStatus('idle')
     }
   }
 
@@ -51,17 +49,22 @@ export const ProductDetails = () => {
       fetchProduct(id)
     } else {
       console.log(productDetails)
-      setError("Product not found")
+      setStatus('error')
     }
-  }, [id]) // Add id as dependency
+  }, [id]) // Add id as dependency  
+  useEffect(() => {
+    if (productDetails) {
+      console.log("PD >> ", productDetails.properties)
+    }
+  }, [productDetails])
+
+  if (status === 'loading') return <Spinner />
   
-  if (loading) return <Spinner />
-  
-  if (error || productDetails === null) {
+  if (status === 'error' || productDetails === null) {
     return ( 
       <div className=" h-[100vh] justify-center flex flex-col gap-5 items-center">
         <DangerIcon className="text-bittersweet"/>
-        <div className="error-message text-bittersweet font-bold">Error: {error ? `${error}` : "Item doesn't Exist" }</div>
+        <div className="error-message text-bittersweet font-bold">Unable to find Item. Check back soon! </div>
       </div>)
   }
 
@@ -79,6 +82,7 @@ export const ProductDetails = () => {
         </div>
       )}
       <section aria-label="Product Infomation" className="h-fit">
+        <Link to='/shop'> Back </Link>
         <div className="flex overflow-hidden gap-4 justify-center">
           <img 
             className="md:flex align-start h-8 w-8 mt-2 hidden" 
@@ -86,11 +90,21 @@ export const ProductDetails = () => {
             aria-hidden="true" 
             alt="Cross Star Design Marker" 
           />
-          <div className="bg-white h-[70vh]  rounded-lg ">
-            <img 
-              className="object-cover p-2 h-full"
+          <div className="bg-white h-auto min-h-[20vh] max-h-[50vh] flex items-center justify-center rounded-lg ">
+            { productDetails.images ? (
+              <img 
+              className="object-cover  p-2 "
+              src={productDetails.images[0]}
+              alt="" />
+            ) : (
+              <img 
+              className="object-cover  p-2 "
               src="/products/rugs/Custom_Thumper.webp" 
               alt="" />
+            )
+            
+
+            }
           </div>
         </div>
         <div className="body_text flex justify-start flex-col my-4">
@@ -115,7 +129,7 @@ export const ProductDetails = () => {
             <h3>Properties:</h3>
             <ul>
               {productDetails.properties.map((property: { id: number, display_name: string }) => (
-                <li key={property.id}>{property.display_name}</li>
+                <li key={`property-${property.id}`}> {property.display_name}</li>
               ))}
             </ul>
           </div>
