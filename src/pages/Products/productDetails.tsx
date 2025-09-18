@@ -69,7 +69,7 @@ export const ProductDetails = () => {
   }
 
   return (
-    <main className="md:mx-20 m-4 mb-20 h-fit" aria-label={`${productDetails.name} Details Page`}>
+    <main className="md:mx-20 m-4 mb-20 h-[100vh]" aria-label={`${productDetails.name} details page`}>
       {cartMessage && (
         <div className={`
           fixed top-4 right-4 p-4 rounded-md z-50 
@@ -82,11 +82,11 @@ export const ProductDetails = () => {
         </div>
       )}
       <section aria-label="Product Infomation" className="h-fit">
-        <Link className="group pointer duration-200 transform transition-all hover:text-bittersweet flex gap-2 items-center" to='/shop'>
+        <Link className="group pointer duration-200 absolute transform transition-all hover:scale-110 hover:text-bittersweet flex gap-2 items-center" to='/shop'>
           <div className={`
             caret-left text-space_cadet
             duration-200
-            group-hover:text-bittersweet
+            group-hover:text-bittersweet 
             text-fleece body_text 
             `} 
           />
@@ -99,20 +99,20 @@ export const ProductDetails = () => {
             aria-hidden="true" 
             alt="Cross Star Design Marker" 
           />
-          <div className="bg-white h-auto min-h-[20vh] max-h-[50vh] flex items-center justify-center rounded-lg ">
+          <div className="bg-white h-auto min-h-[25vh] size-90 max-h-[50vh] flex items-center justify-center rounded-lg ">
             { productDetails.images && productDetails.images.length > 0 ? (
               <img 
               className="object-cover p-2 "
               src={productDetails.images?.[0].image}
               alt="" />
             ) : (
-              <div className="p-2">
+              <div className="p-2 flex flex-col justify-center text-center items-center">
                 <img 
-                  className="object-cover p-2 "
-                  src="/products/rugs/Custom_Thumper.webp" 
-                  alt="" 
+                  className="opacity-90 size-3/4 my-5 object-cover"
+                  src="/assets/design/logo/RuglyBarnacle_Logo.webp" 
+                  alt="Rugly Barnacle Full Logo - Product image unavailable" 
                 />
-                <p className="object-cover ">
+                <p className="font-semibold   text-lg text-majorelle object-cover h-full w-full">
                   Image coming Soon!
                 </p>
               </div>
