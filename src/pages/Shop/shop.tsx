@@ -1,4 +1,3 @@
-// TODO: import productCard
 import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardIcon, MirrorIcon, DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
 import { StartOrderBtn, ReturnToTop } from "../../components/ui/buttons/index"
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
@@ -8,6 +7,8 @@ import type { Product } from "../../lib/api/Product/productservices"
 import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { useState, useEffect, useRef} from "react"
 import type { FC, SVGProps } from "react"
+import { useProductFilters } from "../../hooks/filter/useProductFilter"
+import { FilterControls }
 
 interface CategoryIconProps {
   Icon: FC<SVGProps<SVGSVGElement>>;
@@ -19,8 +20,15 @@ export const Shop = () => {
   const [products, setProducts ] = useState<Product[]>([])
   const [status, setStatus] = useState< 'loading' | 'error' | 'success' | 'idle' >('idle');
   const hasFetched = useRef(false)
-  const productCount = products.length
+  // const productCount = products.length
 
+  const {
+    filteredProducts,
+    filterState,
+    filterFunctions,
+    productCount,
+    filteredCount
+  } = useProductFilters(products);
 
   useEffect(() => {
     if (!hasFetched.current) {
