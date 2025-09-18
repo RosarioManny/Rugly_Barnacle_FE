@@ -60,12 +60,6 @@ Color Pallete:
 
 /* NAVBAR */
 
-.d-nav-links a  {
-  color: #5652E7;
-  padding: 14px;
-  text-decoration: none;
-}
-
 .brand-logo {
   padding: 0px;
 }
@@ -74,22 +68,28 @@ Color Pallete:
 .dropdown {
   float: left;
   overflow: hidden;
+  gap: 9px;
+  cursor: pointer;
+
 }
 
-.dropdown .dropbtn {
+.nav-buttons {
   font-size: 16px;  
   color: #5652E7;
+  border-radius: .5rem;
   padding: 14.25px ;
   margin: 0;
   display: flex;
   align-items: center;
-  gap: 9px;
   cursor: pointer;
+  height: 100%
 }
-.dropbtn:hover {
+
+.nav-buttons:hover {
   background-color: rgba(86, 82, 231, .1);
   transition: all 250ms ease-out;
   cursor: pointer;
+  height: inherit;
 
 }
 
@@ -102,7 +102,7 @@ Color Pallete:
   border-radius: 0 0 .5rem .5rem;
   min-width: 160px;
   box-shadow: 0px 8px 8px 0px rgba(0,0,0,0.2);
-  margin: 3.9px 0 0 0;
+  margin: 7.5px 0 0 0;
   cursor: pointer;
   z-index: 50;
 }

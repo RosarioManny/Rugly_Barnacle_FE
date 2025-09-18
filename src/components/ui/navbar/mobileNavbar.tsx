@@ -3,15 +3,13 @@ import { useMobileHandlers } from "../../../hooks/navbar";
 import { BurgerLine } from "./Burgerline";
 
 interface MobileNavbarProps {
-  shopSubMenu?: string[];
   aboutSubMenu: string[];
 }
 
-export const MobileNavbar = ( { aboutSubMenu=[], shopSubMenu=[] }: MobileNavbarProps) => {
+export const MobileNavbar = ( { aboutSubMenu=[]}: MobileNavbarProps) => {
 
   const {
     handleClick,
-    toggleMobileShop,
     toggleMobileAbout,
     isToggled,
     mobileShopOpen,
@@ -42,10 +40,19 @@ export const MobileNavbar = ( { aboutSubMenu=[], shopSubMenu=[] }: MobileNavbarP
             ${isToggled ? 'translate-x-0' : 'translate-x-full'}`}
       >
       {/* Main Menu */}
+      
       <div 
         className={`flex flex-col h-fit text-white transition-all duration-100  
         ${mobileShopOpen || mobileAboutOpen ? 'opacity-0' : 'opacity-100 delay-250'}`}
       >
+        <button 
+          onClick={toggleMobileAbout}
+          className="flex gap-2 justify-center items-center text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor"
+        >
+          About
+          <div className={`caret-right text-majorelle`} />
+        </button>
+
         <button 
           onClick={handleClick}
           className="flex gap-2 justify-center items-center text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor"
@@ -64,24 +71,15 @@ export const MobileNavbar = ( { aboutSubMenu=[], shopSubMenu=[] }: MobileNavbarP
           </Link>
         </button>
         
-        <button 
-          onClick={toggleMobileAbout}
-          className="flex gap-2 justify-center items-center text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor"
-        >
-          About
-          <div className={`caret-right text-majorelle`} />
-        </button>
-        <button className="flex justify-center items-center text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor">
-          <Link 
-            to="/portfolio" 
-            onClick={handleClick} 
-            className="text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor"
-          >
+        
+        <button onClick={handleClick} className="flex justify-center items-center text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor">
+          <Link to="/portfolio" >
             Portfolio
           </Link>
         </button>
       </div>
-
+    
+      
       {/* About Submenu */}
       <div className={`
         flex flex-col w-full fixed 

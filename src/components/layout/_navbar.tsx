@@ -28,7 +28,7 @@ export const NavBar = () => {
         bg-fleece 
         border-b-solid border-b-2 border-b-majorelle 
         rethink-sans 
-        max-h-[5rem] min-h-[3.5rem]
+        max-h-[70px] min-h-[70px]
         flex md:grid md:grid-cols-3 justify-between items-center">
       {/* Home - Brand image small logo*/}
       <section className="flex justify-self-start items-center focus:scale-110 hover:scale-110 transition-all">
@@ -41,11 +41,11 @@ export const NavBar = () => {
       </section>
 
       {/* Desktop Navbar */}
-      <section className="d-nav-links hidden justify-self-center md:justify-end md:flex">
+      <section className="text-majorelle hidden items-center justify-self-center md:justify-end md:flex">
         <div className="dropdown">
           {/* About Nav Button */}
           <button 
-            className="dropbtn"
+            className="nav-buttons gap-2"
             onClick={handleAboutDropdown}>
             About 
             <div 
@@ -65,7 +65,7 @@ export const NavBar = () => {
             <Link 
               key={link} 
               to={`/${link}`} 
-              className={`dropbtn group`}
+              className={`nav-buttons duration-200 transform transition-all hover:bg-majorelle/10  group`}
               onClick={closeDropdown}
             >
               <div className={`
@@ -78,7 +78,8 @@ export const NavBar = () => {
               <p className="
                 pointer duration-200 transform transition-all
                 text-space_cadet body_text 
-                group-hover:text-majorelle
+                group-hover:text-majorelle 
+                p-1
                 group-active:text-majorelle
                 group-focus:text-majorelle"
               >
@@ -88,62 +89,25 @@ export const NavBar = () => {
             ))}
           </div>
         </div> 
-
-          <Link className="dropbtn" to="/portfolio">
+        <button className="nav-buttons cursor-pointer">
+          <Link className="text-majorelle " to="/portfolio">
             Portfolio
           </Link>
-        <div className="dropdown">
+        </button>
+        
           {/* Shop Nav Button */}
           <button 
-            className="dropbtn pointer"
+            className="nav-buttons cursor-pointer"
             onClick={handleShopDropdown}>
-            Shop 
-            <div 
-              className={`
-              ${shopDropdownOpen ? "border-t-bittersweet rotate-x-180" : "border-t-majorelle"} 
-              transition-transform duration-600 border-t-10 border-solid ease-in-out
-              caret-down`}/>
+              <Link to="/shop">
+                Shop 
+              </Link>
           </button>
-
-          {/* SHOP Dropdown Items */}
-          <div 
-            className={`
-              ${shopDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
-              overflow-hidden transition-all duration-500 ease-in-out
-              dropdown-content`}>
-            {shopSubMenu.map((item) => (
-              <Link 
-              key={item} 
-              to={`/${item}`} 
-              className={`dropbtn group`}
-              onClick={closeDropdown}
-              >
-              <div className={`
-                caret-right text-robin_egg 
-                pointer duration-200 transform transition-all
-                text-fleece body_text 
-                group-hover:text-bittersweet 
-                group-active:text-bittersweet 
-                group-focus:text-bittersweet `} />
-              <p className="
-                pointer duration-200 transform transition-all
-                text-space_cadet body_text 
-                group-hover:text-majorelle
-                group-active:text-majorelle
-                group-focus:text-majorelle"
-              >
-                {item.charAt(0).toUpperCase() + item.slice(1)}
-              </p> 
-            </Link>
-            ))}
-          </div>
-        </div>
       </section>
 
       {/* Mobile Navbar */}
       <section className="z-50 justify-between md:hidden">
         <MobileNavbar 
-          shopSubMenu={shopSubMenu} 
           aboutSubMenu={aboutSubMenu}  
         /> 
       </section>

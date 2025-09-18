@@ -17,11 +17,11 @@ export const useMobileHandlers = () => {
   }
 
   // Mobile Shop Menu
-  const toggleMobileShop = () => {
-    setMobileShopOpen(!mobileShopOpen)
-    // Close about if it's open
-    if (mobileAboutOpen) setMobileAboutOpen(false)
-  }
+  // const toggleMobileShop = () => {
+  //   setMobileShopOpen(!mobileShopOpen)
+  //   // Close about if it's open
+  //   if (mobileAboutOpen) setMobileAboutOpen(false)
+  // }
 
   // Mobile About Menu
   const toggleMobileAbout = () => {
@@ -32,7 +32,7 @@ export const useMobileHandlers = () => {
 
   return {
     handleClick,
-    toggleMobileShop,
+    // toggleMobileShop,
     toggleMobileAbout,
     isToggled,
     mobileShopOpen,
