@@ -3,7 +3,6 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom"
 
 interface ProductCardProps {
-  key: string,
   id?: number,
   image?: string,
   price: number,
@@ -14,7 +13,7 @@ interface ProductCardProps {
   quantity: number,
 }
 
-export const ProductCard = ({ key, id, image, price, name, img_alt, dimensions, category, quantity }: ProductCardProps) => {
+export const ProductCard = ({ id, image, price, name, img_alt, dimensions, category, quantity }: ProductCardProps) => {
   useEffect(() => {
     if(image) { 
       console.log("image >> ",image)
@@ -23,7 +22,6 @@ export const ProductCard = ({ key, id, image, price, name, img_alt, dimensions, 
   return (
     <Link to={`/shop/${id}`}>
       <li
-        key={key}
         className="
           text-space_cadet
           group transform-color duration-[300ms] 

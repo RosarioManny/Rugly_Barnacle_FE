@@ -1,20 +1,14 @@
-import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardIcon, MirrorIcon, DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
+import { DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
-import { ProductCard } from "./productCard"
+import { ProductCard } from "../../components/ui/productCard"
 import { getProducts } from "../../lib/api/Product/productservices"
 import { StartOrderBtn, ReturnToTop } from "../../components/ui/buttons/index"
 import type { Product } from "../../lib/api/Product/productservices"
 import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { useState, useEffect, useRef} from "react"
-import type { FC, SVGProps } from "react"
 import { useProductFilters } from "../../hooks/filter/useProductFilter"
 import { FilterControls } from "../../components/ui/filter"
 
-interface CategoryIconProps {
-  Icon: FC<SVGProps<SVGSVGElement>>;
-  alt: string;
-  description: string;
-}
 
 export const Shop = () => {
   const [products, setProducts ] = useState<Product[]>([])
@@ -54,16 +48,7 @@ export const Shop = () => {
 
   // LOADING STATE
   if (status === 'loading') return <Spinner  />;
-  // const categoryIcons: CategoryIconProps[] = [
-  //   {Icon: StarIcon, alt: "All Products Category Button - Star Icon", description: "All items"},
-  //   {Icon: BrushIcon, alt: "Custom Rug Category Button - Brush Icon", description: "Custom rugs"},
-  //   {Icon: RoundRugIcon, alt: "Rug Category Button - Round Rug Icon", description: "Rugs"},
-  //   {Icon: MugIcon, alt: "Mug Rugs Category Button - Mug Icon", description: "Mug rugs"},
-  //   {Icon: KeyboardIcon, alt: "Wrist Rug Category Button - Keyboard Icon", description: "Wrist rugs"},
-  //   {Icon: MirrorIcon, alt: "Mirror rugs Category Button - Mirror Icon", description: "Mirror rugs"},
-  //   {Icon: StickerSmileIcon, alt: "Stickers & More Category Button - Smiley Sticker Icon", description: "Stickers & more"},
-  // ]
-
+  
   // ERROR STATE
   if ( status === 'error') {
     return ( 
@@ -116,8 +101,8 @@ export const Shop = () => {
           <ul className="md:mx-8 flex-shink-1 mx-2 grid grid-cols-2 md:gap-4 gap-2 md:grid-cols-3">
             {filteredProducts.map((product, idx) => (
               <ProductCard 
-                id={product.id}
                 key={`${product.name}-${idx}`}
+                id={product.id}
                 price={product.price}
                 name={product.name}
                 dimensions={product.dimensions}

@@ -52,10 +52,9 @@ export const ProductDetails = () => {
       setStatus('error')
     }
   }, [id]) // Add id as dependency  
+
   useEffect(() => {
-    if (productDetails) {
-      console.log("PD >> ", productDetails.properties)
-    }
+    productDetails ? console.log("Got it!", productDetails ) : console.log("Empty Array", productDetails)
   }, [productDetails])
 
   if (status === 'loading') return <Spinner />
@@ -82,7 +81,16 @@ export const ProductDetails = () => {
         </div>
       )}
       <section aria-label="Product Infomation" className="h-fit">
-        <Link to='/shop'> Back </Link>
+        <Link className="group pointer duration-200 transform transition-all hover:text-bittersweet flex gap-2 items-center" to='/shop'>
+          <div className={`
+            caret-left text-space_cadet
+            duration-200
+            group-hover:text-bittersweet
+            text-fleece body_text 
+            `} 
+          />
+          Back 
+        </Link>
         <div className="flex overflow-hidden gap-4 justify-center">
           <img 
             className="md:flex align-start h-8 w-8 mt-2 hidden" 
@@ -93,12 +101,12 @@ export const ProductDetails = () => {
           <div className="bg-white h-auto min-h-[20vh] max-h-[50vh] flex items-center justify-center rounded-lg ">
             { productDetails.images ? (
               <img 
-              className="object-cover  p-2 "
+              className="object-cover p-2 "
               src={productDetails.images?.[0]}
               alt="" />
             ) : (
               <img 
-              className="object-cover  p-2 "
+              className="object-cover p-2 "
               src="/products/rugs/Custom_Thumper.webp" 
               alt="" />
             )
