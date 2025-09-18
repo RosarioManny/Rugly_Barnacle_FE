@@ -1,0 +1,10 @@
+// Barrel
+export { Shop } from "./Shop/shop"
+export { About } from "./About/about"
+export { Cart} from "./Cart/cart"
+export { Contact } from "./Contact/contact"
+export { Faq } from "./Faq/faq"
+export { ProductDetails } from "./Products/productDetails"
+export { Home } from "./Home/home"
+export { CustomOrder } from "./Custom/CustomOrder" 
+export { Portfolio } from "./Portfolio/portfolio"

@@ -62,7 +62,7 @@ export const ProductCard = ({ id, image, price, name, img_alt, dimensions, categ
           </div>
           <div className="flex justify-end items-center m-2">
             {quantity ? (
-              <p className="font-bold text-sm ">${price}</p> 
+              <p className="font-bold text-md ">${price}</p> 
             ) : (
               <p className="font-bold text-bittersweet">SOLD</p>
             )

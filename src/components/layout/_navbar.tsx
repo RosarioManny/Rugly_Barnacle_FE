@@ -5,7 +5,7 @@ import { CartIcon } from "../ui/icons-svgs/SvgIcons"
 import { useCart } from "../../hooks/useCart" // Import the cart hook
 // import { useEffect, useState } from "react"
 
-const shopSubMenu = ["shop", "rugs", "mirror rugs", "mug rugs", "custom rugs"]
+const shopSubMenu = [ "shop", "custom"];
 const aboutSubMenu = ["about", "contact", "FAQ"]
 
 export const NavBar = () => {
@@ -16,18 +16,11 @@ export const NavBar = () => {
     shopDropdownOpen,
     aboutDropdownOpen
   } = useDropdownHandlers()
-  // const [cartItemCount, setCartItemCount] = useState(0)
 
   const { cart } = useCart()
   const cartItemCount = cart?.items?.length || 0
 
-  // useEffect(() => {
-  //   try {
-  //     setCartItemCount(cart?.items?.length)
-  //   } catch(err) {
-  //     console.error(err.message)
-  //   }
-  // })
+
 
   return (
     <nav className="
@@ -118,10 +111,10 @@ export const NavBar = () => {
               ${shopDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
               overflow-hidden transition-all duration-500 ease-in-out
               dropdown-content`}>
-            {shopSubMenu.map((link, idx) => (
+            {shopSubMenu.map((item) => (
               <Link 
-              key={`${link}-${idx}`} 
-              to={`/${link}`} 
+              key={item} 
+              to={`/${item}`} 
               className={`dropbtn group`}
               onClick={closeDropdown}
               >
@@ -139,7 +132,7 @@ export const NavBar = () => {
                 group-active:text-majorelle
                 group-focus:text-majorelle"
               >
-                {link.charAt(0).toUpperCase() + link.slice(1)}
+                {item.charAt(0).toUpperCase() + item.slice(1)}
               </p> 
             </Link>
             ))}

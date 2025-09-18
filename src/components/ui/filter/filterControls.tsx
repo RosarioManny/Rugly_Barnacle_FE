@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { SearchBar } from './searchBar';
 import { CategoryFilter } from './categoryFilter';
 import { SortDropdown } from './sortDropdown';
@@ -19,11 +19,27 @@ export const FilterControls: React.FC<FilterControlsProps> = ({
   filteredCount,
   categories
 }) => {
+  const [isScrolling, setIsScrolling] = useState(false);
+
+  useEffect(() => {
+    const toggleScrolling = () => {
+      if (window.pageYOffset > 300) {
+        setIsScrolling(true)
+      } else {
+        setIsScrolling(false)
+      }
+    };
+      
+    window.addEventListener('scroll', toggleScrolling);
+      return () => window.removeEventListener('scroll', toggleScrolling);
+  }, [])
+
   return (
     <>
       {/* Search Bar Section */}
-      <section className="p-4 bg-fleece sticky top-0 z-10">
-        <div className="flex md:flex-row gap-4 items-center justify-center">
+      <section className={`p-4 bg-fleece sticky top-0 z-10 transition-all ease-in-outduration-400
+        ${isScrolling ? "shadow-lg/30 " : ""}`} >
+        <div className="flex md:flex-row gap-4 items-center justify-center ">
           <SearchBar
             searchTerm={filterState.searchTerm}
             setSearchTerm={filterFunctions.setSearchTerm}
@@ -39,8 +55,8 @@ export const FilterControls: React.FC<FilterControlsProps> = ({
       </section>
 
       {/* Category Filter Section */}
-      <section className="bg-pink-200 py-4 flex justify-center overflow-x-auto scrollbar-hide">
-        <div className=" mx-auto px-4">
+      <section className="py-4 flex justify-start overflow-x-auto scrollbar-hide">
+        <div className="p-4 mx-auto">
           <CategoryFilter
             categories={categories}
             selectedCategory={filterState.selectedCategory}

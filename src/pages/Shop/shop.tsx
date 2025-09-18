@@ -8,12 +8,14 @@ import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { useState, useEffect, useRef} from "react"
 import { useProductFilters } from "../../hooks/filter/useProductFilter"
 import { FilterControls } from "../../components/ui/filter"
+import { useParams } from "react-router-dom"
 
 
 export const Shop = () => {
   const [products, setProducts ] = useState<Product[]>([])
   const [status, setStatus] = useState< 'loading' | 'error' | 'success' | 'idle' >('idle');
   const hasFetched = useRef(false)
+  const { category: urlCategory } = useParams<{ category?: string }>();
 
   const {
     filteredProducts,
@@ -82,7 +84,7 @@ export const Shop = () => {
             aria-hidden="true" 
             alt="Cross Star Design Marker" />
             <h1 className="heading_text">
-              {filterState.selectedCategory === 'all' ? 'All Products' : filterState.selectedCategory}
+              {filterState.selectedCategory === 'all' ? 'All Products' : filterState.selectedCategory.charAt(0).toUpperCase() + filterState.selectedCategory.slice(1)}
             </h1>
         </div>
         
@@ -115,11 +117,11 @@ export const Shop = () => {
           </ul>
         ) : (
           // No results message
-          <div className="text-center py-20">
-            <p className="text-lg text-gray-500 mb-4">No products found matching your criteria.</p>
+          <div className="text-center mt-10 mb-22 md:mb-44">
+            <p className="text-lg font-semibold text-space_cadet/60 mb-8">No products found matching your criteria.</p>
             <button
               onClick={filterFunctions.clearAllFilters}
-              className="px-6 py-2 bg-majorelle text-white rounded-md hover:bg-majorelle-dark transition-colors"
+              className="font-medium px-6 py-2 bg-majorelle text-white rounded-md hover:bg-majorelle-dark transition-colors"
             >
               Clear All Filters
             </button>

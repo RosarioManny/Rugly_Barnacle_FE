@@ -1,14 +1,15 @@
 import { Routes, Route } from 'react-router-dom'
-import { Home } from '../pages/Home/home'
-import { About } from '../pages/About/about'
-// import { TempShop } from '../pages/Shop/tempShop'
-import { Portfolio } from '../pages/Portfolio/portfolio'
-import { Faq } from '../pages/Faq/faq'
-import { Contact } from '../pages/Contact/contact'
-// import { Checkout } from '../pages/Checkout/checkout'
-import { ProductDetails } from '../pages/Products/productDetails'
-import { Cart } from '../pages/Cart/cart'
-import { Shop } from '../pages/Shop/shop'
+import { 
+  Home, 
+  About, 
+  Contact, 
+  Shop, 
+  ProductDetails, 
+  Portfolio, 
+  CustomOrder, 
+  Faq, 
+  Cart 
+} from "../pages";
 
 
 
@@ -22,10 +23,11 @@ export const AppRoutes = () => {
         <Route path='/contact' element={<Contact />} />
         <Route path='/portfolio' element={<Portfolio />} />
         <Route path='/shop' element={<Shop />} />
+        <Route path='/custom' element={<CustomOrder />} />
         <Route path='/faq' element={<Faq />} />
         <Route path='/cart' element={<Cart />} />
         {/* <Route path='/checkout' element={<Checkout />} /> */}
-        {/* <Route path='/events' element={<Home />} /> */}
+        {/* <Route path='/events' element={<Events />} /> */}
         <Route path='/shop/:id' element={<ProductDetails />}/>
       </Routes>
     </>

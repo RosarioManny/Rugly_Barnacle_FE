@@ -8,6 +8,7 @@ import type { Product } from "../../lib/api/Product/productservices"
 import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
 import { AddToCartBtn } from "../../components/ui/buttons/btn_addToCart"
+import { p } from "framer-motion/client"
 
 export const ProductDetails = () => {
   const [productDetails, setProductDetails] = useState<Product | null>(null)
@@ -99,16 +100,23 @@ export const ProductDetails = () => {
             alt="Cross Star Design Marker" 
           />
           <div className="bg-white h-auto min-h-[20vh] max-h-[50vh] flex items-center justify-center rounded-lg ">
-            { productDetails.images ? (
+            { productDetails.images && productDetails.images.length > 0 ? (
               <img 
               className="object-cover p-2 "
-              src={productDetails.images?.[0]}
+              src={productDetails.images?.[0].image}
               alt="" />
             ) : (
-              <img 
-              className="object-cover p-2 "
-              src="/products/rugs/Custom_Thumper.webp" 
-              alt="" />
+              <div className="p-2">
+                <img 
+                  className="object-cover p-2 "
+                  src="/products/rugs/Custom_Thumper.webp" 
+                  alt="" 
+                />
+                <p className="object-cover ">
+                  Image coming Soon!
+                </p>
+              </div>
+             
             )
             
 

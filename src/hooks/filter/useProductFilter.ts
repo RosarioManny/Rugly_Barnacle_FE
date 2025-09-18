@@ -8,9 +8,9 @@ export const useProductFilters = (products: Product[]): UseProductFiltersReturn 
   const [filterState, setFilterState] = useState<FilterState>({
     selectedCategory: 'all',
     sortBy: 'featured',
-    priceRange: [0, 1000],
+    // priceRange: [0, 1000],
     searchTerm: '',
-    inStockOnly: false,
+    // inStockOnly: false,
   });
 
   const filteredProducts = useMemo(() => {
@@ -18,42 +18,47 @@ export const useProductFilters = (products: Product[]): UseProductFiltersReturn 
     return sortProducts(filtered, filterState.sortBy);
   }, [products, filterState]);
 
+  // CATEGORY
   const setSelectedCategory = useCallback((category: string) => {
     setFilterState(prev => ({ ...prev, selectedCategory: category }));
   }, []);
 
+  // SORTING ITEMS
   const setSortBy = useCallback((sortBy: string) => {
     setFilterState(prev => ({ ...prev, sortBy }));
   }, []);
+  
+  // PRICE 
+  // const setPriceRange = useCallback((range: [number, number]) => {
+  //   setFilterState(prev => ({ ...prev, priceRange: range }));
+  // }, []);
 
-  const setPriceRange = useCallback((range: [number, number]) => {
-    setFilterState(prev => ({ ...prev, priceRange: range }));
-  }, []);
-
+  // SEARCH BAR
   const setSearchTerm = useCallback((term: string) => {
     setFilterState(prev => ({ ...prev, searchTerm: term }));
   }, []);
 
-  const setInStockOnly = useCallback((inStock: boolean) => {
-    setFilterState(prev => ({ ...prev, inStockOnly: inStock }));
-  }, []);
+  // STOCK
+  // const setInStockOnly = useCallback((inStock: boolean) => {
+  //   setFilterState(prev => ({ ...prev, inStockOnly: inStock }));
+  // }, []);
 
   const clearAllFilters = useCallback(() => {
     setFilterState({
       selectedCategory: 'all',
       sortBy: 'featured',
-      priceRange: [0, 1000],
+      // priceRange: [0, 1000],
       searchTerm: '',
-      inStockOnly: false,
+      // inStockOnly: false,
     });
   }, []);
 
   const filterFunctions = {
     setSelectedCategory,
     setSortBy,
-    setPriceRange,
+    // setPriceRange,
     setSearchTerm,
-    setInStockOnly,
+    // setInStockOnly,
     clearAllFilters,
   };
 

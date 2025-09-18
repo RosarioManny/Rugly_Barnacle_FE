@@ -20,15 +20,15 @@ export const filterProducts = (products: Product[], filters: FilterState): Produ
   }
 
   // Price range filter
-  filtered = filtered.filter(product => {
-    const price = parseFloat(product.price.toString());
-    return price >= filters.priceRange[0] && price <= filters.priceRange[1];
-  });
+  // filtered = filtered.filter(product => {
+  //   const price = parseFloat(product.price.toString());
+  //   return price >= filters.priceRange[0] && price <= filters.priceRange[1];
+  // });
 
   // Stock filter
-  if (filters.inStockOnly) {
-    filtered = filtered.filter(product => product.quantity > 0);
-  }
+  // if (filters.inStockOnly) {
+  //   filtered = filtered.filter(product => product.quantity > 0);
+  // }
 
   return filtered;
 };

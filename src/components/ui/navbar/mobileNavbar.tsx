@@ -53,7 +53,15 @@ export const MobileNavbar = ( { aboutSubMenu=[], shopSubMenu=[] }: MobileNavbarP
           <Link to="/shop">
             Shop
           </Link>
-          <div className={`caret-right text-majorelle`} />
+        </button>
+        
+        <button 
+          onClick={handleClick}
+          className="flex gap-2 justify-center items-center text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor"
+        >
+          <Link to="/shop">
+            Custom Order
+          </Link>
         </button>
         
         <button 
@@ -72,29 +80,6 @@ export const MobileNavbar = ( { aboutSubMenu=[], shopSubMenu=[] }: MobileNavbarP
             Portfolio
           </Link>
         </button>
-      </div>
-
-      {/* Shop Submenu */}
-      <div 
-        className={`flex flex-col  w-full fixed transition-all ease-in-out duration-[500ms] 
-        ${mobileShopOpen ? 'right-0' : '-right-[800px]'}`}
-      >
-        <button 
-          onClick={toggleMobileShop}
-          className="flex gap-2 justify-center items-center text-space_cadet/60 focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor"
-        >
-          <div className={`caret-left text-bittersweet`} />
-          Back
-        </button>
-        {shopSubMenu.map((link, idx) => (
-          <Link 
-            key={`${link}-${idx}`} 
-            to={`/${link.replace(/\s+/g, '-').toLowerCase()}`} 
-            onClick={handleClick} 
-            className="text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor">
-              {link.charAt(0).toUpperCase() + link.slice(1)}
-          </Link>
-        ))}
       </div>
 
       {/* About Submenu */}

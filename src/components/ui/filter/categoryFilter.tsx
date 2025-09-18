@@ -25,7 +25,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   console.log('Available categories:', categories);
   return (
     <div className="overflow-x-auto scrollbar-hide">
-      <div className="flex gap-4 pb-2">
+      <div className="flex gap-4 p-4">
         {['all', ...categories].map((category) => { // < - Creates an Array that starts with 'all' then spreads the categories map. 
           const displayName = category === 'all' ? 'All items' : category;
           const Icon = categoryIcons[displayName] || StarIcon;
@@ -36,8 +36,8 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
               onClick={() => setSelectedCategory(category === 'all' ? 'all' : category)}
               className={`flex flex-col items-center px-4 py-2 rounded-lg transition-all min-w-[80px] ${
                 selectedCategory === category
-                  ? 'bg-majorelle text-white shadow-md'
-                  : 'bg-white text-gray-700 hover:bg-gray-100 border'
+                  ? 'bg-majorelle text-fleece shadow-md'
+                  : 'bg-white text-space_cadet hover:outline-2 hover:text-majorelle hover:outline-majorelle'
               }`}
               aria-label={`Filter by ${displayName}`}
             >
