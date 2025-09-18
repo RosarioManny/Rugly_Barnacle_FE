@@ -1,14 +1,14 @@
 import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardIcon, MirrorIcon, DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
-import { StartOrderBtn, ReturnToTop } from "../../components/ui/buttons/index"
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
 import { ProductCard } from "./productCard"
 import { getProducts } from "../../lib/api/Product/productservices"
+import { StartOrderBtn, ReturnToTop } from "../../components/ui/buttons/index"
 import type { Product } from "../../lib/api/Product/productservices"
 import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { useState, useEffect, useRef} from "react"
 import type { FC, SVGProps } from "react"
 import { useProductFilters } from "../../hooks/filter/useProductFilter"
-import { FilterControls }
+import { FilterControls } from "../../components/ui/filter"
 
 interface CategoryIconProps {
   Icon: FC<SVGProps<SVGSVGElement>>;
@@ -20,7 +20,6 @@ export const Shop = () => {
   const [products, setProducts ] = useState<Product[]>([])
   const [status, setStatus] = useState< 'loading' | 'error' | 'success' | 'idle' >('idle');
   const hasFetched = useRef(false)
-  // const productCount = products.length
 
   const {
     filteredProducts,
@@ -34,7 +33,6 @@ export const Shop = () => {
     if (!hasFetched.current) {
       hasFetched.current = true;
       fetchProducts();
-      console.log("Products >>", products)
     }
   }, []);
 
@@ -43,6 +41,7 @@ export const Shop = () => {
       setStatus('loading');
       const data = await getProducts()
       setProducts(data)
+      setStatus('success');
     } catch(err) {
       setStatus('error')
     } finally {
@@ -50,13 +49,8 @@ export const Shop = () => {
     }
   };
 
-  useEffect(() => {
-    if (products) {
-      console.log(productCount)
-      console.log(products[80]?.images)
-    }
-  }, [products])
-
+  // Extract unique categories for the filter
+  const categories = Array.from(new Set(products.map(product => product.category.name)));
 
   // LOADING STATE
   if (status === 'loading') return <Spinner  />;
@@ -83,32 +77,19 @@ export const Shop = () => {
         </div>
       </div>)
   }
+
   return (
     <main aria-label="Shop Page">
-      {/* Category Selector */}
-      <section>
-        <h1 className="heading_text p-4">Categories</h1>
-        {/* CATEGORY CAROUSEL */}
-        <ul 
-          className="md:mx-4 mx-2 overflow-x-auto scrollbar-hide whitespace-nowrap md:justify-center flex items-center"
-          style={{ scrollbarWidth: 'none' }} 
-          aria-label="Category Selection"
-        >
-          {categoryIcons.map(({ Icon, alt, description }, idx) => (
-            <li
-            className=""
-            key={`category-${idx}`}
-            aria-label={alt}
-            > 
-              <button className="inline-flex mx-4 group cursor-pointer justify-center items-center flex-col text-center flex-shrink-0"> 
-                <Icon className="size-10 md:size-12 text-space_cadet group-hover:text-majorelle"/>  
-                <p className="text-sm text-space_cadet group-hover:text-majorelle">{description}</p>
-              </button>
-            </li>
-          ))}
-        </ul>
-      </section>
-      {/* Product Title */}
+      {/* Filter Controls - Add this section */}
+      <FilterControls
+        filterState={filterState}
+        filterFunctions={filterFunctions}
+        productCount={productCount}
+        filteredCount={filteredCount}
+        categories={categories}
+      />
+
+      {/* Product Title - Updated to show filtered count */}
       <section className="flex flex-col justify-center py-10">
         <div className="flex justify-center">
           <img 
@@ -116,66 +97,69 @@ export const Shop = () => {
             src="/assets/design/icons/Cross_Star_Teal-Blue.webp" 
             aria-hidden="true" 
             alt="Cross Star Design Marker" />
-            <h1 className="heading_text ">
-            {/* Product Category */}
-            {/* productCategory */}
-              All Products 
+            <h1 className="heading_text">
+              {filterState.selectedCategory === 'all' ? 'All Products' : filterState.selectedCategory}
             </h1>
         </div>
-      {/* SORT BY
-      TODO: Create Filter Systems */}
-      <div className="flex items-center justify-between px-2">
-        <select>
-          <option value="featured">Featured</option>
-          <option value="">A to Z</option>
-          <option value="">Z to A</option>
-          <option value="">Low to High</option>
-          <option value="">High to Low</option>
-          <option value="">Genre</option>
-          <option value="">Type</option>
-          <option value="">Large to Small</option>
-          <option value="">Small to Large</option>
-        </select>
-        {/* Amount of current Products found in filter results
-        TODO: fetchFoundCount */}
-        <p className="font-semibold opacity-50"> 
-          {/* {fetchCount} */}
-          {productCount} Items
-        </p>
-      </div>
+        
+        {/* Results count - Simplified since FilterControls already shows it */}
+        <div className="text-center mt-4">
+          <p className="font-semibold opacity-50"> 
+            {filteredCount} {filteredCount === 1 ? 'Item' : 'Items'}
+            {filteredCount !== productCount && ` of ${productCount}`}
+          </p>
+        </div>
       </section>
-      {/* Product Listings 
-      TODO: Create Product Card
-      */}
+
+      {/* Product Listings - Use filteredProducts instead of products */}
       <section aria-label="product-listings">
-        <ul className="md:mx-8 flex-shink-1 mx-2 grid grid-cols-2 md:gap-4 gap-2 md:grid-cols-3">
-          {products.map((product, idx) => (
-            <ProductCard 
-              id={product.id}
-              key={`${product.name}-${idx}`}
-              price={product.price}
-              name={product.name}
-              dimensions={product.dimensions}
-              category={product.category.name}
-              quantity={product.quantity}
-              image={product.images?.[0]?.image}
-              img_alt={`${product.name}`}
-            />
-          ))}
-        </ul>
+        {filteredProducts.length > 0 ? (
+          <ul className="md:mx-8 flex-shink-1 mx-2 grid grid-cols-2 md:gap-4 gap-2 md:grid-cols-3">
+            {filteredProducts.map((product, idx) => (
+              <ProductCard 
+                id={product.id}
+                key={`${product.name}-${idx}`}
+                price={product.price}
+                name={product.name}
+                dimensions={product.dimensions}
+                category={product.category.name}
+                quantity={product.quantity}
+                image={product.images?.[0]?.image}
+                img_alt={`${product.name}`}
+              />
+            ))}
+          </ul>
+        ) : (
+          // No results message
+          <div className="text-center py-20">
+            <p className="text-lg text-gray-500 mb-4">No products found matching your criteria.</p>
+            <button
+              onClick={filterFunctions.clearAllFilters}
+              className="px-6 py-2 bg-majorelle text-white rounded-md hover:bg-majorelle-dark transition-colors"
+            >
+              Clear All Filters
+            </button>
+          </div>
+        )}
       </section>
-      {/* Call To Action */}
-      <CtaWavesBg className="fill-mauve mt-20"/>
-      <section className="bg-mauve heading_text flex flex-col text-center pb-20 gap-5 justify-center items-center">
-          <img 
-            className="flex align-start h-8 w-8" 
-            src="/assets/design/icons/Cross_Star_Teal-Blue.webp" 
-            aria-hidden="true" 
-            alt="Cross Star Design Marker" />
-            <p>Don’t see what you’re looking for? </p>
-            <StartOrderBtn/>
-            <p>Create your custom rug</p>
-      </section>
+
+      {/* Call To Action - Only show if there are products */}
+      {filteredProducts.length > 0 && (
+        <>
+          <CtaWavesBg className="fill-mauve mt-20"/>
+          <section className="bg-mauve heading_text flex flex-col text-center pb-20 gap-5 justify-center items-center">
+            <img 
+              className="flex align-start h-8 w-8" 
+              src="/assets/design/icons/Cross_Star_Teal-Blue.webp" 
+              aria-hidden="true" 
+              alt="Cross Star Design Marker" />
+              <p>Don't see what you're looking for?</p>
+              <StartOrderBtn/>
+              <p>Create your custom rug</p>
+          </section>
+        </>
+      )}
+      
       <ReturnToTop />
     </main>
   )
