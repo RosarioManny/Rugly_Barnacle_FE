@@ -1,20 +1,20 @@
 import React from 'react';
-import { StickerSmileIcon, RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardIcon, MirrorIcon } from "../../ui/icons-svgs/SvgIcons";
+import { RoundRugIcon, StarIcon, BrushIcon, MugIcon, KeyboardIcon, MirrorIcon, BagIcon } from "../../ui/icons-svgs/SvgIcons";
 
 interface CategoryFilterProps {
-  categories: string[];
-  selectedCategory: string;
-  setSelectedCategory: (category: string) => void;
+  categories: string[];  // < - Array of available categories from products
+  selectedCategory: string;  // < - Currently selected category
+  setSelectedCategory: (category: string) => void; // < - Function to update selection
 }
 
 const categoryIcons: Record<string, React.FC<any>> = {
   'All items': StarIcon,
-  'Custom rugs': BrushIcon,
-  'Rugs': RoundRugIcon,
-  'Mug rugs': MugIcon,
-  'Wrist rugs': KeyboardIcon,
-  'Mirror rugs': MirrorIcon,
-  'Stickers & more': StickerSmileIcon,
+  'Custom rug': BrushIcon,
+  'Rug': RoundRugIcon,
+  'Mug rug': MugIcon,
+  'Wrist rug': KeyboardIcon,
+  'Mirror rug': MirrorIcon,
+  'Bag Chains': BagIcon,
 };
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({
@@ -22,10 +22,11 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   selectedCategory,
   setSelectedCategory
 }) => {
+  console.log('Available categories:', categories);
   return (
     <div className="overflow-x-auto scrollbar-hide">
       <div className="flex gap-4 pb-2">
-        {['all', ...categories].map((category) => {
+        {['all', ...categories].map((category) => { // < - Creates an Array that starts with 'all' then spreads the categories map. 
           const displayName = category === 'all' ? 'All items' : category;
           const Icon = categoryIcons[displayName] || StarIcon;
           

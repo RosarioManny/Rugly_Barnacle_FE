@@ -54,16 +54,15 @@ export const Shop = () => {
 
   // LOADING STATE
   if (status === 'loading') return <Spinner  />;
-  
-  const categoryIcons: CategoryIconProps[] = [
-    {Icon: StarIcon, alt: "All Products Category Button - Star Icon", description: "All items"},
-    {Icon: BrushIcon, alt: "Custom Rug Category Button - Brush Icon", description: "Custom rugs"},
-    {Icon: RoundRugIcon, alt: "Rug Category Button - Round Rug Icon", description: "Rugs"},
-    {Icon: MugIcon, alt: "Mug Rugs Category Button - Mug Icon", description: "Mug rugs"},
-    {Icon: KeyboardIcon, alt: "Wrist Rug Category Button - Keyboard Icon", description: "Wrist rugs"},
-    {Icon: MirrorIcon, alt: "Mirror rugs Category Button - Mirror Icon", description: "Mirror rugs"},
-    {Icon: StickerSmileIcon, alt: "Stickers & More Category Button - Smiley Sticker Icon", description: "Stickers & more"},
-  ]
+  // const categoryIcons: CategoryIconProps[] = [
+  //   {Icon: StarIcon, alt: "All Products Category Button - Star Icon", description: "All items"},
+  //   {Icon: BrushIcon, alt: "Custom Rug Category Button - Brush Icon", description: "Custom rugs"},
+  //   {Icon: RoundRugIcon, alt: "Rug Category Button - Round Rug Icon", description: "Rugs"},
+  //   {Icon: MugIcon, alt: "Mug Rugs Category Button - Mug Icon", description: "Mug rugs"},
+  //   {Icon: KeyboardIcon, alt: "Wrist Rug Category Button - Keyboard Icon", description: "Wrist rugs"},
+  //   {Icon: MirrorIcon, alt: "Mirror rugs Category Button - Mirror Icon", description: "Mirror rugs"},
+  //   {Icon: StickerSmileIcon, alt: "Stickers & More Category Button - Smiley Sticker Icon", description: "Stickers & more"},
+  // ]
 
   // ERROR STATE
   if ( status === 'error') {
