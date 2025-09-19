@@ -32,7 +32,7 @@ export const MobileNavbar = ( { aboutSubMenu=[]}: MobileNavbarProps) => {
       {/* OFF-SCREEN Menu */}
       <div 
         className={`
-          h-[100dvh] w-full fixed top-0 left-0 overscroll-none // Use dvh instead of screen
+          h-[100dvh] w-full fixed top-0 left-0 overscroll-none 
           flex items-center justify-center text-center 
           text-3xl 
           transition-all ease-in-out duration-[700ms] delay-[50ms]
@@ -66,7 +66,7 @@ export const MobileNavbar = ( { aboutSubMenu=[]}: MobileNavbarProps) => {
           onClick={handleClick}
           className="flex gap-2 justify-center items-center text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor"
         >
-          <Link to="/shop">
+          <Link to="/custom-order">
             Custom Order
           </Link>
         </button>

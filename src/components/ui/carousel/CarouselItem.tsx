@@ -19,6 +19,7 @@ export const CarouselItem = ({ img, title, link="" }: CardProps) => {
           className="h-full w-full object-cover transition-transform hover:scale-105 " 
           src={img}
           alt={title}
+          loading="lazy"
         />
       </Link>
       <div className="mt-2 text-center">

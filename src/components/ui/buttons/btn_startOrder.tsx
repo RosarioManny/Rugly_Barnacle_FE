@@ -9,7 +9,7 @@ export const StartOrderBtn = () => (
     active:bg-robin_egg active:scale-105 
     focus:bg-robin_egg focus:scale-105
     "> 
-    <Link to="https://www.etsy.com/listing/1525283934/custom-rug-personalized-rug-custom-anime">
+    <Link to="/custom-order">
       Start Order
     </Link>
   </button>

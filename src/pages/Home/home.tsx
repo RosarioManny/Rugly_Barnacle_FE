@@ -69,7 +69,7 @@ export const Home = () => {
         btn_2={<ContactUsBtn/>}
         />
       {/* Promises */}
-      <section aria-label="Promises Section" className="home w-full">
+      <section aria-label="Promises Section" className=" w-full">
         <ul className="grid grid-cols-2 md:flex justify-center">
           {promiseIcons.map(({ Icon, alt, description, title }, idx) => (
             <li key={`${alt}-${idx}`}>
@@ -86,7 +86,7 @@ export const Home = () => {
         </ul>
       </section>
       {/* CUSTOM RUGS */}
-      <section className="home my-8 md:p-8 w-full body_text">
+      <section className=" my-8 md:p-8 w-full body_text">
         {/* Title */}
         <div className="flex justify-center items-center gap-2 my-4 md:my-8">
           <img 

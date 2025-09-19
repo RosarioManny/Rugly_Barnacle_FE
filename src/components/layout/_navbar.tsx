@@ -112,7 +112,7 @@ export const NavBar = () => {
               aria-label={`Cart with ${cartItemCount} items`}
             >
               <CartIcon className="
-                size-10 md:size-11
+                size-8 md:size-10
                 group-hover:scale-110 group-hover:text-majorelle
                 group-focus:scale-110
                 transform-all duration-400
