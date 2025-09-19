@@ -4,7 +4,7 @@ import { OccupiedCart } from "../../components/ui/cart/occupiedCart";
 import { EmptyCart } from "../../components/ui/cart/emptyCart";
 import { CheckoutBtn } from "../../components/ui/buttons";
 import type { CartItem } from "../../lib/api/Cart/cartServices";
-import { useCart } from "../../hooks/useCart"
+import { useCart } from "../../hooks/CartProvider"
 import { useEffect, useState} from "react";
 
 export const Cart = () => {

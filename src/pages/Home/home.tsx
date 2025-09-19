@@ -4,7 +4,7 @@ import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
 import { Carousel } from "../../components/ui/carousel/Carousel"
 import { CategoryCard } from "../../components/ui/categoryCard"
 import { Header } from "../../components/layout/_header"
-import type { FC, SVGProps } from "react"
+import { useEffect, type FC, type SVGProps } from "react"
 
 
 interface PromiseIcons {
@@ -20,6 +20,7 @@ interface TempsProps {
 }
 
 export const Home = () => {
+  
   // TEMP DATA
   const Temp: TempsProps[] = [
     {
@@ -68,7 +69,7 @@ export const Home = () => {
         btn_2={<ContactUsBtn/>}
         />
       {/* Promises */}
-      <section aria-label="Promises Section" className="w-full">
+      <section aria-label="Promises Section" className="home w-full">
         <ul className="grid grid-cols-2 md:flex justify-center">
           {promiseIcons.map(({ Icon, alt, description, title }, idx) => (
             <li key={`${alt}-${idx}`}>
@@ -85,7 +86,7 @@ export const Home = () => {
         </ul>
       </section>
       {/* CUSTOM RUGS */}
-      <section className="my-8 md:p-8 w-full body_text">
+      <section className="home my-8 md:p-8 w-full body_text">
         {/* Title */}
         <div className="flex justify-center items-center gap-2 my-4 md:my-8">
           <img 

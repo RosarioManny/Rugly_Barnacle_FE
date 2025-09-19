@@ -2,10 +2,12 @@ import { Link } from "react-router-dom"
 import { useDropdownHandlers } from "../../hooks/navbar"
 import { MobileNavbar } from "../ui/navbar/mobileNavbar"
 import { CartIcon } from "../ui/icons-svgs/SvgIcons"
-import { useCart } from "../../hooks/useCart" // Import the cart hook
+import { useCart } from "../../hooks/CartProvider" // Import the cart hook
+import { useEffect } from "react"
 // import { useEffect, useState } from "react"
 
-const shopSubMenu = [ "shop", "custom"];
+
+
 const aboutSubMenu = ["about", "contact", "FAQ"]
 
 export const NavBar = () => {
@@ -13,14 +15,21 @@ export const NavBar = () => {
     closeDropdown,
     handleShopDropdown,
     handleAboutDropdown,
-    shopDropdownOpen,
     aboutDropdownOpen
   } = useDropdownHandlers()
 
-  const { cart } = useCart()
-  const cartItemCount = cart?.items?.length || 0
+  const { cartItemCount } = useCart()
+  useEffect(() => {
+    console.log("CIC >>",cartItemCount)
+  }, [cartItemCount])
+  // const [ cartItemCount, setCartItemCount] = useState(cart?.items?.length || 0)
+  // // const cartItemCount = cart?.items?.length || 0÷
+  // useEffect(() => {
+  //   console.log("CIC >>",cartItemCount)
+  //   if (cartItemCount > 0) {
 
-
+  //   }
+  // },[cartItemCount])
 
   return (
     <nav className="
@@ -89,20 +98,20 @@ export const NavBar = () => {
             ))}
           </div>
         </div> 
-        <button className="nav-buttons cursor-pointer">
-          <Link className="text-majorelle " to="/portfolio">
-            Portfolio
-          </Link>
-        </button>
+        <Link className="text-majorelle cursor-pointer" to="/portfolio">
+          <button className="nav-buttons ">
+          Portfolio
+          </button>
+        </Link>
         
           {/* Shop Nav Button */}
-          <button 
-            className="nav-buttons cursor-pointer"
-            onClick={handleShopDropdown}>
-              <Link to="/shop">
-                Shop 
-              </Link>
-          </button>
+          <Link className="cursor-pointer" to="/shop">
+            <button 
+              className="nav-buttons "
+              onClick={handleShopDropdown}>
+                  Shop 
+            </button>
+          </Link>
       </section>
 
       {/* Mobile Navbar */}
@@ -128,8 +137,8 @@ export const NavBar = () => {
             
             {/* Cart Item Count Badge */}
             {cartItemCount > 0 && (
-              <span className="
-                absolute top-1 right-1
+              <span className=
+              {`absolute top-1 right-1
                 min-w-[20px] h-5
                 bg-bittersweet text-fleece
                 rounded-full
@@ -139,7 +148,10 @@ export const NavBar = () => {
                 border-2 border-fleece
                 shadow-sm
                 group-hover:bg-robin_egg
-              ">
+                ease-in-out duration-200
+                ${cartItemCount ? "bg-yellow-500" : "bg-green-600"}
+                `}
+              >
                 {cartItemCount > 99 ? '99+' : cartItemCount}
               </span>
             )}

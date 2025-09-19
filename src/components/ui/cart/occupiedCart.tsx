@@ -1,7 +1,7 @@
 import type { CartItem } from "../../../lib/api/Cart/cartServices"
 import { TrashIcon } from "../icons-svgs/SvgIcons"
 import { formatCartDate } from "../../../lib/utils/dateFormtater" 
-import { useCart } from "../../../hooks/useCart"
+import { useCart } from "../../../hooks/CartProvider"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 

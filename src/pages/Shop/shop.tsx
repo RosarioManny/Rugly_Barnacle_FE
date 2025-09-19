@@ -133,15 +133,15 @@ export const Shop = () => {
       {filteredProducts.length > 0 && (
         <>
           <CtaWavesBg className="fill-mauve mt-20"/>
-          <section className="bg-mauve heading_text flex flex-col text-center pb-20 gap-5 justify-center items-center">
+          <section className="bg-mauve flex flex-col text-center pb-40 gap-5 justify-center items-center">
             <img 
-              className="flex align-start h-8 w-8" 
+              className="flex align-start h-8 w-8 " 
               src="/assets/design/icons/Cross_Star_Teal-Blue.webp" 
               aria-hidden="true" 
               alt="Cross Star Design Marker" />
-              <p>Don't see what you're looking for?</p>
+              <p className="heading_text">Don't see what you're looking for?</p>
               <StartOrderBtn/>
-              <p>Create your custom rug</p>
+              <p className="heading_text">Create your custom rug</p>
           </section>
         </>
       )}
