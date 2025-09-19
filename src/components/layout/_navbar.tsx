@@ -18,7 +18,7 @@ export const NavBar = () => {
     aboutDropdownOpen
   } = useDropdownHandlers()
 
-  const { cartItemCount } = useCart()
+  const { cartItemCount, status } = useCart()
   useEffect(() => {
     console.log("CIC >>",cartItemCount)
   }, [cartItemCount])
@@ -123,16 +123,17 @@ export const NavBar = () => {
 
       {/* Cart Link with Item Count */}
       <section className="justify-self-end mr-4 md:mr-6 relative">
-        <button 
-          className="flex-shrink-0 p-3 hover:bg-majorelle/30 rounded-full transition-colors duration-200 group relative"
-          aria-label={`Cart with ${cartItemCount} items`}
-        >
-          <Link to="/cart"> 
+        <Link className="" to="/cart"> 
+          <button 
+            className=" group transform-all duration-400 flex-shrink-0 p-3 hover:bg-majorelle/30 rounded-full transition-colors relative"
+            aria-label={`Cart with ${cartItemCount} items`}
+          >
             <CartIcon className="
               size-10 md:size-11
               group-hover:scale-110  group-hover:text-majorelle
               group-focus:scale-110
-              transform-all duration-200 text-space_cadet"
+              group transform-all duration-400
+              text-space_cadet"
             />
             
             {/* Cart Item Count Badge */}
@@ -140,7 +141,7 @@ export const NavBar = () => {
               <span className=
               {`absolute top-1 right-1
                 min-w-[20px] h-5
-                bg-bittersweet text-fleece
+                bg-midnight_green text-fleece
                 rounded-full
                 text-xs font-bold
                 flex items-center justify-center
@@ -148,15 +149,15 @@ export const NavBar = () => {
                 border-2 border-fleece
                 shadow-sm
                 group-hover:bg-robin_egg
-                ease-in-out duration-200
-                ${cartItemCount ? "bg-yellow-500" : "bg-green-600"}
+                ease-in-out duration-400 transition-all
+                
                 `}
               >
                 {cartItemCount > 99 ? '99+' : cartItemCount}
               </span>
             )}
-          </Link>
-        </button>
+          </button>
+        </Link>
       </section>
     </nav>
   )
