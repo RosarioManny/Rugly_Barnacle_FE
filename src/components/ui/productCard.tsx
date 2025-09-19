@@ -1,5 +1,4 @@
 // import { useEffect } from "react"
-import { useEffect } from "react";
 import { Link } from "react-router-dom"
 
 interface ProductCardProps {
@@ -14,11 +13,11 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ id, image, price, name, img_alt, dimensions, category, quantity }: ProductCardProps) => {
-  useEffect(() => {
-    if(image) { 
-      console.log("image >> ",image)
-    }
-  }, [image])
+  // useEffect(() => {
+  //   if(image) { 
+  //     console.log("image >> ",image)
+  //   }
+  // }, [image])
   return (
     <Link to={`/shop/${id}`}>
       <li

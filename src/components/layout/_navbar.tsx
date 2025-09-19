@@ -2,11 +2,8 @@ import { Link } from "react-router-dom"
 import { useDropdownHandlers } from "../../hooks/navbar"
 import { MobileNavbar } from "../ui/navbar/mobileNavbar"
 import { CartIcon } from "../ui/icons-svgs/SvgIcons"
-import { useCart } from "../../hooks/CartProvider" // Import the cart hook
-import { useEffect } from "react"
-// import { useEffect, useState } from "react"
-
-
+import { useCart } from "../../hooks/CartProvider"
+import { StartOrderBtn } from "../ui/buttons"
 
 const aboutSubMenu = ["about", "contact", "FAQ"]
 
@@ -18,18 +15,7 @@ export const NavBar = () => {
     aboutDropdownOpen
   } = useDropdownHandlers()
 
-  const { cartItemCount, status } = useCart()
-  useEffect(() => {
-    console.log("CIC >>",cartItemCount)
-  }, [cartItemCount])
-  // const [ cartItemCount, setCartItemCount] = useState(cart?.items?.length || 0)
-  // // const cartItemCount = cart?.items?.length || 0÷
-  // useEffect(() => {
-  //   console.log("CIC >>",cartItemCount)
-  //   if (cartItemCount > 0) {
-
-  //   }
-  // },[cartItemCount])
+  const { cartItemCount } = useCart()
 
   return (
     <nav className="
@@ -38,126 +24,133 @@ export const NavBar = () => {
         border-b-solid border-b-2 border-b-majorelle 
         rethink-sans 
         max-h-[70px] min-h-[70px]
-        flex md:grid md:grid-cols-3 justify-between items-center">
-      {/* Home - Brand image small logo*/}
-      <section className="flex justify-self-start items-center focus:scale-110 hover:scale-110 transition-all">
-        <Link className="brand-logo" to="/">
+        flex justify-between items-center px-4 md:px-6">
+      
+      {/* LEFT SIDE: Logo and Navigation */}
+      <section className="flex items-center space-x-6">
+        {/* Logo */}
+        <Link className="focus:scale-110 hover:scale-110 transition-all" to="/">
           <img 
-            className="size-12 mx-6" 
+            className="size-12" 
             src="/assets/design/logo/Rugly_Barnacle_192x192.png" 
             alt="Rugly Barnacle Abrreviated Logo - RB"/>
         </Link>
-      </section>
 
-      {/* Desktop Navbar */}
-      <section className="text-majorelle hidden items-center justify-self-center md:justify-end md:flex">
-        <div className="dropdown">
-          {/* About Nav Button */}
-          <button 
-            className="nav-buttons gap-2"
-            onClick={handleAboutDropdown}>
-            About 
+        {/* Desktop Navigation - Hidden on mobile */}
+        <section className="text-majorelle hidden md:flex items-center space-x-4">
+          <div className="dropdown">
+            {/* About Nav Button */}
+            <button 
+              className="nav-buttons gap-2"
+              onClick={handleAboutDropdown}>
+              About 
+              <div 
+                className={`
+                ${aboutDropdownOpen ? "border-t-bittersweet rotate-x-180" : "border-t-majorelle"} 
+                transition-transform duration-600 border-t-10 border-solid ease-in-out
+                caret-down`}/>
+            </button>
+
+            {/* ABOUT Dropdown Items */}
             <div 
               className={`
-              ${aboutDropdownOpen ? "border-t-bittersweet rotate-x-180" : "border-t-majorelle"} 
-              transition-transform duration-600 border-t-10 border-solid ease-in-out
-              caret-down`}/>
-          </button>
-
-          {/* ABOUT Dropdown Items */}
-          <div 
-            className={`
-            ${aboutDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
-            overflow-hidden transition-all duration-500 ease-in-out 
-            dropdown-content`}>
-            {aboutSubMenu.map((link) => (
-            <Link 
-              key={link} 
-              to={`/${link}`} 
-              className={`nav-buttons duration-200 transform transition-all hover:bg-majorelle/10  group`}
-              onClick={closeDropdown}
-            >
-              <div className={`
-                caret-right text-robin_egg 
-                pointer duration-200 transform transition-all
-                text-fleece body_text 
-                group-hover:text-bittersweet 
-                group-active:text-bittersweet 
-                group-focus:text-bittersweet `} />
-              <p className="
-                pointer duration-200 transform transition-all
-                text-space_cadet body_text 
-                group-hover:text-majorelle 
-                p-1
-                group-active:text-majorelle
-                group-focus:text-majorelle"
+              ${aboutDropdownOpen ? "opacity-100 max-h-96" : "opacity-0 max-h-0"}
+              overflow-hidden transition-all duration-500 ease-in-out 
+              dropdown-content`}>
+              {aboutSubMenu.map((link) => (
+              <Link 
+                key={link} 
+                to={`/${link}`} 
+                className={`nav-buttons duration-200 transform transition-all hover:bg-majorelle/10 group`}
+                onClick={closeDropdown}
               >
-                {link.charAt(0).toUpperCase() + link.slice(1)}
-              </p> 
-            </Link>
-            ))}
-          </div>
-        </div> 
-        <Link className="text-majorelle cursor-pointer" to="/portfolio">
-          <button className="nav-buttons ">
-          Portfolio
-          </button>
-        </Link>
-        
-          {/* Shop Nav Button */}
-          <Link className="cursor-pointer" to="/shop">
-            <button 
-              className="nav-buttons "
-              onClick={handleShopDropdown}>
-                  Shop 
+                <div className={`
+                  caret-right text-robin_egg 
+                  pointer duration-200 transform transition-all
+                  text-fleece body_text 
+                  group-hover:text-bittersweet 
+                  group-active:text-bittersweet 
+                  group-focus:text-bittersweet `} />
+                <p className="
+                  pointer duration-200 transform transition-all
+                  text-space_cadet body_text 
+                  group-hover:text-majorelle 
+                  p-1
+                  group-active:text-majorelle
+                  group-focus:text-majorelle"
+                >
+                  {link.charAt(0).toUpperCase() + link.slice(1)}
+                </p> 
+              </Link>
+              ))}
+            </div>
+          </div> 
+          
+          <Link to="/portfolio">
+            <button className="nav-buttons cursor-pointer">
+              Portfolio
             </button>
           </Link>
+          
+          <Link to="/shop">
+            <button 
+              className="nav-buttons cursor-pointer"
+              onClick={handleShopDropdown}>
+                Shop 
+            </button>
+          </Link>
+        </section>
       </section>
 
-      {/* Mobile Navbar */}
-      <section className="z-50 justify-between md:hidden">
-        <MobileNavbar 
-          aboutSubMenu={aboutSubMenu}  
-        /> 
-      </section>
+      {/* RIGHT SIDE: Cart and Start Order Button */}
+      <section className="flex items-center justify-center space-x-4">
+        {/* Cart Button */}
+        <div className="relative">
+          <Link to="/cart"> 
+            <button 
+              className="group transform-all duration-400 flex-shrink-0 justify-center items-center p-3 hover:bg-majorelle/30 rounded-full transition-colors"
+              aria-label={`Cart with ${cartItemCount} items`}
+            >
+              <CartIcon className="
+                size-10 md:size-11
+                group-hover:scale-110 group-hover:text-majorelle
+                group-focus:scale-110
+                transform-all duration-400
+                text-space_cadet"
+              />
+              
+              {/* Cart Item Count Badge */}
+              {cartItemCount > 0 && (
+                <span className=
+                {`absolute top-1 right-1
+                  min-w-[20px] h-5
+                  bg-midnight_green text-fleece
+                  rounded-full
+                  text-xs font-bold
+                  flex items-center justify-center
+                  px-1
+                  border-2 border-fleece
+                  shadow-sm
+                  group-hover:bg-robin_egg
+                  ease-in-out duration-400 transition-all
+                  `}
+                >
+                  {cartItemCount > 99 ? '99+' : cartItemCount}
+                </span>
+              )}
+            </button>
+          </Link>
+        </div>
 
-      {/* Cart Link with Item Count */}
-      <section className="justify-self-end mr-4 md:mr-6 relative">
-        <Link className="" to="/cart"> 
-          <button 
-            className=" group transform-all duration-400 flex-shrink-0 p-3 hover:bg-majorelle/30 rounded-full transition-colors relative"
-            aria-label={`Cart with ${cartItemCount} items`}
-          >
-            <CartIcon className="
-              size-10 md:size-11
-              group-hover:scale-110  group-hover:text-majorelle
-              group-focus:scale-110
-              group transform-all duration-400
-              text-space_cadet"
-            />
-            
-            {/* Cart Item Count Badge */}
-            {cartItemCount > 0 && (
-              <span className=
-              {`absolute top-1 right-1
-                min-w-[20px] h-5
-                bg-midnight_green text-fleece
-                rounded-full
-                text-xs font-bold
-                flex items-center justify-center
-                px-1
-                border-2 border-fleece
-                shadow-sm
-                group-hover:bg-robin_egg
-                ease-in-out duration-400 transition-all
-                
-                `}
-              >
-                {cartItemCount > 99 ? '99+' : cartItemCount}
-              </span>
-            )}
-          </button>
-        </Link>
+        {/* Start Order Button */}
+        <div className="hidden md:block">
+          <StartOrderBtn />
+        </div>
+
+        {/* Mobile Navbar - Hidden on desktop */}
+        <div className="md:hidden">
+          <MobileNavbar aboutSubMenu={aboutSubMenu} />
+        </div>
       </section>
     </nav>
   )

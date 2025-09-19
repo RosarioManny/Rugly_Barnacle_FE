@@ -22,7 +22,7 @@ export const MobileNavbar = ( { aboutSubMenu=[]}: MobileNavbarProps) => {
     <>
       <button 
         onClick={handleClick} 
-        className="z-40 relative flex flex-col justify-center items-center mr-10 overscroll-none w-[50px] h-[40px] space-y-1 p-2"
+        className="z-40 relative flex flex-col justify-center items-center  overscroll-none w-[50px] h-[40px] space-y-1 p-2"
         aria-label="Mobile navigation menu - Three lined burger icon">
         <BurgerLine isToggled={isToggled} index={1} />
         <BurgerLine isToggled={isToggled} index={2} />

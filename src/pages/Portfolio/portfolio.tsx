@@ -35,7 +35,6 @@ export const Portfolio = () => {
         tagline="A showcase of all my completed commissions."
         img="/gallery/Product_Display_Assorted_Edited_2.webp"
         img_alt="Assorted variety of rugs"
-        btn_1={<StartOrderBtn/>}
       />
       
       <section className="flex my-4 gap-2 flex-col items-center text-center"> 

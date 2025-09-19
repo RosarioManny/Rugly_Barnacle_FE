@@ -1,9 +1,8 @@
 import type { CartItem } from "../../../lib/api/Cart/cartServices"
 import { TrashIcon } from "../icons-svgs/SvgIcons"
 import { formatCartDate } from "../../../lib/utils/dateFormtater" 
-import { useCart } from "../../../hooks/CartProvider"
 import { useState } from "react"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 interface OccupiedCartProps extends CartItem {
   onRemove?: (productId: number) => void;
@@ -20,93 +19,119 @@ export const OccupiedCart = ({
   onRemove
 }: OccupiedCartProps) => {
 
-  // const { removeItemFromCart, loading } = useCart();
-  const [ isRemoving, setIsRemoving ] = useState(false);
+  const [isRemoving, setIsRemoving] = useState(false);
+  const navigate = useNavigate();
 
-  const handleRemove = async() => {
+  const handleRemove = async (e: React.MouseEvent) => {
+    e.stopPropagation(); // Prevent navigation when clicking delete
+    e.preventDefault();
     
     try {
-      setIsRemoving(true)
+      setIsRemoving(true);
       if (onRemove) {
-        await onRemove(product)
+        await onRemove(product);
       }
-      // await removeItemFromCart(product, quantity)
     } catch(err) {
-      console.error("Failed to remove item", err)
+      console.error("Failed to remove item", err);
     } finally {
-      setIsRemoving(false)
+      setIsRemoving(false);
     }
   }
 
+  const handleCardClick = () => {
+    navigate(`/shop/${product}`);
+  }
+
   return ( 
-    <li className="
-      flex flex-col md:flex-row gap-4 
-      p-4 md:p-6 rounded-md 
-      border-b border-gray-200  
-      last:border-b-0 hover:bg-majorelle/10 
-      transition-colors duration-200">
-      <Link to={`/shop/${product}`}>
-        <div className="flex-shrink-0">
-          <img 
-            className="w-full h-40 md:h-32 md:w-32 lg:h-40 lg:w-40 rounded-lg object-cover shadow-sm"
-            src="/products/rugs/Showcase_Gengar.webp" 
-            alt={product_name} 
-          />
-        </div>
-      </Link>
+    <li 
+      className="
+        flex flex-col md:flex-row gap-4 
+        p-4 md:p-6 mb-2 rounded-md 
+        border-2 border-space_cadet/5
+        hover:bg-majorelle/10 hover:scale-101
+        transition-all duration-500
+        cursor-pointer relative 
+      "
+      onClick={handleCardClick}
+    >
+      {/* Product Image with overlay link */}
+      <div className="flex-shrink-0 relative">
+        <img 
+          className="w-full h-40 md:h-32 md:w-32 lg:h-40 lg:w-40 rounded-lg object-cover shadow-sm"
+          src="/products/rugs/Showcase_Gengar.webp" 
+          alt={product_name} 
+        />
+        {/* Invisible overlay for better click target */}
+        <div className="absolute inset-0 cursor-pointer"></div>
+      </div>
 
       {/* Product Details */}
       <div className="flex-1 flex flex-col justify-between min-w-0">
         {/* Top Section - Product Info */}
         <div className="flex justify-between items-start gap-4 mb-3">
-          <div className="min-w-0 flex-1">
-            <h3 className="font-semibold text-base md:text-lg lg:text-xl text-gray-900 truncate">
+          <div 
+            className="min-w-0 flex-1 cursor-pointer"
+            onClick={handleCardClick}
+          >
+            <h3 className="font-semibold w-auto text-base md:text-lg lg:text-xl text-space_cadet truncate">
               {product_name}
             </h3>
-      {/* Product Image */}
             {dimensions && (
-              <p className="text-sm text-gray-600 mt-1">{dimensions}</p>
+              <p className="text-sm text-space_cadet mt-1">{dimensions}</p>
             )}
-            <p className="text-xs text-gray-500 mt-1">Added: Cart - {id} Product - {product} {formatCartDate(added_at)}</p>
+            <p className="text-xs text-space_cadet/50 mt-1"> Item id: {id}</p>
+            <p className="text-xs text-space_cadet/50 mt-1">Added: {formatCartDate(String(added_at))}</p>
           </div>
           
-          {/* Delete Button */}
+          {/* Delete Button - Positioned absolutely to avoid link conflicts */}
           <button 
-            className="flex-shrink-0 p-2 hover:bg-bittersweet/30 rounded-full transition-colors duration-200 group"
+            className="
+              group
+              absolute 
+              md:top-4 md:right-2 z-10 top-3 right-3
+              cursort-pointer rounded-full 
+              p-1.5 outline-1 outline-bittersweet 
+              bg-space_cadet 
+              md:bg-transparent
+              transition-all duration-200 
+              hover:bg-bittersweet/20 hover:scale-110
+            
+            "
             aria-label={`Remove ${product_name} from cart`}
             onClick={handleRemove}
           >
             {isRemoving ? 
-              <p> Removing...</p> 
+              <p className="text-xs">Removing...</p> 
               : 
               <TrashIcon 
-              className="size-6 md:size-7 text-bittersweet group-hover:scale-110 transition-transform duration-200" /> 
+                className="
+                size-6 md:size-7 
+                text-bittersweet 
+                transition-transform duration-200" 
+              /> 
             }
           </button>
         </div>
 
         {/* Bottom Section - Quantity and Price */}
-        <div className="flex justify-between items-center">
+        <div 
+          className="flex justify-between items-center cursor-pointer"
+          onClick={handleCardClick}
+        >
           <div className="flex items-center gap-4">
-            <span className="text-sm md:text-base text-gray-700">Qty: {quantity}</span>
-            {/* Quantity Controls - Optional */}
-            {/* <div className="flex  items-center gap-2">
-              <button className="w-6 h-6  text-space_cadet rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center text-sm">
-                -
-              </button>
-              <button className="w-6 h-6 rounded-full bg-gray-200 hover:bg-gray-300 flex items-center justify-center text-sm">
-                +
-              </button>
-            </div> */}
+            <span className="text-sm md:text-base text-space_cadet/70">Qty: {quantity}</span>
           </div>
           
-          <p className="font-bold text-lg md:text-xl lg:text-2xl text-gray-900">
+          <p className="font-bold text-lg md:text-xl lg:text-2xl text-majorelle">
             ${(parseFloat(product_price) * quantity).toFixed(2)}
           </p>
         </div>
 
         {/* Unit Price */}
-        <p className="text-sm text-midnight_green text-right mt-1">
+        <p 
+          className="text-sm text-midnight_green text-right mt-1 cursor-pointer"
+          onClick={handleCardClick}
+        >
           ${product_price} each
         </p>
       </div>

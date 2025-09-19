@@ -25,7 +25,7 @@ export interface CartInfo {
 export const getCart = async () => {
   try {
     const response = await api.get<CartInfo>("/cart/");
-    console.log(document.cookie)
+    // console.log(document.cookie)
     return response.data
 
   } catch(err: any) {

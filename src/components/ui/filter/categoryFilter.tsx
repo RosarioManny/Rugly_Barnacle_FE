@@ -22,7 +22,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   selectedCategory,
   setSelectedCategory
 }) => {
-  console.log('Available categories:', categories);
+  // console.log('Available categories:', categories);
   return (
     <div className="overflow-x-auto scrollbar-hide">
       <div className="flex gap-4 p-4">

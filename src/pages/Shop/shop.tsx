@@ -88,13 +88,6 @@ export const Shop = () => {
             </h1>
         </div>
         
-        {/* Results count - Simplified since FilterControls already shows it */}
-        <div className="text-center mt-4">
-          <p className="font-semibold opacity-50"> 
-            {filteredCount} {filteredCount === 1 ? 'Item' : 'Items'}
-            {filteredCount !== productCount && ` of ${productCount}`}
-          </p>
-        </div>
       </section>
 
       {/* Product Listings - Use filteredProducts instead of products */}

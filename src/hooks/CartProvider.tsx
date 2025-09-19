@@ -71,14 +71,14 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     fetchCart();
   }, [fetchCart]);
 
-  useEffect(() => {
-    console.log("Cart updated:", cart);
-    console.log("Cart item count:", cartItemCount);
-  }, [cart, cartItemCount]);
+  // useEffect(() => {
+  //   console.log("Cart updated:", cart);
+  //   console.log("Cart item count:", cartItemCount);
+  // }, [cart, cartItemCount]);
   
-  useEffect(() => {
-    console.log("Cart status changed:", status);
-  }, [status]);
+  // useEffect(() => {
+  //   console.log("Cart status changed:", status);
+  // }, [status]);
 
   return (
     <CartContext.Provider 
