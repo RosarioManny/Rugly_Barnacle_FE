@@ -1,6 +1,11 @@
 import api from "../apiConfig";
 
-interface CustomOrder {
+export interface CustomOrderData {
+  customer_name: string,
+  description: string,
+  email: string,
+}
+export interface CustomOrderResponse {
   customer_name: string,
   description: string,
   email: string,
@@ -12,7 +17,7 @@ interface CustomOrder {
 
 export const getCustomOrder = async (referenceId: string) => {
   try {
-    const response = await api.get<CustomOrder>(`/custom/${referenceId}`);
+    const response = await api.get<CustomOrderData>(`/custom/${referenceId}`);
 
     return response.data
   } catch(err: any) {
@@ -21,7 +26,7 @@ export const getCustomOrder = async (referenceId: string) => {
   }
 }
 
-export  const createCustomOrder = async (orderData: CustomOrder) => {
+export  const createCustomOrder = async (orderData: CustomOrderResponse) => {
   try { 
     const response = await api.post('/custom/', orderData);
 
