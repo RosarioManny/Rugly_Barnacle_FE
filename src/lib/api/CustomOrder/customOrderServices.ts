@@ -26,9 +26,9 @@ export const getCustomOrder = async (referenceId: string) => {
   }
 }
 
-export  const createCustomOrder = async (orderData: CustomOrderResponse) => {
+export  const createCustomOrder = async (orderData: CustomOrderData) => {
   try { 
-    const response = await api.post('/custom/', orderData);
+    const response = await api.post<CustomOrderResponse>('/custom/', orderData);
 
     return response.data
   } catch(err: any) {

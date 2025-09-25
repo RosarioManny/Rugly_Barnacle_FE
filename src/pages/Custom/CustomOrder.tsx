@@ -3,7 +3,7 @@ import { Header } from "../../components/layout/_header";
 import { ShopBtn } from "../../components/ui/buttons/index";
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg";
 import { createCustomOrder } from "../../lib/api/CustomOrder/customOrderServices"; 
-import type { CustomOrderData } from "../../lib/api/CustomOrder/customOrderServices";
+import type { CustomOrderData, CustomOrderResponse } from "../../lib/api/CustomOrder/customOrderServices";
 
 export const CustomOrder = () => {
   const [formData, setFormData] = useState({
@@ -32,16 +32,12 @@ export const CustomOrder = () => {
       const apiData: CustomOrderData = {
         customer_name: formData.customer_name,
         email: formData.email,
-        description: `${formData.description}
-          --------------------------
-          Additional Details:
-          Deadline: ${formData?.deadline ? formData.deadline : "Normal - 1-2 weeks"}
-          Size & Budget: ${formData?.budget ? formData.budget : "2ft - $200+"}
-          `
+        description: `${formData.description}\n\n ><><><><><><><><><><><><><><><\n Additional Details:\n Deadline: ${formData?.deadline ? formData.deadline : "Normal - 1-2 weeks"}\n Size & Budget: ${formData?.budget ? formData.budget : "2ft - $200+"}`
       };
 
       console.log("The Data ::", apiData)
       const result = await createCustomOrder(apiData);
+      console.log("The Result ::", result)
       
       setSubmissionResult({
         success: true,
@@ -81,9 +77,9 @@ export const CustomOrder = () => {
       {/* Success/Error Message */}
       {submissionResult && (
         <div className={`fixed top-4 right-4 p-4 rounded-md z-50 ${
-          submissionResult.success ? "bg-robin_egg text-space_cadet" : "bg-bittersweet text-white"
+          submissionResult.success ? "bg-breeze text-space_cadet" : "bg-bittersweet text-white"
         }`}>
-          <div className="font-semibold">
+          <div className={`font-semibold`}>
             {submissionResult.success ? "✓ Success!" : "Error"}
           </div>
           <div className="text-sm mt-1">
