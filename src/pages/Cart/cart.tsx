@@ -8,7 +8,7 @@ import { useCart } from "../../hooks/CartProvider"
 import { useEffect, useState} from "react";
 
 export const Cart = () => {
-  const { cart, loading, error, fetchCart, removeItemFromCart } = useCart();
+  const { cart, status, fetchCart, removeItemFromCart } = useCart();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   
   useEffect(() => {
@@ -28,7 +28,7 @@ export const Cart = () => {
     }
   };
 
-  if (loading) {
+  if (status === 'loading') {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <Spinner />
@@ -36,7 +36,7 @@ export const Cart = () => {
     );
   }
 
-  if (error || cart === null) {
+  if (status === 'error' || cart === null) {
     return ( 
       <div className="min-h-screen flex flex-col gap-5 items-center justify-center">
         <DangerIcon className="text-bittersweet size-16 animate-pulse" />

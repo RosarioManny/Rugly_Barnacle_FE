@@ -8,14 +8,14 @@ import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { useState, useEffect, useRef} from "react"
 import { useProductFilters } from "../../hooks/filter/useProductFilter"
 import { FilterControls } from "../../components/ui/filter"
-import { useParams } from "react-router-dom"
+// import { useParams } from "react-router-dom"
 
 
 export const Shop = () => {
   const [products, setProducts ] = useState<Product[]>([])
   const [status, setStatus] = useState< 'loading' | 'error' | 'success' | 'idle' >('idle');
   const hasFetched = useRef(false)
-  const { category: urlCategory } = useParams<{ category?: string }>();
+  // const { category: urlCategory } = useParams<{ category?: string }>();
 
   const {
     filteredProducts,

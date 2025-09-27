@@ -3,7 +3,7 @@ import { Header } from "../../components/layout/_header";
 import { ShopBtn } from "../../components/ui/buttons/index";
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg";
 import { createCustomOrder } from "../../lib/api/CustomOrder/customOrderServices"; 
-import type { CustomOrderData, CustomOrderResponse } from "../../lib/api/CustomOrder/customOrderServices";
+import type { CustomOrderData } from "../../lib/api/CustomOrder/customOrderServices";
 
 export const CustomOrder = () => {
   const [formData, setFormData] = useState({
@@ -11,16 +11,28 @@ export const CustomOrder = () => {
     email: "",
     description: "", 
     deadline: "",
-    budget: ""
+    budget: "",
+    contact_method: "email",
+    contact_info: "",
   });
 
+  const [image, setImage] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionResult, setSubmissionResult] = useState<{success: boolean; referenceId?: string; message?: string} | null>(null);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
-    console.log(name, value)
+  };
+
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
+
+  const removeImage = () => {
+    setImage(null);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -28,21 +40,24 @@ export const CustomOrder = () => {
     setIsSubmitting(true);
     
     try {
-      // Prepare data for API (only fields that match your Django model)
+      // Prepare data for API
       const apiData: CustomOrderData = {
         customer_name: formData.customer_name,
         email: formData.email,
-        description: `${formData.description}\n\n ><><><><><><><><><><><><><><><\n Additional Details:\n Deadline: ${formData?.deadline ? formData.deadline : "Normal - 1-2 weeks"}\n Size & Budget: ${formData?.budget ? formData.budget : "2ft - $200+"}`
+        description: `${formData.description}\n\n ><><><><><><><><><><><><><><><\n Additional Details:\n 
+        Deadline: ${formData?.deadline ? formData.deadline : "Normal - 1-2 weeks"} 
+        Size & Budget: ${formData?.budget ? formData.budget : "2ft - $200+"}`,
+        contact_method: formData?.contact_method ? formData.contact_method : formData.email,
+        contact_info: formData.contact_info,
+        image: image || undefined
       };
 
-      console.log("The Data ::", apiData)
       const result = await createCustomOrder(apiData);
-      console.log("The Result ::", result)
       
       setSubmissionResult({
         success: true,
         referenceId: result.reference_id,
-        message: "Custom order submitted successfully! We'll contact you soon."
+        message: "Custom order submitted successfully! Email has been sent with this order Id"
       });
 
       // Reset form on success
@@ -51,8 +66,11 @@ export const CustomOrder = () => {
         email: "",
         description: "",
         deadline: "",
-        budget: ""
+        budget: "",
+        contact_method: "email",
+        contact_info: "",
       });
+      setImage(null);
 
     } catch (error: any) {
       console.error("Submission failed:", error);
@@ -85,8 +103,8 @@ export const CustomOrder = () => {
           <div className="text-sm mt-1">
             {submissionResult.message}
             {submissionResult.referenceId && (
-              <div className="mt-2 font-mono bg-black/20 p-2 rounded">
-                Reference: {submissionResult.referenceId}
+              <div className="mt-2 font-mono bg-robin_egg/50 p-2 rounded">
+                References: {submissionResult.referenceId}
               </div>
             )}
           </div>
@@ -149,6 +167,44 @@ export const CustomOrder = () => {
               />
             </div>
           </div>
+
+          {/* Contact Preference */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="contact_method" className="block text-sm font-medium text-space_cadet mb-1">
+                Preferred Contact Method
+              </label>
+              <select
+                id="contact_method"
+                name="contact_method"
+                value={formData.contact_method}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-majorelle focus:border-transparent"
+              >
+                <option value="email">Email</option>
+                <option value="instagram">Instagram</option>
+                <option value="phone">Phone</option>
+              </select>
+            </div>
+            
+            <div>
+              <label htmlFor="contact_info" className="block text-sm font-medium text-space_cadet mb-1">
+                {formData.contact_method === 'instagram' ? 'Instagram Handle' : 
+                formData.contact_method === 'phone' ? 'Phone Number' : 'Contact Info'}
+              </label>
+              <input
+                type="text"
+                id="contact_info"
+                name="contact_info"
+                value={formData.contact_info}
+                onChange={handleInputChange}
+                placeholder={formData.contact_method === 'instagram' ? '@username' : 
+                            formData.contact_method === 'phone' ? 'Phone number' : 'Additional contact info'}
+                className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
+              />
+              <p className="text-xs text-space_cadet/50 mt-1">Leave blank for email.</p>
+            </div>
+          </div>
           
           <div>
             <label htmlFor="description" className="block text-sm font-medium text-space_cadet mb-1">
@@ -165,6 +221,56 @@ export const CustomOrder = () => {
               className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
             />
           </div>
+
+          {/* Image Upload - Single Image */}
+          <div>
+            <label htmlFor="image" className="block text-sm font-medium text-space_cadet mb-1">
+              Reference Image (Optional)
+            </label>
+            
+            {/* Custom file input wrapper */}
+            <div className="relative">
+              <input
+                type="file"
+                id="image"
+                accept="image/*"
+                onChange={handleImageUpload}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+              <div className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle bg-white">
+                {image ? (
+                  <span className="text-space_cadet">{image.name}</span>
+                ) : (
+                  <span className="text-space_cadet/50">Choose file</span>
+                )}
+              </div>
+            </div>
+            
+            <p className="text-xs text-space_cadet/50 mt-1">Upload one reference image to help visualize your design</p>
+            
+            {/* Single Image Preview */}
+            {image && (
+              <div className="mt-4">
+                <p className="text-sm font-medium text-space_cadet mb-2">Uploaded Image:</p>
+                <div className="flex gap-2">
+                  <div className="relative">
+                    <img 
+                      src={URL.createObjectURL(image)} 
+                      alt="Preview"
+                      className="w-20 h-20 object-cover rounded border"
+                    />
+                    <button
+                      type="button"
+                      onClick={removeImage}
+                      className="absolute -top-2 -right-2 bg-bittersweet text-white rounded-full w-6 h-6 flex items-center justify-center text-xs"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label htmlFor="deadline" className="block text-sm font-medium text-space_cadet mb-1">
@@ -178,8 +284,8 @@ export const CustomOrder = () => {
                   className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-majorelle focus:border-transparent"
                   aria-label="Desired completion "
                 >
-                  <option id="Deadline - Fast option" value="Fast - 1 week">ASAP - 1 week</option>
-                  <option id="Deadline - Normal option" value="Normal - 1-2 weeks">Normal time - 1 - 2 weeks</option>
+                  <option id="Deadline - Fast option" value="Fast - 1 week">ASAP - 1.5 week</option>
+                  <option id="Deadline - Normal option" value="Normal - 1-2 weeks">Normal time - 2 weeks</option>
                   <option id="Deadline - Slow option" value="Slow - 2-3 weeks">No rush - 2 - 3 weeks</option>           
                 </select>
               </div>
@@ -232,7 +338,6 @@ export const CustomOrder = () => {
         </form>
       </section>
       
-      {/* Rest of your component remains the same */}
       <CtaWavesBg className="fill-mauve w-[100vw]" />
       <section className="bg-mauve w-full pb-14 md:pb-24 flex font-medium flex-col items-center text-center ">
         <p className="m-2 font-semibold body_text">
