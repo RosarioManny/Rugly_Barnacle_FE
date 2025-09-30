@@ -20,7 +20,8 @@ export interface CustomOrderResponse {
 
 export const getCustomOrder = async (referenceId: string) => {
   try {
-    const response = await api.get<CustomOrderData>(`/custom/${referenceId}`);
+    const cleanedReferenceId = referenceId.trim()
+    const response = await api.get<CustomOrderResponse>(`/custom/${cleanedReferenceId}/`);
 
     return response.data
   } catch(err: any) {
