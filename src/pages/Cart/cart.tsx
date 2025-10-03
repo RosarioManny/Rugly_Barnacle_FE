@@ -91,6 +91,10 @@ export const Cart = () => {
             ) : (
               <EmptyCart />
             )}
+          <div className="flex items-center justify-center gap-2 text-sm text-space_cadet/40 mt-8">
+            <DangerIcon className="size-10" />
+            <span>Cart contents are session-only and items will be lost upon leaving the site.</span>
+          </div>
           </div>
 
           {/* Checkout Section */}

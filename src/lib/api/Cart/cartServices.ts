@@ -1,5 +1,8 @@
 import api from "../apiConfig"
-
+export interface CartItemImage {
+  primary: string;
+  thumbnail?: string;
+}
 export interface CartItem {
   id: number;
   product: number;
@@ -9,6 +12,7 @@ export interface CartItem {
   subtotal: number;
   added_at?: string;
   dimensions: string;
+  product_images?: CartItemImage;
 }
 
 export interface CartInfo {

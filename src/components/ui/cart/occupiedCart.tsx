@@ -1,7 +1,7 @@
 import type { CartItem } from "../../../lib/api/Cart/cartServices"
 import { TrashIcon } from "../icons-svgs/SvgIcons"
 import { formatCartDate } from "../../../lib/utils/dateFormtater" 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useNavigate } from "react-router-dom"
 
 interface OccupiedCartProps extends CartItem {
@@ -16,12 +16,17 @@ export const OccupiedCart = ({
   dimensions,
   product,
   id,
+  product_images,
   onRemove
 }: OccupiedCartProps) => {
 
   const [isRemoving, setIsRemoving] = useState(false);
   const navigate = useNavigate();
-
+  
+  const getImageUrl = (relativePath: string) => {
+    const baseUrl = import.meta.env.VITE_EXPRESS_BACKEND_URL || 'http://localhost:8000';
+    return `${baseUrl}${relativePath}`
+  }
   const handleRemove = async (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent navigation when clicking delete
     e.preventDefault();
@@ -41,7 +46,6 @@ export const OccupiedCart = ({
   const handleCardClick = () => {
     navigate(`/shop/${product}`);
   }
-
   return ( 
     <li 
       className="
@@ -55,12 +59,32 @@ export const OccupiedCart = ({
       onClick={handleCardClick}
     >
       {/* Product Image with overlay link */}
-      <div className="flex-shrink-0 relative">
-        <img 
-          className="w-full h-40 md:h-32 md:w-32 lg:h-40 lg:w-40 rounded-lg object-cover shadow-sm"
-          src="/products/rugs/Showcase_Gengar.webp" 
-          alt={product_name} 
-        />
+      <div className={`flex-shrink-0 relative `} >
+        { product_images?.primary ? (
+
+          <img 
+            className="
+              w-full h-40 
+              md:h-32 md:w-32 lg:h-40 lg:w-40 
+              rounded-lg object-cover shadow-sm"
+            src={getImageUrl(product_images?.primary)}  
+            alt={product_name} 
+          />
+        ) : (
+          <>
+            <img 
+              className="
+                py-2
+                opacity-80
+                bg-majorelle/60
+                w-full h-40 
+                md:h-32 md:w-32 lg:h-40 lg:w-40 
+                rounded-lg object-contain shadow-sm"
+              src="/assets/design/logo/Rugly_Barnacle_192x192.png" 
+              alt="Rugly Barnacle R & B Logo - Product image unavailable" 
+            />
+          </>
+        )}
         {/* Invisible overlay for better click target */}
         <div className="absolute inset-0 cursor-pointer"></div>
       </div>
@@ -73,14 +97,14 @@ export const OccupiedCart = ({
             className="min-w-0 flex-1 cursor-pointer"
             onClick={handleCardClick}
           >
-            <h3 className="font-semibold w-auto text-base md:text-lg lg:text-xl text-space_cadet truncate">
+            <h3 className="font-semibold w-[90%] text-base md:text-lg lg:text-xl text-space_cadet truncate">
               {product_name}
             </h3>
             {dimensions && (
               <p className="text-sm text-space_cadet mt-1">{dimensions}</p>
             )}
-            <p className="text-xs text-space_cadet/50 mt-1"> Item id: {id}</p>
-            <p className="text-xs text-space_cadet/50 mt-1">Added: {formatCartDate(String(added_at))}</p>
+            <p className="text-xs text-space_cadet/50 mt-1"> Item # : {id}</p>
+            <p className="text-xs text-space_cadet/50 mt-1">Added : {formatCartDate(String(added_at))}</p>
           </div>
           
           {/* Delete Button - Positioned absolutely to avoid link conflicts */}

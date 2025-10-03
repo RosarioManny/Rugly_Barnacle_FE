@@ -34,11 +34,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const addItemToCart = useCallback(async (productId: number, quantity: number = 1) => {
     try {
       setStatus('loading');
-
-      // setCart(prev => {
-      //   console.log("🛒 Previous cart state:", prev);
-      //   return prev
-      // })
       const updatedCart = await addToCart(productId, quantity);
       setCart(updatedCart);
 
@@ -46,7 +41,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       setTimeout(() => {
         fetchCart() // < - Refreshes the cart to get the amount
-      }, 100);
+      }, 1);
     } catch (err) {
       setStatus('error');
       throw err;
@@ -70,15 +65,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   useEffect(() => {
     fetchCart();
   }, [fetchCart]);
-
-  // useEffect(() => {
-  //   console.log("Cart updated:", cart);
-  //   console.log("Cart item count:", cartItemCount);
-  // }, [cart, cartItemCount]);
-  
-  // useEffect(() => {
-  //   console.log("Cart status changed:", status);
-  // }, [status]);
 
   return (
     <CartContext.Provider 

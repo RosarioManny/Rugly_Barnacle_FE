@@ -94,15 +94,16 @@ export const CheckCustomOrderStatus = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <h3 className="text-sm font-medium text-space_cadet/70 mb-1">Reference ID</h3>
-              <p className="text-space_cadet font-mono bg-gray-50 p-2 rounded">{orderData.reference_id}</p>
+              <p className="text-space_cadet font-mono bg-fleece/80 p-2 rounded">{orderData.reference_id}</p>
             </div>
             
             <div>
               <h3 className="text-sm font-medium text-space_cadet/70 mb-1">Status</h3>
               <div className={`px-3 py-1 rounded-full text-sm font-medium inline-block ${
-                orderData.status === 'completed' ? 'bg-green-100 text-green-800' :
-                orderData.status === 'in_progress' ? 'bg-blue-100 text-blue-800' :
-                orderData.status === 'pending' ? 'bg-yellow-100 text-yellow-800' :
+                orderData.status === 'completed' ? 'bg-midnight_green/15 text-midnight_green' :
+                orderData.status === 'in_progress' ? 'bg-breeze/50 text-robin_egg' :
+                orderData.status === 'pending' ? 'bg-space_cadet/10 text-space_cadet' :
+                orderData.status === 'canceled' ? 'bg-bittersweet/20 text-bittersweet' :
                 'bg-gray-100 text-gray-800'
               }`}>
                 {orderData.status.replace('_', ' ').toUpperCase()}
@@ -124,7 +125,7 @@ export const CheckCustomOrderStatus = () => {
 
           <div>
             <h3 className="text-sm font-medium text-space_cadet/70 mb-1">Order Description</h3>
-            <p className="text-space_cadet bg-gray-50 p-3 rounded whitespace-pre-wrap">{orderData.description}</p>
+            <p className="text-space_cadet bg-fleece/80 p-3 rounded whitespace-pre-wrap">{orderData.description}</p>
           </div>
 
           <div>
@@ -138,10 +139,10 @@ export const CheckCustomOrderStatus = () => {
             </p>
           </div>
 
-          {orderData.admin_notes && (
+          {!orderData.admin_notes && (
             <div>
-              <h3 className="text-sm font-medium text-space_cadet/70 mb-1">Admin Notes</h3>
-              <p className="text-space_cadet bg-robin_egg/20 p-3 rounded whitespace-pre-wrap">{orderData.admin_notes}</p>
+              <h3 className="text-sm font-medium text-space_cadet/70 mb-1">Tufter Alerts:</h3>
+              <p className="text-space_cadet bg-breeze/20 p-3 rounded whitespace-pre-wrap">{orderData.admin_notes}</p>
             </div>
           )}
         </div>
