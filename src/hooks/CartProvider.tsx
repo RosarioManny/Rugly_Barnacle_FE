@@ -7,6 +7,7 @@ interface CartContextType {
   cartItemCount: number;
   addItemToCart: (productId: number, quantity?: number) => Promise<void>;
   removeItemFromCart: (productId: number, quantity?: number) => Promise<void>;
+  fetchCart: () => Promise<void>;
   status: 'loading' | 'error' | 'success' | 'idle';
 }
 
@@ -46,7 +47,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       setStatus('error');
       throw err;
     }
-  }, []);
+  }, [fetchCart]);
 
   const removeItemFromCart = useCallback(async (productId: number, quantity: number = 1) => {
     try {
@@ -71,6 +72,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       value={{
       cart,
       cartItemCount,
+      fetchCart,
       status,
       addItemToCart,
       removeItemFromCart,

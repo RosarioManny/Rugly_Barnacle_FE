@@ -8,7 +8,8 @@ import {
   Portfolio, 
   CustomOrder, 
   Faq, 
-  Cart 
+  Cart,
+  Checkout
 } from "../pages";
 // import { CartProvider } from '../hooks/CartProvider';
 
@@ -30,7 +31,7 @@ export const AppRoutes = () => {
           <Route path='/shop' element={<Shop />} />
           <Route path='/cart' element={<Cart />} />
           <Route path='/shop/:id' element={<ProductDetails />}/>
-        {/* <Route path='/checkout' element={<Checkout />} /> */}
+        <Route path='/checkout' element={<Checkout />} />
         {/* <Route path='/events' element={<Events />} /> */}
       </Routes>
         {/* </CartProvider> */}

@@ -2,10 +2,11 @@ export const Spinner = ({
   width = "w-6", 
   height = "h-6", 
   borderColor = "border-majorelle",
-  borderWidth = "border-4"
+  borderWidth = "border-4",
+  loading = true
 }) => {
   return (
-    <div className="h-[100vh] justify-center flex  flex-col gap-5 items-center">
+    <div className="justify-center flex  flex-col gap-5 items-center">
       <div 
         className={`
           ${width} 
@@ -20,7 +21,9 @@ export const Spinner = ({
           scale-150
         `}
       ></div>
-      <p className="text-majorelle font-semibold text-[1.4rem] animate-pulse">Loading...</p>
+      {loading &&
+        <p className="text-majorelle font-semibold text-[1.4rem] animate-pulse">Loading...</p>
+      }
     </div>
   );
 };

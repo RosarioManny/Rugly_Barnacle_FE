@@ -42,7 +42,7 @@ export const Faq = () => {
           </ul>
         </section>
         <CtaWavesBg className="fill-mauve"/>
-        <section className="flex justify-center items-center pb-14 md:pb-36 bg-mauve">
+        <section className="flex justify-center items-center pb-14 md:pb-60 bg-mauve">
           <img 
             className="flex align-start h-10 w-10 mr-4" 
             src="/assets/design/icons/Cross_Star_White.webp" 

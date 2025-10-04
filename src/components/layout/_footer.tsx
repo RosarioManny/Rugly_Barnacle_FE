@@ -25,6 +25,7 @@ export const Footer = () => {
     {title: "FAQ", path: "faq"}, 
     {title: "portfolio", path: "portfolio"}, 
     {title: "shop", path: "shop"}, 
+    {title: "custom Order", path: "custom-order"}, 
   ];
 
   return (
@@ -106,11 +107,11 @@ export const Footer = () => {
             </ul>
           </section>
           <section className="flex justify-start w-full">
-          <img 
-            className="m-10 h-10 w-10" 
-            src="/assets/design/icons/X_Star_Teal-Blue.webp" 
-            aria-hidden="true"
-            alt="Teal Star decorator" />
+            <img 
+              className="m-10 h-10 w-10" 
+              src="/assets/design/icons/X_Star_Teal-Blue.webp" 
+              aria-hidden="true"
+              alt="Teal Star decorator" />
           </section>
         </main>
       </footer>
