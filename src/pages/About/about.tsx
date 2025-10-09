@@ -5,7 +5,7 @@ import { ShopBtn, StartOrderBtn } from "../../components/ui/buttons/index"
 export const About = () => {
 
   return (
-    <main aria-label="About Me Page">
+    <main className=" md:mb-40 mb-24 " aria-label="About Me Page">
       <Header
         title="About Me"
         tagline="Learn what Rugly Barnacle is about!"
@@ -39,7 +39,7 @@ export const About = () => {
           </div>
         </section>
         {/* CALL-TO-ACTION */}
-        <section className="py-10 md:mb-40 mb-10 flex font-medium flex-col items-center text-center ">
+        {/* <section className="py-10 md:mb-40 mb-10 flex font-medium flex-col items-center text-center ">
           <p className="m-2 font-semibold body_text">
             Need inspiration? Check out my premade rugs, too!
           </p>
@@ -59,7 +59,7 @@ export const About = () => {
           <p className="text-[.7rem]">
             (Me and my dog Hercules)
           </p>
-        </section>
+        </section> */}
     </main>
   )
 }

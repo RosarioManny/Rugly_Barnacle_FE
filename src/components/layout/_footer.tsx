@@ -114,6 +114,27 @@ export const Footer = () => {
               alt="Teal Star decorator" />
           </section>
         </main>
+        
+        {/* Creator Credit Section */}
+        <div className="border-t border-fleece/20 pt-2 pb-3">
+          <div className="flex mx-4 justify-between text-center body_text text-fleece/20">
+              <p>
+                Created by{" "}
+                <a 
+                  href="httdivs://github.com/RosarioManny" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="hover:text-breeze transition-colors duration-200 underline"
+                >
+                  Emmanuel Rosario
+                </a>
+              </p>
+              <p>
+              • Version 1.1
+              </p>
+            
+          </div>
+        </div>
       </footer>
   )
 }

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Header } from "../../components/layout/_header";
-import { ShopBtn } from "../../components/ui/buttons/index";
+// import { ShopBtn } from "../../components/ui/buttons/index";
 import { CreateCustomOrderForm } from "../../components/ui/customForm/createCustomForm";
 import { CheckCustomOrderStatus } from "../../components/ui/customForm/checkCustomOrderStatus.tsx";
-import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg";
+// import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg";
 
 export const CustomOrder = () => {
   const [activeView, setActiveView] = useState<"create" | "status">("create");
@@ -56,7 +56,7 @@ export const CustomOrder = () => {
       
       {/* CONTENT */}
       <section className="flex flex-col items-center justify-center text-center gap-6 mb-10">
-        <p className="body_text max-w-3/4">
+        <p className="body_text md:w-[50%] w-[75%] ">
           {activeView === "create" 
             ? "Ready to bring your unique vision to life? Fill out the form below with details about your custom rug idea. I'll review your request and get back to you with a quote and timeline!"
             : "Enter your order reference ID to check the current status of your custom rug order."
@@ -71,10 +71,10 @@ export const CustomOrder = () => {
         <CheckCustomOrderStatus />
       )}
       
-      <CtaWavesBg className="fill-mauve w-[100vw]" />
+      {/* <CtaWavesBg className="fill-mauve w-[100vw]" />
       <section className="bg-mauve w-full pb-14 md:pb-24 flex font-medium flex-col items-center text-center ">
-        <p className="m-2 font-semibold body_text">
-          Not ready for a custom order? Check out my premade rugs!
+        <p className="m-2 font-semibold subheading_text">
+          Not ready for a custom order? <br/> Check out my premade rugs!
         </p>
         <div className="flex flex-col gap-8 my-8 items-center ">
           <ShopBtn/>
@@ -85,7 +85,7 @@ export const CustomOrder = () => {
             alt="Cross Star Design Marker" 
           />
         </div>
-      </section>
+      </section> */}
     </main>
   );
 };

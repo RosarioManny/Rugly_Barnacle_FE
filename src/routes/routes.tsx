@@ -3,14 +3,16 @@ import {
   Home, 
   About, 
   Contact, 
-  Shop, 
-  ProductDetails, 
+  // Shop, 
+  // ProductDetails, 
   Portfolio, 
   CustomOrder, 
   Faq, 
-  Cart,
-  Checkout
+  // Cart,
+  // Checkout,
+  TempShop
 } from "../pages";
+
 // import { CartProvider } from '../hooks/CartProvider';
 
 // const ContextWrapper = useContext()
@@ -28,10 +30,11 @@ export const AppRoutes = () => {
         <Route path='/portfolio' element={<Portfolio />} />
         <Route path='/custom-order' element={<CustomOrder />} />
         <Route path='/faq' element={<Faq />} />
-          <Route path='/shop' element={<Shop />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/shop/:id' element={<ProductDetails />}/>
-        <Route path='/checkout' element={<Checkout />} />
+        <Route path='/shop' element={<TempShop />} />
+          {/* <Route path='/shop' element={<Shop />} /> */}
+          {/* <Route path='/cart' element={<Cart />} /> */}
+          {/* <Route path='/shop/:id' element={<ProductDetails />}/> */}
+        {/* <Route path='/checkout' element={<Checkout />} /> */}
         {/* <Route path='/events' element={<Events />} /> */}
       </Routes>
         {/* </CartProvider> */}

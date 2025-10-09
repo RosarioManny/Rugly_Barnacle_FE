@@ -112,13 +112,12 @@ export const OccupiedCart = ({
             className="
               group
               absolute 
-              md:top-4 md:right-2 z-10 top-3 right-3
+              z-10 top-4 right-4
               cursort-pointer rounded-full 
-              p-1.5 outline-1 outline-bittersweet 
-              bg-space_cadet 
-              md:bg-transparent
+              p-1.5
+            
               transition-all duration-200 
-              hover:bg-bittersweet/20 hover:scale-110
+              hover:bg-bittersweet/80 hover:scale-110
             
             "
             aria-label={`Remove ${product_name} from cart`}
@@ -130,7 +129,7 @@ export const OccupiedCart = ({
               <TrashIcon 
                 className="
                 size-6 md:size-7 
-                text-bittersweet 
+                text-space_cadet 
                 transition-transform duration-200" 
               /> 
             }

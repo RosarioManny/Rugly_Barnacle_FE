@@ -41,7 +41,7 @@ export  const createCustomOrder = async (orderData: CustomOrderData) => {
     formData.append('contact_info', orderData.contact_info);
 
     if (orderData.image) {
-      formData.append('image', orderData.image)
+      formData.append('images', orderData.image)
     }
     
     const response = await api.post<CustomOrderResponse>('/custom/', formData, {

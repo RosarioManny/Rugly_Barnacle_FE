@@ -1,4 +1,4 @@
-// import { CtaWavesBg } from "../../components/icons-svgs/ctaWavesBg"
+import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
 import { Header } from "../../components/layout/_header"
 import { useEffect } from "react"
 import { ReturnToTop, StartOrderBtn} from "../../components/ui/buttons"
@@ -58,7 +58,7 @@ export const Portfolio = () => {
       </section>
       
       {/* PHOTO GALLERY */}
-      <section className="pb-20 mb-20 mx-2 flex flex-1 flex-col justify-center items-center">
+      <section className=" mx-2 flex flex-1 flex-col justify-center items-center">
         <ul className="
         w-full
         grid gap-1 grid-cols-1 
@@ -101,6 +101,15 @@ export const Portfolio = () => {
           </div>
         </div>
       )}
+      <CtaWavesBg className="fill-mauve"/>
+      <section className="flex flex-col justify-center items-center md:pb-40 pb-22  bg-mauve">
+        <img 
+          className="flex align-start h-10 w-10 mb-4" 
+          src="/assets/design/icons/Cross_Star_White.webp" 
+          aria-hidden="true" 
+          alt="Cross Star Design Marker" />
+        <StartOrderBtn/>
+      </section>
       <ReturnToTop />
     </main>
   )

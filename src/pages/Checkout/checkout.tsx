@@ -92,8 +92,8 @@ export const Checkout = () => {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">
         <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-900 mb-4">Checkout</h1>
-          <p className="text-gray-600 mb-4">
+          <h1 className="text-2xl font-bold text-fleece mb-4">Checkout</h1>
+          <p className="text-fleece mb-4">
             {cartItems.length === 0 ? "Your cart is empty" : "Error loading cart"}
           </p>
           <button
@@ -108,7 +108,7 @@ export const Checkout = () => {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50">
+    <main className="min-h-screen bg-fleece">
       <Header 
         title="Checkout"
         tagline="Complete your purchase"
@@ -120,12 +120,12 @@ export const Checkout = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Checkout Form */}
           <div className="bg-white rounded-xl shadow-sm p-6">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Customer Information</h2>
+            <h2 className="text-2xl font-bold text-space_cadet mb-6">Customer Information</h2>
             
             <form onSubmit={handleSubmit} className="space-y-6">
               {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="email" className="block text-sm font-medium text-space_cadet mb-1">
                   Email Address *
                 </label>
                 <input
@@ -135,7 +135,7 @@ export const Checkout = () => {
                   required
                   value={customerInfo.email}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle focus:border-transparent"
+                  className="w-full px-3 py-2 border border-fleece rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle focus:border-transparent"
                   placeholder="your@email.com"
                 />
               </div>
@@ -143,7 +143,7 @@ export const Checkout = () => {
               {/* Name */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="firstName" className="block text-sm font-medium text-space_cadet mb-1">
                     First Name *
                   </label>
                   <input
@@ -153,11 +153,11 @@ export const Checkout = () => {
                     required
                     value={customerInfo.firstName}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle focus:border-transparent"
+                    className="w-full px-3 py-2 border border-fleece rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle focus:border-transparent"
                   />
                 </div>
                 <div>
-                  <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">
+                  <label htmlFor="lastName" className="block text-sm font-medium text-space_cadet mb-1">
                     Last Name *
                   </label>
                   <input
@@ -167,14 +167,14 @@ export const Checkout = () => {
                     required
                     value={customerInfo.lastName}
                     onChange={handleInputChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle focus:border-transparent"
+                    className="w-full px-3 py-2 border border-fleece rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle focus:border-transparent"
                   />
                 </div>
               </div>
 
               {/* Address */}
               <div>
-                <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">
+                <label htmlFor="address" className="block text-sm font-medium text-space_cadet mb-1">
                   Street Address *
                 </label>
                 <input
@@ -184,7 +184,7 @@ export const Checkout = () => {
                   required
                   value={customerInfo.address}
                   onChange={handleInputChange}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle focus:border-transparent"
+                  className="w-full px-3 py-2 border border-fleece rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle focus:border-transparent"
                   placeholder="123 Main St"
                 />
               </div>
@@ -237,7 +237,7 @@ export const Checkout = () => {
 
               {/* Payment Method Placeholder */}
               <div className="border-t pt-6">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Payment Method</h3>
+                <h3 className="text-lg font-semibold text-space_cadet mb-4">Payment Method</h3>
                 <div className="bg-gray-50 p-4 rounded-lg border-2 border-dashed border-gray-300">
                   <p className="text-center text-gray-600">
                     Stripe payment integration will be implemented here
@@ -259,7 +259,6 @@ export const Checkout = () => {
                   disabled={isProcessing}
                   className="
                     bg-majorelle text-white 
-                    border-3 border-bittersweet
                     py-3 px-4 rounded-lg font-semibold hover:bg-robin_egg transition-colors 
                     disabled:opacity-90 disabled:bg-bittersweet disabled:cursor-not-allowed"
                 >
@@ -276,7 +275,7 @@ export const Checkout = () => {
                 <button
                 
                   onClick={() => navigate('/cart')}
-                  className="w-full bg-gray-200 text-gray-700 py-3 px-4 rounded-lg font-semibold hover:bg-gray-300 transition-colors"
+                  className="w-full bg-space_cadet/50 text-white py-3 px-4 rounded-lg font-semibold hover:bg-bittersweet/80 transition-colors"
                 >
                   Return to Cart
                 </button>
@@ -286,7 +285,7 @@ export const Checkout = () => {
 
           {/* Order Summary */}
           <div className="bg-white rounded-xl shadow-sm p-6 h-fit sticky top-8">
-            <h2 className="text-2xl font-bold text-gray-900 mb-6">Order Summary</h2>
+            <h2 className="text-2xl font-bold text-space_cadet mb-6">Order Summary</h2>
             
             {/* Cart Items */}
             <div className="space-y-4 mb-6">
@@ -300,12 +299,12 @@ export const Checkout = () => {
                     />
                   )}
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-medium text-gray-900 truncate">{item.product_name}</h3>
+                    <h3 className="font-medium text-space_cadet truncate">{item.product_name}</h3>
                     <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
                     <p className="text-sm text-gray-600">{item.dimensions}</p>
                   </div>
                   <div className="text-right">
-                    <p className="font-semibold text-gray-900">
+                    <p className="font-semibold text-space_cadet">
                       ${(parseFloat(item.product_price) * item.quantity).toFixed(2)}
                     </p>
                   </div>
@@ -325,7 +324,7 @@ export const Checkout = () => {
               </div>
               <div className="flex justify-between text-sm">
                 <span>Tax:</span>
-                <span className="text-gray-600">Calculated at checkout</span>
+                <span className="text-space_cadet">Calculated at checkout</span>
               </div>
               <hr className="my-4" />
               <div className="flex justify-between text-lg font-bold">

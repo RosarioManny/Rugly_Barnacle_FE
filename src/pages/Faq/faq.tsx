@@ -3,6 +3,7 @@ import { FaqCard } from "./faqCard"
 import { ShopBtn } from "../../components/ui/buttons/btn_shop"
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
 import { faqItems } from "./faqQuestions"
+import { StartOrderBtn } from "../../components/ui/buttons"
 
 export const Faq = () => {
   
@@ -42,13 +43,13 @@ export const Faq = () => {
           </ul>
         </section>
         <CtaWavesBg className="fill-mauve"/>
-        <section className="flex justify-center items-center pb-14 md:pb-60 bg-mauve">
+        <section className="flex flex-col justify-center items-center md:pb-40 pb-22  bg-mauve">
           <img 
-            className="flex align-start h-10 w-10 mr-4" 
+            className="flex align-start h-10 w-10 mb-4" 
             src="/assets/design/icons/Cross_Star_White.webp" 
             aria-hidden="true" 
             alt="Cross Star Design Marker" />
-          <ShopBtn/>
+          <StartOrderBtn/>
         </section>
       </main>
     </>
