@@ -1,5 +1,5 @@
 import { Header } from "../../components/layout/_header"
-import { ShopBtn, StartOrderBtn } from "../../components/ui/buttons/index"
+import { StartOrderBtn } from "../../components/ui/buttons/index"
 // import { Link } from "react-router-dom"
 
 export const About = () => {

@@ -1,6 +1,6 @@
 import { Header } from "../../components/layout/_header"
 import { FaqCard } from "./faqCard"
-import { ShopBtn } from "../../components/ui/buttons/btn_shop"
+// import { ShopBtn } from "../../components/ui/buttons/btn_shop"
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
 import { faqItems } from "./faqQuestions"
 import { StartOrderBtn } from "../../components/ui/buttons"

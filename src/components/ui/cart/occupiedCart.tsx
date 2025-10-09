@@ -1,7 +1,7 @@
 import type { CartItem } from "../../../lib/api/Cart/cartServices"
 import { TrashIcon } from "../icons-svgs/SvgIcons"
 import { formatCartDate } from "../../../lib/utils/dateFormtater" 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
 interface OccupiedCartProps extends CartItem {

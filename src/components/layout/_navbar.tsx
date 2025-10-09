@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import { useDropdownHandlers } from "../../hooks/navbar"
 import { MobileNavbar } from "../ui/navbar/mobileNavbar"
-import { CartIcon } from "../ui/icons-svgs/SvgIcons"
-import { useCart } from "../../hooks/CartProvider"
+// import { CartIcon } from "../ui/icons-svgs/SvgIcons"
+// import { useCart } from "../../hooks/CartProvider"
 import { StartOrderBtn } from "../ui/buttons"
 
 const aboutSubMenu = ["about", "contact", "FAQ"]
@@ -15,7 +15,7 @@ export const NavBar = () => {
     aboutDropdownOpen
   } = useDropdownHandlers()
 
-  const { cartItemCount } = useCart()
+  // const { cartItemCount } = useCart()
 
   return (
     <nav className="
