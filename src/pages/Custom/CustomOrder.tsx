@@ -9,7 +9,7 @@ export const CustomOrder = () => {
   const [activeView, setActiveView] = useState<"create" | "status">("create");
 
   return (
-    <main aria-label="Custom Order Form" className=" flex flex-col items-center ">
+    <main aria-label="Custom Order Form" className="md:mb-40 mb-20  flex flex-col items-center ">
       <Header
         title="Custom Order"
         tagline="Bring your vision to life with a custom rug!"

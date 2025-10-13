@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { CustomOrderData } from "../../../lib/api/CustomOrder/customOrderServices";
 import { createCustomOrder } from "../../../lib/api/CustomOrder/customOrderServices";
 
@@ -16,6 +16,15 @@ export const CreateCustomOrderForm = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionResult, setSubmissionResult] = useState<{success: boolean; referenceId?: string; message?: string} | null>(null);
 
+  useEffect(() => {
+    if (submissionResult) {
+      const timer = setTimeout(() => {
+        setSubmissionResult(null)
+      }, 5000);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [submissionResult])
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -30,6 +39,19 @@ export const CreateCustomOrderForm = () => {
   const removeImage = () => {
     setImage(null);
   };
+
+  const formReset = () => {
+    setFormData({
+      customer_name: "", 
+      email: "",
+      description: "", 
+      deadline: "",
+      budget: "",
+      contact_method: "email",
+      contact_info: "",
+    });
+    removeImage()
+  }
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -54,8 +76,10 @@ export const CreateCustomOrderForm = () => {
       setSubmissionResult({
         success: true,
         referenceId: result.reference_id,
-        message: "Custom order request submitted successfully! We'll contact you within 24 hours to discuss details and finalize your order."
+        message: "Thanks! Email confirmation sent. We'll contact you within 1-2 days."
       });
+
+      formReset()
 
     } catch (error: any) {
       console.error("Submission failed:", error);
@@ -71,7 +95,7 @@ export const CreateCustomOrderForm = () => {
   return (
     <>
       {submissionResult && (
-        <div className={`fixed top-4 right-4 p-4 rounded-md z-50 ${
+        <div className={`fixed top-4 right-4 p-4 rounded-md z-50 transform-opacity duration-500 ${
           submissionResult.success ? "bg-breeze text-space_cadet" : "bg-bittersweet text-white"
         }`}>
           <div className={`font-semibold`}>
@@ -324,7 +348,7 @@ export const CreateCustomOrderForm = () => {
             </button>
           </div>
           <div className="text-center text-sm text-space_cadet/70">
-            <p>You'll receive a response within 24 hours to discuss your custom order</p>
+            <p>You'll receive a response within 1-2 buisness days to discuss your custom order</p>
           </div>
           <p className="text-xs text-space_cadet/50 text-center"> <span className="text-bittersweet"> * </span> = Required</p>
         </form>
