@@ -1,8 +1,7 @@
 import axios from "axios";
 
-const BACKEND_URL = import.meta.env.VITE_EXPRESS_BACKEND_URL || 'http://localhost:8000';
+const BACKEND_URL = import.meta.env.VITE_RENDER_BACKEND_URL;
 
-// 
 const getCookie = (name: string) => {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
