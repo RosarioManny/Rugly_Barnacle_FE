@@ -40,7 +40,7 @@ export const CustomOrder = () => {
               : "bg-gray-100 text-space_cadet hover:bg-gray-200"
           }`}
         >
-          Create Custom Order
+          Create Your Custom Rug
         </button>
         <button
           onClick={() => setActiveView("status")}
