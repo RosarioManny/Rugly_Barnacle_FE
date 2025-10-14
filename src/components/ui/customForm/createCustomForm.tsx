@@ -146,10 +146,10 @@ export const CreateCustomOrderForm = () => {
     </div>
 
     {/* NEW: Production Timeline Notice */}
-    <div className="mb-6 p-4 bg-majorelle/10 rounded-lg border-l-4 border-majorelle">
+    <div className="mb-6 p-4 bg-breeze/30 rounded-lg border-l-4 border-robin_egg">
       <div className="flex items-start gap-3">
         <div className="flex-shrink-0 mt-0.5">
-          <DangerIcon className="size-8 text-majorelle rotate-180"/>
+          <DangerIcon className="size-8 text-robin_egg rotate-180"/>
         </div>
         <div>
           <h3 className="font-semibold text-space_cadet mb-1">Production Timeline & Reference Images</h3>
