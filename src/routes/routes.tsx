@@ -3,14 +3,17 @@ import {
   Home, 
   About, 
   Contact, 
-  // Shop, 
-  // ProductDetails, 
   Portfolio, 
   CustomOrder, 
   Faq, 
-  // Cart,
-  // Checkout,
-  TempShop
+  Shop, 
+  ProductDetails, 
+  Cart,
+  Checkout,
+  // TempShop,
+  // Booking,
+  // Blog,
+  // Event
 } from "../pages";
 
 // import { CartProvider } from '../hooks/CartProvider';
@@ -30,12 +33,14 @@ export const AppRoutes = () => {
         <Route path='/portfolio' element={<Portfolio />} />
         <Route path='/custom-order' element={<CustomOrder />} />
         <Route path='/faq' element={<Faq />} />
-        <Route path='/shop' element={<TempShop />} />
-          {/* <Route path='/shop' element={<Shop />} /> */}
-          {/* <Route path='/cart' element={<Cart />} /> */}
-          {/* <Route path='/shop/:id' element={<ProductDetails />}/> */}
-        {/* <Route path='/checkout' element={<Checkout />} /> */}
+        {/* <Route path='/shop' element={<TempShop />} /> */}
+          <Route path='/shop' element={<Shop />} />
+          <Route path='/cart' element={<Cart />} />
+          <Route path='/shop/:id' element={<ProductDetails />}/>
+        <Route path='/checkout' element={<Checkout />} />
         {/* <Route path='/events' element={<Events />} /> */}
+        {/* <Route path='/blog' element={<Blog />} /> */}
+        {/* <Route path='/bookings' element={<Booking />} /> */}
       </Routes>
         {/* </CartProvider> */}
     </>

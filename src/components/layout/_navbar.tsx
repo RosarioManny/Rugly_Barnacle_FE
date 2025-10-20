@@ -1,8 +1,8 @@
 import { Link } from "react-router-dom"
 import { useDropdownHandlers } from "../../hooks/navbar"
 import { MobileNavbar } from "../ui/navbar/mobileNavbar"
-// import { CartIcon } from "../ui/icons-svgs/SvgIcons"
-// import { useCart } from "../../hooks/CartProvider"
+import { CartIcon } from "../ui/icons-svgs/SvgIcons"
+import { useCart } from "../../hooks/CartProvider"
 import { StartOrderBtn } from "../ui/buttons"
 
 const aboutSubMenu = ["about", "contact", "FAQ"]
@@ -15,7 +15,7 @@ export const NavBar = () => {
     aboutDropdownOpen
   } = useDropdownHandlers()
 
-  // const { cartItemCount } = useCart()
+  const { cartItemCount } = useCart()
 
   return (
     <nav className="
@@ -105,7 +105,7 @@ export const NavBar = () => {
       {/* RIGHT SIDE: Cart and Start Order Button */}
       <section className="flex items-center justify-center space-x-4">
         {/* Cart Button */}
-        {/* <div className="relative">
+        <div className="relative">
           <Link to="/cart"> 
             <button 
               className="group transform-all duration-400 flex-shrink-0 justify-center items-center p-3 hover:bg-majorelle/30 rounded-full transition-colors"
@@ -117,10 +117,10 @@ export const NavBar = () => {
                 group-focus:scale-110
                 transform-all duration-400
                 text-space_cadet"
-              /> */}
+              />
               
               {/* Cart Item Count Badge */}
-              {/* {cartItemCount > 0 && (
+              {cartItemCount > 0 && (
                 <span className=
                 {`absolute top-1 right-1
                   min-w-[20px] h-5
@@ -140,7 +140,7 @@ export const NavBar = () => {
               )}
             </button>
           </Link>
-        </div> */}
+        </div>
 
         {/* Start Order Button */}
         <div className="hidden md:block">
