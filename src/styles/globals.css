@@ -170,24 +170,22 @@ button {
   color: #F0F0F1;
   transition-property: all;
   transition-duration: 500ms;
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .btn_general {
   padding: .7rem;
   border-radius: .5rem;
   background-color: #5652E7;
-  font-size: 1.3rem;
-  font-weight: 600;
-  min-width: fit-content;
-  max-width: 100%; 
 }
 
 .btn_addToCart {
   padding: .5rem 1rem;
   border-radius: .5rem;
   background-color: #5652E7;
-  font-size: 1.3rem;
-  font-weight: 600;
+  
+  
 }
 
 
@@ -195,8 +193,7 @@ button {
   padding: .5rem;
   border-radius: .5rem;
   border:#5652E7 solid 3px;
-  font-size: 1.3rem;
-  font-weight: 600;
+  
 }
 
 .gradient {

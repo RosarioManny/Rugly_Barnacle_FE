@@ -3,18 +3,18 @@ import type { Product } from "../../api/Product/productservices";
 export interface FilterState {
   selectedCategory: string;
   sortBy: string;
-  // priceRange: [number, number];
   searchTerm: string;
+  // priceRange: [number, number];
   // inStockOnly: boolean;
 }
 
 export interface FilterFunctions {
   setSelectedCategory: (category: string) => void;
   setSortBy: (sortBy: string) => void;
-  // setPriceRange: (range: [number, number]) => void;
   setSearchTerm: (term: string) => void;
-  // setInStockOnly: (inStock: boolean) => void;
   clearAllFilters: () => void;
+  // setInStockOnly: (inStock: boolean) => void;
+  // setPriceRange: (range: [number, number]) => void;
 }
 
 export interface UseProductFiltersReturn {

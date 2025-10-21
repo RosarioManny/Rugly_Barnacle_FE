@@ -130,7 +130,7 @@ export const Footer = () => {
                 </a>
               </p>
               <p>
-              • Version 1.1
+              • Version 1.1.0
               </p>
             
           </div>

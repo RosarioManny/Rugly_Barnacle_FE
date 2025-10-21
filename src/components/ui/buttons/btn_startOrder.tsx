@@ -3,8 +3,8 @@ import { Link } from "react-router-dom"
 export const StartOrderBtn = () => (
   <Link to="/custom-order">
     <button className="
-      btn_general 
-      max-w-[130px] h-[55px]
+      btn_general
+      w-auto h-[55px]
       drop-shadow-sm/50
       hover:bg-robin_egg hover:scale-105
       active:bg-robin_egg active:scale-105 

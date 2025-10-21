@@ -46,7 +46,7 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
                 />
               </div>
             )}
-          <div className="flex mx-8 md:w-1/2 text-center items-center flex-col gap-6 justify-center">
+          <div className="flex mx-4 md:w-2/3 text-center items-center flex-col gap-6 justify-center">
             <p className="
             heading_text 
             justify-self-start
@@ -62,7 +62,7 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
                 {tagline}
               </p>
             )}
-            <div className="flex text-lg gap-2">
+            <div className="flex items-center justify-center gap-2">
               {btn_1 && (
                 <>
                   {btn_1}

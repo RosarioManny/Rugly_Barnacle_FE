@@ -29,6 +29,7 @@ export const Shop = () => {
     if (!hasFetched.current) {
       hasFetched.current = true;
       fetchProducts();
+      
     }
   }, []);
 
@@ -45,8 +46,8 @@ export const Shop = () => {
     }
   };
 
-  // Extract unique categories for the filter
-  const categories = Array.from(new Set(products.map(product => product.category.name)));
+  // Extract unique categories for the filter 
+  const categories = Array.from(new Set(products.map(product => product.category.name))); // <- This extracts categories from the products fetched. No products != no categories.
 
   // LOADING STATE
   if (status === 'loading') return <Spinner  />;
@@ -84,7 +85,11 @@ export const Shop = () => {
             aria-hidden="true" 
             alt="Cross Star Design Marker" />
             <h1 className="heading_text">
-              {filterState.selectedCategory === 'all' ? 'All Products' : filterState.selectedCategory.charAt(0).toUpperCase() + filterState.selectedCategory.slice(1)}
+              {filterState.selectedCategory === 'all'
+              ? 
+              'All Products' 
+              : 
+              filterState.selectedCategory.charAt(0).toUpperCase() + filterState.selectedCategory.slice(1)}
             </h1>
         </div>
         

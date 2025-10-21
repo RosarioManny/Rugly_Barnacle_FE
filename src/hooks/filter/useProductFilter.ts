@@ -8,8 +8,8 @@ export const useProductFilters = (products: Product[]): UseProductFiltersReturn 
   const [filterState, setFilterState] = useState<FilterState>({
     selectedCategory: 'all',
     sortBy: 'featured',
-    // priceRange: [0, 1000],
     searchTerm: '',
+    // priceRange: [0, 1000],
     // inStockOnly: false,
   });
 
@@ -28,15 +28,15 @@ export const useProductFilters = (products: Product[]): UseProductFiltersReturn 
     setFilterState(prev => ({ ...prev, sortBy }));
   }, []);
   
-  // PRICE 
-  // const setPriceRange = useCallback((range: [number, number]) => {
-  //   setFilterState(prev => ({ ...prev, priceRange: range }));
-  // }, []);
-
   // SEARCH BAR
   const setSearchTerm = useCallback((term: string) => {
     setFilterState(prev => ({ ...prev, searchTerm: term }));
   }, []);
+
+  // PRICE 
+  // const setPriceRange = useCallback((range: [number, number]) => {
+  //   setFilterState(prev => ({ ...prev, priceRange: range }));
+  // }, []);
 
   // STOCK
   // const setInStockOnly = useCallback((inStock: boolean) => {
@@ -47,8 +47,8 @@ export const useProductFilters = (products: Product[]): UseProductFiltersReturn 
     setFilterState({
       selectedCategory: 'all',
       sortBy: 'featured',
-      // priceRange: [0, 1000],
       searchTerm: '',
+      // priceRange: [0, 1000],
       // inStockOnly: false,
     });
   }, []);
@@ -56,10 +56,10 @@ export const useProductFilters = (products: Product[]): UseProductFiltersReturn 
   const filterFunctions = {
     setSelectedCategory,
     setSortBy,
-    // setPriceRange,
     setSearchTerm,
-    // setInStockOnly,
     clearAllFilters,
+    // setPriceRange,
+    // setInStockOnly,
   };
 
   return {

@@ -34,6 +34,7 @@ export const FilterControls: React.FC<FilterControlsProps> = ({
       return () => window.removeEventListener('scroll', toggleScrolling);
   }, [])
 
+
   return (
     <>
       {/* Search Bar Section */}
