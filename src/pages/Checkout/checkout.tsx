@@ -4,8 +4,11 @@ import { Header } from "../../components/layout/_header";
 import { Spinner } from "../../components/ui/loaders/loadingSpinner";
 import { useCart } from "../../hooks/CartProvider";
 import type { CartItem } from "../../lib/api/Cart/cartServices";
+import { useStripe } from "@stripe/react-stripe-js";
 
 export const Checkout = () => {
+  const stripe = useStripe()
+  console.log(stripe)
   const { cart, status } = useCart();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);

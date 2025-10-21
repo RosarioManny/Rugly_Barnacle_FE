@@ -38,7 +38,7 @@ export const AddToCartBtn = ({
       onClick={handleAddToCart}
       disabled={isAdding} // Disable button while adding
       className={`
-        btn_general 
+        bg-majorelle
         w-full h-[55px]
         duration-100 drop-shadow-sm/50
         hover:bg-robin_egg hover:scale-105

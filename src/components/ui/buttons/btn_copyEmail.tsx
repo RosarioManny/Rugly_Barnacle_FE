@@ -9,16 +9,16 @@ export const Emailbtn = ( { background="bg-breeze hover:bg-robin_egg hover:text-
     aria-describedby="email-address"
     aria-label="Copy Email Button"
     className=
-   {`w-fit
+    {`
+    p-2 w-fit
     drop-shadow-sm
-    rounded-2xl text-space_cadet 
+    text-space_cadet 
     flex align-center items-center
     hover:scale-105
     ${background}
-    `}
-   > 
-      <CopyIcon className="size-5 m-2 text-inherit"/>
-      <p id="email-address" className="p-2">
+    `}> 
+      <CopyIcon className="size-4 m-2"/>
+      <p id="email-address" className="text-sm">
         @theruglybarnacle@gmail.com
       </p>
     </button>

@@ -171,30 +171,11 @@ button {
   transition-property: all;
   transition-duration: 500ms;
   font-weight: 600;
-  font-size: 1.2rem;
-}
-
-.btn_general {
+  font-size: 1.19rem;
+  border-radius: .5rem;
   padding: .7rem;
-  border-radius: .5rem;
-  background-color: #5652E7;
 }
 
-.btn_addToCart {
-  padding: .5rem 1rem;
-  border-radius: .5rem;
-  background-color: #5652E7;
-  
-  
-}
-
-
-.btn_contact_us {
-  padding: .5rem;
-  border-radius: .5rem;
-  border:#5652E7 solid 3px;
-  
-}
 
 .gradient {
   background: linear-gradient(-45deg, #114C56, #202254 );

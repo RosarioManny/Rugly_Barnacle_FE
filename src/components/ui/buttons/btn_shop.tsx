@@ -4,8 +4,8 @@ import { Link } from "react-router-dom"
 export const ShopBtn = () => (
     <Link to="/shop">
       <button className="
-        btn_general 
-        max-w-[130px] h-[55px]
+        bg-majorelle
+      w-auto h-[55px]
         flex items-center gap-2 group
         drop-shadow-sm/50 duration-600 
         hover:bg-robin_egg hover:scale-105 
