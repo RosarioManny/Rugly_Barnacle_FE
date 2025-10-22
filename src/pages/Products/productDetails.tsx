@@ -1,20 +1,20 @@
 import { useState, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
 // API
-// import { useCart } from "../../hooks/useCart"
+
 import { getProduct } from "../../lib/api/Product/productservices"
 import type { Product } from "../../lib/api/Product/productservices"
 // COMPONENTS
 import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
 import { AddToCartBtn } from "../../components/ui/buttons/btn_addToCart"
-import { useCart } from "../../hooks/CartProvider"
+
 
 export const ProductDetails = () => {
   const [productDetails, setProductDetails] = useState<Product | null>(null)
   const [status, setStatus] = useState< 'loading' | 'error' | 'success' | 'idle' >('idle')
   const [cartMessage, setCartMessage] = useState<string | null>(null)
-  const { cartItemCount } = useCart()
+  
   // useParams returns an object, you need to extract the id
   const { id } = useParams<{ id: string }>()
 
@@ -55,7 +55,7 @@ export const ProductDetails = () => {
   }, [id]) // Add id as dependency  
 
   useEffect(() => {
-    console.log("Current cart item count:", cartItemCount) // Should match NavBar
+    
     productDetails ? console.log("Got it!", productDetails ) : console.log("Empty Array", productDetails)
   }, [productDetails])
 
@@ -158,13 +158,8 @@ export const ProductDetails = () => {
         )}
         <div className="flex w-full justify-center">
           <AddToCartBtn
-            quantity={1}
-            product_id={productDetails.id}
-            onError={handleErrorMsg}
-            onSuccess={handleSuccessMsg}
           />
         </div>
-        {/*TODO: Add to Cart Btn */}
       </section>
       <section className="h-fit my-4 flex flex-col gap-4">
         <img 

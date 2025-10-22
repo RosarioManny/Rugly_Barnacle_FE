@@ -2,7 +2,6 @@ import { Link } from "react-router-dom"
 import { useDropdownHandlers } from "../../hooks/navbar"
 import { MobileNavbar } from "../ui/navbar/mobileNavbar"
 import { CartIcon } from "../ui/icons-svgs/SvgIcons"
-import { useCart } from "../../hooks/CartProvider"
 import { StartOrderBtn } from "../ui/buttons"
 
 const aboutSubMenu = ["about", "contact", "FAQ"]
@@ -15,7 +14,6 @@ export const NavBar = () => {
     aboutDropdownOpen
   } = useDropdownHandlers()
 
-  const { cartItemCount } = useCart()
 
   return (
     <nav className="
@@ -109,7 +107,7 @@ export const NavBar = () => {
           <Link to="/cart"> 
             <button 
               className="group transform-all duration-400 flex-shrink-0 justify-center items-center p-3 hover:bg-majorelle/30 rounded-full transition-colors"
-              aria-label={`Cart with ${cartItemCount} items`}
+              aria-label={`Cart with  items`}
             >
               <CartIcon className="
                 size-8 md:size-10
@@ -120,8 +118,8 @@ export const NavBar = () => {
               />
               
               {/* Cart Item Count Badge */}
-              {cartItemCount > 0 && (
-                <span className=
+              
+                {/* <span className=
                 {`absolute top-1 right-1
                   min-w-[20px] h-5
                   bg-midnight_green text-fleece
@@ -135,9 +133,7 @@ export const NavBar = () => {
                   ease-in-out duration-400 transition-all
                   `}
                 >
-                  {cartItemCount > 99 ? '99+' : cartItemCount}
-                </span>
-              )}
+                </span> */}
             </button>
           </Link>
         </div>

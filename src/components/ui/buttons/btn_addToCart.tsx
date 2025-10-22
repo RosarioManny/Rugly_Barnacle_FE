@@ -1,42 +1,13 @@
-import { useCart } from "../../../hooks/CartProvider";
+
 import { useState } from "react";
 
-interface AddToCartBtnProps {
-  product_id: number;
-  quantity?: number;
-  onSuccess?: () => void;
-  onError?: (error: string) => void;
-}
 
-export const AddToCartBtn = ({ 
-    product_id, 
-    quantity = 1, 
-    onSuccess,
-    onError
-  }: AddToCartBtnProps) => {
+export const AddToCartBtn = () => {
     const [isAdding, setIsAdding] = useState(false);
-    const { addItemToCart } = useCart(); 
-    
-  const handleAddToCart = async () => {
-    try {
-      setIsAdding(true);
-      await addItemToCart(product_id, quantity);
-      onSuccess?.();
-      console.log(`Handler added x${quantity} item(s) - ID: ${product_id}, to cart`);
-    } 
-    catch (err: any) {
-      const errorMessage = err.response?.data?.error || "Error: Failed to add to cart";
-      onError?.(errorMessage);
-      console.error("Add to cart error:", errorMessage);
-    } finally {
-      setIsAdding(false);
-    }
-  };
 
   return (
     <button 
-      onClick={handleAddToCart}
-      disabled={isAdding} // Disable button while adding
+      disabled={isAdding}
       className={`
         bg-majorelle
         w-full h-[55px]
