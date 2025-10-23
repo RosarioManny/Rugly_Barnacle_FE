@@ -6,7 +6,7 @@ export const Spinner = ({
   loading = true
 }) => {
   return (
-    <div className="justify-center flex  flex-col gap-5 items-center">
+    <div className="justify-center flex flex-col gap-5 items-center">
       <div 
         className={`
           ${width} 

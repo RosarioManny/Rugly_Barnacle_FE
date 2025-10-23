@@ -3,6 +3,7 @@ import { useDropdownHandlers } from "../../hooks/navbar"
 import { MobileNavbar } from "../ui/navbar/mobileNavbar"
 import { CartIcon } from "../ui/icons-svgs/SvgIcons"
 import { StartOrderBtn } from "../ui/buttons"
+import { useCart } from "../../hooks/cart/cartProvider"
 
 const aboutSubMenu = ["about", "contact", "FAQ"]
 
@@ -14,6 +15,9 @@ export const NavBar = () => {
     aboutDropdownOpen
   } = useDropdownHandlers()
 
+  const { cart } = useCart()
+  const cartItems = cart?.items
+  console.log("Navbar Call > ",cartItems)
 
   return (
     <nav className="
@@ -118,8 +122,8 @@ export const NavBar = () => {
               />
               
               {/* Cart Item Count Badge */}
-              
-                {/* <span className=
+              {cartItems &&
+                <span className=
                 {`absolute top-1 right-1
                   min-w-[20px] h-5
                   bg-midnight_green text-fleece
@@ -130,10 +134,13 @@ export const NavBar = () => {
                   border-2 border-fleece
                   shadow-sm
                   group-hover:bg-robin_egg
-                  ease-in-out duration-400 transition-all
+                  ease-in-out duration-300 transition-all
+                  ${cartItems.length > 0 ? "" : "opacity-0"}
                   `}
                 >
-                </span> */}
+                  {cartItems.length}
+                </span>
+              }
             </button>
           </Link>
         </div>

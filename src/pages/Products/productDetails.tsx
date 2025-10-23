@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react"
 import { useParams, Link } from "react-router-dom"
 // API
-
 import { getProduct } from "../../lib/api/Product/productservices"
 import type { Product } from "../../lib/api/Product/productservices"
 // COMPONENTS
@@ -36,13 +35,17 @@ export const ProductDetails = () => {
   }
 
   const handleSuccessMsg = () => {
-    setCartMessage("Item added to cart successfully!");
-    setTimeout(() => setCartMessage(null), 3000); // Clear message after 3 seconds
+    if (status === 'success') {
+      setCartMessage("Item added to cart successfully!");
+      setTimeout(() => setCartMessage(null), 3000); // Clear message after 3 seconds
+    }
   };
 
   const handleErrorMsg = (error: string) => {
-    setCartMessage(error);
-    setTimeout(() => setCartMessage(null), 5000); // Clear message after 5 seconds
+    if (status === 'error') {
+      setCartMessage(error);
+      setTimeout(() => setCartMessage(null), 5000); // Clear message after 5 seconds
+    }
   };
 
   useEffect(() => {
@@ -157,7 +160,11 @@ export const ProductDetails = () => {
           </div>
         )}
         <div className="flex w-full justify-center">
-          <AddToCartBtn
+          <AddToCartBtn 
+            productId={Number(id)}
+            quantity={1}
+            onSuccess={() => console.log("Item added successfully!")}
+            onError={(error) => console.error("Failed to add item:", error)}
           />
         </div>
       </section>

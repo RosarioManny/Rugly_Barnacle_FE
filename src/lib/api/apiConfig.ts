@@ -1,7 +1,7 @@
-// apiConfig.ts - FIXED VERSION
 import axios from "axios";
 
 const BACKEND_URL = import.meta.env.VITE_RENDER_BACKEND_URL;
+let currentSession: string | null = null;
 
 const api = axios.create({
     baseURL: BACKEND_URL,
@@ -23,31 +23,19 @@ export const getCookie = (name: string) => {
     return cookieValue;
 };
 
-export const ensureCSRFToken = async (): Promise<void> => {
-    console.log("🔄 Initializing CSRF token via /csrf/ endpoint...");
-    try {
-        // Call your new Django CSRF endpoint
-        await api.get('/csrf/');
-        
-        // Check if token is now available
-        const token = getCookie('csrftoken');
-        if (token) {
-        console.log("== ✅ CSRF token successfully set ==", token);
-        } else {
-        console.warn("❌ CSRF token still not set after /csrf/ call");
-        }
-    } catch (error) {
-        console.error("⚠️ CSRF initialization failed:", error);
-    }
-};
+console.log("== Cookie ==",getCookie('cookie'))
+
+const detectSessionChange = () => {
+    const newSessionId = getSessionFromCookie();
+}
 // Response interceptor first
 api.interceptors.response.use(
     (response) => {
-        console.log("✅ Response received, checking for CSRF cookie");
+        
         // Check if we have a CSRF token after successful response
         const csrfToken = getCookie('csrftoken');
         if (csrfToken) {
-            console.log("🍪 CSRF token is now available in cookies");
+            console.log("CSRF token is now available in cookies");
         } 
         return response;
     },
@@ -66,7 +54,7 @@ api.interceptors.request.use((config) => {
     if (methodsThatNeedCSRF.includes(config.method?.toLowerCase() ?? '')) {
         // Just get the current CSRF token - don't try to fetch it
         const csrfToken = getCookie('csrftoken');
-        console.log(`🛡️ For ${config.method?.toUpperCase()} ${config.url}, CSRF token:`, csrfToken);
+        console.log(`🛡️ For ${config.method?.toUpperCase()} ${config.url}, CSRF token:: `, csrfToken);
         
         if (csrfToken) {
             config.headers['X-CSRFToken'] = csrfToken;
