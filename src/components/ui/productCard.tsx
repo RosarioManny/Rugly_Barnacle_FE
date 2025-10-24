@@ -1,4 +1,4 @@
-// import { useEffect } from "react"
+import { useState } from "react"
 import { Link } from "react-router-dom"
 
 interface ProductCardProps {
@@ -13,11 +13,12 @@ interface ProductCardProps {
 }
 
 export const ProductCard = ({ id, image, price, name, img_alt, dimensions, category, quantity }: ProductCardProps) => {
-  // useEffect(() => {
-  //   if(image) { 
-  //     console.log("image >> ",image)
-  //   }
-  // }, [image])
+  const [imageError, setImageError] = useState(false)
+
+  const handleImageError = () => {
+    setImageError(true)
+  }
+
   return (
     <Link to={`/shop/${id}`}>
       <li
@@ -32,13 +33,14 @@ export const ProductCard = ({ id, image, price, name, img_alt, dimensions, categ
       >
         {/* Product Content */}
         <div className=" rounded-t-xl flex-1 relative overflow-hidden">
-          {image ? 
+          {image && !imageError ? 
           (
             <img 
               className="w-full items-center flex h-[55%] object-cover group-hover:scale-105 transition-transform duration-300" 
               src={image}
               alt={img_alt} 
               loading="lazy"
+              onError={handleImageError}
             />
           ) : (
             <div className="

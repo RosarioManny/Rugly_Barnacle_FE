@@ -13,6 +13,7 @@ export const ProductDetails = () => {
   const [productDetails, setProductDetails] = useState<Product | null>(null)
   const [status, setStatus] = useState< 'loading' | 'error' | 'success' | 'idle' >('idle')
   const [cartMessage, setCartMessage] = useState<string | null>(null)
+  const [imageError, setImageError] = useState(false)
   
   // useParams returns an object, you need to extract the id
   const { id } = useParams<{ id: string }>()
@@ -48,6 +49,10 @@ export const ProductDetails = () => {
     }
   };
 
+  const handleImageError = () => {
+    setImageError(true)
+  }
+
   useEffect(() => {
     if (id) {
       fetchProduct(id)
@@ -58,8 +63,7 @@ export const ProductDetails = () => {
   }, [id]) // Add id as dependency  
 
   useEffect(() => {
-    
-    productDetails ? console.log("Got it!", productDetails ) : console.log("Empty Array", productDetails)
+    productDetails ? console.info("Got it!", productDetails ) : console.log("Empty Array", productDetails)
   }, [productDetails])
 
   if (status === 'loading') return <Spinner />
@@ -110,11 +114,13 @@ export const ProductDetails = () => {
             alt="Cross Star Design Marker" 
           />
           <div className="bg-white h-auto min-h-[25vh] size-90 max-h-[50vh] flex items-center justify-center rounded-lg ">
-            { productDetails.images && productDetails.images.length > 0 ? (
+            { productDetails.images && productDetails.images.length > 0 && !imageError ? (
               <img 
               className="object-cover p-2 "
               src={productDetails.images?.[0].image}
-              alt="" />
+              alt=""
+              onError={handleImageError}
+              />
             ) : (
               <div className="p-2 flex flex-col justify-center text-center items-center">
                 <img 
@@ -163,8 +169,8 @@ export const ProductDetails = () => {
           <AddToCartBtn 
             productId={Number(id)}
             quantity={1}
-            onSuccess={() => console.log("Item added successfully!")}
-            onError={(error) => console.error("Failed to add item:", error)}
+            onSuccess={handleSuccessMsg}
+            onError={handleErrorMsg}
           />
         </div>
       </section>

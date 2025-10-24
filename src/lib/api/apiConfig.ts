@@ -23,13 +23,22 @@ export const getCookie = (name: string) => {
     return cookieValue;
 };
 
-// Simple session detection - uses sessionid or csrftoken as session indicator
-const getSessionIdentifier = (): string | null => {
-    return getCookie('sessionid') || getCookie('csrftoken');
+// Simple session detection - uses sessionid
+const getSessionId = (): string | null => {
+    return getCookie('sessionid') 
 };
 
-const detectSessionChange = (): boolean => {
-    const newSessionId = getSessionIdentifier();
+const ensureCSRFToken = async (): Promise<void> => {
+    try {
+        await api.get('/csrf/');
+        console.log("CSRF Token ensured");
+    } catch (err) {
+        console.error("X Failed to ensure CSRF Token X", err);
+    }
+} 
+
+const handleSessionChange = async (): Promise<boolean> => {
+    const newSessionId = getSessionId();
     
     if (!currentSessionId && newSessionId) {
         // First time setting session
@@ -40,9 +49,13 @@ const detectSessionChange = (): boolean => {
     
     if (currentSessionId !== newSessionId) {
         console.log('🔄 Session changed!');
-        console.log('   Old:', currentSessionId?.substring(0, 10) + '...');
-        console.log('   New:', newSessionId?.substring(0, 10) + '...');
+        console.log('Old:', currentSessionId?.substring(0, 10) + '...');
+        console.log('New:', newSessionId?.substring(0, 10) + '...');
         currentSessionId = newSessionId;
+
+        currentSessionId = newSessionId;
+
+        await ensureCSRFToken();
         return true;
     }
     
@@ -50,51 +63,53 @@ const detectSessionChange = (): boolean => {
 };
 
 // Request interceptor with session detection
-api.interceptors.request.use((config) => {
+api.interceptors.request.use(async (config) => {
     const methodsThatNeedCSRF = ['post', 'put', 'delete', 'patch'];
-    
-    // Detect session changes for debugging
-    const sessionChanged = detectSessionChange();
-    if (sessionChanged) {
-        console.warn('⚠️ Session changed - CSRF token might be invalid');
-    }
-    
+
+    await handleSessionChange();
+
     if (methodsThatNeedCSRF.includes(config.method?.toLowerCase() ?? '')) {
         const csrfToken = getCookie('csrftoken');
-        
-        if (sessionChanged && !csrfToken) {
-            console.error('🚨 Session changed but no CSRF token available!');
-        }
-        
+
         if (csrfToken) {
-            config.headers['X-CSRFToken'] = csrfToken;
-        } else {
-            console.warn("⚠️ No CSRF token available for mutation request!");
+            config.headers['X-CSRFToken'] = csrfToken; // <- Explicitly setting the csrf token
+        } 
+        else {
+            console.warn("No CSRF Token available - Ensureing token...");
+            await ensureCSRFToken();
+            const newCSRFToken = getCookie('csrftoken');
+            if (newCSRFToken) {
+                config.headers['X-CSRFToken'] = newCSRFToken; // < Retry setting the token
+            }
         }
     }
-    
     return config;
 });
 
 // Response interceptor
 api.interceptors.response.use(
-    (response) => {
-        return response;
-    },
-    (error) => {
-        if (error.response?.status === 403) {
-            const sessionId = getSessionIdentifier();
-            console.error('🔐 CSRF/Session Error Details:');
-            console.error('   Current session:', sessionId?.substring(0, 10) + '...');
-            console.error('   URL:', error.config?.url);
-            console.error('   Method:', error.config?.method);
+    (response) => response,
+    async (error) => {
+        if (error.response?.status === 403 && error.config) {
+            console.error('X CSRF Error - attempting to refresh token and retry');
+
+            await ensureCSRFToken();
+        
+            const csrfToken = getCookie('csrftoken');
+            if (csrfToken) {
+                error.config.headers['X-CSRFToken'] = csrfToken;
+
+                console.log('Retrying request with new CSRF token')
+                return api.request(error.config)
+            }
+
         }
         return Promise.reject(error);
     }
 );
 
 // Initialize session on import
-const initialSession = getSessionIdentifier();
+const initialSession = getSessionId();
 if (initialSession) {
     currentSessionId = initialSession;
     console.log('🎯 Initial session detected:', initialSession.substring(0, 10) + '...');

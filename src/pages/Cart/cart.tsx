@@ -10,6 +10,7 @@ export const Cart = () => {
   const { cart, status, fetchCart, removeItemFromCart } = useCart();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   
+  
   useEffect(() => {
     if (cart?.items && Array.isArray(cart.items)) {
       const validItems = cart.items.filter(item => item !== null && item !== undefined) as CartItem[];
@@ -37,22 +38,24 @@ export const Cart = () => {
     );
   }
 
-  // if (status === 'error' || cart === null) {
-  //   return ( 
-  //     <div className="min-h-screen flex flex-col gap-5 items-center justify-center">
-  //       <DangerIcon className="text-bittersweet size-16 animate-pulse" />
-  //       <div className="error-message text-bittersweet font-bold text-center px-4">
-  //         Error: <br/> {"Difficulty getting cart. Check back later"}
-  //       </div>
-  //       <button 
-  //         onClick={fetchCart}
-  //         className="px-6 py-2 font-semibold bg-majorelle text-white rounded-lg hover:bg-robin_egg hover:scale-110 ease-in-out duration-300 transition-all"
-  //       >
-  //         Retry
-  //       </button>
-  //     </div>
-  //   );
-  // }
+  if (status === 'error' || cart === null) {
+    return ( 
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="bg-white p-4 rounded-lg flex flex-col justify-center items-center  gap-4">
+          <DangerIcon className="text-bittersweet size-16 animate-pulse" />
+          <div className="error-message text-space_cadet font-bold text-center px-4">
+            Error: <br/> Difficulty getting cart. <br /> Retry or check back later
+          </div>
+          <button 
+            onClick={fetchCart}
+            className="px-6 py-2 font-semibold bg-majorelle text-white rounded-lg hover:bg-robin_egg hover:scale-110 ease-in-out duration-300 transition-all"
+            >
+            Retry
+          </button>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <main className="min-h-screen bg-gray-50 py-8" aria-label="Cart Page">
@@ -61,6 +64,7 @@ export const Cart = () => {
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Shopping Cart</h1>
           <p className="text-gray-600">Review your items before checkout</p>
+          Hello
         </div>
 
         {/* Main Content */}
@@ -79,6 +83,7 @@ export const Cart = () => {
                 <span className="text-sm font-medium">Refresh Cart</span>
               </button>
             </div>
+            
 
             {/* Cart Items List */}
             {cartItems.length > 0 ? (
@@ -95,9 +100,12 @@ export const Cart = () => {
               <EmptyCart />
             )}
 
-            <div className="flex items-center justify-center gap-2 text-sm text-space_cadet/40 mt-8">
-              <DangerIcon className="size-10" />
-              <span>Cart contents are session-only and items will be lost upon leaving the site.</span>
+            <div className="flex flex-col  gap-2 text-sm text-space_cadet/40 mt-8">
+              <div className="flex items-center justify-center gap-2 ">
+                <DangerIcon className="size-10" />
+                <span>Cart contents are session-only and items may be lost upon leaving the site.</span>
+              </div>
+              <p className="mx-2 text-sm flex justify-end">Cart Id: {cart.id}</p>
             </div>
           </div>
 
@@ -132,10 +140,6 @@ export const Cart = () => {
             <div className="flex justify-center">
               <CheckoutBtn />
             </div>
-            
-            <p className="text-xs text-gray-500 mt-4 text-center">
-              Free shipping on orders over $150
-            </p>
           </div>
         </div>
 

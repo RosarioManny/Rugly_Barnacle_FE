@@ -17,7 +17,6 @@ export const NavBar = () => {
 
   const { cart } = useCart()
   const cartItems = cart?.items
-  console.log("Navbar Call > ",cartItems)
 
   return (
     <nav className="

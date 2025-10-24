@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { formatCartDate } from "../../../lib/utils/dateFormtater";
 import { TrashIcon } from "../icons-svgs/SvgIcons";
 
+
 export const EmptyCart = () => {
   return ( 
     <div className="flex flex-col gap-4 justify-center items-center my-4">
@@ -37,7 +38,12 @@ export const OccupiedCart = ({
 
   const [isRemoving, setIsRemoving] = useState(false);
   const navigate = useNavigate();
+  const [imageError, setImageError] = useState(false)
   
+  const handleImageError = () => {
+    setImageError(true)
+  }
+
   const getImageUrl = (relativePath: string) => {
     const baseUrl = import.meta.env.VITE_EXPRESS_BACKEND_URL || 'http://localhost:8000';
     return `${baseUrl}${relativePath}`
@@ -77,14 +83,15 @@ export const OccupiedCart = ({
     >
       {/* Product Image with overlay link */}
       <div className={`flex-shrink-0 relative `} >
-        { product_images?.primary ? (
+        { product_images?.primary && !imageError ? (
 
           <img 
             className="
               w-full h-40 
               md:h-32 md:w-32 lg:h-40 lg:w-40 
               rounded-lg object-cover shadow-sm"
-            src={getImageUrl(product_images?.primary)}  
+            onError={handleImageError}
+            src={getImageUrl(product_images?.primary) }  
             alt={product_name} 
           />
         ) : (

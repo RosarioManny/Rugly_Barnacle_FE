@@ -5,7 +5,7 @@ interface AddToCartBtnProps {
   productId: number;
   quantity?: number;
   onSuccess?: () => void;
-  onError?: (error: Error) => void;
+  onError?: (error: string) => void;
 }
 
 export const AddToCartBtn = ({ 
