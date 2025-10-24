@@ -12,8 +12,8 @@ import {
   Checkout,
   // TempShop,
   // Booking,
-  // Blog,
-  // Event
+  Blog,
+  Events
 } from "../pages";
 
 // import { CartProvider } from '../hooks/CartProvider';
@@ -38,8 +38,8 @@ export const AppRoutes = () => {
           <Route path='/cart' element={<Cart />} />
           <Route path='/shop/:id' element={<ProductDetails />}/>
         <Route path='/checkout' element={<Checkout />} />
-        {/* <Route path='/events' element={<Events />} /> */}
-        {/* <Route path='/blog' element={<Blog />} /> */}
+        <Route path='/events' element={<Events />} />
+        <Route path='/blog' element={<Blog />} />
         {/* <Route path='/bookings' element={<Booking />} /> */}
       </Routes>
         {/* </CartProvider> */}

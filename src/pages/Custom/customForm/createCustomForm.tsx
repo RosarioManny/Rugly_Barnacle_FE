@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import type { CustomOrderData } from "../../../lib/api/CustomOrder/customOrderServices";
 import { createCustomOrder } from "../../../lib/api/CustomOrder/customOrderServices";
-import { DangerIcon } from "../icons-svgs/SvgIcons";
+import { DangerIcon } from "../../../components/ui/icons-svgs/SvgIcons";
 
 export const CreateCustomOrderForm = () => {
   const [formData, setFormData] = useState({

@@ -5,7 +5,7 @@ import { CartIcon } from "../ui/icons-svgs/SvgIcons"
 import { StartOrderBtn } from "../ui/buttons"
 import { useCart } from "../../hooks/cart/cartProvider"
 
-const aboutSubMenu = ["about", "contact", "FAQ"]
+const aboutSubMenu = ["about", "contact", "FAQ", "blog"]
 
 export const NavBar = () => {
   const {

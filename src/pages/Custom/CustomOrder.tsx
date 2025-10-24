@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { Header } from "../../components/layout/_header";
 // import { ShopBtn } from "../../components/ui/buttons/index";
-import { CreateCustomOrderForm } from "../../components/ui/customForm/createCustomForm";
-import { CheckCustomOrderStatus } from "../../components/ui/customForm/checkCustomOrderStatus.tsx";
+import { CreateCustomOrderForm } from "./customForm/createCustomForm";
+import { CheckCustomOrderStatus } from "./customForm/checkCustomOrderStatus.tsx";
 // import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg";
 
 export const CustomOrder = () => {

@@ -4,7 +4,8 @@ import { CheckoutBtn, } from "../../components/ui/buttons";
 import { useCart } from "../../hooks/cart/cartProvider";
 import type { CartItem } from "../../lib/api/Cart/cartServices";
 import { useEffect, useState } from "react";
-import { OccupiedCart, EmptyCart } from "../../components/ui/cart/cartState";
+import { OccupiedCart, EmptyCart } from "./components/cartState";
+
 
 export const Cart = () => {
   const { cart, status, fetchCart, removeItemFromCart } = useCart();

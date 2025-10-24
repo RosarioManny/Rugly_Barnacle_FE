@@ -1,9 +1,9 @@
-import { StartOrderBtn, ShopBtn } from "../buttons/index"
+import { StartOrderBtn, ShopBtn } from "../../../components/ui/buttons";
 import type { CartItem } from "../../../lib/api/Cart/cartServices";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatCartDate } from "../../../lib/utils/dateFormtater";
-import { TrashIcon } from "../icons-svgs/SvgIcons";
+import { TrashIcon } from "../../../components/ui/icons-svgs/SvgIcons";
 
 
 export const EmptyCart = () => {
