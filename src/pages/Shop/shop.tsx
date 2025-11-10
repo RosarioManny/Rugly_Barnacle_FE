@@ -28,8 +28,7 @@ export const Shop = () => {
   useEffect(() => {
     if (!hasFetched.current) {
       hasFetched.current = true;
-      fetchProducts();
-      
+      fetchProducts(); 
     }
   }, []);
 

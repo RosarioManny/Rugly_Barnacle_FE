@@ -1,52 +1,50 @@
 import { Header } from "../../components/layout/_header"
-import { formatCartDate } from "../../lib/utils/dateFormtater"
+import { useEffect, useState } from "react"
+// import { formatCartDate } from "../../lib/utils/dateFormtater"
 import { ReturnToTop } from "../../components/ui/buttons"
-// import { BlogPost } from "./blogPost"
+import { getBlogDetails, getBlogs } from "../../lib/api/Blog/blogServices"
+import type { BlogPost } from "../../lib/api/Blog/blogServices"
 import { BlogCard } from "./components/blogCards"
-// import 
 
-export interface Blog {
-  id: number,
-  title: string,
-  description: string,
-  created_at: string,
-  tags: string[],
-}
 
-const date = new Date()
-const fomattedDate = formatCartDate(date)
-const TempBlogs = [
-  {
-    id: 1,
-    title: "My Craziest Rug Yet!",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed, illum. Earum nemo libero accusamus dicta! Pariatur autem reprehenderit sint expedita accusamus doloremque numquam earum, nihil consequuntur impedit enim quia vero?",
-    created_at: (fomattedDate),
-    tags: [ "Personal", "Rug Making", "Events", "Inspiration" ]
-  },
-  {
-    id: 2,
-    title: "The time a fan gave me inspiration!",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed, illum. Earum nemo libero accusamus dicta! Pariatur autem reprehenderit sint expedita accusamus doloremque numquam earum, nihil consequuntur impedit enim quia vero?",
-    created_at: (fomattedDate),
-    tags: [ "Rug Making", "Inspiraton"]
-  },
-  {
-    id: 3,
-    title: "Why do I create my tufts?",
-    description: "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sed, illum. Earum nemo libero accusamus dicta! Pariatur autem reprehenderit sint expedita accusamus doloremque numquam earum, nihil consequuntur impedit enim quia vero?",
-    created_at: (fomattedDate),
-    tags: [ "Personal"]
-  },
-]
+
 export const Blog = () => {
+  const [blogs, setBlogs] = useState<BlogPost[]>([]);
+  const [status, setStatus] = useState< 'loading' | 'error' | 'success' | 'idle' >('idle');
 
+  useEffect(() => {
+    fetchBlogs();
+
+    
+  }, [])
+
+  const fetchBlogs = async () => {
+    try {
+      setStatus('loading');
+      const data = await getBlogs();
+      setBlogs(data)
+      setStatus('success');
+    } catch(err) {
+      setStatus('error')
+    } finally {
+      setStatus('idle')
+    }
+  }
+
+  console.log("Checking single blog >>",blogs[0])
+  console.log("Check >>",typeof(blogs[0]?.id))
   return (
   <main className="min-h-screen bg-fleece mb-36 md:mb-48">
     <Header 
     title="Blog"
     tagline="Where I talk about Rugly Barnacle, events, ideas & more!"
     />
-
+    <section>
+      <div>
+        <p> Upcoming everts? Go to  events page  </p>
+        <p>Status:: {status}</p>
+      </div>
+    </section>
     {/* Blog List - organized by most recent */}
     <section className="max-w-4xl mx-auto px-4 py-8">
       <div className="flex mb-6 justify-center items-center ">
@@ -59,9 +57,18 @@ export const Blog = () => {
       </div>
       
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {TempBlogs.map((blog, index) => (
-          <BlogCard key={index} {...blog} />
-        ))}
+        {blogs && (
+          blogs.map((blog, idx) => (
+            <BlogCard 
+            key={idx}
+            content={blog.content}
+            title={blog.title}
+            created_at={blog.created_at}
+            tags={blog.tags}
+            id={blog.id}
+            />
+          ))
+        )}
       </div>
     </section>
     <ReturnToTop />

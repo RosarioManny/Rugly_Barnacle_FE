@@ -4,6 +4,7 @@ import { Header } from "../../components/layout/_header";
 import { CreateCustomOrderForm } from "./customForm/createCustomForm";
 import { CheckCustomOrderStatus } from "./customForm/checkCustomOrderStatus.tsx";
 // import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg";
+import { ReturnToTop } from "../../components/ui/buttons/btn_returnToTop.tsx";
 
 export const CustomOrder = () => {
   const [activeView, setActiveView] = useState<"create" | "status">("create");
@@ -34,20 +35,20 @@ export const CustomOrder = () => {
       <section className="flex gap-4 mx-2 mb-6">
         <button
           onClick={() => setActiveView("create")}
-          className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+          className={`px-6 py-3 rounded-lg font-medium duration-300 ease-in-out transition-colors ${
             activeView === "create" 
-              ? "bg-majorelle text-white" 
-              : "bg-gray-100 text-space_cadet hover:bg-gray-200"
+              ? "bg-majorelle text-fleece" 
+              : "text-space_cadet hover:bg-majorelle/10"
           }`}
         >
           Create Your Custom Rug
         </button>
         <button
           onClick={() => setActiveView("status")}
-          className={`px-6 py-3 rounded-lg font-medium transition-colors ${
+          className={`px-6 py-3 rounded-lg font-medium duration-300 ease-in-out transition-colors ${
             activeView === "status" 
-              ? "bg-majorelle text-white" 
-              : "bg-gray-100 text-space_cadet hover:bg-gray-200"
+              ? "bg-majorelle text-fleece" 
+              : "text-space_cadet hover:bg-majorelle/10"
           }`}
         >
           Check Order Status
@@ -86,6 +87,7 @@ export const CustomOrder = () => {
           />
         </div>
       </section> */}
+      <ReturnToTop />
     </main>
   );
 };

@@ -13,6 +13,7 @@ import {
   // TempShop,
   // Booking,
   Blog,
+  BlogDetails,
   Events
 } from "../pages";
 
@@ -40,6 +41,7 @@ export const AppRoutes = () => {
         <Route path='/checkout' element={<Checkout />} />
         <Route path='/events' element={<Events />} />
         <Route path='/blog' element={<Blog />} />
+        <Route path='/blog/:id' element={<BlogDetails />} />
         {/* <Route path='/bookings' element={<Booking />} /> */}
       </Routes>
         {/* </CartProvider> */}

@@ -282,11 +282,10 @@ export const CreateCustomOrderForm = () => {
           type="submit"
           disabled={isSubmitting}
           className={`
-            btn_general 
-            max-w-[130px] h-[55px]
-            flex items-center gap-2 group
-            drop-shadow-sm/50 duration-600 
-            hover:bg-robin_egg hover:scale-105 
+            bg-majorelle
+            w-auto h-[55px]
+            drop-shadow-sm
+            hover:bg-robin_egg hover:scale-105
             active:bg-robin_egg active:scale-105 
             focus:bg-robin_egg focus:scale-105
             ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}
