@@ -5,6 +5,8 @@ import { getBlogDetails, type BlogPost } from "../../lib/api/Blog/blogServices"
 import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import { getTagStyles } from "../../lib/utils/tagStyles"
+import { EtsyLogo, InstagramLogo, TikTokLogo } from "../../components/ui/icons-svgs/socialMediaIcons"
+import { socialMediaLogos } from "../../lib/utils/socialMedias"
 
 export const BlogDetails = () => {
   const [blogDetails, setBlogDetails] = useState<BlogPost | null>(null)
@@ -42,7 +44,7 @@ export const BlogDetails = () => {
     fetchBlogDetails();
   }, [id])
 
-  // const CapitalizedTag = blogDetails.tags[0].toUpperCase() + tags.slice(1)
+  
   // Loading State
   if (status === 'loading') {
     return (
@@ -159,30 +161,48 @@ export const BlogDetails = () => {
             </div>
 
             {/* Links Section */}
-            {blogDetails.links && blogDetails.links.length > 0 && (
-              <footer className="mt-8 pt-6 border-t border-sand-100">
-                <h3 className="font-semibold text-gray-900 mb-4">Related Links</h3>
-                <ul className="space-y-3">
-                  {blogDetails.links.map((link, index) => (
-                    <li key={index} className="flex items-start">
-                      <span className="text-blue-600 mr-2">•</span>
-                      <a 
-                        href={link.url} 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        className="text-blue-600 hover:text-blue-800 underline transition-colors break-words"
-                      >
-                        {link.title}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              </footer>
-            )}
+          {blogDetails.links && blogDetails.links.length > 0 && (
+            <footer className="mt-8 pt-6 border-t border-space_cadet grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 ">
+            
+                {/* Related Links Section */}
+                <div className="lg:pr-4">
+                  <h3 className="font-semibold text-space_cadet/90 mb-4 text-lg sm:text-xl">
+                    Related Links
+                  </h3>
+                  <ul className="space-y-3">
+                    {blogDetails.links.map((link, index) => (
+                      <li key={index} className="flex items-start">
+                        <span className="text-majorelle/70 mr-2 mt-1 flex-shrink-0">•</span>
+                        <a 
+                          href={link.url} 
+                          target="_blank" 
+                          rel="noopener noreferrer"
+                          className="text-majorelle/70 hover:text-majorelle underline transition-colors break-words text-sm sm:text-base"
+                        >
+                          {link.title}
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                
+                {/* Social Media Section */}
+                <div className="flex flex-col items-start md:items-end justify-end">
+                  <ul className="flex items-center justify-center md:justify-end space-x-4 sm:space-x-6 w-full">
+                    {socialMediaLogos.map(({ Social }, idx) => (
+                      <li key={idx} className="flex justify-center">
+                        <Social className="hover:text-majorelle" />
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+            </footer>
+          )}
           </article>
         ) : (
           <div className="text-center py-12">
-            <p className="text-gray-500 text-lg">No blog post found.</p>
+            <p className="text-space_cadet/60 text-lg font-semibold">No blog post found.</p>
           </div>
         )}
       </section>

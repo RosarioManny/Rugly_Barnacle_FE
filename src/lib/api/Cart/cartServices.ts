@@ -38,7 +38,7 @@ interface AddToCartResponse {
 export const getCart = async (): Promise<Cart> => {
   try {
     const response = await api.get<Cart>('/cart/');
-    console.log("✅ Cart fetched successfully:", response.data);
+    // console.log("✅ Cart fetched successfully:", response.data);
     return response.data;
   } catch (error: any) {
     console.error("❌ Failed to fetch cart:", error.response?.data || error.message);
@@ -56,7 +56,7 @@ export const addToCart = async (
       product_id: productId,
       quantity: quantity
     });
-    console.log(`✅ Added ${quantity}x product ${productId} to cart:`, response.data);
+    // console.log(`✅ Added ${quantity}x product ${productId} to cart:`, response.data);
     return response.data;
   } catch (error: any) {
     const errorMsg = error.response?.data?.error || error.message;
@@ -77,7 +77,7 @@ export const removeFromCart = async (
         quantity: quantity
       }
     });
-    console.log(`✅ Removed ${quantity}x product ${productId} from cart:`, response.data);
+    // console.log(`✅ Removed ${quantity}x product ${productId} from cart:`, response.data);
     return response.data;
   } catch (error: any) {
     const errorMsg = error.response?.data?.error || error.message;
@@ -90,7 +90,7 @@ export const removeFromCart = async (
 export const getCartItem = async (itemId: number): Promise<CartItem> => {
   try {
     const response = await api.get<CartItem>(`/cart/items/${itemId}/`);
-    console.log("✅ Cart item fetched:", response.data);
+    // console.log("✅ Cart item fetched:", response.data);
     return response.data;
   } catch (error: any) {
     console.error("❌ Failed to fetch cart item:", error.response?.data || error.message);
@@ -107,7 +107,7 @@ export const updateCartItem = async (
     const response = await api.patch<CartItem>(`/cart/items/${itemId}/`, {
       quantity: quantity
     });
-    console.log(`✅ Updated cart item ${itemId} to quantity ${quantity}:`, response.data);
+    // console.log(`✅ Updated cart item ${itemId} to quantity ${quantity}:`, response.data);
     return response.data;
   } catch (error: any) {
     const errorMsg = error.response?.data?.error || error.message;
@@ -120,7 +120,7 @@ export const updateCartItem = async (
 export const deleteCartItem = async (itemId: number): Promise<void> => {
   try {
     await api.delete(`/cart/items/${itemId}/`);
-    console.log(`✅ Deleted cart item ${itemId}`);
+    // console.log(`✅ Deleted cart item ${itemId}`);
   } catch (error: any) {
     const errorMsg = error.response?.data?.error || error.message;
     console.error("❌ Failed to delete cart item:", errorMsg);

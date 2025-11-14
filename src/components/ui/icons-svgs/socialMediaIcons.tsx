@@ -9,7 +9,10 @@ export const InstagramLogo = ({ className = "" }) => (
     viewBox="0 0 24 24"
     aria-hidden="true" 
     fill="none" 
-    className={`${className}`} 
+    className={`
+      hover:scale-110 active:scale-110 focus:scale-110 
+      pointer duration-300 ease-in-out 
+      ${className}`}
     xmlns="http://www.w3.org/2000/svg">
       <g id="SVGRepo_bgCarrier" strokeWidth="0"/>
       <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"/>
@@ -45,7 +48,10 @@ export const InstagramLogo = ({ className = "" }) => (
 export const TikTokLogo = ({ className = ""}) => (
   <Link to="https://www.tiktok.com/@theruglybarnacle" aria-label="TikTok Logo and Link">
     <svg 
-    className={`${className}`}
+    className={`
+      hover:scale-110 active:scale-110 focus:scale-110 
+      pointer duration-300 ease-in-out 
+      ${className}`}
     fill="currentColor"
     width="40px" 
     height="40px" 
@@ -77,12 +83,15 @@ export const TikTokLogo = ({ className = ""}) => (
 export const EtsyLogo = ({ className = "" }) => ( 
   <Link to="https://www.etsy.com/shop/TheRuglyBarnacle">
     <svg 
-    className={`${className}`}
+    className={`
+      hover:scale-110 active:scale-110 focus:scale-110 
+      pointer duration-300 ease-in-out 
+      ${className}`}
     fill="currentColor"
     xmlns="http://www.w3.org/2000/svg"  
     viewBox="0 0 50 50" 
-    width="40px" 
-    height="40px">
+    width="36px" 
+    height="36px">
       <path 
       d="M21,1H2A1,1,0,0,0,1,2V4A1,1,0,0,0,2,5H5A3,3,0,0,1,8,8V42a3,3,0,0,1-3,3H2a1,1,0,0,0-1,1v2a1,1,0,0,0,1,1H38.438a2,2,0,0,0,1.941-1.515l2.31-11.242A1,1,0,0,0,
       41.719,35h-2a1,1,0,0,0-.949.684l-2.709,5.742A5,5,0,0,1,31.271,45H19a3,3,0,0,1-3-3V27h8a5,5,0,0,1,5,5v1h3V16H29v2a5,5,0,0,1-5,5H16V8a3,3,0,0,1,3-3H31a5,5,0,0,

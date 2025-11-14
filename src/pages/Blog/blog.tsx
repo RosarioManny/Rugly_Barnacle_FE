@@ -179,7 +179,8 @@ export const Blog = () => {
               title={blog.title}
               created_at={blog.created_at}
               tags={blog.tags}
-              id={blog.id}
+              id={blog.id} 
+              links={[]}            
             />
           ))}
         </div>

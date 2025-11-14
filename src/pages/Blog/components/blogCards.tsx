@@ -27,7 +27,7 @@ export const BlogCard = ({ title, content, created_at, id, tags }: BlogPost) => 
         </div>
         {/* Tags to help identify */}
         <ul className="flex flex-wrap justify-start gap-2 my-3">
-          <li key={`${tags}-${id}`} className={`text-xs font-semibold rounded-full px-2 py-1 ${getTagStyles(tags)}`}>
+          <li key={`${tags}-${id}`} className={`text-xs  rounded-full px-2 py-1 ${getTagStyles(tags)}`}>
             {getTagDisplayName(tags)}
           </li>
         </ul>

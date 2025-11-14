@@ -17,7 +17,6 @@ export interface BlogPost {
 export const getBlogs = async (): Promise<BlogPost[]> => {
   try {
     const response = await api.get<BlogPost[]>('blogs/');
-    console.log("Response Data",response.data)
     return response.data
   }
   catch(err: any) {

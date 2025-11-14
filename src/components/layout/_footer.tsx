@@ -1,23 +1,16 @@
 import { Link } from "react-router-dom";
 import { CtaWavesBg } from "../ui/icons-svgs/ctaWavesBg"
-import { InstagramLogo, TikTokLogo, EtsyLogo } from "../ui/icons-svgs/socialMediaIcons"
 import { Emailbtn } from "../ui/buttons";
+import { socialMediaLogos } from "../../lib/utils/socialMedias";
 // import { NewsLetterForm } from "../ui/newsLetterForm"
-import type { FC, SVGProps } from "react"
+
 // ChangeEvent and FormEvent are effective TS types for the event.targets. 
 // Allowing TS to know what will be happening to an element. 
 // See handleChange for more.
 
-interface SocialMediaProps {
-  Social: FC<SVGProps<SVGSVGElement>>,
-}
+
 export const Footer = () => {
-  
-  const socialMedia: SocialMediaProps[] = [
-    {Social: EtsyLogo},
-    {Social: TikTokLogo},
-    {Social: InstagramLogo},
-  ];
+
 
   const links: { title: string; path: string }[] = [  
     {title: "home", path: ""}, 
@@ -53,15 +46,14 @@ export const Footer = () => {
               Follow Me!
             </h2>
             <ul className="flex space-x-6 m-2">
-              {socialMedia.map(({ Social}, idx) => (
+              {socialMediaLogos.map(({ Social }, idx) => (
                 <li key={`${Social}-${idx} group-text-fleece`}>
                   <Social  
                     className="
-                      pointer duration-300 ease-in-out
                       size-10 text-fleece 
-                      hover:text-breeze hover:scale-105 
-                      active:text-breeze active:scale-110
-                      focus:text-breeze focus:scale-105"
+                      hover:text-breeze 
+                      active:text-breeze 
+                      focus:text-breeze"
                   />
                 </li>
               ))}

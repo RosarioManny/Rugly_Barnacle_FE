@@ -14,21 +14,22 @@ export const FaqCard = ({ question, answer }: faqCardProps) => {
   return (
     <li 
     onClick={handleToggle}
-    className="h-fit  cursor-pointer  bg-fleece p-4 rounded-xl">
+    className="h-fit hover:outline-2 hover:outline-robin_egg duration-200 cursor-pointer bg-fleece p-4 rounded-xl">
       {/* QUESTION */}
       <div className="
         subheading_text 
+        
         text-md my-4 text-bold gap-4
         flex justify-between items-center"
       >
         <p>{question}</p>
-        <button 
+        <span 
           className={`
             ${isToggled ? "border-t-bittersweet rotate-x-180" : "border-t-robin_egg"} 
-            transition-transform duration-300 border-t-10 border-solid ease-in-out
+            transition-transform duration-300 border-t-10 border-solid ease-in-out w-2
             caret-down`}
         >
-        </button>
+        </span>
       </div>
       {/* ANSWER */}
       <motion.div 
@@ -43,7 +44,7 @@ export const FaqCard = ({ question, answer }: faqCardProps) => {
           delay: isToggled ? 0.15 : 0
         }}
         >
-        <p className="body_text text-gray-500">
+        <p className="body_text text-space_cadet/50">
           {answer}
         </p>
       </motion.div>
