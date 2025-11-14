@@ -7,7 +7,10 @@ export interface BlogPost {
   tags: string ,
   content: string,
   created_at: string,
-  links: string[], // <- Array of Strings
+  links: Array<{
+    title: string,
+    url: string
+  }>, // <- Array of Strings
 }
 
 // Get a list of blogs

@@ -1,28 +1,14 @@
 import { Link } from "react-router-dom";
 import type { BlogPost } from "../../../lib/api/Blog/blogServices";
-
-
+import { getTagDisplayName, getTagStyles } from "../../../lib/utils/tagStyles";
 
 export const BlogCard = ({ title, content, created_at, id, tags }: BlogPost) => {
   const truncatedContent = content.length > 150 
     ? `${content.substring(0, 150)}...` 
     : content;
 
-  const getTagStyles = (tagName: string) => {
-    switch(tagName.toLowerCase()) {
-      case 'personal':
-        return 'bg-majorelle/20 text-majorelle';
-      case 'inspiration':
-        return 'bg-robin_egg/20 text-robin_egg';
-      case 'rug making':
-        return 'bg-bittersweet/20 text-bittersweet';
-      case 'events':
-        return 'bg-midnight_green/20 text-midnight_green';
-      default:
-        return 'bg-gray-200 text-gray-700';
-    }
-  }
-  const CapitalizedTag = tags[0].toUpperCase() + tags.slice(1)
+  
+  
   return (
     <Link to={`/blog/${id}`}>
       <article className="
@@ -41,8 +27,8 @@ export const BlogCard = ({ title, content, created_at, id, tags }: BlogPost) => 
         </div>
         {/* Tags to help identify */}
         <ul className="flex flex-wrap justify-start gap-2 my-3">
-          <li key={`${tags}-${id}`} className={`text-xs rounded-full px-2 py-1 ${getTagStyles(tags)}`}>
-            {CapitalizedTag}
+          <li key={`${tags}-${id}`} className={`text-xs font-semibold rounded-full px-2 py-1 ${getTagStyles(tags)}`}>
+            {getTagDisplayName(tags)}
           </li>
         </ul>
       </article>
