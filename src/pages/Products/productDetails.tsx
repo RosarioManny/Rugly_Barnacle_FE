@@ -121,7 +121,7 @@ export const ProductDetails = () => {
               alt=""
               onError={handleImageError}
               />
-            ) : (
+              ) : (
               <div className="p-2 flex flex-col justify-center text-center items-center">
                 <img 
                   className="opacity-90 size-3/4 my-5 object-cover"
@@ -132,9 +132,7 @@ export const ProductDetails = () => {
                   Image coming Soon!
                 </p>
               </div>
-            )
-            
-
+              )
             }
           </div>
         </div>
