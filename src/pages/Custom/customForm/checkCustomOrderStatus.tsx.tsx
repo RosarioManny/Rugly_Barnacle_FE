@@ -35,23 +35,25 @@ export const CheckCustomOrderStatus = () => {
       {!orderData ? (
         // Lookup Form
         <form onSubmit={handleSubmit} className="space-y-6">
-          <div>
-            <label htmlFor="referenceId" className="block text-sm font-medium text-space_cadet mb-1">
-              Order Reference ID <span className="text-bittersweet"> * </span>
-            </label>
-            <input
-              type="text"
-              id="referenceId"
-              value={referenceId}
-              onChange={(e) => setReferenceId(e.target.value)}
-              required
-              placeholder="Enter your order reference ID"
-              className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
-            />
-            <p className="text-xs text-space_cadet/50 mt-1">
-              You should have received this ID when you submitted your order
-            </p>
-          </div>
+        <div>
+  <label htmlFor="referenceId" className="block text-sm font-medium text-space_cadet mb-1">
+    Order Reference ID <span className="text-bittersweet">*</span>
+  </label>
+  <input
+    type="text"
+    id="referenceId"
+    value={referenceId}
+    onChange={(e) => setReferenceId(e.target.value)}
+    required
+    placeholder="CUST-123ABC"
+    className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
+  />
+  <p className="text-xs text-space_cadet/50 mt-2">
+    <strong>Check order confirmation email.</strong><br/>
+    Enter the complete reference ID exactly as shown, including any dashes, letters, and numbers.<br/>
+    Example: <span className="bg-space_cadet/10 px-1">CUST-123ABC</span>
+  </p>
+</div>
 
           {error && (
             <div className="p-3 bg-bittersweet/10 border border-bittersweet rounded-md">

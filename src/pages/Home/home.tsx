@@ -4,6 +4,7 @@ import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
 import { Carousel } from "../../components/ui/carousel/Carousel"
 import { CategoryCard } from "../../components/ui/categoryCard"
 import { Header } from "../../components/layout/_header"
+import { ReturnToTop } from "../../components/ui/buttons/index"
 import { type FC, type SVGProps } from "react"
 
 
@@ -155,6 +156,7 @@ export const Home = () => {
           <ShopBtn />
         </div>
       </section>
+      <ReturnToTop />
     </main>
   )
 }

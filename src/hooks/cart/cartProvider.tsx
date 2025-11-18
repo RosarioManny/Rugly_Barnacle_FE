@@ -33,7 +33,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
       const cartData = await getCart();
       setCart(cartData);
       setStatus('success');
-      console.log('🛒 Cart loaded:', cartData);
+      // console.log('🛒 Cart loaded:', cartData);
     } catch (err: any) {
       setStatus('error');
       if (status === 'error') {

@@ -1,8 +1,31 @@
 export const TAG_DISPLAY_NAMES: {[key: string]: string} = {
-  personal: 'Personal',
-  rug_making: 'Rug Making',
-  inspiration: 'Inspration',
-  events: 'Events'
+  "personal": 'Personal',
+  "rug_making": 'Rug Making',
+  "inspiration": 'Inspration',
+  "events": 'Events',
+  "online": 'Online',
+  "workshop": 'Workshop',
+  "meet-up": 'Meet Up',
+  "venue": 'Venue',
+  "market": 'Market'
+}
+
+export const TAG_STYLES: {[key: string]: string } = {
+  // Majorelle
+  "personal": 'font-semibold bg-majorelle/90 text-white',
+  "meet-up": 'font-semibold bg-majorelle/90 text-white',
+  // Robin_egg
+  "workshop": 'font-semibold bg-robin_egg/90 text-white',
+  "inspiration": 'font-semibold bg-robin_egg/90 text-white',
+  // Bittersweet
+  "rug_making": 'font-semibold bg-bittersweet/90 text-white',
+  "venue": 'font-semibold bg-bittersweet/90 text-white',
+  // Mauve
+  "market": 'font-semibold bg-mauve/90 text-white',
+  "market2": 'font-semibold bg-mauve/90 text-white',
+  // Midnight_green
+  "online": 'font-semibold bg-space_cadet/90 text-white',
+  "events": 'font-semibold bg-space_cadet/90 text-white',
 }
 
 export const getTagDisplayName = (tagKey: string): string => {
@@ -10,16 +33,6 @@ export const getTagDisplayName = (tagKey: string): string => {
 }
 
 export const getTagStyles = (tagKey: string) => {
-    switch(tagKey) {
-      case 'personal':
-        return 'font-semibold bg-majorelle/20 text-majorelle';
-      case 'inspiration':
-        return 'font-semibold bg-robin_egg/20 text-robin_egg';
-      case 'rug_making':
-        return 'font-semibold bg-bittersweet/20 text-bittersweet';
-      case 'events':
-        return 'font-semibold bg-midnight_green/20 text-midnight_green';
-      default:
-        return 'font-semibold bg-gray-200 text-gray-700';
-    }
+    return TAG_STYLES[tagKey] || 'font-semibold bg-midnight_green/20 text-midnight_green'
   }
+

@@ -6,11 +6,11 @@ import {
   Portfolio, 
   CustomOrder, 
   Faq, 
-  Shop, 
+  // Shop, 
   ProductDetails, 
   Cart,
   Checkout,
-  // TempShop,
+  TempShop,
   // Booking,
   Blog,
   BlogDetails,
@@ -34,8 +34,8 @@ export const AppRoutes = () => {
         <Route path='/portfolio' element={<Portfolio />} />
         <Route path='/custom-order' element={<CustomOrder />} />
         <Route path='/faq' element={<Faq />} />
-        {/* <Route path='/shop' element={<TempShop />} /> */}
-          <Route path='/shop' element={<Shop />} />
+        <Route path='/shop' element={<TempShop />} />
+          {/* <Route path='/shop' element={<Shop />} /> */}
           <Route path='/cart' element={<Cart />} />
           <Route path='/shop/:id' element={<ProductDetails />}/>
         <Route path='/checkout' element={<Checkout />} />

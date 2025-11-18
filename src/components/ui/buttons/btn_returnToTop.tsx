@@ -35,8 +35,9 @@ export const ReturnToTop = () => {
         p-2 
         rounded-lg shadow-lg 
         transition-all duration-300 transform 
-        hover:bg-bittersweet hover:scale-105 hover:ring-majorelle hover:ring-2
-        active:bg-bittersweet  active:ring-majorelle active:ring-opacity-50
+        hover:bg-mauve hover:scale-105 hover:ring-majorelle hover:ring-2
+        active:bg-mauve active:ring-majorelle active:ring-opacity-50
+        focus:bg-mauve focus:ring-mauve focus:ring-opacity-50
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}
         ease-in-out
       `}

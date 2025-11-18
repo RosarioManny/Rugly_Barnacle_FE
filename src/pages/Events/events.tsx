@@ -7,7 +7,7 @@ import { BallOfYarnIcon, DangerIcon } from "../../components/ui/icons-svgs/SvgIc
 
 export const Events = () => {
   const [events, setEvents] = useState<Event[]>([]);
-  const [status, setStatus] = useState<'loading' | 'error' | 'success' | 'idle'>('success');
+  const [status, setStatus] = useState<'loading' | 'error' | 'success' | 'idle'>('idle');
   const [selectedEvent, setSelectedEvent] = useState<Event | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -58,12 +58,12 @@ export const Events = () => {
           </div>
           
           {/* Skeleton Loading */}
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {[...Array(6)].map((_, index) => (
+          <div className=" grid gap-6">
+            {[...Array(3)].map((_, index) => (
               <div key={index} className="bg-white rounded-lg shadow-sm border border-majorelle p-4 animate-pulse">
                 <div className="h-6 bg-space_cadet/30 rounded w-3/4 mb-4"></div>
                 <div className="h-4 bg-space_cadet/30 rounded w-1/4 mb-4"></div>
-                <div className="space-y-2">
+                <div className="space-y-2 ">
                   <div className="h-4 bg-space_cadet/30 rounded"></div>
                   <div className="h-4 bg-space_cadet/30 rounded w-5/6"></div>
                   <div className="h-4 bg-space_cadet/30 rounded w-4/6"></div>
@@ -127,7 +127,7 @@ export const Events = () => {
       <main className="min-h-screen bg-fleece mb-36 md:mb-48">
         <Header 
           title="Events"
-          tagline="Join Rugly Barnacle at upcoming events, workshops, and markets!"
+          tagline="Join Rugly Barnacle at upcoming events, workshops, markets and more!"
         />
         <section className="max-w-4xl mx-auto px-4 py-8">
           <div className="flex mb-6 justify-center items-center">
@@ -168,7 +168,7 @@ export const Events = () => {
       />
       
       {/* Events List */}
-    <section className="max-w-6xl mx-auto px-4 py-8">
+    <section className={`${ isModalOpen ? "overflow-y-hidden" : "overflow-y-hidden"} max-w-6xl mx-auto px-4 py-8`}>
       <div className="flex mb-6 justify-center items-center">
         <img 
           className="flex items-center mr-4 size-10" 
@@ -193,7 +193,9 @@ export const Events = () => {
 
       {/* Event Modal */}
       {isModalOpen && selectedEvent && (
-        <div className="fixed inset-0 bg-black/50 flex items-center justify-center p-4 z-50">
+        <div 
+        onClick={closeModal}
+        className="fixed inset-0 bg-space_cadet/50 flex items-center justify-center p-4 z-50">
           <div className="bg-white rounded-lg max-w-2xl w-full max-h-[90vh] overflow-y-auto">
             <div className="p-6">
               {/* Header with close button */}

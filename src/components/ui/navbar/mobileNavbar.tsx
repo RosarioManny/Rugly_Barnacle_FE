@@ -75,12 +75,6 @@ export const MobileNavbar = ( { aboutSubMenu=[]}: MobileNavbarProps) => {
             Portfolio
           </Link>
         </button>
-        {/* WIP */}
-        <button onClick={handleClick} className="flex justify-center items-center text-space_cadet focus:scale-110 hover:animate-pulse p-2 relative group pointer-cursor">
-          <Link to="/events" >
-            Events
-          </Link>
-        </button>
       </div>
     
       

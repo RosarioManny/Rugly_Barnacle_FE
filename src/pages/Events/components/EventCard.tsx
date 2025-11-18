@@ -2,6 +2,8 @@
 import type { Event } from "../../../lib/api/Event/eventServices";
 import { useState } from "react";
 import { PinIcon, CalendarIcon, DollarIcon } from "../../../components/ui/icons-svgs/SvgIcons";
+import { formatCartDate } from "../../../lib/utils/dateFormtater";
+import { getTagStyles, getTagDisplayName } from "../../../lib/utils/tagStyles";
 
 interface EventCardProps {
   event: Event;
@@ -15,14 +17,6 @@ export const EventCard = ({ event, onClick }: EventCardProps) => {
     setImageError(true);
   };
 
-  const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-      month: 'short',
-      day: 'numeric',
-      year: 'numeric'
-    });
-  };
-
   const formatTime = (dateString: string) => {
     return new Date(dateString).toLocaleTimeString('en-US', {
       hour: 'numeric',
@@ -31,16 +25,7 @@ export const EventCard = ({ event, onClick }: EventCardProps) => {
     });
   };
 
-  const getEventTypeColor = (type: string) => {
-    const colors = {
-      'online': 'bg-midnight_green/10 text-midnight_green',
-      'workshop': 'bg-robin_egg/10 text-robin_egg',
-      'meet-up': 'bg-majorelle/10 text-majorelle',
-      'venue': 'bg-bittersweet/10 text-bittersweet',
-      'market': 'bg-mauve text-space_cadet'
-    };
-    return colors[type as keyof typeof colors] || 'bg-gray-100 text-gray-800';
-  };
+
 
   return (
     <div 
@@ -49,7 +34,7 @@ export const EventCard = ({ event, onClick }: EventCardProps) => {
     >
       <div className="flex flex-col md:flex-row gap-6">
         {/* Event Image */}
-        <div className="md:w-1/3 lg:w-1/4">
+        <div className="md:w-1/3 lg:w-1/4 h-full">
           {event.image && !imageError ? (
             <img 
               className="w-full h-48 md:h-40 object-cover rounded-lg"
@@ -72,8 +57,8 @@ export const EventCard = ({ event, onClick }: EventCardProps) => {
         <div className="flex-1">
           {/* Header with Event Type and Status */}
           <div className="flex flex-wrap justify-between items-start mb-3">
-            <span className={`text-xs font-medium px-3 py-1 rounded-full ${getEventTypeColor('venue')}`}>
-              Example
+            <span className={`text-xs font-medium px-3 py-1 rounded-full ${getTagStyles(event.event_type)}`}>
+              {getTagDisplayName(event.event_type)}
             </span>
             <div className="flex gap-2">
               {event.status === 'upcoming' && (
@@ -106,7 +91,7 @@ export const EventCard = ({ event, onClick }: EventCardProps) => {
               <CalendarIcon className="w-4 h-4 mr-2 flex-shrink-0"/>
             
               <div>
-                <div>{formatDate(event.start_time)}</div>
+                <div>{formatCartDate(event.start_time)}</div>
                 <div className="text-space_cadet/70">{formatTime(event.start_time)}</div>
               </div>
             </div>
@@ -135,11 +120,11 @@ export const EventCard = ({ event, onClick }: EventCardProps) => {
           <div className="flex justify-between items-center">
             {event.registration_deadline && (
               <div className="font-semibold text-bittersweet/70  text-sm">
-                Register by: {formatDate(event.registration_deadline)}
+                Register by: {formatCartDate(event.registration_deadline)}
               </div>
             )}
             <div className="text-majorelle text-base font-semibold ml-auto">
-              Click for details →
+              Details →
             </div>
           </div>
         </div>

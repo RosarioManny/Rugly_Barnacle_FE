@@ -5,7 +5,7 @@ interface BurgerLineProps {
 }
 
 export const BurgerLine = ({ isToggled, index }: BurgerLineProps) => {
-  const lineClass = `rounded bg-space_cadet block h-1 w-10 transition-transform duration-300 ease-in-out`;
+  const lineClass = `rounded block h-1 w-10 transition-all duration-300 ease-in-out ${isToggled ?  "bg-bittersweet" : "bg-space_cadet "}`;
   const transforms = [
     isToggled ? "rotate-45 translate-y-2" : "",
     isToggled ? "opacity-0" : "opacity-100",

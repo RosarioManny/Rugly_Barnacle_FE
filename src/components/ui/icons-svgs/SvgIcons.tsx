@@ -635,23 +635,23 @@ export const CalendarIcon = ({className = ""}) => (
       d="M14 22H10C6.22876 22 4.34315 22 3.17157 20.8284C2 19.6569 2 17.7712 2 14V12C2 8.22876 2 6.34315 3.17157 5.17157C4.34315 4 6.22876 4 10 4H14C17.7712
         4 19.6569 4 20.8284 5.17157C22 6.34315 22 8.22876 22 12V14C22 17.7712 22 19.6569 20.8284 20.8284C20.1752 21.4816 19.3001 21.7706 18 21.8985" 
       stroke="currentColor" 
-      stroke-width="1.5" 
-      stroke-linecap="round"/>
+      strokeWidth="1.5" 
+      strokeLinecap="round"/>
     <path 
       d="M7 4V2.5" 
       stroke="currentColor" 
-      stroke-width="1.5" 
-      stroke-linecap="round"/>
+      strokeWidth="1.5" 
+      strokeLinecap="round"/>
     <path 
       d="M17 4V2.5" 
       stroke="currentColor" 
-      stroke-width="1.5" 
-      stroke-linecap="round"/>
+      strokeWidth="1.5" 
+      strokeLinecap="round"/>
     <path 
       d="M21.5 9H16.625H10.75M2 9H5.875" 
       stroke="currentColor" 
-      stroke-width="1.5" 
-      stroke-linecap="round"/>
+      strokeWidth="1.5" 
+      strokeLinecap="round"/>
   </svg>
 )
 export const DollarIcon = ({className = ""}) => (
@@ -665,20 +665,20 @@ export const DollarIcon = ({className = ""}) => (
     <path 
       d="M12 6V18" 
       stroke="currentColor" 
-      stroke-width="1.5" 
-      stroke-linecap="round"/>
+      strokeWidth="1.5" 
+      strokeLinecap="round"/>
     <path 
       d="M15 9.5C15 8.11929 13.6569 7 12 7C10.3431 7 9 8.11929 9 9.5C9 10.8807 10.3431 12 12 12C13.6569 12 15 13.1193 15 14.5C15 15.8807 13.6569 17 12 
         17C10.3431 17 9 15.8807 9 14.5" 
       stroke="currentColor" 
-      stroke-width="1.5" 
-      stroke-linecap="round"/>
+      strokeWidth="1.5" 
+      strokeLinecap="round"/>
     <path 
       d="M7 3.33782C8.47087 2.48697 10.1786 2 12 2C17.5228 2 22 6.47715 22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 10.1786 2.48697 8.47087 
         3.33782 7" 
       stroke="currentColor" 
-      stroke-width="1.5" 
-      stroke-linecap="round"/>
+      strokeWidth="1.5" 
+      strokeLinecap="round"/>
   </svg>
 )
 export const PinIcon = ({className = ""}) => (
