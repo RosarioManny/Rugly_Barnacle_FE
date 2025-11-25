@@ -56,7 +56,7 @@ export const OccupiedCart = ({
     try {
       setIsRemoving(true);
       if (onRemove) {
-        await onRemove(product);
+        await onRemove(product.id); // TODO: This may break the item removal. 
       }
     } catch(err) {
       console.error("Failed to remove item", err);
