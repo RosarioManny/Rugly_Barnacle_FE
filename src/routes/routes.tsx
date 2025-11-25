@@ -7,9 +7,9 @@ import {
   CustomOrder, 
   Faq, 
   // Shop, 
-  ProductDetails, 
-  Cart,
-  Checkout,
+  // ProductDetails, 
+  // Cart,
+  // Checkout,
   TempShop,
   // Booking,
   Blog,
@@ -36,9 +36,9 @@ export const AppRoutes = () => {
         <Route path='/faq' element={<Faq />} />
         <Route path='/shop' element={<TempShop />} />
           {/* <Route path='/shop' element={<Shop />} /> */}
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/shop/:id' element={<ProductDetails />}/>
-        <Route path='/checkout' element={<Checkout />} />
+          {/* <Route path='/cart' element={<Cart />} /> */}
+          {/* <Route path='/shop/:id' element={<ProductDetails />}/> */}
+        {/* <Route path='/checkout' element={<Checkout />} /> */}
         <Route path='/events' element={<Events />} />
         <Route path='/blog' element={<Blog />} />
         <Route path='/blog/:id' element={<BlogDetails />} />
