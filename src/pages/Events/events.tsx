@@ -1,7 +1,7 @@
 import { Header } from "../../components/layout/_header"
 import { useEffect, useState } from "react"
 import { ReturnToTop } from "../../components/ui/buttons"
-import { type Event, getEventDetails, getEvents } from "../../lib/api/Event/eventServices"
+import { type Event, getEvents } from "../../lib/api/Event/eventServices"
 import { EventCard } from "./components/EventCard"
 import { BallOfYarnIcon, DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
 

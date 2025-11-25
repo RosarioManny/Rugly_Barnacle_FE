@@ -5,12 +5,9 @@ import { Footer } from './components/layout/_footer'
 import { SmoothScrollToTop } from './hooks/navbar/smoothScrollToTop'
 import { CartProvider } from './hooks/cart/cartProvider'
 // import { useCart } from './hooks/cart/cartProvider'
-import { useEffect } from 'react'
+// import { useEffect } from 'react'
 
 function App() {
-  // useEffect(() => {
-  //   const cart = CartProvider.cart
-  // })
 
   return (
     <BrowserRouter>

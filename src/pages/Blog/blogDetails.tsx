@@ -5,7 +5,6 @@ import { getBlogDetails, type BlogPost } from "../../lib/api/Blog/blogServices"
 import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import { getTagStyles } from "../../lib/utils/tagStyles"
-import { EtsyLogo, InstagramLogo, TikTokLogo } from "../../components/ui/icons-svgs/socialMediaIcons"
 import { socialMediaLogos } from "../../lib/utils/socialMedias"
 
 export const BlogDetails = () => {
