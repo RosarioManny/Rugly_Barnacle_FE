@@ -4,6 +4,7 @@ import { ReturnToTop } from "../../components/ui/buttons"
 import { type Event, getEvents } from "../../lib/api/Event/eventServices"
 import { EventCard } from "./components/EventCard"
 import { BallOfYarnIcon, DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
+import { p } from "framer-motion/client"
 
 export const Events = () => {
   const [events, setEvents] = useState<Event[]>([]);
@@ -121,45 +122,6 @@ export const Events = () => {
     )
   }
 
-  // Empty State
-  if (status === 'success' && events.length === 0) {
-    return (
-      <main className="min-h-screen bg-fleece mb-36 md:mb-48">
-        <Header 
-          title="Events"
-          tagline="Join Rugly Barnacle at upcoming events, workshops, markets and more!"
-        />
-        <section className="max-w-4xl mx-auto px-4 py-8">
-          <div className="flex mb-6 justify-center items-center">
-            <img 
-              className="flex items-center mr-4 size-10" 
-              src="/assets/design/icons/X_Star_Teal-Blue.webp" 
-              aria-hidden="true" 
-              alt="Cross Star Design Marker" 
-            />
-            <h1 className="text-3xl font-bold text-space_cadet">Upcoming Events</h1>
-          </div>
-          
-          <div className="text-center py-4">
-            <div className="bg-majorelle/10 border border-majorelle rounded-lg p-10 max-w-md mx-auto">
-              <div className="flex justify-center mb-4 ">
-                <BallOfYarnIcon className="yarn-animation fill-space_cadet"/>
-              </div>
-              <h2 className="text-xl font-semibold text-space_cadet mb-2">
-                No Events Scheduled
-              </h2>
-              <p className="text-space_cadet">
-                Check back soon for upcoming events and workshops!
-              </p>
-            </div>
-          </div>
-        </section>
-        <ReturnToTop />
-      </main>
-    )
-  }
-
-  // Success State
   return (
     <main className="min-h-screen bg-fleece mb-36 md:mb-48">
       <Header 
@@ -178,17 +140,34 @@ export const Events = () => {
         />
         <h1 className="text-3xl font-bold text-space_cadet">Upcoming Events</h1>
       </div>
+      {events.length === 0 ? 
+      (
+        <div className="text-center py-4">
+            <div className="bg-majorelle/10 border border-majorelle rounded-lg p-10 max-w-md mx-auto">
+              <div className="flex justify-center mb-4 ">
+                <BallOfYarnIcon className="yarn-animation fill-space_cadet"/>
+              </div>
+              <h2 className="text-xl font-semibold text-space_cadet mb-2">
+                No Events Scheduled
+              </h2>
+              <p className="text-space_cadet">
+                Check back soon for upcoming events and workshops!
+              </p>
+            </div>
+          </div>
+      ) : (
+
+        <div className="space-y-6">
+          {events.map((event, idx) => (
+            <EventCard 
+              key={event.id || idx}
+              event={event}
+              onClick={() => handleEventClick(event)}
+            />
+          ))}
+        </div>
+      )}
       
-      {/* Single column layout for full-width cards */}
-      <div className="space-y-6">
-        {events.map((event, idx) => (
-          <EventCard 
-            key={event.id || idx}
-            event={event}
-            onClick={() => handleEventClick(event)}
-          />
-        ))}
-      </div>
     </section>
 
       {/* Event Modal */}

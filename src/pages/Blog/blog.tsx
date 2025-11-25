@@ -12,7 +12,6 @@ export const Blog = () => {
 
   useEffect(() => {
     fetchBlogs();
-    console.log(blogs.length)
 
   }, [])
 
@@ -113,43 +112,6 @@ export const Blog = () => {
     )
   }
 
-  // Empty State
-  if (status === 'success' && blogs.length === 0) {
-    return (
-      <main className="min-h-screen bg-fleece mb-36 md:mb-48">
-        <Header 
-          title="Blog"
-          tagline="Where I talk about Rugly Barnacle, events, ideas & more!"
-        />
-        <section className="max-w-4xl mx-auto px-4 py-8">
-          <div className="flex mb-6 justify-center items-center">
-            <img 
-              className="flex items-center mr-4 size-10" 
-              src="/assets/design/icons/X_Star_Teal-Blue.webp" 
-              aria-hidden="true" 
-              alt="Cross Star Design Marker" 
-            />
-            <h1 className="text-3xl font-bold text-space_cadet">The Rugly Blogs</h1>
-          </div>
-          
-          <div className="text-center py-4">
-            <div className="bg-majorelle/10 border border-majorelle rounded-lg p-10 max-w-md mx-auto">
-              <div className="flex justify-center mb-4 ">
-                <BallOfYarnIcon className="yarn-animation fill-space_cadet"/>
-              </div>
-              <h2 className="text-xl font-semibold text-space_cadet mb-2">
-                No Blog Posts Yet
-              </h2>
-              <p className="text-space_cadet">
-                Check back soon for new articles and updates!
-              </p>
-            </div>
-          </div>
-        </section>
-        <ReturnToTop />
-      </main>
-    )
-  }
 
   // Success State
   return (
@@ -170,20 +132,37 @@ export const Blog = () => {
           />
           <h1 className="text-3xl font-bold text-space_cadet">The Rugly Blogs</h1>
         </div>
-        
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {blogs.map((blog, idx) => (
-            <BlogCard 
-              key={blog.id || idx}
-              content={blog.content}
-              title={blog.title}
-              created_at={blog.created_at}
-              tags={blog.tags}
-              id={blog.id} 
-              links={[]}            
-            />
-          ))}
-        </div>
+        {blogs.length === 0 ? 
+          (
+            <div className="text-center py-4">
+            <div className="bg-majorelle/10 border border-majorelle rounded-lg p-10 max-w-md mx-auto">
+              <div className="flex justify-center mb-4 ">
+                <BallOfYarnIcon className="yarn-animation fill-space_cadet"/>
+              </div>
+              <h2 className="text-xl font-semibold text-space_cadet mb-2">
+                No Blog Posts Yet
+              </h2>
+              <p className="text-space_cadet">
+                Check back soon for new articles and updates!
+              </p>
+            </div>
+          </div>
+          ) : (
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {blogs.map((blog, idx) => (
+                <BlogCard 
+                  key={blog.id || idx}
+                  content={blog.content}
+                  title={blog.title}
+                  created_at={blog.created_at}
+                  tags={blog.tags}
+                  id={blog.id} 
+                  links={[]}            
+                />
+              ))}
+            </div>
+          ) 
+        }
       </section>
       <ReturnToTop />
     </main>
