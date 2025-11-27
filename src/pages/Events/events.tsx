@@ -4,7 +4,6 @@ import { ReturnToTop } from "../../components/ui/buttons"
 import { type Event, getEvents } from "../../lib/api/Event/eventServices"
 import { EventCard } from "./components/EventCard"
 import { BallOfYarnIcon, DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
-import { p } from "framer-motion/client"
 
 export const Events = () => {
   const [events, setEvents] = useState<Event[]>([]);

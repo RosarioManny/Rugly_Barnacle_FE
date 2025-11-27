@@ -4,7 +4,7 @@ export const StartOrderBtn = () => (
   <Link to="/custom-order">
     <button className="
       bg-majorelle
-      w-auto h-[55px]
+      w-auto h-[56px]
       drop-shadow-sm
       hover:bg-robin_egg hover:scale-105
       active:bg-robin_egg active:scale-105 

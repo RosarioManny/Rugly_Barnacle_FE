@@ -62,9 +62,9 @@ export const ProductDetails = () => {
     }
   }, [id]) // Add id as dependency  
 
-  useEffect(() => {
-    productDetails ? console.info("Got it!", productDetails ) : console.log("Empty Array", productDetails)
-  }, [productDetails])
+  // useEffect(() => {
+  //   productDetails ? console.info("Got it!", productDetails ) : console.log("Empty Array", productDetails)
+  // }, [productDetails])
 
   if (status === 'loading') return <Spinner />
   

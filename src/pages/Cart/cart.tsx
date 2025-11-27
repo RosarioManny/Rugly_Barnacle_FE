@@ -65,19 +65,18 @@ export const Cart = () => {
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Shopping Cart</h1>
           <p className="text-gray-600">Review your items before checkout</p>
-          Hello
         </div>
 
         {/* Main Content */}
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Cart Items Section */}
           <div className="flex-1 bg-white rounded-xl shadow-sm p-6">
-            <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+            <div className="flex flex-row justify-between items-center mb-6 gap-4">
               <h2 className="text-xl font-semibold text-gray-900">
-                Your Items: <b className="text-majorelle">{cartItems.length}</b>
+                Items: <b className="text-majorelle">{cartItems.length}</b>
               </h2>
               <button 
-                className="group flex items-center gap-2 text-gray-600 hover:text-majorelle transition-colors duration-200"
+                className="group bg-space_cadet/10 flex items-center gap-2 text-space_cadet/80 hover:bg-majorelle/20 hover:text-majorelle transition-all duration-200"
                 onClick={fetchCart}
               > 
                 <RefreshIcon className="size-5 group-hover:-rotate-360 transition-transform duration-900" />
