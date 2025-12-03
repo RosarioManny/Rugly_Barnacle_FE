@@ -6,6 +6,7 @@ import { Spinner } from '../../components/ui/loaders/loadingSpinner';
 import { DangerIcon } from '../../components/ui/icons-svgs/SvgIcons';
 import { OrderSummary } from './OrderSummary/OrderSummary';
 import { type CartItem } from '../../lib/api/Cart/cartServices';
+import { createCheckout } from '../../lib/api/Stripe/stripeservices';
 
 export const CheckoutPage = () => {
   const { cart, status, fetchCart } = useCart();
@@ -22,14 +23,14 @@ export const CheckoutPage = () => {
     }
   }, [cart]);
 
-  const subtotal = cart?.total || 0;
-  const shippingCost = 4.99; // Fixed or calculated from backend
-  const taxRate = 0.08;
-  const taxAmount = subtotal * taxRate;
+  const subtotal = cart?.total || 0
+  const shippingCost = 4.99; //TODO:: Fixed or calculated from backend
+  const taxRate = 0.08; //TODO:: Calculated via stripe
+  const taxAmount = subtotal * taxRate; //TODO:: Calculated via stripe
   const totalAmount = subtotal + shippingCost + taxAmount;
 
   const handleStripeCheckout = async () => {
-    if (!cart || cartItems.length === 0) {
+    if(!cart || cartItems.length === 0) {
       alert('Your cart is empty');
       return;
     }
@@ -37,45 +38,19 @@ export const CheckoutPage = () => {
     setIsProcessing(true);
 
     try {
-      // Prepare data for Stripe Checkout session
-      const checkoutData = {
-        cartId: cart.id,
-        items: cartItems.map(item => ({
-          product_id: item.product.id,
-          product_name: item.product_name,
-          quantity: item.quantity,
-          price: parseFloat(item.product_price),
-          image: item.product_images?.primary
-        })),
-        totalAmount: totalAmount,
-        successUrl: `${window.location.origin}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-        cancelUrl: `${window.location.origin}/cart`
-      };
+      const sessionData = await createCheckout();
 
-      // Call your backend to create Stripe Checkout session
-      const response = await fetch('/api/create-checkout-session', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(checkoutData)
-      });
-
-      const session = await response.json();
-
-      if (session.id) {
-        // Redirect to Stripe Checkout
-        window.location.href = session.url;
+      if(sessionData.checkout_url) {
+        window.location.href = sessionData.checkout_url;
       } else {
-        throw new Error('Failed to create checkout session');
+        throw new Error('No checkout URL recieved')
       }
-
     } catch (error) {
-      console.error('Checkout error:', error);
-      alert('There was an error starting checkout. Please try again.');
-      setIsProcessing(false);
+        console.error('Checkout error:', error);
+        alert('There was an error starting checkout. Please try again.');
+        setIsProcessing(false);
     }
-  };
+  }
 
   if (status === 'loading' || isProcessing) {
     return (
@@ -149,17 +124,17 @@ export const CheckoutPage = () => {
           {/* Payment Section */}
           <div className="w-full lg:w-96">
             <div className="bg-white rounded-xl shadow-md p-6 h-fit sticky top-8">
-              <h2 className="text-xl font-semibold text-gray-900 mb-4">Complete Purchase</h2>
+              <h2 className="text-xl font-semibold text-space_cadet/90 mb-4">Complete Purchase</h2>
               
               {/* Security Badges */}
-              <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+              <div className="mb-6 p-4 bg-fleece/60 rounded-lg">
                 <div className="flex items-center justify-center gap-4 mb-3">
-                  <div className="text-xs text-gray-600">Secure checkout with</div>
-                  <div className="font-bold text-gray-900">Stripe</div>
+                  <div className="text-xs text-space_cadet/60">Secure checkout with</div>
+                  <div className="font-bold text-space_cadet/90">Stripe</div>
                 </div>
                 <div className="flex justify-center gap-3">
-                  <div className="text-xs text-gray-500"> - SSL Encrypted</div>
-                  <div className="text-xs text-gray-500"> - PCI Compliant</div>
+                  <div className="text-xs text-space_cadet/50"> - SSL Encrypted</div>
+                  <div className="text-xs text-space_cadet/50"> - PCI Compliant</div>
                 </div>
               </div>
 
@@ -167,14 +142,17 @@ export const CheckoutPage = () => {
               <button
                 onClick={handleStripeCheckout}
                 disabled={isProcessing}
-                className="w-full bg-majorelle hover:bg-robin_egg text-white font-bold py-4 px-6 rounded-lg transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-majorelle 
+                hover:bg-robin_egg text-white font-bold py-4 px-6 rounded-lg 
+                transition-colors duration-200 
+                disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {isProcessing ? 'Redirecting to Secure Checkout...' : 'Proceed Checkout'}
               </button>
 
               {/* Trust Signals */}
               <div className="mt-4 text-center">
-                <p className="text-xs text-gray-500">
+                <p className="text-xs text-space_cadet/50">
                   You'll be redirected to Stripe to complete your payment securely
                 </p>
               </div>

@@ -125,7 +125,7 @@ export const NavBar = () => {
                 <span className=
                 {`absolute top-1 right-1
                   min-w-[20px] h-5
-                  bg-midnight_green text-fleece
+                  bg-midnight_green/90 text-fleece
                   rounded-full
                   text-xs font-bold
                   flex items-center justify-center
