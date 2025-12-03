@@ -100,18 +100,18 @@ export const CheckoutPage = () => {
   }
 
   return (
-    <main className="min-h-screen bg-gray-50 py-8" aria-label="Checkout Page">
-      <div className="container mx-auto px-4 max-w-7xl">
+    <main className="min-h-screen py-8 mb-20" aria-label="Checkout Page">
+      <div className="mx-auto px-4 max-w-7xl">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Checkout</h1>
-          <p className="text-gray-600">Review your order and proceed to payment</p>
+          <h1 className="text-3xl md:text-4xl font-bold text-space_cadet/90 mb-2">Checkout</h1>
+          <p className="text-space_cadet/60">Review your order and proceed to payment</p>
         </div>
 
         {/* Checkout Content */}
         <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
           {/* Order Summary */}
-          <div className="flex-1">
+          <div className="flex-1 max-w-5xl mx-auto ">
             <OrderSummary 
               cartItems={cartItems}
               subtotal={subtotal}
@@ -122,19 +122,19 @@ export const CheckoutPage = () => {
           </div>
 
           {/* Payment Section */}
-          <div className="w-full lg:w-96">
+          <div className="flex-1 max-w-5xl mx-auto ">
             <div className="bg-white rounded-xl shadow-md p-6 h-fit sticky top-8">
               <h2 className="text-xl font-semibold text-space_cadet/90 mb-4">Complete Purchase</h2>
               
               {/* Security Badges */}
               <div className="mb-6 p-4 bg-fleece/60 rounded-lg">
                 <div className="flex items-center justify-center gap-4 mb-3">
-                  <div className="text-xs text-space_cadet/60">Secure checkout with</div>
-                  <div className="font-bold text-space_cadet/90">Stripe</div>
+                  <div className="text-sm text-space_cadet/60">Secure checkout with</div>
+                  <div className="text-xl font-bold text-majorelle/90">Stripe</div>
                 </div>
                 <div className="flex justify-center gap-3">
-                  <div className="text-xs text-space_cadet/50"> - SSL Encrypted</div>
-                  <div className="text-xs text-space_cadet/50"> - PCI Compliant</div>
+                  <div className="text-sm text-space_cadet/50"> - SSL Encrypted</div>
+                  <div className="text-sm text-space_cadet/50"> - PCI Compliant</div>
                 </div>
               </div>
 
@@ -142,7 +142,8 @@ export const CheckoutPage = () => {
               <button
                 onClick={handleStripeCheckout}
                 disabled={isProcessing}
-                className="w-full bg-majorelle 
+                className="
+                w-full bg-majorelle 
                 hover:bg-robin_egg text-white font-bold py-4 px-6 rounded-lg 
                 transition-colors duration-200 
                 disabled:opacity-50 disabled:cursor-not-allowed"

@@ -17,7 +17,7 @@ import {
   Blog,
   BlogDetails,
   Events,
-  IncorrectPath
+  CatchAll
 } from "../pages";
 import { CartProvider } from '../hooks/cart/cartProvider';
 
@@ -44,7 +44,7 @@ export const AppRoutes = () => {
         <Route path='/blog' element={<Blog />} />
         <Route path='/blog/:id' element={<BlogDetails />} />
         {/* <Route path='/bookings' element={<Booking />} /> */}
-        <Route path='/*' element={<IncorrectPath />} />
+        <Route path='/*' element={<CatchAll />} />
       </Routes>
         </CartProvider>
     </>

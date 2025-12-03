@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { DangerIcon } from '../../components/ui/icons-svgs/SvgIcons';
 
-export const IncorrectPath = () => {
+export const CatchAll = () => {
 
   const params = useParams();
   const IncorrectPath = params['*'] || 'the requested';
