@@ -4,6 +4,7 @@ import { useCart } from "../../../hooks/cart/cartProvider";
 interface AddToCartBtnProps {
   productId: number;
   quantity?: number;
+  isAvailable: boolean;
   onSuccess?: () => void;
   onError?: (error: string) => void;
 }
@@ -12,7 +13,8 @@ export const AddToCartBtn = ({
   productId, 
   quantity = 1, 
   onSuccess,
-  onError 
+  onError,
+  isAvailable = true
 }: AddToCartBtnProps) => {
   const [isAdding, setIsAdding] = useState(false);
   const { addItemToCart } = useCart();
@@ -33,7 +35,7 @@ export const AddToCartBtn = ({
   return (
     <button 
       onClick={handleAddToCart}
-      disabled={isAdding}
+      disabled={isAdding || !isAvailable}
       className={`
         bg-majorelle
         w-full h-[55px]

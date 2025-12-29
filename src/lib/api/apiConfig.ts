@@ -37,7 +37,7 @@ const ensureCSRFToken = async (): Promise<void> => {
     }
 } 
 
-const handleSessionChange = async (): Promise<boolean> => {
+export const handleSessionChange = async (): Promise<boolean> => {
     const newSessionId = getSessionId();
     
     if (!currentSessionId && newSessionId) {

@@ -4,17 +4,12 @@ import { type CartItem } from "../../../lib/api/Cart/cartServices";
 interface OrderSummaryProps {
   cartItems: CartItem[];
   subtotal: number;
-  shippingCost: number;
-  taxAmount: number;
-  totalAmount: number;
 }
 
 export const OrderSummary = ({
   cartItems,
   subtotal,
-  shippingCost,
-  taxAmount,
-  totalAmount
+
 }: OrderSummaryProps) => {
   return (
     <div className="bg-white rounded-xl shadow-sm p-6">
@@ -50,13 +45,6 @@ export const OrderSummary = ({
                     />
                   </>
                 )}
-                {/* {item.product_images?.primary && (
-                  <img 
-                    src={item.product_images.primary} 
-                    alt={item.product_name}
-                    className="w-full h-full object-cover"
-                  />
-                )} */}
               </div>
               <div className="flex-1 min-w-0">
                 <h4 className="text-sm font-medium text-gray-900 truncate">
@@ -81,16 +69,16 @@ export const OrderSummary = ({
           </div>
           <div className="flex justify-between text-sm">
             <span>Shipping:</span>
-            <span>${shippingCost.toFixed(2)}</span>
+            <span className="text-bittersweet">Calculated in Stripe </span>
           </div>
           <div className="flex justify-between text-sm">
             <span>Tax:</span>
-            <span>${taxAmount.toFixed(2)}</span>
+            <span className="text-bittersweet">Calculated in Stripe </span>
           </div>
           <hr className="my-4" />
           <div className="flex justify-between text-lg font-bold">
-            <span>Total:</span>
-            <span>${totalAmount.toFixed(2)}</span>
+            <span>Subtotal:</span>
+            <span>${subtotal.toFixed(2)}</span>
           </div>
         </div>
       </div>

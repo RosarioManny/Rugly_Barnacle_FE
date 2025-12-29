@@ -1,3 +1,4 @@
+import { p } from "framer-motion/client"
 import { useState } from "react"
 import { Link } from "react-router-dom"
 
@@ -63,7 +64,10 @@ export const ProductCard = ({ id, image, price, name, img_alt, dimensions, categ
           </div>
           <div className="flex justify-end items-center m-2">
             {quantity ? (
-              <p className="font-bold text-md ">${price}</p> 
+              <div className="w-full flex justify-between items-center"> 
+                <p> <span className="text-majorelle"> {quantity}x </span> available</p>
+                <p className="font-bold text-md ">  ${price}</p> 
+              </div>
             ) : (
               <p className="font-bold text-bittersweet">SOLD</p>
             )

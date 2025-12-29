@@ -19,13 +19,13 @@ import {
   Events,
   CatchAll
 } from "../pages";
-import { CartProvider } from '../hooks/cart/cartProvider';
+// import { CartProvider } from '../hooks/cart/cartProvider';
 
 export const AppRoutes = () => {
 
   return (
     <>
-        <CartProvider>
+        {/* <CartProvider> */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
@@ -38,7 +38,7 @@ export const AppRoutes = () => {
           <Route path='/cart' element={<Cart />} />
           <Route path='/shop/:id' element={<ProductDetails />}/>
         <Route path='/checkout' element={<CheckoutPage />} />
-            <Route path='/checkout/success' element={<CheckoutSuccessPage />} />
+            <Route path='/checkout/success/' element={<CheckoutSuccessPage />} />
             <Route path='/checkout/cancel' element={<CheckoutCancelPage />} /> 
         <Route path='/events' element={<Events />} />
         <Route path='/blog' element={<Blog />} />
@@ -46,7 +46,7 @@ export const AppRoutes = () => {
         {/* <Route path='/bookings' element={<Booking />} /> */}
         <Route path='/*' element={<CatchAll />} />
       </Routes>
-        </CartProvider>
+        {/* </CartProvider> */}
     </>
   )
 }

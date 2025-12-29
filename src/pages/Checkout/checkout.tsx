@@ -8,6 +8,7 @@ import { OrderSummary } from './OrderSummary/OrderSummary';
 import { type CartItem } from '../../lib/api/Cart/cartServices';
 import { createCheckout } from '../../lib/api/Stripe/stripeservices';
 
+
 export const CheckoutPage = () => {
   const { cart, status, fetchCart } = useCart();
   const navigate = useNavigate();
@@ -23,11 +24,8 @@ export const CheckoutPage = () => {
     }
   }, [cart]);
 
-  const subtotal = cart?.total || 0
-  const shippingCost = 4.99; //TODO:: Fixed or calculated from backend
-  const taxRate = 0.08; //TODO:: Calculated via stripe
-  const taxAmount = subtotal * taxRate; //TODO:: Calculated via stripe
-  const totalAmount = subtotal + shippingCost + taxAmount;
+  const cartSubtotal = cart?.total || 0
+
 
   const handleStripeCheckout = async () => {
     if(!cart || cartItems.length === 0) {
@@ -114,10 +112,7 @@ export const CheckoutPage = () => {
           <div className="flex-1 max-w-5xl mx-auto ">
             <OrderSummary 
               cartItems={cartItems}
-              subtotal={subtotal}
-              shippingCost={shippingCost}
-              taxAmount={taxAmount}
-              totalAmount={totalAmount}
+              subtotal={cartSubtotal}
             />
           </div>
 

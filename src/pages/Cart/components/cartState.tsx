@@ -5,7 +5,6 @@ import { useNavigate } from "react-router-dom";
 import { formatCartDate } from "../../../lib/utils/dateFormtater";
 import { TrashIcon } from "../../../components/ui/icons-svgs/SvgIcons";
 
-
 export const EmptyCart = () => {
   return ( 
     <div className="flex flex-col gap-4 justify-center items-center my-4">
@@ -19,9 +18,9 @@ export const EmptyCart = () => {
   )
 }
 
-// Occupied Cart Component (exact copy from your example)
+// Occupied Cart Component
 interface OccupiedCartProps extends CartItem {
-  onRemove?: (productId: number) => void;
+  onRemove: (cartItemId: number) => void;
 }
 
 export const OccupiedCart = ({ 
@@ -31,7 +30,7 @@ export const OccupiedCart = ({
   added_at, 
   dimensions,
   product,
-  id,
+  id, // This is the cart_item_id
   product_images,
   onRemove
 }: OccupiedCartProps) => {
@@ -50,20 +49,24 @@ export const OccupiedCart = ({
   }
 
   const handleRemove = async (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent navigation when clicking delete
+    e.stopPropagation(); // Prevent card click when removing
     e.preventDefault();
     
+    if (!id || !onRemove) {
+      console.error('Cannot remove: missing id or onRemove handler');
+      return;
+    }
+    
     try {
+      console.log('Removing cart item ID:', id);
       setIsRemoving(true);
-      if (onRemove) {
-        await onRemove(product.id); // TODO: This may break the item removal. 
-      }
-    } catch(err) {
-      console.error("Failed to remove item", err);
+      await onRemove(id); // Pass the cart item ID (not product ID)
+    } catch (error) {
+      console.error('Remove failed:', error);
     } finally {
       setIsRemoving(false);
     }
-  }
+  };
 
   const handleCardClick = () => {
     navigate(`/shop/${product}`);
@@ -84,14 +87,13 @@ export const OccupiedCart = ({
       {/* Product Image with overlay link */}
       <div className={`flex-shrink-0 relative `} >
         { product_images?.primary && !imageError ? (
-
           <img 
             className="
               w-full h-40 
               md:h-32 md:w-32 lg:h-40 lg:w-40 
               rounded-lg object-cover shadow-sm"
             onError={handleImageError}
-            src={getImageUrl(product_images?.primary) }  
+            src={getImageUrl(product_images?.primary)}  
             alt={product_name} 
           />
         ) : (
@@ -109,7 +111,6 @@ export const OccupiedCart = ({
             />
           </>
         )}
-        {/* Invisible overlay for better click target */}
         <div className="absolute inset-0 cursor-pointer"></div>
       </div>
 
@@ -127,34 +128,35 @@ export const OccupiedCart = ({
             {dimensions && (
               <p className="text-sm text-space_cadet mt-1">{dimensions}</p>
             )}
-            <p className="text-xs text-space_cadet/50 mt-1"> Item # : {id}</p>
-            <p className="text-xs text-space_cadet/50 mt-1">Added : {formatCartDate(String(added_at))}</p>
+            <p className="text-xs text-space_cadet/50 mt-1">Item #: {id}</p>
+            <p className="text-xs text-space_cadet/50 mt-1">Added: {formatCartDate(String(added_at))}</p>
           </div>
           
-          {/* Delete Button - Positioned absolutely to avoid link conflicts */}
+          {/* Delete Button */}
           <button 
             className="
               group
               absolute 
               z-10 top-4 right-4
-              cursort-pointer rounded-full 
+              cursor-pointer rounded-full 
               p-1.5
-            
               transition-all duration-200 
               hover:bg-bittersweet/80 hover:scale-110
-            
             "
             aria-label={`Remove ${product_name} from cart`}
             onClick={handleRemove}
+            disabled={isRemoving}
           >
             {isRemoving ? 
               <p className="text-xs">Removing...</p> 
               : 
               <TrashIcon 
                 className="
-                size-6 md:size-7 
-                text-space_cadet 
-                transition-transform duration-200" 
+                  size-6 md:size-7 
+                  text-space_cadet 
+                  transition-transform duration-200
+                  group-hover:text-white
+                " 
               /> 
             }
           </button>

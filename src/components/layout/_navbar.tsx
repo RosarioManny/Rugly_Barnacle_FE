@@ -4,6 +4,7 @@ import { MobileNavbar } from "../ui/navbar/mobileNavbar"
 import { CartIcon } from "../ui/icons-svgs/SvgIcons"
 import { StartOrderBtn } from "../ui/buttons"
 import { useCart } from "../../hooks/cart/cartProvider"
+import { useEffect } from "react"
 
 const aboutSubMenu = ["about", "contact", "FAQ", "blog", "events"]
 
@@ -16,6 +17,9 @@ export const NavBar = () => {
   } = useDropdownHandlers()
 
   const { cart } = useCart()
+  useEffect(() => {
+    console.log("Cart items changed:", cart?.items)
+  }, [cart?.items])
   const cartItems = cart?.items
 
   return (
@@ -137,7 +141,7 @@ export const NavBar = () => {
                   ${cartItems.length > 0 ? "" : "opacity-0"}
                   `}
                 >
-                  {cartItems.length}
+                  {cartItems.reduce((total, item) => total + item.quantity, 0)}
                 </span>
               }
             </button>
