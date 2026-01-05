@@ -3,11 +3,13 @@ import { useEffect, useState } from 'react'
 import { SuccessCheckmark } from '../../../components/ui/icons-svgs/SvgIcons'
 // import { getCheckoutSession } from '../../../lib/api/Stripe/stripeservices'
 import { clearCart } from '../../../lib/api/Cart/cartServices'
+import { checkoutSuccess } from '../../../lib/api/Stripe/stripeservices'
 
 export const CheckoutSuccessPage = () => {
   const [searchParams] = useSearchParams()
   const [isLoading, setIsLoading] = useState(true) // Changed to true
   const [cartCleared, setCartCleared] = useState(false)
+  const [quantitiesUpdated, setQuantitiesUpdated] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
@@ -33,12 +35,22 @@ export const CheckoutSuccessPage = () => {
       }
 
       try {
+        await checkoutSuccess(sessionId, cartId)
+        setQuantitiesUpdated(true)
+        console.log("Product quantities updated successfully")
+
         await clearCart();
         setCartCleared(true)
         console.log("Cart cleared successfully after checkout")
+
       } catch (err: any) {
         console.error("Error verifying payment:", err)
-        setError(err.message || 'Unable to verify payment details')
+
+        if (quantitiesUpdated && !cartCleared) {
+          setError("Payment processed but failed to clear cart. Please contact support.")
+        } else {
+          setError(err.message || 'Unable to complete checkout processing')
+        }
       } finally {
         setIsLoading(false)
       }
