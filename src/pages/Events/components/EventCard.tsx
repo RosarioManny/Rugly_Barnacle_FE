@@ -2,7 +2,7 @@
 import type { Event } from "../../../lib/api/Event/eventServices";
 import { useState } from "react";
 import { PinIcon, CalendarIcon, DollarIcon } from "../../../components/ui/icons-svgs/SvgIcons";
-import { formatCartDate } from "../../../lib/utils/dateFormtater";
+import { formatCartDate, formatTime } from "../../../lib/utils/dateFormtater";
 import { getTagStyles, getTagDisplayName } from "../../../lib/utils/tagStyles";
 
 interface EventCardProps {
@@ -16,16 +16,6 @@ export const EventCard = ({ event, onClick }: EventCardProps) => {
   const handleImageError = () => {
     setImageError(true);
   };
-
-  const formatTime = (dateString: string) => {
-    return new Date(dateString).toLocaleTimeString('en-US', {
-      hour: 'numeric',
-      minute: '2-digit',
-      hour12: true
-    });
-  };
-
-
 
   return (
     <div 
@@ -88,8 +78,8 @@ export const EventCard = ({ event, onClick }: EventCardProps) => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 mb-4">
             {/* Date and Time */}
             <div className="flex items-center text-space_cadet text-sm">
-              <CalendarIcon className="w-4 h-4 mr-2 flex-shrink-0"/>
-            
+              <CalendarIcon className="size-6 mr-2 flex-shrink-0"/>
+  
               <div>
                 <div>{formatCartDate(event.start_time)}</div>
                 <div className="text-space_cadet/70">{formatTime(event.start_time)}</div>
@@ -98,7 +88,7 @@ export const EventCard = ({ event, onClick }: EventCardProps) => {
 
             {/* Location */}
             <div className="flex items-center text-space_cadet text-sm">
-              <PinIcon className="w-4 h-4 mr-2 flex-shrink-0"/>
+              <PinIcon className="size-6 mr-2 flex-shrink-0"/>
               <span className="line-clamp-2">{event.location}</span>
             </div>
 

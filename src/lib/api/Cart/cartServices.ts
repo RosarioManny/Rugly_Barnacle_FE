@@ -1,5 +1,6 @@
 import api from "../apiConfig";
 import { type Product } from "../Product/productservices";
+import { handleSessionChange } from "../apiConfig";
 
 export interface CartItem {
   id: number;
@@ -33,7 +34,6 @@ interface AddToCartResponse {
   added_at: string;
 }
 
-
 // Get Cart
 export const getCart = async (): Promise<Cart> => {
   try {
@@ -52,6 +52,9 @@ export const addToCart = async (
   quantity: number = 1
 ): Promise<AddToCartResponse> => {
   try {
+
+    handleSessionChange();
+
     const response = await api.post<AddToCartResponse>('/cart/add-to-cart/', {
       product_id: productId,
       quantity: quantity
@@ -67,21 +70,25 @@ export const addToCart = async (
 
 // Remove from Cart
 export const removeFromCart = async (
-  productId: number, 
+  cartItemId: number, 
   quantity: number = 1
 ): Promise<Cart> => {
   try {
+    console.log(`🔄 Removing cart item ${cartItemId}, quantity: ${quantity}`);
+    
     const response = await api.delete<Cart>('/cart/remove-from-cart/', {
       data: {
-        product_id: productId,
+        cart_item_id: cartItemId,  // Changed from product_id
         quantity: quantity
       }
     });
-    // console.log(`✅ Removed ${quantity}x product ${productId} from cart:`, response.data);
+    
+    console.log(`✅ Successfully removed item ${cartItemId} from cart`);
     return response.data;
   } catch (error: any) {
     const errorMsg = error.response?.data?.error || error.message;
     console.error("❌ Failed to remove from cart:", errorMsg);
+    console.error("❌ Full error:", error.response?.data);
     throw new Error(errorMsg);
   }
 };
@@ -127,3 +134,15 @@ export const deleteCartItem = async (itemId: number): Promise<void> => {
     throw new Error(errorMsg);
   }
 };
+
+export const clearCart = async (): Promise<Cart> => {
+  try {
+    const response = await api.delete<Cart>('cart/clear-cart/');
+    console.log("Cart cleared successfully", response.data);
+    return response.data;
+  } catch (error: any) {
+    const errorMsg = error.response?.data?.error || error.message;
+    console.error("Failed to clear cart:", errorMsg);
+    throw new Error(errorMsg)
+  }
+}

@@ -8,9 +8,9 @@ interface CartContextType {
   status: 'idle' | 'loading' | 'success' | 'error';
   fetchCart: () => Promise<void>;
   addItemToCart: (productId: number, quantity?: number) => Promise<void>;
-  removeItemFromCart: (productId: number, quantity?: number) => Promise<void>;
+  removeCartItem: (productId: number, quantity?: number) => Promise<void>;
   updateCartItemQuantity: (itemId: number, quantity: number) => Promise<void>;
-  removeCartItem: (itemId: number) => Promise<void>;
+  // removeCartItem: (itemId: number) => Promise<void>;
 }
 
 // Create Context
@@ -59,7 +59,7 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   // Remove Item from Cart
-  const removeItemFromCart = async (productId: number, quantity: number = 1) => {
+  const removeCartItem = async (productId: number, quantity: number = 1) => {
     try {
       
       const updatedCart = await removeFromCart(productId, quantity);
@@ -92,21 +92,21 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
   };
 
   // Delete Cart Item Completely (using CartItemDetailView)
-  const removeCartItem = async (itemId: number) => {
-    try {
+  // const removeCartItem = async (cartItemId: number) => {
+  //   try {
       
-      await deleteCartItem(itemId);
-      // Refresh cart after deletion
-      await fetchCart();
-      console.log(`✅ Deleted cart item ${itemId}`);
-    } catch (err: any) {
-      setStatus('error');
-      if (status === 'error') {
-        console.error('❌ Error fetching cart:', err);
-      }
-      throw err;
-    }
-  };
+  //     await deleteCartItem(cartItemId);
+  //     // Refresh cart after deletion
+  //     await fetchCart();
+  //     console.log(`✅ Deleted cart item ${cartItemId}`);
+  //   } catch (err: any) {
+  //     setStatus('error');
+  //     if (status === 'error') {
+  //       console.error('❌ Error fetching cart:', err);
+  //     }
+  //     throw err;
+  //   }
+  // };
 
 
   // Fetch cart on mount
@@ -119,9 +119,9 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     status,
     fetchCart,
     addItemToCart,
-    removeItemFromCart,
-    updateCartItemQuantity,
     removeCartItem,
+    updateCartItemQuantity,
+    // removeCartItem,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

@@ -8,7 +8,7 @@ import { OccupiedCart, EmptyCart } from "./components/cartState";
 
 
 export const Cart = () => {
-  const { cart, status, fetchCart, removeItemFromCart } = useCart();
+  const { cart, status, fetchCart, removeCartItem } = useCart();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   
   
@@ -22,10 +22,10 @@ export const Cart = () => {
   }, [cart]);
 
   const cartTotal = cart?.total
-  
-  const handleItemRemove = async (productId: number) => {
+  const cartTotalItems = cartItems.reduce((total, item) => total + item.quantity, 0)
+  const handleItemRemove = async (cartItemId: number) => {
     try {
-      await removeItemFromCart(productId);
+      await removeCartItem(cartItemId, 1); // Use the new service with cart_item_id
     } catch (err) {
       console.error("Failed to Remove", err);
     }
@@ -65,19 +65,18 @@ export const Cart = () => {
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-gray-900 mb-2">Shopping Cart</h1>
           <p className="text-gray-600">Review your items before checkout</p>
-          Hello
         </div>
 
         {/* Main Content */}
         <div className="flex flex-col lg:flex-row gap-8">
           {/* Cart Items Section */}
           <div className="flex-1 bg-white rounded-xl shadow-sm p-6">
-            <div className="flex flex-col sm:flex-row justify-between items-center mb-6 gap-4">
+            <div className="flex flex-row justify-between items-center mb-6 gap-4">
               <h2 className="text-xl font-semibold text-gray-900">
-                Your Items: <b className="text-majorelle">{cartItems.length}</b>
+                Items: <b className="text-majorelle">{cartTotalItems}</b>
               </h2>
               <button 
-                className="group flex items-center gap-2 text-gray-600 hover:text-majorelle transition-colors duration-200"
+                className="group bg-space_cadet/10 flex items-center gap-2 text-space_cadet/80 hover:bg-majorelle/20 hover:text-majorelle transition-all duration-200"
                 onClick={fetchCart}
               > 
                 <RefreshIcon className="size-5 group-hover:-rotate-360 transition-transform duration-900" />
@@ -114,26 +113,18 @@ export const Cart = () => {
           <div className="w-full lg:w-96 bg-white rounded-xl shadow-md p-6 h-fit sticky top-8">
             <div className="mb-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-2">Order Summary</h2>
-              <p className="text-xs text-bittersweet/60 mb-4">
-                Taxes & shipping applied at checkout
-              </p>
               
               <div className="space-y-3">
+                <p className="text-sm font-semibold text-bittersweet/70 mb-4">
+                  Taxes & shipping applied at checkout
+                </p>
                 <div className="flex justify-between text-sm">
-                  <span>Subtotal ({cartItems.length} items):</span>
+                  <span>Subtotal ({cartTotalItems} items):</span>
                   <span className="font-semibold">${cartTotal}</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>Estimated Shipping:</span>
-                  <span className="text-gray-600">Calculated at checkout</span>
-                </div>
-                <div className="flex justify-between text-sm">
-                  <span>Estimated Tax:</span>
-                  <span className="text-gray-600">Calculated at checkout</span>
                 </div>
                 <hr className="my-4" />
                 <div className="flex justify-between text-lg font-bold">
-                  <span>Total:</span>
+                  <span>Subtotal:</span>
                   <span>${cartTotal}</span>
                 </div>
               </div>

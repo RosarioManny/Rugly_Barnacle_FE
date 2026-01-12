@@ -30,14 +30,14 @@ const getSessionId = (): string | null => {
 
 const ensureCSRFToken = async (): Promise<void> => {
     try {
-        await api.get('/csrf/');
+        await api.get('csrf/');
         console.log("CSRF Token ensured");
     } catch (err) {
         console.error("X Failed to ensure CSRF Token X", err);
     }
 } 
 
-const handleSessionChange = async (): Promise<boolean> => {
+export const handleSessionChange = async (): Promise<boolean> => {
     const newSessionId = getSessionId();
     
     if (!currentSessionId && newSessionId) {
