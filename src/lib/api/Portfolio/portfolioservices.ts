@@ -1,4 +1,4 @@
-import { api } from '../apiConfig.ts';
+import api from '../apiConfig';
 
 export interface PortfolioImage {
   title: string;
