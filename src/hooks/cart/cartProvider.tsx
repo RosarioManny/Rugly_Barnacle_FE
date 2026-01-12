@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { getCart, removeFromCart, addToCart, deleteCartItem, updateCartItem} from '../../lib/api/Cart/cartServices'
+import { getCart, removeFromCart, addToCart, updateCartItem} from '../../lib/api/Cart/cartServices'
 import type { Cart } from '../../lib/api/Cart/cartServices';
+
+// deleteCartItem is not being used currently
 
 // Context Types
 interface CartContextType {

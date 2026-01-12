@@ -24,7 +24,7 @@ export const CheckoutPage = () => {
     }
   }, [cart]);
 
-  const cartSubtotal = cart?.total || 0
+  const cartSubtotal = Number(cart?.total) || 0
 
 
   const handleStripeCheckout = async () => {
