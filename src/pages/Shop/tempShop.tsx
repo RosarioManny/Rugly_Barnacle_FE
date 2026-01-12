@@ -33,7 +33,7 @@ export const TempShop = () => {
       </a>
       
       <a 
-        href="/blogs" 
+        href="/blog" 
         className="bg-robin_egg/10 p-4 rounded-lg border border-robin_egg/20 hover:border-robin_egg/40 transition-all hover:bg-robin_egg/30 group"
       >
         <div className="flex items-center gap-3">
