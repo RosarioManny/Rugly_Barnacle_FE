@@ -1,6 +1,7 @@
 import { Link, useSearchParams } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import { SuccessCheckmark } from '../../../components/ui/icons-svgs/SvgIcons'
+import { Spinner } from '../../../components/ui/loaders/loadingSpinner'
 // import { getCheckoutSession } from '../../../lib/api/Stripe/stripeservices'
 import { clearCart } from '../../../lib/api/Cart/cartServices'
 import { checkoutSuccess } from '../../../lib/api/Stripe/stripeservices'
@@ -13,7 +14,10 @@ export const CheckoutSuccessPage = () => {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
+    let isMounted = true;
+
     const handleSuccessfulCheckout = async () => {
+      if(!isMounted) return;
       const sessionId = searchParams.get('session_id')
       const cartId = searchParams.get('cart_id')
 
@@ -56,6 +60,10 @@ export const CheckoutSuccessPage = () => {
       }
     }
     handleSuccessfulCheckout()
+
+    return () => {
+      isMounted = false;
+    }
   }, [searchParams])
 
   return (
@@ -74,7 +82,7 @@ export const CheckoutSuccessPage = () => {
           {/* Loading State */}
           {isLoading && (
             <div className="mb-6">
-              <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-majorelle mx-auto mb-4"></div>
+              <Spinner loading={false}/>
               <p className="text-space_cadet/80">Verifying your payment...</p>
             </div>
           )}
@@ -88,12 +96,6 @@ export const CheckoutSuccessPage = () => {
               </p>
             </div>
           )}
-          
-          {/* Cart Clear Error State */}
-          {/* {!isLoading && !error && (
-           
-          )}
-           */}
           {/* Success Content (shown when not loading) */}
           {!isLoading && !error && (
             <>

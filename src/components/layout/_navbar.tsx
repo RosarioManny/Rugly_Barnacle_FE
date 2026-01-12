@@ -1,10 +1,10 @@
 import { Link } from "react-router-dom"
 import { useDropdownHandlers } from "../../hooks/navbar"
 import { MobileNavbar } from "../ui/navbar/mobileNavbar"
-import { CartIcon } from "../ui/icons-svgs/SvgIcons"
+// import { CartIcon } from "../ui/icons-svgs/SvgIcons"
 import { StartOrderBtn } from "../ui/buttons"
-import { useCart } from "../../hooks/cart/cartProvider"
-import { useEffect } from "react"
+// import { useCart } from "../../hooks/cart/cartProvider"
+// import { useEffect } from "react"
 
 const aboutSubMenu = ["about", "contact", "FAQ", "blog", "events"]
 
@@ -16,11 +16,11 @@ export const NavBar = () => {
     aboutDropdownOpen
   } = useDropdownHandlers()
 
-  const { cart } = useCart()
-  useEffect(() => {
-    console.log("Cart items changed:", cart?.items)
-  }, [cart?.items])
-  const cartItems = cart?.items
+  // const { cart } = useCart()
+  // useEffect(() => {
+  //   console.log("Cart items changed:", cart?.items)
+  // }, [cart?.items])
+  // const cartItems = cart?.items
 
   return (
     <nav className="
@@ -110,43 +110,6 @@ export const NavBar = () => {
       {/* RIGHT SIDE: Cart and Start Order Button */}
       <section className="flex items-center justify-center space-x-4">
         {/* Cart Button */}
-        <div className="relative">
-          <Link to="/cart"> 
-            <button 
-              className="group transform-all duration-400 flex-shrink-0 justify-center items-center p-3 hover:bg-majorelle/10 rounded-full transition-colors"
-              aria-label={`Cart with  items`}
-            >
-              <CartIcon className="
-                size-8 md:size-10
-                group-hover:scale-110 group-hover:text-majorelle
-                group-focus:scale-110
-                transform-all duration-400
-                text-space_cadet"
-              />
-              
-              {/* Cart Item Count Badge */}
-              {cartItems &&
-                <span className=
-                {`absolute top-1 right-1
-                  min-w-[20px] h-5
-                  bg-midnight_green/90 text-fleece
-                  rounded-full
-                  text-xs font-bold
-                  flex items-center justify-center
-                  px-1
-                  border-2 border-fleece
-                  shadow-sm
-                  group-hover:bg-robin_egg
-                  ease-in-out duration-300 transition-all
-                  ${cartItems.length > 0 ? "" : "opacity-0"}
-                  `}
-                >
-                  {cartItems.reduce((total, item) => total + item.quantity, 0)}
-                </span>
-              }
-            </button>
-          </Link>
-        </div>
 
         {/* Start Order Button */}
         <div className="hidden md:block">
@@ -161,3 +124,41 @@ export const NavBar = () => {
     </nav>
   )
 }
+// CART IN NAVBAR - TO BE ADDED LATER
+//  <div className="relative">
+//           <Link to="/cart"> 
+//             <button 
+//               className="group transform-all duration-400 flex-shrink-0 justify-center items-center p-3 hover:bg-majorelle/10 rounded-full transition-colors"
+//               aria-label={`Cart with  items`}
+//             >
+//               <CartIcon className="
+//                 size-8 md:size-10
+//                 group-hover:scale-110 group-hover:text-majorelle
+//                 group-focus:scale-110
+//                 transform-all duration-400
+//                 text-space_cadet"
+//               />
+              
+//               {/* Cart Item Count Badge */}
+//               {cartItems &&
+//                 <span className=
+//                 {`absolute top-1 right-1
+//                   min-w-[20px] h-5
+//                   bg-midnight_green/90 text-fleece
+//                   rounded-full
+//                   text-xs font-bold
+//                   flex items-center justify-center
+//                   px-1
+//                   border-2 border-fleece
+//                   shadow-sm
+//                   group-hover:bg-robin_egg
+//                   ease-in-out duration-300 transition-all
+//                   ${cartItems.length > 0 ? "" : "opacity-0"}
+//                   `}
+//                 >
+//                   {cartItems.reduce((total, item) => total + item.quantity, 0)}
+//                 </span>
+//               }
+//             </button>
+//           </Link>
+//         </div>

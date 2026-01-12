@@ -1,5 +1,5 @@
 import { StartOrderBtn } from "../../components/ui/buttons"
-import { BallOfYarnIcon } from "../../components/ui/icons-svgs/SvgIcons"
+import { BallOfYarnIcon, CalendarIcon, ChatBubbleIcon } from "../../components/ui/icons-svgs/SvgIcons"
 
 export const TempShop = () => {
   return (
@@ -15,6 +15,38 @@ export const TempShop = () => {
       <section className="flex flex-col justify-center items-center gap-8 max-w-md mx-auto px-4">
         <BallOfYarnIcon className="yarn-animation fill-majorelle"/>
         <p className="font-bold text-space_cadet"> Shop Coming Soon... </p>
+
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 w-full max-w-2xl mb-6">
+      <a 
+        href="/events" 
+        className="bg-majorelle/20 p-4 rounded-lg border border-majorelle/20 hover:border-majorelle/40 transition-all hover:bg-majorelle/30 group"
+      >
+        <div className=" flex items-center gap-3">
+          <div className="bg-majorelle/20 p-2 rounded-lg group-hover:bg-majorelle/30 transition-colors">
+            <CalendarIcon className="w-6 h-6 text-majorelle"/>
+          </div>
+          <div>
+            <h3 className="font-bold text-space_cadet">Upcoming Events!</h3>
+            <p className="text-gray-600 text-sm">Find me at markets, conventions & shows </p>
+          </div>
+        </div>
+      </a>
+      
+      <a 
+        href="/blogs" 
+        className="bg-robin_egg/10 p-4 rounded-lg border border-robin_egg/20 hover:border-robin_egg/40 transition-all hover:bg-robin_egg/30 group"
+      >
+        <div className="flex items-center gap-3">
+          <div className="bg-robin_egg/30 p-2 rounded-lg group-hover:bg-robin_egg/30 transition-colors">
+            <ChatBubbleIcon className="w-6 h-6 text-robin_egg"/>
+          </div>
+          <div>
+            <h3 className="font-bold text-space_cadet">Explore Blogs!</h3>
+            <p className="text-gray-600 text-sm">Latest news, tutorials & behind-the-scenes</p>
+          </div>
+        </div>
+      </a>
+    </div>
         <div className="text-center space-y-4">
           <h1 className="text-majorelle font-bold text-2xl">
             Custom Orders Now Available!

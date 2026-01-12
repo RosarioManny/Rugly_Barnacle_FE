@@ -6,13 +6,13 @@ import {
   Portfolio, 
   CustomOrder, 
   Faq, 
-  Shop, 
-  ProductDetails, 
-  Cart,
-  CheckoutPage,
-  CheckoutSuccessPage,
-  CheckoutCancelPage,
-  // TempShop,
+  // Shop, 
+  // ProductDetails, 
+  // Cart,
+  // CheckoutPage,
+  // CheckoutSuccessPage,
+  // CheckoutCancelPage,
+  TempShop,
   // Booking,
   Blog,
   BlogDetails,
@@ -33,13 +33,13 @@ export const AppRoutes = () => {
         <Route path='/portfolio' element={<Portfolio />} />
         <Route path='/custom-order' element={<CustomOrder />} />
         <Route path='/faq' element={<Faq />} />
-        {/* <Route path='/shop' element={<TempShop />} /> */}
-          <Route path='/shop' element={<Shop />} />
-          <Route path='/cart' element={<Cart />} />
-          <Route path='/shop/:id' element={<ProductDetails />}/>
+        <Route path='/shop' element={<TempShop />} />
+          {/* <Route path='/shop' element={<Shop />} />
+          <Route path='/cart' element={<Cart />} /> */}
+          {/* <Route path='/shop/:id' element={<ProductDetails />}/>
         <Route path='/checkout' element={<CheckoutPage />} />
             <Route path='/checkout/success/' element={<CheckoutSuccessPage />} />
-            <Route path='/checkout/cancel' element={<CheckoutCancelPage />} /> 
+            <Route path='/checkout/cancel' element={<CheckoutCancelPage />} />  */}
         <Route path='/events' element={<Events />} />
         <Route path='/blog' element={<Blog />} />
         <Route path='/blog/:id' element={<BlogDetails />} />
