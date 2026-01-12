@@ -6,6 +6,7 @@ import { EventCard } from "./components/EventCard"
 import { BallOfYarnIcon, DangerIcon, ClockIcon, CalendarIcon, PinIcon, DollarIcon} from "../../components/ui/icons-svgs/SvgIcons"
 import { formatTime } from "../../lib/utils/dateFormtater"
 
+
 export const Events = () => {
   const [events, setEvents] = useState<Event[]>([]);
   const [status, setStatus] = useState<'loading' | 'error' | 'success' | 'idle'>('idle');
