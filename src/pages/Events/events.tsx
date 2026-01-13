@@ -21,12 +21,15 @@ export const Events = () => {
     try {
       setStatus('loading');
       const data = await getEvents();
-      setEvents(data)
-      setStatus('success');
+
+      const sortedEvents = [...data].sort((a, b) => 
+        new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
+      );
+      setEvents(sortedEvents);
+      setStatus('idle');
     } catch(err) {
-      setStatus('error')
-    } finally {
-      setStatus('idle')
+      console.error('Error fetching events:', err);
+      setStatus('error');
     }
   }
 
@@ -39,7 +42,6 @@ export const Events = () => {
     setIsModalOpen(false);
     setSelectedEvent(null);
   }
-
   // Loading State
   if (status === 'loading') {
     return (

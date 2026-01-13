@@ -19,15 +19,15 @@ export const EventCard = ({ event, onClick }: EventCardProps) => {
 
   return (
     <div 
-      className="bg-white rounded-lg shadow-sm border border-majorelle p-6 cursor-pointer hover:shadow-md transition-all duration-300 w-full mb-4"
+      className="bg-white rounded-lg shadow-sm border border-majorelle p-6 cursor-pointer hover:shadow-md hover:bg-majorelle/10 transition-all duration-300 w-full mb-4"
       onClick={onClick}
     >
-      <div className="flex flex-col md:flex-row gap-6">
+      <div className="flex flex-col justify-center items-center md:flex-row gap-6">
         {/* Event Image */}
-        <div className="md:w-1/3 lg:w-1/4 h-full">
+        <div className="flex md:w-1/3 lg:w-1/4 h-full">
           {event.image && !imageError ? (
             <img 
-              className="w-full h-48 md:h-40 object-cover rounded-lg"
+              className="w-full h-auto max-h-60 object-cover  rounded-lg"
               src={event.image}
               alt={event.title}
               onError={handleImageError}
