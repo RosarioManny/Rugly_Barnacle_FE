@@ -9,6 +9,7 @@ import { useState, useEffect, useRef} from "react"
 import { useProductFilters } from "../../hooks/filter/useProductFilter"
 import { FilterControls } from "../../components/ui/filter"
 // import { useParams } from "react-router-dom"
+import { LoadingPage } from "../../components/layout/loadingPage"
 
 
 export const Shop = () => {
@@ -49,7 +50,7 @@ export const Shop = () => {
   const categories = Array.from(new Set(products.map(product => product.category.name))); // <- This extracts categories from the products fetched. No products != no categories.
 
   // LOADING STATE
-  if (status === 'loading') return <Spinner  />;
+  if (status === 'loading') return <LoadingPage/>;
   
   // ERROR STATE
   if ( status === 'error') {
@@ -115,7 +116,10 @@ export const Shop = () => {
         ) : (
           // No results message
           <div className="text-center mt-10 mb-22 md:mb-44">
-            <p className="text-lg font-semibold text-space_cadet/60 mb-8">No products found matching your criteria.</p>
+            <span className="mx-4 flex justify-center flex-col items-center ">
+              <DangerIcon className="text-bittersweet mb-8"/>
+              <p className="text-lg font-semibold text-space_cadet/60 mb-8">No products found matching your criteria.</p>
+            </span>
             <button
               onClick={filterFunctions.clearAllFilters}
               className="font-medium px-6 py-2 bg-majorelle text-white rounded-md hover:bg-majorelle-dark transition-colors"

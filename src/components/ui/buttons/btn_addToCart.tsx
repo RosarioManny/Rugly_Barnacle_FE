@@ -39,7 +39,7 @@ export const AddToCartBtn = ({
       className={`
         bg-majorelle
         w-full h-[55px]
-        duration-100 drop-shadow-sm/50
+        duration-100 drop-shadow-sm/50 rounded-lg
         hover:bg-robin_egg hover:scale-105
         focus:bg-robin_egg focus:scale-105
         ${isAdding ? 'opacity-70 cursor-not-allowed' : ''}

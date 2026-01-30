@@ -4,7 +4,7 @@ export const CheckoutBtn = () => (
   
     <Link to="/checkout">
       <button className="
-        drop-shadow-sm/50
+        drop-shadow-sm/50 rounded-lg
         bg-majorelle
         hover:bg-robin_egg hover:scale-105
         active:bg-robin_egg active:scale-105 

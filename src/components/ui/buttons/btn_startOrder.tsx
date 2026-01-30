@@ -5,7 +5,7 @@ export const StartOrderBtn = () => (
     <button className="
       bg-majorelle
       w-auto h-[56px]
-      drop-shadow-sm
+      drop-shadow-sm rounded-lg
       hover:bg-robin_egg hover:scale-105
       active:bg-robin_egg active:scale-105 
       focus:bg-robin_egg focus:scale-105

@@ -1,18 +1,23 @@
 import { motion } from "framer-motion"
 import { useState } from "react"
+
 interface faqCardProps {
+  key: string | number,
   question: string,
   answer: string
 }
 
-export const FaqCard = ({ question, answer }: faqCardProps) => {
+export const FaqCard = ({ key, question, answer }: faqCardProps) => {
   const [isToggled, setIsToggled] = useState(false)
 
+  console.log("KEY >>> ", key)
   const handleToggle = () => {
     setIsToggled(!isToggled)
   }
+
   return (
     <li 
+    key={key}
     onClick={handleToggle}
     className="h-fit hover:outline-2 hover:outline-robin_egg duration-200 cursor-pointer bg-fleece p-4 rounded-xl">
       {/* QUESTION */}
@@ -22,7 +27,7 @@ export const FaqCard = ({ question, answer }: faqCardProps) => {
         text-md my-4 text-bold gap-4
         flex justify-between items-center"
       >
-        <p>{question}</p>
+        <p>{question} {key}</p>
         <span 
           className={`
             ${isToggled ? "border-t-bittersweet rotate-x-180" : "border-t-robin_egg"} 

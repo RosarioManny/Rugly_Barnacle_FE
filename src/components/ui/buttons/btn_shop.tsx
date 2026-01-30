@@ -5,9 +5,9 @@ export const ShopBtn = () => (
     <Link to="/shop">
       <button className="
         bg-majorelle
-      w-auto h-[55px]
+        w-auto h-[55px]
         flex items-center gap-2 group
-        drop-shadow-sm/50 duration-600 
+        drop-shadow-sm/50 duration-600 rounded-lg
         hover:bg-robin_egg hover:scale-105 
         active:bg-robin_egg active:scale-105 
         focus:bg-robin_egg focus:scale-105"

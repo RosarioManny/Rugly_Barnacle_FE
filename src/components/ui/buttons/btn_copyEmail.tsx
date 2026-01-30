@@ -11,7 +11,7 @@ export const Emailbtn = ( { background="bg-breeze hover:bg-robin_egg hover:text-
     className=
     {`
     p-2 w-fit
-    drop-shadow-sm
+    drop-shadow-sm rounded-lg
     text-space_cadet 
     flex align-center items-center
     hover:scale-105

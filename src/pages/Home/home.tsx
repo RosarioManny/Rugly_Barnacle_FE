@@ -91,7 +91,7 @@ export const Home = () => {
         {/* Title */}
         <div className="flex justify-center items-center gap-2 my-4 md:my-8">
           <img 
-            className="h-8 w-8 md:h-10 md:w-10" 
+            className="h-8 w-8 md:h-10 md:w-10 " 
             src="/assets/design/icons/X_Star_Teal-Blue.webp" 
             aria-hidden="true"
             alt="Teal Star decorator" 
@@ -102,9 +102,9 @@ export const Home = () => {
         {/* Price and Action */}
         <div className="flex flex-col lg:flex-row justify-center items-center mx-3 gap-6 md:gap-8 lg:gap-12">
           {/* Image */}
-          <div className="w-full max-w-md lg:max-w-lg xl:max-w-xl">
+          <div className="w-full drop-shadow-md drop-shadow-space_cadet/80 max-w-md lg:max-w-lg xl:max-w-xl ">
             <img 
-              className="w-full rounded-xl drop-shadow-md object-cover" 
+              className="w-full  object-cover rounded-3xl ring-6 ring-space_cadet" 
               src="/products/prices/NEW_8_28_25_General_Price.webp" 
               alt="General Pricing Poster - Pricing's vary by design, size, quantity, colors and intricacy. 
               Estimates are: 3ft is $150+ ; 4ft is $250; 5ft is $350; 6ft and more is $450." 

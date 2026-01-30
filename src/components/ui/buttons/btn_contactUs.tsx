@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 export const ContactUsBtn = () => (
     <Link to="/contact">
       <button className="
-      drop-shadow-sm
+      drop-shadow-sm rounded-lg
       border-2 border-robin_egg
       h-[55px]
       active:border-robin_egg active:scale-105 active:border-majorelle

@@ -5,6 +5,7 @@ import { type Event, getEvents } from "../../lib/api/Event/eventServices"
 import { EventCard } from "./components/EventCard"
 import { BallOfYarnIcon, DangerIcon, ClockIcon, CalendarIcon, PinIcon, DollarIcon} from "../../components/ui/icons-svgs/SvgIcons"
 import { formatTime } from "../../lib/utils/dateFormtater"
+import { EventsModalImage } from "./components/EventsModalImage"
 
 
 export const Events = () => {
@@ -32,6 +33,7 @@ export const Events = () => {
       setStatus('error');
     }
   }
+
 
   const handleEventClick = (event: Event) => {
     setSelectedEvent(event);
@@ -174,120 +176,112 @@ export const Events = () => {
     </section>
 
       {/* Event Modal */}
-{isModalOpen && selectedEvent && (
+      {isModalOpen && selectedEvent && (
 
-  <div 
-    onClick={closeModal}
-    className="fixed inset-0 bg-space_cadet/50 flex items-center justify-center p-2 sm:p-4 z-50"
-  >
-    
-    <div 
-      onClick={(e) => e.stopPropagation()}
-      className="bg-fleece flex flex-col lg:flex-row rounded-lg max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden"
-    >
-      {/* Image Section - Top on mobile, Left on desktop */}
-      <div className="lg:flex-1 lg:min-w-0 lg:h-full text-bittersweet">
-        <button
+        <div 
           onClick={closeModal}
-          className="text-space_cadet flex items-center hover:text-bittersweet transition-colors flex-shrink-0 ml-2"
+          className="fixed inset-0 bg-space_cadet/50 flex items-center justify-center p-2 sm:p-4 z-50"
         >
-          <svg className="hover:cursor-pointer size-8 sm:size-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-          <span className="">Close</span>
-        </button>
-        {selectedEvent.image && (
-          <div className="h-64 sm:h-80 lg:h-full w-full">
-            <img 
-              src={selectedEvent.image} 
-              alt={selectedEvent.title}
-              className="size-full object-contain lg:object-cover bg-gray-100"
-            />
-          </div>
-        )}
-      </div>
-
-      {/* Information Section - Bottom on mobile, Right on desktop */}
-      <div className="lg:flex-1 lg:min-w-0 overflow-y-auto">
-        <div className="p-4 sm:p-6 h-full flex flex-col">
-          {/* Header with close button */}
-          <div className="flex justify-between items-start mb-4 sm:mb-6">
-            <h2 className="text-xl sm:text-2xl font-bold text-space_cadet pr-4">{selectedEvent.title}</h2>
-
-          </div>
-
-          {/* Event Details */}
-          <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
-            {/* Location */}
-            <div className="flex items-start  text-space_cadet">
-              <PinIcon className="text-majorelle size-6 sm:size-7 mr-2 flex-shrink-0 mt-0.5"/>
-              <span className="break-words text-sm sm:text-base">{selectedEvent.location}</span>
+          
+          <div 
+            onClick={(e) => e.stopPropagation()}
+            className="bg-fleece flex flex-col lg:flex-row rounded-lg max-w-4xl w-full max-h-[95vh] sm:max-h-[90vh] overflow-hidden"
+          >
+            {/* Image Section - Top on mobile, Left on desktop */}
+            <div className="lg:flex-1 lg:min-w-0 lg:h-full text-bittersweet">
+              <button
+                onClick={closeModal}
+                className="text-space_cadet flex items-center hover:text-bittersweet transition-colors flex-shrink-0 ml-2"
+              >
+                <svg className="hover:cursor-pointer size-8 sm:size-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+                <span className="">Close</span>
+              </button>
+              <EventsModalImage event={selectedEvent} />
             </div>
 
-            {/* Date */}
-            <div className="flex items-center text-space_cadet">
-              <CalendarIcon className="text-majorelle size-6 sm:size-7 mr-2 flex-shrink-0"/>
-              <span className="text-sm sm:text-base">
-                {new Date(selectedEvent.start_time).toLocaleDateString('en-US', { 
-                  weekday: 'short',
-                  year: 'numeric', 
-                  month: 'short', 
-                  day: 'numeric' 
-                })}
-              </span>
-            </div>
+            {/* Information Section - Bottom on mobile, Right on desktop */}
+            <div className="lg:flex-1 lg:min-w-0 bg-fleece overflow-y-auto">
+              <div className="p-4 sm:p-6 h-full flex flex-col">
+                {/* Header with close button */}
+                <div className="flex justify-between items-start mb-4 sm:mb-6">
+                  <h2 className="text-xl sm:text-2xl font-bold text-space_cadet pr-4">{selectedEvent.title}</h2>
 
-            {/* Times */}
-            <div className="space-y-1 sm:space-y-2">
-              <div className="flex items-start text-space_cadet">
-                <ClockIcon className="text-majorelle size-6 sm:size-7 mr-2 flex-shrink-0 mt-0.5"/>
-                <div className="flex flex-col">
-                  <span className="font-medium text-sm sm:text-base">Start: {formatTime(selectedEvent.start_time)}</span>
-                  {selectedEvent.end_time && (
-                    <span className="font-medium text-sm sm:text-base mt-0.5 sm:mt-1">End: {formatTime(selectedEvent.end_time)}</span>
+                </div>
+
+                {/* Event Details */}
+                <div className="space-y-3 sm:space-y-4 mb-4 sm:mb-6">
+                  {/* Location */}
+                  <div className="flex items-start  text-space_cadet">
+                    <PinIcon className="text-majorelle size-6 sm:size-7 mr-2 flex-shrink-0 mt-0.5"/>
+                    <span className="break-words text-sm sm:text-base">{selectedEvent.location}</span>
+                  </div>
+
+                  {/* Date */}
+                  <div className="flex items-center text-space_cadet">
+                    <CalendarIcon className="text-majorelle size-6 sm:size-7 mr-2 flex-shrink-0"/>
+                    <span className="text-sm sm:text-base">
+                      {new Date(selectedEvent.start_time).toLocaleDateString('en-US', { 
+                        weekday: 'short',
+                        year: 'numeric', 
+                        month: 'short', 
+                        day: 'numeric' 
+                      })}
+                    </span>
+                  </div>
+
+                  {/* Times */}
+                  <div className="space-y-1 sm:space-y-2">
+                    <div className="flex items-start text-space_cadet">
+                      <ClockIcon className="text-majorelle size-6 sm:size-7 mr-2 flex-shrink-0 mt-0.5"/>
+                      <div className="flex flex-col">
+                        <span className="font-medium text-sm sm:text-base">Start: {formatTime(selectedEvent.start_time)}</span>
+                        {selectedEvent.end_time && (
+                          <span className="font-medium text-sm sm:text-base mt-0.5 sm:mt-1">End: {formatTime(selectedEvent.end_time)}</span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Price */}
+                  {selectedEvent.price !== null && selectedEvent.price !== undefined && selectedEvent.price !== 0 && (
+                    <div className="flex items-center text-space_cadet">
+                      <DollarIcon className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0"/>
+                      <span className="text-sm sm:text-base">${selectedEvent.price.toFixed(2)}</span>
+                    </div>
                   )}
                 </div>
+
+                {/* Event Description */}
+                <div className="mb-4 sm:mb-6 flex-grow">
+                  <h3 className="font-semibold text-space_cadet mb-2 text-sm sm:text-base">About This Event</h3>
+                  <p className="text-space_cadet leading-relaxed whitespace-pre-line text-sm sm:text-base">
+                    {selectedEvent.description}
+                  </p>
+                </div>
+
+                {/* Learn More Button */}
+                {selectedEvent.ticket_link && (
+                  <div className="pt-3 sm:pt-4 border-t border-space_cadet/20">
+                    <a
+                      href={selectedEvent.ticket_link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center justify-center bg-majorelle hover:bg-majorelle/80 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-colors duration-300 w-full text-center text-sm sm:text-base"
+                    >
+                      Get Tickets / Learn More
+                      <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                      </svg>
+                    </a>
+                  </div>
+                )}
               </div>
             </div>
-
-            {/* Price */}
-            {selectedEvent.price !== null && selectedEvent.price !== undefined && selectedEvent.price !== 0 && (
-              <div className="flex items-center text-space_cadet">
-                <DollarIcon className="w-4 h-4 sm:w-5 sm:h-5 mr-2 flex-shrink-0"/>
-                <span className="text-sm sm:text-base">${selectedEvent.price.toFixed(2)}</span>
-              </div>
-            )}
           </div>
-
-          {/* Event Description */}
-          <div className="mb-4 sm:mb-6 flex-grow">
-            <h3 className="font-semibold text-space_cadet mb-2 text-sm sm:text-base">About This Event</h3>
-            <p className="text-space_cadet leading-relaxed whitespace-pre-line text-sm sm:text-base">
-              {selectedEvent.description}
-            </p>
-          </div>
-
-          {/* Learn More Button */}
-          {selectedEvent.ticket_link && (
-            <div className="pt-3 sm:pt-4 border-t border-space_cadet/20">
-              <a
-                href={selectedEvent.ticket_link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center bg-majorelle hover:bg-majorelle/80 text-white px-4 sm:px-6 py-2 sm:py-3 rounded-lg transition-colors duration-300 w-full text-center text-sm sm:text-base"
-              >
-                Get Tickets / Learn More
-                <svg className="w-3 h-3 sm:w-4 sm:h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                </svg>
-              </a>
-            </div>
-          )}
         </div>
-      </div>
-    </div>
-  </div>
-)}
+      )}
       <ReturnToTop />
     </main>
   );

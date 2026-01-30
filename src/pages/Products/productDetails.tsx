@@ -7,11 +7,12 @@ import type { Product } from "../../lib/api/Product/productservices"
 import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
 import { AddToCartBtn } from "../../components/ui/buttons/btn_addToCart"
+import { LoadingPage } from "../../components/layout/loadingPage"
 
 
 export const ProductDetails = () => {
   const [productDetails, setProductDetails] = useState<Product | null>(null)
-  const [status, setStatus] = useState< 'loading' | 'error' | 'success' | 'idle' >('idle')
+  const [status, setStatus] = useState< 'loading' | 'error' | 'success' | 'idle' >('loading')
   const [cartMessage, setCartMessage] = useState<string | null>(null)
   const [imageError, setImageError] = useState(false)
   
@@ -56,17 +57,17 @@ export const ProductDetails = () => {
   useEffect(() => {
     if (id) {
       fetchProduct(id)
+      
     } else {
       console.log(productDetails)
       setStatus('error')
     }
   }, [id])
 
-  // useEffect(() => {
-  //   productDetails ? console.info("Got it!", productDetails ) : console.log("Empty Array", productDetails)
-  // }, [productDetails])
 
-  if (status === 'loading') return <Spinner />
+
+  if (status === 'loading') return <LoadingPage />;
+
   
   if (status === 'error' || productDetails === null) {
     return ( 
@@ -105,7 +106,7 @@ export const ProductDetails = () => {
   }
 
   return (
-    <main className="md:mx-20 m-4 mb-20 h-[100vh]" aria-label={`${productDetails.name} details page`}>
+    <main className="md:mx-20 m-4 mb-96 h-[100vh]" aria-label={`${productDetails.name} details page`}>
       {cartMessage && (
         <div className={`
           fixed top-4 right-4 p-4 rounded-md z-50 

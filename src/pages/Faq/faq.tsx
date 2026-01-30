@@ -14,21 +14,25 @@ export const Faq = () => {
   const [faqs, setFaqs ] = useState<FaqResponse[]>([])
   const [status, setStatus] = useState<'loading' | 'error' | 'success' | 'idle'>('idle');
   
+
   useEffect(()=>{
-    const fetchFAQs = async () => {
+    
+    fetchFAQs()
+  }, [])
+
+  const fetchFAQs = async () => {
       setStatus('loading')
       try {
         const data = await getAllFaq();
         setFaqs(data);
       } catch (err) {
-        console.error('Failed to fetch FAQs', err);
+        setFaqs(faqItems)
+        console.error('Failed to fetch FAQs, using preset', err);
         setStatus('error')
       } finally {
         setStatus('success');
       }
     }
-    fetchFAQs()
-  }, [])
   
   const displayFaqs = status === 'error' ? Fallback_FAQs : faqs;
   return (
@@ -65,7 +69,8 @@ export const Faq = () => {
               flex flex-col gap-2">
                 {displayFaqs.map((faq: FaqResponse  ) => (
                   <FaqCard
-                  key={faq.id}
+                  // TODO: adjust key value
+                  key={faq?.id}
                   question={faq.question}
                   answer={faq.answer}
                   />
