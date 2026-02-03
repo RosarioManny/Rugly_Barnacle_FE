@@ -6,6 +6,8 @@ import { PORTFOLIO_IMAGE_FALLBACK } from "./portfolioImages"
 import { PortfolioItem } from "./portfolioItem"
 import { usePortfolioModal } from "../../hooks/portfolio/imageModal"
 import { getPortfolioImages, type PortfolioImage } from "../../lib/api/Portfolio/portfolioservices"
+
+
 export const Portfolio = () => {
   const { 
     closeModal,
@@ -25,32 +27,16 @@ export const Portfolio = () => {
         if (visibleImages.length >= 6) {
           setPortfolioImages(visibleImages);
         } else {
-          throw new Error ('Not enough visible images');
+          throw new Error ('Not enough visible images, using fallback.');
         }
       } catch (error) {
         console.error('Error fetching portfolio images:', error);
         setPortfolioImages(PORTFOLIO_IMAGE_FALLBACK);
       }
     }
-    
     fetchImages();
     
   }, [])
-
-  useEffect(() => {
-
-    const preloadCriticalImages = () => {
-      portfolioImages.slice(0, 4).forEach(({ image }) => {
-        const link = document.createElement('link');
-        link.rel = 'preload';
-        link.as = 'image';
-        link.href = image;
-        document.head.appendChild(link);
-      });
-    };
-    
-    preloadCriticalImages();
-  }, []);
 
   return (
     <main aria-label="Portfolio Page">
@@ -93,7 +79,9 @@ export const Portfolio = () => {
               onClick={handleImageClick}
               index={idx}
               path={image} 
-              alt={title}/>
+              alt={title}
+              priority={idx < 6}
+              />
           ))}
         </ul>
       </section>

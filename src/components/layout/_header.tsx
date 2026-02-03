@@ -40,7 +40,7 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
               <div className="z-20 flex w-full md:max-w-2/3 lg:max-w-1/2 drop-shadow-lg/50 justify-center items-center ">
                 <img 
                   loading="lazy"
-                  className="h-46 md:h-78 object-cover floating-item" 
+                  className="md:h-72 sm:h-64 h-48 object-cover floating-item" 
                   src="/assets/design/logo/RuglyBarnacle_Logo.webp" 
                   alt="Rugly Barnacle Logo" 
                 />

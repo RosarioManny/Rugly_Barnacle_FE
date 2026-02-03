@@ -12,9 +12,10 @@ interface PortfolioItemProps {
   alt: string;
   index: number; // Add index prop for staggering
   onClick: (image: PortfolioImage) => void;
+  priority?: boolean
 }
 
-export const PortfolioItem = ({ path, alt, index, onClick }: PortfolioItemProps) => {
+export const PortfolioItem = ({ path, alt, index, onClick, priority }: PortfolioItemProps) => {
   const ref = useRef<HTMLLIElement>(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
   const [isLoaded, setIsLoaded] = useState(false);
@@ -62,6 +63,7 @@ export const PortfolioItem = ({ path, alt, index, onClick }: PortfolioItemProps)
             alt={alt}
             loading="lazy"
             decoding='async'
+            fetchPriority={priority ? 'high' : 'auto'}
             onLoad={() => setIsLoaded(true)}
             style={{ 
               opacity: isLoaded ? 1 : 0, 
