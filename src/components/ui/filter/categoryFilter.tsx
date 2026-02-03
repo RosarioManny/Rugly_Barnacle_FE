@@ -9,13 +9,15 @@ interface CategoryFilterProps {
 
 const categoryIcons: Record<string, React.FC<any>> = {
   'All items': StarIcon,
-  'Custom rug': BrushIcon,
+  'Custom Order': BrushIcon,
   'Rug': RoundRugIcon,
-  'Mug rug': MugIcon,
-  'Wrist rug': KeyboardIcon,
-  'Mirror rug': MirrorIcon,
+  'Mug Rug': MugIcon,
+  'Wrist Rug': KeyboardIcon,
+  'Mirror Rug': MirrorIcon,
   'Bag Chains': BagIcon,
 };
+
+// console.log('Category icons mapping:', categoryIcons['Rug']);
 
 export const CategoryFilter: React.FC<CategoryFilterProps> = ({
   categories,
@@ -29,7 +31,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
         {['all', ...categories].map((category) => { // < - Creates an Array that starts with 'all' then spreads the categories map. 
           const displayName = category === 'all' ? 'All items' : category;
           const Icon = categoryIcons[displayName] || StarIcon;
-          
+        
           return (
             <button
               key={category}
@@ -43,7 +45,7 @@ export const CategoryFilter: React.FC<CategoryFilterProps> = ({
             >
               <Icon className="w-6 h-6 mb-1" />
               <span className="text-xs font-medium whitespace-nowrap">
-                {displayName}
+                {displayName} 
               </span>
             </button>
           );

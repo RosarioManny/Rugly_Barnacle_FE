@@ -1,26 +1,50 @@
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
 import { Header } from "../../components/layout/_header"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 import { ReturnToTop, StartOrderBtn} from "../../components/ui/buttons"
-import { portfolioImages } from "./portfolioImages"
+import { PORTFOLIO_IMAGE_FALLBACK } from "./portfolioImages"
 import { PortfolioItem } from "./portfolioItem"
 import { usePortfolioModal } from "../../hooks/portfolio/imageModal"
-
+import { getPortfolioImages, type PortfolioImage } from "../../lib/api/Portfolio/portfolioservices"
 export const Portfolio = () => {
   const { 
     closeModal,
     selectedImage,
     handleBackdropClick,
     handleImageClick 
+
   } = usePortfolioModal()
+  const [portfolioImages, setPortfolioImages] =  useState<PortfolioImage[]>([]);
 
   useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const data = await getPortfolioImages();
+        console.log('Fetched portfolio images:', data);
+        const visibleImages = data.filter(image => image.is_visible);
+        if (visibleImages.length >= 6) {
+          setPortfolioImages(visibleImages);
+        } else {
+          throw new Error ('Not enough visible images');
+        }
+      } catch (error) {
+        console.error('Error fetching portfolio images:', error);
+        setPortfolioImages(PORTFOLIO_IMAGE_FALLBACK);
+      }
+    }
+    
+    fetchImages();
+    
+  }, [])
+
+  useEffect(() => {
+
     const preloadCriticalImages = () => {
-      portfolioImages.slice(0, 4).forEach(({ path }) => {
+      portfolioImages.slice(0, 4).forEach(({ image }) => {
         const link = document.createElement('link');
         link.rel = 'preload';
         link.as = 'image';
-        link.href = path;
+        link.href = image;
         document.head.appendChild(link);
       });
     };
@@ -63,13 +87,13 @@ export const Portfolio = () => {
         w-full
         grid gap-1 grid-cols-1 
         md:grid-cols-2 lg:grid-cols-3">
-          {portfolioImages.map(({path, alt}, idx) => (
+          {portfolioImages.map(({image, title}, idx) => (
             <PortfolioItem 
-              key={`${idx}-${alt}`}
+              key={`${idx}-${title}`}
               onClick={handleImageClick}
               index={idx}
-              path={path} 
-              alt={alt}/>
+              path={image} 
+              alt={title}/>
           ))}
         </ul>
       </section>
