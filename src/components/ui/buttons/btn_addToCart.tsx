@@ -40,8 +40,8 @@ export const AddToCartBtn = ({
         bg-majorelle
         w-full h-[55px]
         duration-100 drop-shadow-sm/50 rounded-lg
-        hover:bg-robin_egg hover:scale-105
-        focus:bg-robin_egg focus:scale-105
+        hover:bg-robin_egg hover:scale-101
+        focus:bg-robin_egg focus:scale-101
         ${isAdding ? 'opacity-70 cursor-not-allowed' : ''}
       `}> 
       <p className={`${isAdding ? "animate-pulse" : ""}`}>

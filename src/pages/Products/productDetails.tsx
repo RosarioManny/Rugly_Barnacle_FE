@@ -1,17 +1,19 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import { useParams, Link } from "react-router-dom"
 // API
-import { getProduct } from "../../lib/api/Product/productservices"
-import type { Product } from "../../lib/api/Product/productservices"
+import { getProduct, type Product } from "../../lib/api/Product/productservices"
+import { getProperties, type Property } from "../../lib/api/Property/properties"
 // COMPONENTS
-import { Spinner } from "../../components/ui/loaders/loadingSpinner"
+// import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
 import { AddToCartBtn } from "../../components/ui/buttons/btn_addToCart"
 import { LoadingPage } from "../../components/layout/loadingPage"
+import { li } from "framer-motion/client"
 
 
 export const ProductDetails = () => {
   const [productDetails, setProductDetails] = useState<Product | null>(null)
+  const [properties, setProperties] = useState<Property[]>([])
   const [status, setStatus] = useState< 'loading' | 'error' | 'success' | 'idle' >('loading')
   const [cartMessage, setCartMessage] = useState<string | null>(null)
   const [imageError, setImageError] = useState(false)
@@ -19,7 +21,18 @@ export const ProductDetails = () => {
   // useParams returns an object, you need to extract the id
   const { id } = useParams<{ id: string }>()
 
-  // console.log("Cookie >", document.cookie)
+  // Fetch all properties
+  const fetchProperties = async () =>{
+    try {
+      const data = await getProperties();
+      setProperties(data);
+    } catch (err) {
+      console.error("Error fetching properties:", err);
+      return [];
+    }
+  }
+
+  // Fetch product details by ID
   const fetchProduct = async (productId: string) => {
     try {
       setStatus('loading')
@@ -36,36 +49,39 @@ export const ProductDetails = () => {
     }
   }
 
-  const handleSuccessMsg = () => {
-    if (status === 'success') {
-      setCartMessage("Item added to cart successfully!");
-      setTimeout(() => setCartMessage(null), 3000); // Clear message after 3 seconds
-    }
-  };
+  // Handlers for Add to Cart button callbacks
+  const handleCartMessage = (message: string, isError: boolean) => {
+    setCartMessage(message)
+    setTimeout(() => { setCartMessage(null)}, isError ? 5000 :3000)
+  }
 
-  const handleErrorMsg = (error: string) => {
-    if (status === 'error') {
-      setCartMessage(error);
-      setTimeout(() => setCartMessage(null), 5000); // Clear message after 5 seconds
-    }
-  };
-
+  // Image error handler
   const handleImageError = () => {
     setImageError(true)
   }
 
+  // Fetch product details when component mounts or id changes
   useEffect(() => {
     if (id) {
+      fetchProperties()
       fetchProduct(id)
-      
     } else {
       console.log(productDetails)
       setStatus('error')
     }
   }, [id])
 
+  const productProperties = useMemo(() => {
+  if (!productDetails?.properties || properties.length === 0) return [];
 
+  return productDetails.properties
+    .map(propId => properties.find(prop => prop.id === propId))  // propId is a number, not an object
+    .filter((prop): prop is Property => prop !== undefined);
+}, [productDetails?.properties, properties]);
 
+console.log('Properties:', properties);
+console.log('Product Properties IDs:', productDetails?.properties);
+console.log('Mapped Properties:', productProperties);
   if (status === 'loading') return <LoadingPage />;
 
   
@@ -142,10 +158,10 @@ export const ProductDetails = () => {
             aria-hidden="true" 
             alt="Cross Star Design Marker" 
           />
-          <div className="bg-white h-auto min-h-[25vh] size-90 max-h-[50vh] flex items-center justify-center rounded-lg ">
+          <div className="bg-white h-auto min-h-[25vh] max-h-[50vh] flex items-center justify-center rounded-lg ">
             { productDetails.images && productDetails.images.length > 0 && !imageError ? (
               <img 
-              className="object-cover p-2 "
+              className="object-cover p-2 max-h-[50vh] h-90 rounded-lg "
               src={productDetails.images?.[0].image}
               alt=""
               onError={handleImageError}
@@ -182,12 +198,14 @@ export const ProductDetails = () => {
           </div>
         </div>
         {/* Display properties */}
-        {productDetails.properties && productDetails.properties.length > 0 && (
+        {productProperties.length > 0 && (
           <div>
             <h3>Properties:</h3>
             <ul>
-              {productDetails.properties.map((property: { id: number, display_name: string }) => (
-                <li key={`property-${property.id}`}> {property.display_name}</li>
+              {productProperties.map((prop) => (
+                <li key={`property-${prop.id}`} className="body_text">
+                  {prop.display_name}
+                </li>
               ))}
             </ul>
           </div>
@@ -197,8 +215,8 @@ export const ProductDetails = () => {
             isAvailable={productDetails.quantity > 0}
             productId={Number(id)}
             quantity={1}
-            onSuccess={handleSuccessMsg}
-            onError={handleErrorMsg}
+            onSuccess={() => handleCartMessage("Item added to cart!", false)}
+            onError={(error) => handleCartMessage(error, true)}
           />
         </div>
       </section>

@@ -1,5 +1,7 @@
 import { useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
+import { subscribeToNewsletter } from "../../lib/api/Newsletter/newsletter";
+
 // ChangeEvent and FormEvent are effective TS types for the event.targets. 
 // Allowing TS to know what will be happening to an element. 
 // See handleChange for more.
@@ -21,25 +23,36 @@ export const NewsLetterForm = () => {
   // FormEvent tells TS that this the base form submission even. It's like a "submit" type.
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();  
-    console.log("subscribed:", inputData.email) 
-    setInputData({email: ""});
+    try {
+      const newEmailData = inputData.email.trim();
+      subscribeToNewsletter(newEmailData)
+      console.log("subscribed:", inputData.email) 
+      setInputData({email: ""});
+    } catch (err: any) {
+      console.error("Error subscribing to newsletter:", err);
+    }
   };
   
   return (
-    <section className="my-4">
+    <section className="">
         <h1 className="
         heading_text 
-        my-3
+        mb-4
         text-20 text-mauve 
         underline underline-offset-6 decoration-2 decoration-wavy"> Join the Newsletter</h1>
-        <form className="" onSubmit={handleSubmit}>
+        <form className="flex flex-shrink " onSubmit={handleSubmit}>
           <button 
             className="
-            bg-breeze text-space_cadet font-bold rounded-l-2xl p-2
-            hover:bg-robin_egg hover:text-fleece hover:scale-105 
+            bg-breeze text-space_cadet font-bold 
+            rounded-l-2xl 
+            flex items-center justify-center
+            max-h-[40px]
+            hover:bg-robin_egg 
             "
             type="submit"> 
-            Subscribe 
+            <p>
+              Subscribe 
+            </p>
           </button>
           <input 
             onChange={handleChange}
