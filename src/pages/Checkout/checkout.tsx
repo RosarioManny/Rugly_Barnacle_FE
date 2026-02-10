@@ -5,15 +5,17 @@ import { useCart } from '../../hooks/cart/cartProvider';
 import { OrderSummary } from './OrderSummary/OrderSummary';
 import { type CartItem } from '../../lib/api/Cart/cartServices';
 import { createCheckout } from '../../lib/api/Stripe/stripeservices';
+import { Link } from 'react-router-dom';
 import { CheckoutEmptyState, CheckoutErrorState, CheckoutLoadingState, CheckoutStockErrorState} from './components/checkoutComponents';
 
 
 export const CheckoutPage = () => {
-  const { cart, status, fetchCart } = useCart();
   const navigate = useNavigate();
+  const { cart, status, fetchCart } = useCart();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
   const [stockErrors, setStockErrors] = useState<{product_name: string; requested: number; available: number}[]>([]);
+  const [orderSummaryOpen, setOrderSummaryOpen] = useState(true);
 
   useEffect(() => {
     if (cart?.items && Array.isArray(cart.items)) {
@@ -74,6 +76,21 @@ export const CheckoutPage = () => {
     <main className="min-h-screen py-8 mb-20" aria-label="Checkout Page">
       <div className="mx-auto px-4 max-w-7xl">
         {/* Header */}
+        <Link 
+          className="
+          group pointer duration-200 w-fit inline-flex transform ml-8 
+          transition-color hover:text-bittersweet 
+          gap-2 items-center" 
+          to='/cart'>
+          <div className={`
+            caret-left text-space_cadet
+            duration-200
+            group-hover:text-bittersweet 
+            text-fleece body_text 
+            `} 
+          />
+          Back 
+        </Link>
         <div className="text-center mb-8">
           <h1 className="text-3xl md:text-4xl font-bold text-space_cadet/90 mb-2">Checkout</h1>
           <p className="text-space_cadet/60">Review your order and proceed to payment</p>
@@ -82,12 +99,14 @@ export const CheckoutPage = () => {
         {/* Checkout Content */}
         <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
           {/* Order Summary */}
-          <div className="flex-1 max-w-5xl mx-auto ">
-            <OrderSummary 
-              cartItems={cartItems}
-              subtotal={cartSubtotal}
-            />
-          </div>
+          {orderSummaryOpen && (
+            <div className="flex-1 max-w-5xl mx-auto ">
+              <OrderSummary 
+                cartItems={cartItems}
+                subtotal={cartSubtotal}
+              />
+            </div>
+          )}
 
           {/* Payment Section */}
           <div className="flex-1 max-w-5xl mx-auto ">

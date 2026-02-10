@@ -25,9 +25,8 @@ export const OrderSummary = ({
                 { item.product_images?.primary ? (
                   <img 
                     className="
-                      w-full h-40 
-                      md:h-32 md:w-32 lg:h-40 lg:w-40 
-                      rounded-lg object-cover shadow-sm"
+                      w-full h-full
+                      rounded-lg object-cover "
                     src={item?.product_images?.primary }  
                     alt={item?.product_name} 
                   />

@@ -9,9 +9,21 @@ import { OccupiedCart, EmptyCart } from "./components/cartState";
 
 export const Cart = () => {
   const { cart, status, fetchCart, removeCartItem, addItemToCart } = useCart();
+  const [localQuantities, setLocalQuantities] = useState<Record<number, number>>({});
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const cartTotal = cart?.total
+  const cartTotalItems = cartItems.reduce((total, item) => total + item.quantity, 0)
   
-  
+  useEffect(() => {
+    if (cartItems.length > 0) {
+      const initial = cartItems.reduce<Record<number, number>>((acc, item) => {
+        acc[item.id] = item.quantity;
+        return acc
+      }, {});
+      setLocalQuantities(initial);
+    }
+  }, [cartItems]);
+
   useEffect(() => {
     if (cart?.items && Array.isArray(cart.items)) {
       const validItems = cart.items.filter(item => item !== null && item !== undefined) as CartItem[];
@@ -21,25 +33,27 @@ export const Cart = () => {
     }
   }, [cart]);
 
-  const cartTotal = cart?.total
-  const cartTotalItems = cartItems.reduce((total, item) => total + item.quantity, 0)
   const handleItemRemove = async (cartItemId: number) => {
-    try {
-      await removeCartItem(cartItemId, 1); // Use the new service with cart_item_id
-    } catch (err) {
-      console.error("Failed to Remove", err);
-    }
+    setLocalQuantities(prev => {
+      const currentQuantity = prev[cartItemId] || 1;
+      if (currentQuantity <= 1) {
+        console.log(`Removing item ${cartItemId} from cart`);
+        removeCartItem(cartItemId, 1);
+        return prev;
+      }
+      return {...prev, [cartItemId]: currentQuantity - 1}; 
+    })
   };
 
   const handleAddItem = async (cartItemId: number) => {
-    try {
-      const cartItem = cartItems.find(item => item.id === cartItemId);
-      if (!cartItem) return;
-      await addItemToCart(cartItem?.product, 1)
-    } catch (err){ 
-      console.error("Failed to Add", err);
-    }
-  }
+    setLocalQuantities(prev => {
+      console.log(`Adding item ${cartItemId} to cart`);
+      return {
+        ...prev,
+        [cartItemId]: (prev[cartItemId] || 0) + 1
+      };
+    });
+  };
 
   if (status === 'loading') {
     return (
@@ -100,6 +114,8 @@ export const Cart = () => {
               <ul className="divide-y divide-gray-200">
                 {cartItems.map((item, idx) => (
                   <OccupiedCart
+                    {...item}
+                    quantity={localQuantities[item.id] || item.quantity}
                     onRemove={handleItemRemove}
                     onAdd={handleAddItem}
                     key={`${item.id}-${item.added_at}-${idx}`}
