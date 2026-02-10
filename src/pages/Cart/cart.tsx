@@ -8,7 +8,7 @@ import { OccupiedCart, EmptyCart } from "./components/cartState";
 
 
 export const Cart = () => {
-  const { cart, status, fetchCart, removeCartItem } = useCart();
+  const { cart, status, fetchCart, removeCartItem, addItemToCart } = useCart();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   
   
@@ -30,6 +30,16 @@ export const Cart = () => {
       console.error("Failed to Remove", err);
     }
   };
+
+  const handleAddItem = async (cartItemId: number) => {
+    try {
+      const cartItem = cartItems.find(item => item.id === cartItemId);
+      if (!cartItem) return;
+      await addItemToCart(cartItem?.product, 1)
+    } catch (err){ 
+      console.error("Failed to Add", err);
+    }
+  }
 
   if (status === 'loading') {
     return (
@@ -91,6 +101,7 @@ export const Cart = () => {
                 {cartItems.map((item, idx) => (
                   <OccupiedCart
                     onRemove={handleItemRemove}
+                    onAdd={handleAddItem}
                     key={`${item.id}-${item.added_at}-${idx}`}
                     {...item}
                   />

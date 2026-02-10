@@ -2,11 +2,10 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/cart/cartProvider';
-import { Spinner } from '../../components/ui/loaders/loadingSpinner';
-import { DangerIcon } from '../../components/ui/icons-svgs/SvgIcons';
 import { OrderSummary } from './OrderSummary/OrderSummary';
 import { type CartItem } from '../../lib/api/Cart/cartServices';
 import { createCheckout } from '../../lib/api/Stripe/stripeservices';
+import { CheckoutEmptyState, CheckoutErrorState, CheckoutLoadingState, CheckoutStockErrorState} from './components/checkoutComponents';
 
 
 export const CheckoutPage = () => {
@@ -14,6 +13,7 @@ export const CheckoutPage = () => {
   const navigate = useNavigate();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
+  const [stockErrors, setStockErrors] = useState<{product_name: string; requested: number; available: number}[]>([]);
 
   useEffect(() => {
     if (cart?.items && Array.isArray(cart.items)) {
@@ -26,75 +26,48 @@ export const CheckoutPage = () => {
 
   const cartSubtotal = Number(cart?.total) || 0
 
-
   const handleStripeCheckout = async () => {
-    if(!cart || cartItems.length === 0) {
+    if (!cart || cartItems.length === 0) {
       alert('Your cart is empty');
       return;
     }
 
     setIsProcessing(true);
+    setStockErrors([]); // Clear any previous errors
 
     try {
       const sessionData = await createCheckout();
-
-      if(sessionData.checkout_url) {
+      if (sessionData.checkout_url) {
         window.location.href = sessionData.checkout_url;
       } else {
-        throw new Error('No checkout URL recieved')
+        throw new Error('No checkout URL received');
       }
-    } catch (error) {
-        console.error('Checkout error:', error);
-        alert('There was an error starting checkout. Please try again.');
-        setIsProcessing(false);
+    } catch (error: any) {
+      console.error('Checkout error:', error);
+      const errorData = error.response?.data;
+
+      if (errorData?.items) {
+        setStockErrors(errorData.items); // <- Stock errors from Django
+      }
+      setIsProcessing(false);
     }
   }
 
   if (status === 'loading' || isProcessing) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <Spinner />
-          <p className="mt-4 text-gray-600">Preparing checkout...</p>
-        </div>
-      </div>
-    );
+    return CheckoutLoadingState(status, isProcessing);
   }
 
   if (status === 'error' || cart === null) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="bg-white p-6 rounded-lg shadow-md flex flex-col items-center gap-4 max-w-md text-center">
-          <DangerIcon className="text-bittersweet size-16" />
-          <div className="error-message text-space_cadet font-bold">
-            Error loading your cart
-          </div>
-          <button 
-            onClick={fetchCart}
-            className="px-6 py-2 font-semibold bg-majorelle text-white rounded-lg hover:bg-robin_egg transition-colors"
-          >
-            Retry
-          </button>
-        </div>
-      </div>
-    );
+    return CheckoutErrorState(status, cart, fetchCart);
   }
-
+  
   if (cartItems.length === 0) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="bg-white p-6 rounded-lg shadow-md text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h2>
-          <p className="text-gray-600 mb-6">Add some items to your cart before checking out.</p>
-          <button 
-            onClick={() => navigate('/shop')}
-            className="px-6 py-2 font-semibold bg-majorelle text-white rounded-lg hover:bg-robin_egg transition-colors"
-          >
-            Continue Shopping
-          </button>
-        </div>
-      </div>
-    );
+    return CheckoutEmptyState(cartItems, navigate);
+    }
+
+  {/* Stock Errors */}
+  if (stockErrors.length > 0) {
+    return CheckoutStockErrorState(stockErrors, navigate);
   }
 
   return (
