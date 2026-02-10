@@ -44,7 +44,7 @@ export const NewsLetterForm = () => {
           <button 
             className="
             bg-breeze text-space_cadet font-bold 
-            rounded-l-2xl 
+            rounded-l-xl 
             flex items-center justify-center
             max-h-[40px]
             hover:bg-robin_egg 
@@ -63,9 +63,12 @@ export const NewsLetterForm = () => {
             aria-describedby="email-error"
             placeholder="youremail@site.com" 
             pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-            className="bg-white md:w-xs w-2/3 max-h-[40px] rounded-r-2xl pl-2 py-2">
+            className="bg-white md:w-xs w-2/3 max-h-[40px] max-w-[250px] rounded-r-xl pl-2 py-2">
           </input>
         </form>
       </section>
   )
 }
+
+
+// python manage.py migrate && python manage.py collectstatic --noinput && gunicorn rbproduct.wsgi

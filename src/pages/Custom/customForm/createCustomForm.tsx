@@ -15,6 +15,23 @@ export const CreateCustomOrderForm = () => {
   const [image, setImage] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionResult, setSubmissionResult] = useState<{success: boolean; referenceId?: string; message?: string} | null>(null);
+  const BUDGET_AND_TYPES = [
+    { label: "2ft - $200+", value: "2ft - $200+" },
+    { label: "3ft - $300+", value: "3ft - $300+" },
+    { label: "4ft - $400+", value: "4ft - $400+" },
+    { label: "5ft - $500+", value: "5ft - $500+" },
+    { label: "6ft - $600+", value: "6ft - $600+" },
+    { label: "Bag Chain - TBD", value: "Bag Chain" },
+    { label: "Mirror Rug - TBD", value: "Mirror Rug" },
+    { label: "Mug Rug - TBD", value: "Mug Rug" },
+    { label: "Wrist Rug - TBD", value: "Wrist Rug" },
+  ]
+  const CONTACT_METHODS = [
+    { label: "Email", value: "email" },
+    { label: "Instagram", value: "instagram" },
+    { label: "Phone", value: "phone" },
+    { label: "Other", value: "other"}
+  ]
 
   useEffect(() => {
     if (submissionResult) {
@@ -30,11 +47,11 @@ export const CreateCustomOrderForm = () => {
     setFormData(prev => ({ ...prev, [name]: value }));
   };
 
-  // const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   if (e.target.files && e.target.files[0]) {
-  //     setImage(e.target.files[0]);
-  //   }
-  // };
+  const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setImage(e.target.files[0]);
+    }
+  };
 
   const removeImage = () => {
     setImage(null);
@@ -128,6 +145,7 @@ export const CreateCustomOrderForm = () => {
         <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">3</div>
         <p className="font-semibold">Secure Payment</p>
         <p className="text-xs text-space_cadet/70">Pay via Venmo once design is finalized</p>
+        {/* <p className="text-xs text-space_cadet/70">Pay through the shop</p> */}
       </div>
       <div className="text-center">
         <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">4</div>
@@ -138,24 +156,38 @@ export const CreateCustomOrderForm = () => {
   </div>
 
   <section className="max-w-4/5 md:max-w-2/3 p-6 bg-white rounded-lg shadow-xl mb-12">
-    <div className="mb-6 p-4 bg-bittersweet/30 rounded-lg border-l-4 border-bittersweet">
-      <p className="text-sm text-space_cadet">
-        <strong>Payment Information:</strong> After we finalize your design, a $50 down payment through Zelle or Venmo is required.
-        No further payment is needed until your custom design is completed.
-      </p>
-    </div>
+  
+  {/* <div className="mb-6 p-4 bg-bittersweet/30 rounded-lg border-l-4 border-bittersweet">
+    <p className="text-sm text-space_cadet">
+      <strong>Payment Info:</strong> A $50 down payment through our shop secures your order. Once your piece is 
+      ready, you'll receive a Stripe payment link for the remaining balance — please complete it within 
+      7 days to ensure timely shipping.
+    </p>
+  </div>
+  */}
+  <div className="mb-6 p-4 bg-bittersweet/30 rounded-lg border-l-4 border-bittersweet">
+    <h3 className="font-semibold text-space_cadet mb-1">Payment Info</h3>
+    <p className="text-sm text-space_cadet">
+      After we finalize your design together, a $50 deposit via Zelle or Venmo 
+      is all that's needed to get started. You won't be charged the remaining balance until your piece 
+      is complete and ready to ship.
+    </p>
+  </div>
 
     {/* NEW: Production Timeline Notice */}
     <div className="mb-6 p-4 bg-breeze/30 rounded-lg border-l-4 border-robin_egg">
       <div className="flex items-start gap-3">
-        <div className="flex-shrink-0 mt-0.5">
-          <DangerIcon className="size-8 text-robin_egg rotate-180"/>
-        </div>
+        {/* <div className="flex-shrink-0 ">
+         
+        </div> */}
         <div>
-          <h3 className="font-semibold text-space_cadet mb-1">Production Timeline & Reference Images</h3>
+          <h3 className="flex gap-1 font-semibold text-space_cadet mb-1">
+            <DangerIcon className=" size-6 text-robin_egg rotate-180"/>
+            Production Timeline & Reference Images
+          </h3>
           <p className="text-sm text-space_cadet/80">
-            • Custom rugs take <strong>2-3 weeks to complete</strong> from design confirmation<br/>
-            • Have reference images? Email them once we start collaborating on your design!
+            • Custom rugs take <strong>2-3 weeks to complete</strong> from design confirmation.<br/>
+            • Have reference more images? Email them once we start collaborating on your design!
           </p>
         </div>
       </div>
@@ -208,9 +240,11 @@ export const CreateCustomOrderForm = () => {
             onChange={handleInputChange}
             className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-majorelle focus:border-transparent"
           >
-            <option value="email">Email</option>
-            <option value="instagram">Instagram</option>
-            <option value="phone">Phone</option>
+            {CONTACT_METHODS.map(({ label, value }) => (
+              <option key={value} value={value}>
+                {label}
+              </option>
+            ))}
           </select>
         </div>
         
@@ -263,20 +297,54 @@ export const CreateCustomOrderForm = () => {
               className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-majorelle focus:border-transparent"
               aria-label="Rug Desired size + price range "
             >
-              <option id="2ft - $200+" value="2ft - $200+">2ft - $200+</option>
-              <option id="3ft - $300+" value="3ft - $300+">3ft - $300+</option>
-              <option id="4ft - $400+" value="4ft - $400+">4ft - $400+</option>
-              <option id="5ft - $500+" value="5ft - $500+">5ft - $500+</option>
-              <option id="6ft - $600+" value="6ft - $600+">6ft - $600+</option>                
+              {BUDGET_AND_TYPES.map(({ label, value }) => (
+                <option key={label} value={value}>{label}</option>
+              ))}        
             </select>
           </div>
           <p className="text-xs text-bittersweet/70">Final pricing confirmed after design consultation</p>
         </div>
-        
-        {/* Removed the old notice box since we have the new one above */}
-        <div></div>
       </div>
-      
+      <div>
+  <label htmlFor="image" className="block text-sm font-medium text-space_cadet mb-1">
+    Reference Image <span className="text-space_cadet/50 text-xs">(optional)</span>
+  </label>
+
+  <label
+    htmlFor="image"
+    className="flex items-center gap-3 w-full px-4 py-2 border border-space_cadet/30 rounded-md cursor-pointer hover:border-majorelle transition-colors"
+  >
+    <span className=" text-majorelle font-medium ">Choose File</span>
+    <span className=" text-space_cadet/50 truncate">
+      {image ? image.name : "No file chosen"}
+    </span>
+  </label>
+
+  <input
+    type="file"
+    id="image"
+    accept="image/*"
+    onChange={handleImageUpload}
+    className="sr-only" 
+  />
+
+  {image && (
+    <div className="mt-2 flex items-center gap-3">
+      <img
+        src={URL.createObjectURL(image)}
+        alt="Preview"
+        className="w-16 h-16 object-cover rounded-md border border-space_cadet/20"
+      />
+      <button
+        type="button"
+        onClick={removeImage}
+        className="text-sm text-bittersweet hover:underline"
+      >
+        Remove
+      </button>
+    </div>
+  )}
+</div>
       <div className="flex justify-center mt-8">
         <button
           type="submit"
@@ -284,7 +352,7 @@ export const CreateCustomOrderForm = () => {
           className={`
             bg-majorelle
             w-auto h-[55px]
-            drop-shadow-sm
+            drop-shadow-sm rounded-lg
             hover:bg-robin_egg hover:scale-105
             active:bg-robin_egg active:scale-105 
             focus:bg-robin_egg focus:scale-105
@@ -297,7 +365,10 @@ export const CreateCustomOrderForm = () => {
       <div className="text-center text-sm text-space_cadet/70">
         <p>You'll receive a response within 1-2 business days to discuss your custom order</p>
       </div>
-      <p className="text-xs text-space_cadet/50 text-center"> <span className="text-bittersweet"> * </span> = Required</p>
+      <div className="flex gap-4">
+        <p className="text-xs text-space_cadet/50 text-center"> <span className="text-bittersweet"> * </span> = Required</p>
+        <p className="text-xs text-space_cadet/50 text-center"> <span className="text-bittersweet"> TBD </span> = To Be Discussed</p>
+      </div>
     </form>
   </section>
 </>

@@ -8,6 +8,18 @@ export interface PortfolioImage {
   thumbnail?: string;
 }
 
+// GET PORTFOLIO LIST IMAGES
+export const getPortfolioImages = async (): Promise<PortfolioImage[]> => {
+  try {
+    const response = await api.get<PortfolioImage[]>('portfolio/');
+    return response.data;
+
+  } catch (err: any) {
+    console.error("Error fetching portfolio images:", err.response?.data?.error || err.message);
+    throw err;
+  }
+}
+
 // MODEL
 //  title = models.CharField(max_length=200, blank=True, help_text="Short description of the rug (e.g., 'Blue Geometric Pattern Rug')")
 //     image = models.ImageField(
@@ -24,16 +36,3 @@ export interface PortfolioImage {
 //     is_visible = models.BooleanField(default=True, help_text="Toggle to show this in the portfolio")
 //     created_at = models.DateField(auto_now_add=True)
 //     thumbnail = models.ImageField(upload_to='portfolio/thumbnails/', blank=True, null=True)
-
-
-// GET PORTFOLIO LIST IMAGES
-export const getPortfolioImages = async (): Promise<PortfolioImage[]> => {
-  try {
-    const response = await api.get<PortfolioImage[]>('portfolio/');
-    return response.data;
-
-  } catch (err: any) {
-    console.error("Error fetching portfolio images:", err.response?.data?.error || err.message);
-    throw err;
-  }
-}

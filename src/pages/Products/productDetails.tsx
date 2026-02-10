@@ -5,10 +5,10 @@ import { getProduct, type Product } from "../../lib/api/Product/productservices"
 import { getProperties, type Property } from "../../lib/api/Property/properties"
 // COMPONENTS
 // import { Spinner } from "../../components/ui/loaders/loadingSpinner"
-import { DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
+import { DangerIcon, StarIcon } from "../../components/ui/icons-svgs/SvgIcons"
 import { AddToCartBtn } from "../../components/ui/buttons/btn_addToCart"
 import { LoadingPage } from "../../components/layout/loadingPage"
-import { li } from "framer-motion/client"
+
 
 
 export const ProductDetails = () => {
@@ -75,13 +75,11 @@ export const ProductDetails = () => {
   if (!productDetails?.properties || properties.length === 0) return [];
 
   return productDetails.properties
-    .map(propId => properties.find(prop => prop.id === propId))  // propId is a number, not an object
+    .map(propId => properties.find(prop => prop.id === propId.id))
     .filter((prop): prop is Property => prop !== undefined);
 }, [productDetails?.properties, properties]);
 
-console.log('Properties:', properties);
-console.log('Product Properties IDs:', productDetails?.properties);
-console.log('Mapped Properties:', productProperties);
+
   if (status === 'loading') return <LoadingPage />;
 
   
@@ -122,7 +120,7 @@ console.log('Mapped Properties:', productProperties);
   }
 
   return (
-    <main className="md:mx-20 m-4 mb-96 h-[100vh]" aria-label={`${productDetails.name} details page`}>
+    <main className="md:mx-20 m-4 mb-[850px] sm:mb-[700px] h-[100vh]" aria-label={`${productDetails.name} details page`}>
       {cartMessage && (
         <div className={`
           fixed top-4 right-4 p-4 rounded-md z-50 
@@ -192,19 +190,25 @@ console.log('Mapped Properties:', productProperties);
           <div className="flex gap-2">
             <p className="font-bold">In Stock: </p>
             <p className=""> 
-
               {productDetails.quantity }
             </p>
+          </div>
+          <div className="my-2">
+            <p className="subheading_text font-semibold underline ">Item Description: </p>
+            <p> {productDetails.description}</p>
           </div>
         </div>
         {/* Display properties */}
         {productProperties.length > 0 && (
           <div>
-            <h3>Properties:</h3>
-            <ul>
+            <h3 className="font-bold">Properties:</h3>
+            <ul className="my-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2">
               {productProperties.map((prop) => (
-                <li key={`property-${prop.id}`} className="body_text">
-                  {prop.display_name}
+                <li key={`property-${prop.id}`} className="mx-6 sm:mx-0 body_text gap-4 flex items-center text-start justify-center bg-breeze/20 rounded p-3">
+                  <StarIcon className="size-5 text-space_cadet"/>
+                  <p className="mr-auto">
+                    {prop.display_name}
+                  </p>
                 </li>
               ))}
             </ul>
@@ -226,24 +230,26 @@ console.log('Mapped Properties:', productProperties);
           src="/assets/design/icons/Cross_Star_Teal-Blue.webp" 
           aria-hidden="true" 
           alt="Cross Star Design Marker" 
-          />
-        <div >
-          <p className="subheading_text font-semibold underline">Item Description: </p>
-          <p> {productDetails.description}</p>
-        </div>
+        />
         <div>
-          <p className="subheading_text font-semibold underline">Shipping: </p>
+          <p className="subheading_text font-semibold underline">Shipping:</p>
           <p> 
-            Shipping is dependent on product type and customer selection. 
-            Most items are not free shipping.
+            Shipping costs vary by product size, weight, and destination. 
+            Shipping rates will be calculated at checkout based on your selection.
           </p>
         </div>
         <div>
-          <p className="subheading_text font-semibold underline">Return Policy: </p>
+          <p className="subheading_text font-semibold underline">Return Policy:</p>
           <p>  
-            There no return policy for Rugly Barnacle products. 
-            This applies to both custom and premade products. 
-            All sales final upon completion. 
+            All sales are final. Due to the custom nature of our rugs, we cannot accept returns or exchanges. 
+            Please review product details carefully before purchasing. Refer to product notes about the the color and display of the products. 
+          </p>
+        </div>
+        <div>
+          <p className="subheading_text font-semibold underline">Product Notes:</p>
+          <p>  
+            Rug colors may vary slightly from photos due to screen settings and lighting. 
+            Minor variations in handmade rugs are normal and add to their unique character.
           </p>
         </div>
       </section>

@@ -68,6 +68,7 @@ export const CheckCustomOrderStatus = () => {
               className={`
                 bg-majorelle
                 w-auto h-[55px]
+                rounded-lg
                 drop-shadow-sm
                 hover:bg-robin_egg hover:scale-105
                 active:bg-robin_egg active:scale-105 

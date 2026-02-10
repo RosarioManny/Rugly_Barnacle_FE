@@ -76,7 +76,7 @@ export const Cart = () => {
                 Items: <b className="text-majorelle">{cartTotalItems}</b>
               </h2>
               <button 
-                className="group bg-space_cadet/10 flex items-center gap-2 text-space_cadet/80 hover:bg-majorelle/20 hover:text-majorelle transition-all duration-200"
+                className="group rounded-lg bg-space_cadet/10 flex items-center gap-2 text-space_cadet/80 hover:bg-majorelle/20 hover:text-majorelle transition-all duration-200"
                 onClick={fetchCart}
               > 
                 <RefreshIcon className="size-5 group-hover:-rotate-360 transition-transform duration-900" />
@@ -137,11 +137,11 @@ export const Cart = () => {
 
         {/* Advisories */}
         <section className="mb-48 mt-8 bg-white shadow-sm rounded-xl p-6">
-          <h3 className="font-semibold text-gray-900 mb-3">Important Information</h3>
-          <p className="text-sm text-gray-600 leading-relaxed">
+          <h3 className="font-semibold text-space_cadet mb-3">Important Information</h3>
+          <p className="text-sm text-space_cadet/60 leading-relaxed">
             The price and availability of items at RuglyBarnacle.com are subject to change. 
             The Cart is a temporary place to store a list of your items and reflects each item's most recent price.
-            You can modify quantities or remove items before proceeding to checkout.
+            You can modify quantities or remove items before proceeding to checkout. Taxes and shipping are calculated in the Stripe checkout.
           </p>
         </section>
       </div>

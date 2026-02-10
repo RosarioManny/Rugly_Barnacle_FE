@@ -36,7 +36,7 @@ export const ProductCard = ({ id, image, price, name, img_alt, dimensions, categ
           {image && !imageError ? 
           (
             <img 
-              className="w-full items-center flex h-[55%] object-cover group-hover:scale-105 transition-transform duration-300" 
+              className="w-full items-center flex h-[55%] sm:object-contain object-cover bg-white group-hover:scale-105 transition-transform duration-300" 
               src={image}
               alt={img_alt} 
               loading="lazy"

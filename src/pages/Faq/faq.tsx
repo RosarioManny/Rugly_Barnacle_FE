@@ -7,6 +7,7 @@ import { faqItems } from "./faqQuestions"
 import { StartOrderBtn } from "../../components/ui/buttons"
 import { getAllFaq, type FaqResponse} from "../../lib/api/Faq/faqServices"
 import { useEffect, useState} from "react"
+import { div } from "framer-motion/client"
 
 export const Faq = () => {
   const Fallback_FAQs = faqItems
@@ -16,10 +17,9 @@ export const Faq = () => {
   
 
   useEffect(()=>{
-    
     fetchFAQs()
   }, [])
-
+  
   const fetchFAQs = async () => {
       setStatus('loading')
       try {
@@ -69,10 +69,9 @@ export const Faq = () => {
               flex flex-col gap-2">
                 {displayFaqs.map((faq: FaqResponse  ) => (
                   <FaqCard
-                  // TODO: adjust key value
-                  key={faq?.id}
-                  question={faq.question}
-                  answer={faq.answer}
+                    key={`${faq.id}`}
+                    question={faq.question}
+                    answer={faq.answer}
                   />
                 ))}
               </ul>

@@ -10,7 +10,6 @@ interface faqCardProps {
 export const FaqCard = ({ key, question, answer }: faqCardProps) => {
   const [isToggled, setIsToggled] = useState(false)
 
-  console.log("KEY >>> ", key)
   const handleToggle = () => {
     setIsToggled(!isToggled)
   }
