@@ -37,7 +37,7 @@ export const Cart = () => {
       const cartItem = cartItems.find(item => item.id === cartItemId);
       if (!cartItem) return;
       console.log("Adding item to cart:", cartItem);
-      await addItemToCart(number(cartItem?.product), 1);
+      await addItemToCart(Number(cartItem?.product), 1);
     } catch (err) {
       console.error("Failed to add item", err);
     }
@@ -88,7 +88,13 @@ export const Cart = () => {
                 Items: <b className="text-majorelle">{cartTotalItems}</b>
               </h2>
               <button 
-                className="rounded-lg group bg-space_cadet/10 flex items-center gap-2 text-space_cadet/80 hover:bg-majorelle/20 hover:text-majorelle transition-all duration-200"
+                className="
+                  rounded-lg
+                  group bg-space_cadet/10 
+                  flex items-center gap-2
+                  text-space_cadet/80
+                  hover:bg-majorelle/20 hover:text-majorelle 
+                  transition-all duration-200"
                 onClick={fetchCart}
               > 
                 <RefreshIcon className="size-5 group-hover:-rotate-360 transition-transform duration-900" />

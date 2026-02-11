@@ -17,7 +17,7 @@ import {
   Blog,
   BlogDetails,
   Events,
-  NewsLetterModal,
+  // NewsLetterModal,
   CatchAll
 } from "../pages";
 // import { CartProvider } from '../hooks/cart/cartProvider';
@@ -27,7 +27,7 @@ export const AppRoutes = () => {
   return (
     <>
         {/* <CartProvider> */}
-      <NewsLetterModal/>
+      {/* <NewsLetterModal/> */}
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />

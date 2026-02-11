@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { CtaWavesBg } from "../ui/icons-svgs/ctaWavesBg"
 import { Emailbtn } from "../ui/buttons";
 import { socialMediaLogos } from "../../lib/utils/socialMedias";
-import { NewsLetterForm } from "../ui/newsLetterForm"
+// import { NewsLetterForm } from "../ui/newsLetterForm"
 
 export const Footer = () => {
 
@@ -36,7 +36,7 @@ export const Footer = () => {
             {/* LEFT COLUMN - Newsletter, Socials, Contact */}
             <div className="flex flex-col items-center md:items-start space-y-8">
               {/* NEWSLETTER */}
-              <NewsLetterForm/>
+              {/* <NewsLetterForm/> */}
               
               {/* SOCIALS */}
               <section>
