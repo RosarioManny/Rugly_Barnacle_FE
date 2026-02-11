@@ -31,7 +31,7 @@ export const OccupiedCart = ({
   added_at, 
   dimensions,
   product,
-  id, // This is the cart_item_id
+  id,
   product_images,
   onRemove,
   onAdd
@@ -169,37 +169,38 @@ export const OccupiedCart = ({
           className="flex justify-between items-center cursor-pointer"
           onClick={handleCardClick}
         >
-          <div className="flex items-center gap-2">
-  <button
-    onClick={(e) => { e.stopPropagation(); onRemove(id); }}
-    className="
-      w-7 h-7 flex items-center justify-center
-      rounded-full border border-space_cadet/20
-      hover:bg-bittersweet/80 hover:text-white hover:border-transparent
-      transition-all duration-200 text-space_cadet font-bold
-    "
-    aria-label="Remove one"
-  >
-    −
-  </button>
+        <div className="flex items-center gap-2">
+          <button
+            onClick={(e) => { e.stopPropagation(); onRemove(id); }}
+            className="
+              w-7 h-7 flex items-center justify-center
+              rounded-full border border-space_cadet/20
+              hover:bg-bittersweet/80 hover:text-white hover:border-transparent
+              transition-all duration-200 text-space_cadet font-bold
+            "
+            aria-label="Remove one"
+          >
+            −
+          </button>
 
-  <span className="text-sm md:text-base text-space_cadet/70 w-6 text-center">
-    {quantity}
-  </span>
+          <span className="text-sm md:text-base text-space_cadet/70 w-6 text-center">
+            {quantity}
+          </span>
 
-  <button
-    onClick={(e) => { e.stopPropagation(); onAdd(id); }}
-    className="
-      w-7 h-7 flex items-center justify-center
-      rounded-full border border-space_cadet/20
-      hover:bg-majorelle hover:text-white hover:border-transparent
-      transition-all duration-200 text-space_cadet font-bold
-    "
-    aria-label="Add one"
-  >
-    +
-  </button>
-</div>
+          <button
+            onClick={(e) => { e.stopPropagation(); onAdd(id); }}
+            className="
+              w-7 h-7 flex items-center justify-center
+              rounded-full border border-space_cadet/20
+              hover:bg-majorelle hover:text-white hover:border-transparent
+              transition-all duration-200 text-space_cadet font-bold
+            "
+            aria-label="Add one"
+          >
+            +
+          </button>
+        </div>
+          
           <p className="font-bold text-lg md:text-xl lg:text-2xl text-majorelle">
             ${(parseFloat(product_price) * quantity).toFixed(2)}
           </p>

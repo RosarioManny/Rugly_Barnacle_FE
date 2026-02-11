@@ -9,21 +9,9 @@ import { OccupiedCart, EmptyCart } from "./components/cartState";
 
 export const Cart = () => {
   const { cart, status, fetchCart, removeCartItem, addItemToCart } = useCart();
-  const [localQuantities, setLocalQuantities] = useState<Record<number, number>>({});
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
-  const cartTotal = cart?.total
-  const cartTotalItems = cartItems.reduce((total, item) => total + item.quantity, 0)
   
-  useEffect(() => {
-    if (cartItems.length > 0) {
-      const initial = cartItems.reduce<Record<number, number>>((acc, item) => {
-        acc[item.id] = item.quantity;
-        return acc
-      }, {});
-      setLocalQuantities(initial);
-    }
-  }, [cartItems]);
-
+  
   useEffect(() => {
     if (cart?.items && Array.isArray(cart.items)) {
       const validItems = cart.items.filter(item => item !== null && item !== undefined) as CartItem[];
@@ -33,26 +21,26 @@ export const Cart = () => {
     }
   }, [cart]);
 
+  const cartTotal = cart?.total
+  const cartTotalItems = cartItems.reduce((total, item) => total + item.quantity, 0)
   const handleItemRemove = async (cartItemId: number) => {
-    setLocalQuantities(prev => {
-      const currentQuantity = prev[cartItemId] || 1;
-      if (currentQuantity <= 1) {
-        console.log(`Removing item ${cartItemId} from cart`);
-        removeCartItem(cartItemId, 1);
-        return prev;
-      }
-      return {...prev, [cartItemId]: currentQuantity - 1}; 
-    })
+    try {
+      await removeCartItem(cartItemId, 1); // Use the new service with cart_item_id
+    } catch (err) {
+      console.error("Failed to Remove", err);
+    }
   };
 
   const handleAddItem = async (cartItemId: number) => {
-    setLocalQuantities(prev => {
-      console.log(`Adding item ${cartItemId} to cart`);
-      return {
-        ...prev,
-        [cartItemId]: (prev[cartItemId] || 0) + 1
-      };
-    });
+    try {
+      // Find the cart item to get its product ID
+      const cartItem = cartItems.find(item => item.id === cartItemId);
+      if (!cartItem) return;
+      console.log("Adding item to cart:", cartItem);
+      await addItemToCart(number(cartItem?.product), 1);
+    } catch (err) {
+      console.error("Failed to add item", err);
+    }
   };
 
   if (status === 'loading') {
@@ -100,7 +88,7 @@ export const Cart = () => {
                 Items: <b className="text-majorelle">{cartTotalItems}</b>
               </h2>
               <button 
-                className="group rounded-lg bg-space_cadet/10 flex items-center gap-2 text-space_cadet/80 hover:bg-majorelle/20 hover:text-majorelle transition-all duration-200"
+                className="rounded-lg group bg-space_cadet/10 flex items-center gap-2 text-space_cadet/80 hover:bg-majorelle/20 hover:text-majorelle transition-all duration-200"
                 onClick={fetchCart}
               > 
                 <RefreshIcon className="size-5 group-hover:-rotate-360 transition-transform duration-900" />
@@ -114,8 +102,6 @@ export const Cart = () => {
               <ul className="divide-y divide-gray-200">
                 {cartItems.map((item, idx) => (
                   <OccupiedCart
-                    {...item}
-                    quantity={localQuantities[item.id] || item.quantity}
                     onRemove={handleItemRemove}
                     onAdd={handleAddItem}
                     key={`${item.id}-${item.added_at}-${idx}`}
@@ -164,11 +150,11 @@ export const Cart = () => {
 
         {/* Advisories */}
         <section className="mb-48 mt-8 bg-white shadow-sm rounded-xl p-6">
-          <h3 className="font-semibold text-space_cadet mb-3">Important Information</h3>
-          <p className="text-sm text-space_cadet/60 leading-relaxed">
+          <h3 className="font-semibold text-gray-900 mb-3">Important Information</h3>
+          <p className="text-sm text-gray-600 leading-relaxed">
             The price and availability of items at RuglyBarnacle.com are subject to change. 
             The Cart is a temporary place to store a list of your items and reflects each item's most recent price.
-            You can modify quantities or remove items before proceeding to checkout. Taxes and shipping are calculated in the Stripe checkout.
+            You can modify quantities or remove items before proceeding to checkout.
           </p>
         </section>
       </div>

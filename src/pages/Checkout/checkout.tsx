@@ -2,20 +2,19 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../../hooks/cart/cartProvider';
+import * as CheckoutStates from './components/checkoutComponents'
 import { OrderSummary } from './OrderSummary/OrderSummary';
 import { type CartItem } from '../../lib/api/Cart/cartServices';
 import { createCheckout } from '../../lib/api/Stripe/stripeservices';
 import { Link } from 'react-router-dom';
-import { CheckoutEmptyState, CheckoutErrorState, CheckoutLoadingState, CheckoutStockErrorState} from './components/checkoutComponents';
 
 
 export const CheckoutPage = () => {
-  const navigate = useNavigate();
   const { cart, status, fetchCart } = useCart();
+  const navigate = useNavigate();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   const [isProcessing, setIsProcessing] = useState(false);
-  const [stockErrors, setStockErrors] = useState<{product_name: string; requested: number; available: number}[]>([]);
-  const [orderSummaryOpen, setOrderSummaryOpen] = useState(true);
+  const [stockErrors, setStockErrors] = useState<{ product_name: string; requested: number; available: number }[]>([]);
 
   useEffect(() => {
     if (cart?.items && Array.isArray(cart.items)) {
@@ -28,59 +27,75 @@ export const CheckoutPage = () => {
 
   const cartSubtotal = Number(cart?.total) || 0
 
+
   const handleStripeCheckout = async () => {
-    if (!cart || cartItems.length === 0) {
-      alert('Your cart is empty');
-      return;
-    }
-
-    setIsProcessing(true);
-    setStockErrors([]); // Clear any previous errors
-
-    try {
-      const sessionData = await createCheckout();
-      if (sessionData.checkout_url) {
-        window.location.href = sessionData.checkout_url;
-      } else {
-        throw new Error('No checkout URL received');
-      }
-    } catch (error: any) {
-      console.error('Checkout error:', error);
-      const errorData = error.response?.data;
-
-      if (errorData?.items) {
-        setStockErrors(errorData.items); // <- Stock errors from Django
-      }
-      setIsProcessing(false);
-    }
+  if (!cart || cartItems.length === 0) {
+    alert('Your cart is empty');
+    return;
   }
 
+  setIsProcessing(true);
+  setStockErrors([]); // Clear any previous errors
+
+  try {
+    const sessionData = await createCheckout();
+
+    if (sessionData.checkout_url) {
+      window.location.href = sessionData.checkout_url;
+    } else {
+      throw new Error('No checkout URL received');
+    }
+  } catch (error: any) {
+    console.error('Checkout error:', error);
+    
+    // HANDLE STOCK ERRORS FROM BACKEND
+    const errorData = error.response?.data;
+    
+    if (errorData?.items) {
+      // Stock error - show specific error messages
+      setStockErrors(errorData.items);
+    } else {
+      // Generic error
+      alert('There was an error starting checkout. Please try again.');
+    }
+    
+    setIsProcessing(false);
+  }
+}
+
   if (status === 'loading' || isProcessing) {
-    return CheckoutLoadingState(status, isProcessing);
+    return <CheckoutStates.CheckoutLoadingState />
   }
 
   if (status === 'error' || cart === null) {
-    return CheckoutErrorState(status, cart, fetchCart);
+    return (
+      <CheckoutStates.CheckoutErrorState onRetry={fetchCart} />
+    );
   }
-  
-  if (cartItems.length === 0) {
-    return CheckoutEmptyState(cartItems, navigate);
-    }
 
-  {/* Stock Errors */}
-  if (stockErrors.length > 0) {
-    return CheckoutStockErrorState(stockErrors, navigate);
+  if (cartItems.length === 0) {
+    return <CheckoutStates.CheckoutEmptyState onContinueShopping={() => navigate('/shop')} />;
   }
 
   return (
     <main className="min-h-screen py-8 mb-20" aria-label="Checkout Page">
       <div className="mx-auto px-4 max-w-7xl">
+        <CheckoutStates.CheckoutStockErrorState 
+          stockErrors={stockErrors}
+          onUpdateCart={() => navigate('/cart')}
+        />
         {/* Header */}
+        <div className="text-center mb-8">
+          <h1 className="text-3xl md:text-4xl font-bold text-space_cadet/90 mb-2">Checkout</h1>
+          <p className="text-space_cadet/60">Review your order and proceed to payment</p>
+        </div>
         <Link 
           className="
-          group pointer duration-200 w-fit inline-flex transform ml-8 
+          object-fit
+          w-fit 
+          group pointer duration-200  transform px-4 ml-2 mb-4
           transition-color hover:text-bittersweet 
-          gap-2 items-center" 
+          flex gap-2 items-center" 
           to='/cart'>
           <div className={`
             caret-left text-space_cadet
@@ -91,22 +106,15 @@ export const CheckoutPage = () => {
           />
           Back 
         </Link>
-        <div className="text-center mb-8">
-          <h1 className="text-3xl md:text-4xl font-bold text-space_cadet/90 mb-2">Checkout</h1>
-          <p className="text-space_cadet/60">Review your order and proceed to payment</p>
-        </div>
-
         {/* Checkout Content */}
         <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
           {/* Order Summary */}
-          {orderSummaryOpen && (
-            <div className="flex-1 max-w-5xl mx-auto ">
-              <OrderSummary 
-                cartItems={cartItems}
-                subtotal={cartSubtotal}
-              />
-            </div>
-          )}
+          <div className="flex-1 max-w-5xl mx-auto ">
+            <OrderSummary 
+              cartItems={cartItems}
+              subtotal={cartSubtotal}
+            />
+          </div>
 
           {/* Payment Section */}
           <div className="flex-1 max-w-5xl mx-auto ">

@@ -93,23 +93,6 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     }
   };
 
-  // Delete Cart Item Completely (using CartItemDetailView)
-  // const removeCartItem = async (cartItemId: number) => {
-  //   try {
-      
-  //     await deleteCartItem(cartItemId);
-  //     // Refresh cart after deletion
-  //     await fetchCart();
-  //     console.log(`✅ Deleted cart item ${cartItemId}`);
-  //   } catch (err: any) {
-  //     setStatus('error');
-  //     if (status === 'error') {
-  //       console.error('❌ Error fetching cart:', err);
-  //     }
-  //     throw err;
-  //   }
-  // };
-
 
   // Fetch cart on mount
   useEffect(() => {

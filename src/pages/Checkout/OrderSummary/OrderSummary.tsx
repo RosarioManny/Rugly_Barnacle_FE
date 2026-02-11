@@ -26,7 +26,7 @@ export const OrderSummary = ({
                   <img 
                     className="
                       w-full h-full
-                      rounded-lg object-cover "
+                      rounded-lg object-cover shadow-sm"
                     src={item?.product_images?.primary }  
                     alt={item?.product_name} 
                   />
