@@ -2,7 +2,7 @@ import { motion } from 'framer-motion';
 import { useInView } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 
-interface PortfolioImage {
+export interface PortfolioImageShowcase {
   path: string;
   alt: string;
 }
@@ -11,7 +11,7 @@ interface PortfolioItemProps {
   path: string;
   alt: string;
   index: number; // Add index prop for staggering
-  onClick: (image: PortfolioImage) => void;
+  onClick: (image: PortfolioImageShowcase) => void;
   priority?: boolean
 }
 
