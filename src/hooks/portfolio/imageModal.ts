@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { type imageInfoProps } from "../../pages/Portfolio/portfolioImages";
+import { type PortfolioImage } from "../../lib/api/Portfolio/portfolioservices";
 
 export const usePortfolioModal = () => {
-  const [selectedImage, setSelectedImage] = useState<imageInfoProps | null>(null);
+  const [selectedImage, setSelectedImage] = useState<PortfolioImage | null>(null);
   
   const closeModal = () => {
     setSelectedImage(null);
@@ -27,7 +27,7 @@ export const usePortfolioModal = () => {
     return () => window.removeEventListener('keydown', handleEscape);
   }, []);
 
-  const handleImageClick = (img: imageInfoProps) => {
+  const handleImageClick = (img: PortfolioImage) => {
     setSelectedImage(img);
     document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
   };

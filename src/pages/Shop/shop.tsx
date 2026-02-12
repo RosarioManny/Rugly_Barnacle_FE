@@ -4,11 +4,9 @@ import { ProductCard } from "../../components/ui/productCard"
 import { getProducts } from "../../lib/api/Product/productservices"
 import { StartOrderBtn, ReturnToTop } from "../../components/ui/buttons/index"
 import type { Product } from "../../lib/api/Product/productservices"
-import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { useState, useEffect, useRef} from "react"
 import { useProductFilters } from "../../hooks/filter/useProductFilter"
 import { FilterControls } from "../../components/ui/filter"
-// import { useParams } from "react-router-dom"
 import { LoadingPage } from "../../components/layout/loadingPage"
 
 

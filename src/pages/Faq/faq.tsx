@@ -1,13 +1,12 @@
 import { Header } from "../../components/layout/_header"
 import { FaqCard } from "./faqCard"
-// import { ShopBtn } from "../../components/ui/buttons/btn_shop"
 import { Spinner } from "../../components/ui/loaders/loadingSpinner"
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
 import { faqItems } from "./faqQuestions"
 import { StartOrderBtn } from "../../components/ui/buttons"
 import { getAllFaq, type FaqResponse} from "../../lib/api/Faq/faqServices"
 import { useEffect, useState} from "react"
-import { div } from "framer-motion/client"
+
 
 export const Faq = () => {
   const Fallback_FAQs = faqItems

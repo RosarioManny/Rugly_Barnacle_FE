@@ -19,20 +19,3 @@ export const getPortfolioImages = async (): Promise<PortfolioImage[]> => {
     throw err;
   }
 }
-
-// MODEL
-//  title = models.CharField(max_length=200, blank=True, help_text="Short description of the rug (e.g., 'Blue Geometric Pattern Rug')")
-//     image = models.ImageField(
-//         upload_to='portfolio/',
-//         blank=True,
-//         null=True, 
-//         storage=MediaCloudinaryStorage(),
-//         validators=[
-//             FileExtensionValidator(
-//                 allowed_extensions=['jpg', 'jpeg', 'png', 'webp']
-//             )
-//         ]
-//     )
-//     is_visible = models.BooleanField(default=True, help_text="Toggle to show this in the portfolio")
-//     created_at = models.DateField(auto_now_add=True)
-//     thumbnail = models.ImageField(upload_to='portfolio/thumbnails/', blank=True, null=True)
