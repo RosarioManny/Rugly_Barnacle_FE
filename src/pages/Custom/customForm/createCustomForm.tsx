@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import type { CustomOrderData } from "../../../lib/api/CustomOrder/customOrderServices";
 import { createCustomOrder } from "../../../lib/api/CustomOrder/customOrderServices";
 import { DangerIcon } from "../../../components/ui/icons-svgs/SvgIcons";
+import { Link } from "react-router-dom"
 
 export const CreateCustomOrderForm = () => {
   const [formData, setFormData] = useState({
@@ -127,59 +128,54 @@ export const CreateCustomOrderForm = () => {
     </div>
   )}
 
-  {/* Order Process Overview */}
+{/* Order Process Overview */}
   <div className="bg-majorelle/10 p-6 w-4/5 text-center rounded-lg mb-8">
     <h2 className="text-xl font-bold text-majorelle mb-4">How Custom Orders Work</h2>
     <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
       <div className="text-center">
         <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">1</div>
-        <p className="font-semibold">Submit Request</p>
-        <p className="text-xs text-space_cadet/70">Fill out this form with your design ideas</p>
+        <p className="font-semibold">Submit Your Request</p>
+        <p className="text-xs text-space_cadet/70">Share your design vision through our form</p>
       </div>
       <div className="text-center">
         <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">2</div>
-        <p className="font-semibold">Design Consultation</p>
-        <p className="text-xs text-space_cadet/70">We'll discuss details and finalize pricing</p>
+        <p className="font-semibold">Receive Your Quote</p>
+        <p className="text-xs text-space_cadet/70">We'll review your request and provide pricing details</p>
       </div>
       <div className="text-center">
         <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">3</div>
-        <p className="font-semibold">Secure Payment</p>
-        <p className="text-xs text-space_cadet/70">Pay via Venmo once design is finalized</p>
-        {/* <p className="text-xs text-space_cadet/70">Pay through the shop</p> */}
+        <p className="font-semibold">Confirm & Pay Deposit</p>
+        <p className="text-xs text-space_cadet/70">$50 deposit via <Link className="text-majorelle/90 font-bold hover:underline hover:text-majorelle" to="/shop"> Shop </Link> secures your spot. Remaining balance due upon completion</p>
       </div>
       <div className="text-center">
         <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">4</div>
         <p className="font-semibold">Creation & Delivery</p>
-        <p className="text-xs text-space_cadet/70">I create your piece and ship it to you</p>
+        <p className="text-xs text-space_cadet/70">Your custom piece is crafted and shipped directly to you</p>
       </div>
     </div>
   </div>
 
   <section className="max-w-4/5 md:max-w-2/3 p-6 bg-white rounded-lg shadow-xl mb-12">
   
-  {/* <div className="mb-6 p-4 bg-bittersweet/30 rounded-lg border-l-4 border-bittersweet">
+  <div className="mb-6 p-4 bg-bittersweet/30 rounded-lg border-l-4 border-bittersweet">
     <p className="text-sm text-space_cadet">
       <strong>Payment Info:</strong> A $50 down payment through our shop secures your order. Once your piece is 
       ready, you'll receive a Stripe payment link for the remaining balance — please complete it within 
       7 days to ensure timely shipping.
     </p>
   </div>
-  */}
-  <div className="mb-6 p-4 bg-bittersweet/30 rounded-lg border-l-4 border-bittersweet">
+  {/* <div className="mb-6 p-4 bg-bittersweet/30 rounded-lg border-l-4 border-bittersweet">
     <h3 className="font-semibold text-space_cadet mb-1">Payment Info</h3>
     <p className="text-sm text-space_cadet">
       After we finalize your design together, a $50 deposit via Zelle or Venmo 
       is all that's needed to get started. You won't be charged the remaining balance until your piece 
       is complete and ready to ship.
     </p>
-  </div>
+  </div> */}
 
     {/* NEW: Production Timeline Notice */}
     <div className="mb-6 p-4 bg-breeze/30 rounded-lg border-l-4 border-robin_egg">
       <div className="flex items-start gap-3">
-        {/* <div className="flex-shrink-0 ">
-         
-        </div> */}
         <div>
           <h3 className="flex gap-1 font-semibold text-space_cadet mb-1">
             <DangerIcon className=" size-6 text-robin_egg rotate-180"/>

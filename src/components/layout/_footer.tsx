@@ -13,6 +13,9 @@ export const Footer = () => {
     {title: "portfolio", path: "portfolio"}, 
     {title: "shop", path: "shop"}, 
     {title: "custom Order", path: "custom-order"}, 
+    {title: "blog", path: "blog"}, 
+    {title: "events", path: "events"}, 
+
   ];
 
   return (
@@ -53,10 +56,11 @@ export const Footer = () => {
                       <Social  
                         className="
                           size-10 text-fleece 
+                          duration-200 transform transition-all
                           hover:text-breeze 
                           active:text-breeze 
                           focus:text-breeze
-                          transition-colors duration-200"
+                          "
                       />
                     </li>
                   ))}
@@ -87,7 +91,7 @@ export const Footer = () => {
                   text-center md:text-left">
                   Quick Links
                 </h2>
-                <ul className="text-fleece flex flex-col items-center md:items-start gap-3 mt-4">
+                <ul className="text-fleece flex flex-col items-center md:items-start gap-2 mt-4">
                   {links.map(({ title, path}, idx) => (
                     <li key={`${title}-${idx}`}>
                       <Link 
