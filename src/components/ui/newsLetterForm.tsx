@@ -21,8 +21,8 @@ export const NewsLetterForm = ({onSuccess}: NewsletterFormProps) => {
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newData = { ...inputData, [e.target.name]: e.target.value}
     setInputData(newData)
-    console.log("Input data >>", inputData)
-    console.log("New data >>", newData)
+    // console.log("Input data >>", inputData)
+    // console.log("New data >>", newData)
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -30,11 +30,11 @@ export const NewsLetterForm = ({onSuccess}: NewsletterFormProps) => {
     try {
       const newEmailData = inputData.email.trim();
       await subscribeToNewsletter(newEmailData)
-      console.log("subscribed:", inputData.email) 
+      // console.log("subscribed:", inputData.email) 
       setInputData({email: ""});
       setAlert({ message: "You're subscribed! 🎉", type: 'success' });
       setTimeout(() => {
-        onSuccess?.();  // closes the modal after alert is briefly visible
+        onSuccess?.();  
       }, 1500);
     } catch (err: any) {
       console.error("Error subscribing to newsletter:", err);
