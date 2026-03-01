@@ -1,3 +1,4 @@
+// LOGIC FOR MODAL POP-UP
 import { useState, useEffect } from "react";
 
 const NEWSLETTER_MODAL_KEY = 'newsletterModalShown';

@@ -12,12 +12,13 @@ import {
   CheckoutPage,
   CheckoutSuccessPage,
   CheckoutCancelPage,
+  NewsletterUnsubscribe,
   // TempShop,
   // Booking,
   Blog,
   BlogDetails,
   Events,
-  // NewsLetterModal,
+  NewsLetterModal,
   CatchAll
 } from "../pages";
 // import { CartProvider } from '../hooks/cart/cartProvider';
@@ -27,7 +28,7 @@ export const AppRoutes = () => {
   return (
     <>
         {/* <CartProvider> */}
-      {/* <NewsLetterModal/> */}
+      <NewsLetterModal/>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/about' element={<About />} />
@@ -47,7 +48,7 @@ export const AppRoutes = () => {
         <Route path='/blog/:id' element={<BlogDetails />} />
         {/* <Route path='/bookings' element={<Booking />} /> */}
         {/* <Route path='/newsletter' element={<NewsLetter />} /> */}
-        {/* <Route path='/newsletter/unsubscribe' element={<NewsletterUnsubscribe />} /> */}
+        <Route path='/newsletter/unsubscribe' element={<NewsletterUnsubscribe />} />
         <Route path='/*' element={<CatchAll />} />
       </Routes>
         {/* </CartProvider> */}

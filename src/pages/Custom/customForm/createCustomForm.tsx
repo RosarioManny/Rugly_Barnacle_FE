@@ -43,6 +43,7 @@ export const CreateCustomOrderForm = () => {
       return () => clearTimeout(timer);
     }
   }, [submissionResult])
+  
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({ ...prev, [name]: value }));
@@ -110,23 +111,23 @@ export const CreateCustomOrderForm = () => {
 
   return (
     <>
-  {submissionResult && (
-    <div className={`fixed top-4 right-4 p-4 rounded-md z-50 transform-opacity duration-500 ${
-      submissionResult.success ? "bg-breeze text-space_cadet" : "bg-bittersweet text-white"
-    }`}>
-      <div className={`font-semibold`}>
-        {submissionResult.success ? "✓ Request Submitted!" : "Error"}
+    {submissionResult && (
+      <div className={`fixed top-4 right-4 p-4 rounded-md z-50 transform-opacity duration-500 ${
+        submissionResult.success ? "bg-breeze text-space_cadet" : "bg-bittersweet text-white"
+      }`}>
+        <div className={`font-semibold`}>
+          {submissionResult.success ? "✓ Request Submitted!" : "Error"}
+        </div>
+        <div className="text-sm mt-1">
+          {submissionResult.message}
+          {submissionResult.referenceId && (
+            <div className="mt-2 font-mono bg-robin_egg/50 p-2 rounded">
+              Order Reference: {submissionResult.referenceId}
+            </div>
+          )}
+        </div>
       </div>
-      <div className="text-sm mt-1">
-        {submissionResult.message}
-        {submissionResult.referenceId && (
-          <div className="mt-2 font-mono bg-robin_egg/50 p-2 rounded">
-            Order Reference: {submissionResult.referenceId}
-          </div>
-        )}
-      </div>
-    </div>
-  )}
+    )}
 
 {/* Order Process Overview */}
   <div className="bg-majorelle/10 p-6 w-4/5 text-center rounded-lg mb-8">

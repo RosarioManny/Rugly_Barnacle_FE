@@ -39,9 +39,11 @@ export const AddToCartBtn = ({
       className={`
         bg-majorelle
         w-full h-[55px]
-        duration-100 drop-shadow-sm/50 rounded-lg
-        hover:bg-robin_egg hover:scale-101
-        focus:bg-robin_egg focus:scale-101
+        max-w-[75vw]
+        duration-300 drop-shadow-sm/50 rounded-lg
+        hover:bg-space_cadet hover:scale-102 hover:ring-2 hover:ring-mauve
+        focus:bg-space_cadet focus:scale-102 focus:ring-2 focus:ring-mauve
+        active:bg-space_cadet active:scale-102 active:ring-2 active:ring-mauve
         ${isAdding ? 'opacity-70 cursor-not-allowed' : ''}
       `}> 
       <p className={`${isAdding ? "animate-pulse" : ""}`}>

@@ -34,9 +34,9 @@ export const ReturnToTop = () => {
         bg-majorelle text-fleece 
         rounded-lg shadow-lg 
         transition-all duration-300 transform ease-in-out
-        hover:bg-mauve hover:scale-105 hover:ring-majorelle hover:ring-2
-        active:bg-mauve active:ring-majorelle active:ring-opacity-50
-        focus:bg-mauve focus:ring-mauve focus:ring-opacity-50
+        hover:bg-space_cadet hover:scale-105 hover:ring-mauve hover:ring-2
+        active:bg-space_cadet active:ring-mauve active:ring-opacity-80
+        focus:bg-space_cadet focus:ring-mauve focus:ring-opacity-80
         ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4 pointer-events-none'}
         
       `}

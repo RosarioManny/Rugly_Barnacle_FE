@@ -6,9 +6,9 @@ export const CheckoutBtn = () => (
       <button className="
         drop-shadow-sm/50 rounded-lg
         bg-majorelle
-        hover:bg-robin_egg hover:scale-105
-        active:bg-robin_egg active:scale-105 
-        focus:bg-robin_egg focus:scale-105"> 
+        hover:bg-robin_egg hover:scale-110
+        active:bg-robin_egg active:scale-110 
+        focus:bg-robin_egg focus:scale-110"> 
           Checkout
       </button>
     </Link>

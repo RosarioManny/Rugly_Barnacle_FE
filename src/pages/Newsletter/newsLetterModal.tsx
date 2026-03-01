@@ -1,5 +1,6 @@
 
 import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg"
+import { NewsLetterForm } from "../../components/ui/newsLetterForm"
 import { useNewsletterModal } from "../../hooks/newsletter/newsletterModal"
 
 export const NewsLetterModal = () => {
@@ -18,11 +19,11 @@ export const NewsLetterModal = () => {
       onClick={handleNewsletterBackdropClick}
       className={`
       ${isVisible ? 'opacity-100' : 'opacity-0'}
-      fixed inset-0 z-40 bg-black/50 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300`}>
+      fixed inset-0 z-40 bg-space_cadet/50 backdrop-blur-sm flex items-center justify-center p-4 transition-opacity duration-300`}>
       <div 
       className={`
       ${isVisible ? 'opacity-100 scale-100' : 'opacity-0 scale-95'}
-      relative flex flex-col w-full h-2/3 max-w-md mx-auto bg-fleece rounded-xl overflow-hidden shadow-sm border-4 border-majorelle`}>
+      relative flex flex-col w-1/2 h-2/3 min-w-[350px] max-w-lg mx-auto bg-fleece rounded-xl overflow-hidden shadow-sm border-4 border-majorelle`}>
         {/* Close button */}
         <button 
         onClick={closeNewsletterModal}
@@ -36,12 +37,19 @@ export const NewsLetterModal = () => {
         </button>
         
         {/* Top Section: Banner Image (2/3 of container) */}
-        <div className="relative h-full bg-robin_egg ">
-          <img 
-            className="object-cover size-full mb-8" 
-            src="/assets/design/logo/Banner_Blue_clean.webp" 
-            alt="Rugly Barnacle Banner" 
+        <div className="relative h-full bg-robin_egg flex items-center">
+        <picture>
+          <source 
+            media="(min-width: 768px)" 
+            className="object-cover "
+            srcSet="/assets/design/logo/Banner_Blue_clean_V2.webp" 
           />
+          <img
+            className="sm:object-cover h-full"
+            src="/assets/design/logo/RuglyBarnacle_Logo.webp"
+            alt="Rugly Barnacle Banner"
+          />
+        </picture>
           
           {/* Overlapping Wave */}
           <div className="absolute  bottom-4 sm:bottom-5 w-full">
@@ -55,22 +63,7 @@ export const NewsLetterModal = () => {
             <h1 className="text-2xl sm:text-4xlfont-bold underline pt-2 text-mauve mb-3">
               Join the Newsletter!
             </h1>
-            
-            <div className="flex flex-row my-4 sm:my-6">
-              <button 
-                className="bg-breeze text-space_cadet font-bold rounded-l-xl hover:bg-robin_egg flex items-center justify-center"
-              >
-                Subscribe
-              </button>
-              <input 
-                className="flex-grow py-3 px-2 bg-fleece rounded-r-xl max-w-[200px] sm:max-w-[400px] focus:outline-none focus:border-majorelle focus:ring-2 focus:ring-majorelle/30 transition-colors"
-                placeholder="Email Address" 
-                type="email" 
-                name="email" 
-                id="email" 
-              />
-            </div>
-            
+              <NewsLetterForm onSuccess={closeNewsletterModal} />
             <p className="text-fleece font-bold text-md">
               Subscribe to receive updates and news
             </p>

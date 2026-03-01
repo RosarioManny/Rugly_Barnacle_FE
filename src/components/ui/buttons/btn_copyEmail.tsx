@@ -14,7 +14,9 @@ export const Emailbtn = ( { background="bg-breeze hover:bg-robin_egg hover:text-
     drop-shadow-sm rounded-lg
     text-space_cadet 
     flex align-center items-center
-    hover:scale-105
+    hover:scale-105 hover:ring-2 hover:ring-majorelle
+    active:scale-105 active:ring-2 active:ring-majorelle
+    focus:scale-105 focus:ring-2 focus:ring-majorelle
     ${background}
     `}> 
       <CopyIcon className="size-4 m-2"/>
