@@ -24,7 +24,7 @@ export const Header = ({ btn_1, btn_2, title="", tagline="", img, img_alt }: Hea
               className="size-full object-cover "
               src={img} 
               alt={img_alt || "Header background"}  />
-              <div className="absolute inset-0 bg-gradient-to-tr from-space_cadet  to-majorelle/20"/>
+              <div className="absolute inset-0 bg-gradient-to-tr from-space_cadet via-majorelle/50 to-transparent"/>
             </div>
           )}
 

@@ -17,5 +17,6 @@ export { CheckoutSuccessPage } from "./Checkout/CheckoutStatusPages/checkoutSucc
 export { CheckoutCancelPage } from "./Checkout/CheckoutStatusPages/checkoutCancelPage"
 export { NewsLetterModal} from "./Newsletter/newsLetterModal"
 export { NewsletterUnsubscribe } from "./Newsletter/newsletterUnsubscribe"
+export { PrivacyPolicy } from "./PrivacyPolicy/PrivacyPolicy"
 // export { Booking } from "./Booking/booking"
 export { CatchAll } from "./CatchAll/catchAll"
