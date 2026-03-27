@@ -16,7 +16,7 @@ export const Footer = () => {
     {title: "custom Order", path: "custom-order"}, 
     {title: "blog", path: "blog"}, 
     {title: "events", path: "events"}, 
-
+    {title: "privacy Policy", path: "privacy-policy"}
   ];
 
   return (
@@ -106,7 +106,7 @@ export const Footer = () => {
                       >
                         <p className="
                           duration-200 transform transition-all
-                          text-fleece body_text 
+                          text-fleece body_text font-medium tracking-wider
                           group-hover:text-breeze group-hover:scale-110 
                           group-active:text-breeze group-active:scale-110
                           group-focus:text-breeze group-focus:scale-110">

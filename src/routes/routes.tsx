@@ -50,7 +50,7 @@ export const AppRoutes = () => {
         {/* <Route path='/bookings' element={<Booking />} /> */}
         {/* <Route path='/newsletter' element={<NewsLetter />} /> */}
         <Route path='/newsletter/unsubscribe' element={<NewsletterUnsubscribe />} />
-        <Route path='/privacypolicy' element={<PrivacyPolicy/> } />
+        <Route path='/privacy-policy' element={<PrivacyPolicy/> } />
         <Route path='/*' element={<CatchAll />} />
       </Routes>
         {/* </CartProvider> */}
