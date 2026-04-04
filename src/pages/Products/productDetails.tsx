@@ -18,6 +18,7 @@ export const ProductDetails = () => {
   const [cartMessage, setCartMessage] = useState<string | null>(null)
   const [imageError, setImageError] = useState(false)
   
+  console.log(productDetails?.images)
   // useParams returns an object, you need to extract the id
   const { id } = useParams<{ id: string }>()
 

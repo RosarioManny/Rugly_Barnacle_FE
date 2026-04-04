@@ -11,7 +11,6 @@ export const Cart = () => {
   const { cart, status, fetchCart, removeCartItem, addItemToCart } = useCart();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
   
-  
   useEffect(() => {
     if (cart?.items && Array.isArray(cart.items)) {
       const validItems = cart.items.filter(item => item !== null && item !== undefined) as CartItem[];

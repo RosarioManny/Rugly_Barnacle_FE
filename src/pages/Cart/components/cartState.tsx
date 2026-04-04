@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatCartDate } from "../../../lib/utils/dateFormtater";
 import { TrashIcon } from "../../../components/ui/icons-svgs/SvgIcons";
+import { useEffect } from "react";
 
 export const EmptyCart = () => {
   return ( 
@@ -39,16 +40,7 @@ export const OccupiedCart = ({
 
   const [isRemoving, setIsRemoving] = useState(false);
   const navigate = useNavigate();
-  const [imageError, setImageError] = useState(false)
-  
-  const handleImageError = () => {
-    setImageError(true)
-  }
 
-  const getImageUrl = (relativePath: string) => {
-    const baseUrl = import.meta.env.VITE_EXPRESS_BACKEND_URL || 'http://localhost:8000';
-    return `${baseUrl}${relativePath}`
-  }
 
   const handleRemove = async (e: React.MouseEvent) => {
     e.stopPropagation(); // Prevent card click when removing
@@ -88,14 +80,13 @@ export const OccupiedCart = ({
     >
       {/* Product Image with overlay link */}
       <div className={`flex-shrink-0 relative `} >
-        { product_images?.primary && !imageError ? (
+        { product_images?.primary ? (
           <img 
             className="
               w-full h-40 
               md:h-32 md:w-32 lg:h-40 lg:w-40 
               rounded-lg object-cover shadow-sm"
-            onError={handleImageError}
-            src={getImageUrl(product_images?.primary)}  
+            src={product_images?.primary}  
             alt={product_name} 
           />
         ) : (
