@@ -3,8 +3,6 @@ import type { ChangeEvent, FormEvent } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { unsubscribeFromNewsletter } from "../../lib/api/Newsletter/newsletter";
 import { ShopBtn } from "../../components/ui/buttons";
-import { Shop } from "../Shop/shop";
-
 
 export const NewsletterUnsubscribe = () => {
   const [searchParams] = useSearchParams();

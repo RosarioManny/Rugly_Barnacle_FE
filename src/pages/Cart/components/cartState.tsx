@@ -4,7 +4,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatCartDate } from "../../../lib/utils/dateFormtater";
 import { TrashIcon } from "../../../components/ui/icons-svgs/SvgIcons";
-import { useEffect } from "react";
 
 export const EmptyCart = () => {
   return ( 
