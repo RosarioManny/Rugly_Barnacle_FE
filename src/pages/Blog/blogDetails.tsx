@@ -6,6 +6,7 @@ import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import { getTagStyles } from "../../lib/utils/tagStyles"
 import { socialMediaLogos } from "../../lib/utils/socialMedias"
+import ReactMarkdown from 'react-markdown'
 
 export const BlogDetails = () => {
   const [blogDetails, setBlogDetails] = useState<BlogPost | null>(null)
@@ -148,15 +149,17 @@ export const BlogDetails = () => {
             {/* Content Section */}
             <div className="prose prose-lg max-w-none">
               {/* Render content with proper formatting */}
-              {blogDetails.content.split('\n').map((paragraph, index) => (
-                paragraph.trim() ? (
-                  <p key={index} className="mb-4 text-gray-700 leading-relaxed">
-                    {paragraph}
-                  </p>
-                ) : (
-                  <br key={index} />
-                )
-              ))}
+              <ReactMarkdown
+                components={{
+                  p: ({ children }) => <p className="mb-4 leading-relaxed">{children}</p>,
+                  strong: ({ children }) => <strong className="font-bold text-space_cadet">{children}</strong>,
+                  em: ({ children }) => <em className="italic">{children}</em>,
+                  h2: ({ children }) => <h2 className="text-2xl font-bold text-majorelle mt-6 mb-3">{children}</h2>,
+                  h3: ({ children }) => <h3 className="text-xl font-bold text-majorelle mt-4 mb-2">{children}</h3>,
+                }}
+              >
+                {blogDetails.content}
+              </ReactMarkdown>
             </div>
 
             {/* Links Section */}
