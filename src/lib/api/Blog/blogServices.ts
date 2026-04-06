@@ -29,7 +29,7 @@ export const getBlogs = async (): Promise<BlogPost[]> => {
 
 export const getBlogDetails = async ( blogPostId: number ): Promise<BlogPost> => {
   try {
-    const response = await api.get<BlogPost>(`blogs/${blogPostId}`);
+    const response = await api.get<BlogPost>(`blogs/${blogPostId}/`);
     return response.data
   }
   catch(err: any) {
