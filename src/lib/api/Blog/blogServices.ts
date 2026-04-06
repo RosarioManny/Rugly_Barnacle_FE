@@ -6,7 +6,9 @@ export interface BlogPost {
   title: string,
   tags: string ,
   content: string,
+  image: string | null,
   created_at: string,
+  quick_description: string | null,
   links: Array<{
     title: string,
     url: string

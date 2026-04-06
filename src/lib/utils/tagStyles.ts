@@ -7,7 +7,8 @@ export const TAG_DISPLAY_NAMES: {[key: string]: string} = {
   "workshop": 'Workshop',
   "meet-up": 'Meet Up',
   "venue": 'Venue',
-  "market": 'Market'
+  "market": 'Market',
+  "misc": 'Misc',
 }
 
 export const TAG_STYLES: {[key: string]: string } = {

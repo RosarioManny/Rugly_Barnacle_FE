@@ -4,7 +4,7 @@ import { ReturnToTop } from "../../components/ui/buttons"
 import { getBlogDetails, type BlogPost } from "../../lib/api/Blog/blogServices"
 import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
-import { getTagStyles } from "../../lib/utils/tagStyles"
+import { getTagDisplayName, getTagStyles } from "../../lib/utils/tagStyles"
 import { socialMediaLogos } from "../../lib/utils/socialMedias"
 import ReactMarkdown from 'react-markdown'
 
@@ -88,6 +88,8 @@ export const BlogDetails = () => {
     <main className="min-h-screen bg-fleece mb-36 md:mb-48">
       <Header 
         title={blogDetails ? blogDetails.title : "The Rugly Barnacle Blog"}
+        img={blogDetails?.image || ""}
+        tagline={blogDetails?.quick_description ||"" }
       />
 
       <section className="max-w-4xl mx-auto px-4 py-8">
@@ -137,7 +139,7 @@ export const BlogDetails = () => {
                           key={index}
                           className={`inline-blockpx-2 p-2 rounded text-xs ${getTagStyles(tag)}`}
                         >
-                          {tag.trim()}
+                          {getTagDisplayName(tag.trim())}
                         </span>
                       ))}
                     </div>
