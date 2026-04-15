@@ -16,8 +16,8 @@ import {
   // TempShop,
   // Booking,
   PrivacyPolicy,
-  Blog,
-  BlogDetails,
+  Newsletter,
+  NewsletterDetails,
   Events,
   NewsLetterModal,
   CatchAll
@@ -45,8 +45,8 @@ export const AppRoutes = () => {
             <Route path='/checkout/success/' element={<CheckoutSuccessPage />} />
             <Route path='/checkout/cancel' element={<CheckoutCancelPage />} /> 
         <Route path='/events' element={<Events />} />
-        <Route path='/blog' element={<Blog />} />
-        <Route path='/blog/:id' element={<BlogDetails />} />
+        <Route path='/newsletter' element={<Newsletter />} />
+        <Route path='/newsletter/:id' element={<NewsletterDetails />} />
         {/* <Route path='/bookings' element={<Booking />} /> */}
         {/* <Route path='/newsletter' element={<NewsLetter />} /> */}
         <Route path='/newsletter/unsubscribe' element={<NewsletterUnsubscribe />} />
