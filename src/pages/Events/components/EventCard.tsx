@@ -44,7 +44,7 @@ export const EventCard = ({ event, onClick }: EventCardProps) => {
         </div>
 
         {/* Event Details */}
-        <div className="flex-1">
+        <div className="flex-1 w-[90%] ">
           {/* Header with Event Type and Status */}
           <div className="flex flex-wrap justify-between items-start mb-3">
             <span className={`text-xs font-medium px-3 py-1 rounded-full ${getTagStyles(event.event_type)}`}>

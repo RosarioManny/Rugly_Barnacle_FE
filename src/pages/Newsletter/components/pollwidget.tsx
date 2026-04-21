@@ -1,6 +1,6 @@
 // components/ui/Poll.tsx
 import { useState } from "react"
-import { type Poll, type PollChoice, getPoll, castPollVote } from "../../../lib/api/Newsletter/pollServices"
+import { type Poll, type PollChoice, castPollVote } from "../../../lib/api/Newsletter/pollServices"
 
 
 interface PollProps {

@@ -19,20 +19,26 @@ export const Events = () => {
   }, [])
 
   const fetchEvents = async () => {
-    try {
-      setStatus('loading');
-      const data = await getEvents();
+  try {
+    setStatus('loading');
+    const data = await getEvents();
+    const now = new Date();
 
-      const sortedEvents = [...data].sort((a, b) => 
-        new Date(a.start_time).getTime() - new Date(b.start_time).getTime()
-      );
-      setEvents(sortedEvents);
-      setStatus('idle');
-    } catch(err) {
-      console.error('Error fetching events:', err);
-      setStatus('error');
-    }
+    const upcoming = [...data]
+      .filter(event => new Date(event.end_time ?? event.start_time) >= now)
+      .sort((a, b) => new Date(a.start_time).getTime() - new Date(b.start_time).getTime());
+
+    const past = [...data]
+      .filter(event => new Date(event.end_time ?? event.start_time) < now)
+      .sort((a, b) => new Date(b.start_time).getTime() - new Date(a.start_time).getTime()); // most recent past first
+
+    setEvents([...upcoming, ...past]);
+    setStatus('idle');
+  } catch(err) {
+    console.error('Error fetching events:', err);
+    setStatus('error');
   }
+}
 
 
   const handleEventClick = (event: Event) => {
