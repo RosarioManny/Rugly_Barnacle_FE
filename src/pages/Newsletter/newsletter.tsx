@@ -1,13 +1,12 @@
 import { Header } from "../../components/layout/_header"
 import { useEffect, useState } from "react"
 import { ReturnToTop } from "../../components/ui/buttons"
-import { getBlogs } from "../../lib/api/Blog/blogServices"
-import type { BlogPost } from "../../lib/api/Blog/blogServices"
+import { type Newsletter, getNewsletter  } from "../../lib/api/Newsletter/newsletterServices"
 import { NewsletterCard } from "./components/newsletterCard"
 import { BallOfYarnIcon, DangerIcon } from "../../components/ui/icons-svgs/SvgIcons"
 
-export const Newsletter = () => {
-  const [newsletters, setNewsletters] = useState<BlogPost[]>([]);
+export const NewsletterPage = () => {
+  const [newsletters, setNewsletters] = useState<Newsletter[]>([]);
   const [status, setStatus] = useState<'loading' | 'error' | 'success' | 'idle'>('success');
 
   useEffect(() => {
@@ -18,7 +17,7 @@ export const Newsletter = () => {
   const fetchBlogs = async () => {
     try {
       setStatus('loading');
-      const data = await getBlogs();
+      const data = await getNewsletter();
       setNewsletters(data)
       setStatus('success');
     } catch(err) {
@@ -140,7 +139,7 @@ export const Newsletter = () => {
                 <BallOfYarnIcon className="yarn-animation fill-space_cadet"/>
               </div>
               <h2 className="text-xl font-semibold text-space_cadet mb-2">
-                No Blog Posts Yet
+                No Newsletters Yet
               </h2>
               <p className="text-space_cadet">
                 Check back soon for new articles and updates!

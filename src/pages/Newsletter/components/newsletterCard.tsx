@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import type { BlogPost } from "../../../lib/api/Blog/blogServices";
+import type { Newsletter } from "../../../lib/api/Newsletter/newsletterServices";
 import { getTagDisplayName, getTagStyles } from "../../../lib/utils/tagStyles";
 
 const stripMarkdown = (text: string) =>
@@ -12,7 +12,7 @@ const stripMarkdown = (text: string) =>
     .replace(/\n+/g, ' ')            // newlines
     .trim();
 
-export const NewsletterCard = ({ title, content, created_at, id, tags, image, quick_description=""}: BlogPost) => {
+export const NewsletterCard = ({ title, content, created_at, id, tags, image, quick_description="",}: Newsletter) => {
   const plainText = stripMarkdown(content);
   const truncatedContent = plainText.length > 150 
     ? `${plainText.substring(0, 150)}...` 

@@ -1,15 +1,16 @@
 import { Header } from "../../components/layout/_header"
 import { formatCartDate } from "../../lib/utils/dateFormtater"
 import { ReturnToTop } from "../../components/ui/buttons"
-import { getBlogDetails, type BlogPost } from "../../lib/api/Blog/blogServices"
+import { getNewsletterDetails, type Newsletter } from "../../lib/api/Newsletter/newsletterServices"
 import { useEffect, useState } from "react"
 import { useParams, Link } from "react-router-dom"
 import { getTagDisplayName, getTagStyles } from "../../lib/utils/tagStyles"
 import { socialMediaLogos } from "../../lib/utils/socialMedias"
 import ReactMarkdown from 'react-markdown'
+import { PollWidget } from "./components/pollwidget"
 
 export const NewsletterDetails = () => {
-  const [newsletterDetails, setNewsletterDetails] = useState<BlogPost | null>(null)
+  const [newsletterDetails, setNewsletterDetails] = useState<Newsletter | null>(null)
   const [status, setStatus] = useState<'loading' | 'error' | 'success' | 'idle'>('idle')
   const { id } = useParams<{ id: string }>()
 
@@ -28,7 +29,7 @@ export const NewsletterDetails = () => {
           throw new Error('Invalid blog ID');
         }
 
-        const data = await getBlogDetails(numericId);
+        const data = await getNewsletterDetails(numericId);
         setNewsletterDetails(data);
         setStatus("success");
       } 
@@ -36,9 +37,6 @@ export const NewsletterDetails = () => {
         setStatus("error")
         console.error(err.message)
       } 
-      finally {
-        setStatus("idle")
-      }
     }
 
     fetchBlogDetails();
@@ -208,6 +206,11 @@ export const NewsletterDetails = () => {
           <div className="text-center py-12">
             <p className="text-space_cadet/60 text-lg font-semibold">No blog post found.</p>
           </div>
+        )}
+        {newsletterDetails?.poll ? (
+          <PollWidget poll={newsletterDetails.poll} />
+        ) : (
+            <p className="text-center text-space_cadet/60 mt-12">   No poll associated with this newsletter.</p>
         )}
       </section>
       <ReturnToTop />
