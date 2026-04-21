@@ -111,263 +111,256 @@ export const CreateCustomOrderForm = () => {
 
   return (
     <>
-    {submissionResult && (
-      <div className={`fixed top-4 right-4 p-4 rounded-md z-50 transform-opacity duration-500 ${
-        submissionResult.success ? "bg-breeze text-space_cadet" : "bg-bittersweet text-white"
-      }`}>
-        <div className={`font-semibold`}>
-          {submissionResult.success ? "✓ Request Submitted!" : "Error"}
+      {submissionResult && (
+        <div className={`fixed top-4 right-4 p-4 rounded-md z-50 transform-opacity duration-500 ${
+          submissionResult.success ? "bg-breeze text-space_cadet" : "bg-bittersweet text-white"
+        }`}>
+          <div className={`font-semibold`}>
+            {submissionResult.success ? "✓ Request Submitted!" : "Error"}
+          </div>
+          <div className="text-sm mt-1">
+            {submissionResult.message}
+            {submissionResult.referenceId && (
+              <div className="mt-2 font-mono bg-robin_egg/50 p-2 rounded">
+                Order Reference: {submissionResult.referenceId}
+              </div>
+            )}
+          </div>
         </div>
-        <div className="text-sm mt-1">
-          {submissionResult.message}
-          {submissionResult.referenceId && (
-            <div className="mt-2 font-mono bg-robin_egg/50 p-2 rounded">
-              Order Reference: {submissionResult.referenceId}
+      )}
+
+      {/* Order Process Overview */}
+      <div className="bg-majorelle/10 p-6 w-4/5 text-center rounded-lg mb-8">
+        <h2 className="text-xl font-bold text-majorelle mb-4">How Custom Orders Work</h2>
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
+          <div className="text-center">
+            <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">1</div>
+            <p className="font-semibold">Submit Your Request</p>
+            <p className="text-xs text-space_cadet/70">Share your design vision through our form</p>
+          </div>
+          <div className="text-center">
+            <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">2</div>
+            <p className="font-semibold">Receive Your Quote</p>
+            <p className="text-xs text-space_cadet/70">We'll review your request and provide pricing details</p>
+          </div>
+          <div className="text-center">
+            <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">3</div>
+            <p className="font-semibold">Confirm & Pay Deposit</p>
+            <p className="text-xs text-space_cadet/70">$50 deposit via <Link className="text-majorelle/90 font-bold hover:underline hover:text-majorelle" to="/shop"> Shop </Link> secures your spot. Remaining balance due upon completion</p>
+          </div>
+          <div className="text-center">
+            <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">4</div>
+            <p className="font-semibold">Creation & Delivery</p>
+            <p className="text-xs text-space_cadet/70">Your custom piece is crafted and shipped directly to you</p>
+          </div>
+        </div>
+      </div>
+
+      <section className="max-w-4/5 md:max-w-2/3 p-6 bg-white rounded-lg shadow-xl mb-12">
+      
+      <div className="mb-6 p-4 bg-bittersweet/30 rounded-lg border-l-4 border-bittersweet ">
+        <p className="text-sm text-space_cadet">
+          <strong>Payment Info:</strong> A $50 down payment through our shop secures your order. Once your piece is 
+          ready, you'll receive a Stripe payment link for the remaining balance — please complete it within 
+          7 days to ensure timely shipping.
+        </p>
+        <Link to="/shop" className="flex justify-end text-sm font-bold text-bittersweet"> Click here to shop →</Link>
+      </div>
+
+        {/* NEW: Production Timeline Notice */}
+        <div className="mb-6 p-4 bg-breeze/30 rounded-lg border-l-4 border-robin_egg">
+          <div className="flex items-start gap-3">
+            <div>
+              <h3 className="flex gap-1 font-semibold text-space_cadet mb-1">
+                <DangerIcon className=" size-6 text-robin_egg rotate-180"/>
+                Production Timeline & Reference Images
+              </h3>
+              <p className="text-sm text-space_cadet/80">
+                • Custom rugs take <strong>2-3 weeks to complete</strong> from design confirmation.<br/>
+                • Have reference more images? Email them once we start collaborating on your design!
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="customer_name" className="block text-sm font-medium text-space_cadet mb-1">
+                Your Name <span className="text-bittersweet"> * </span>
+              </label>
+              <input
+                type="text"
+                id="customer_name"
+                name="customer_name"
+                value={formData.customer_name}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
+              />
+            </div>
+            
+            <div>
+              <label htmlFor="email" className="block text-sm font-medium text-space_cadet mb-1">
+                Email Address <span className="text-bittersweet"> * </span>
+              </label>
+              <input
+                autoComplete="off"
+                type="email"
+                id="email"
+                name="email"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+                className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
+              />
+            </div>
+          </div>
+
+          {/* Contact Preference */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="contact_method" className="block text-sm font-medium text-space_cadet mb-1">
+                Preferred Contact Method
+              </label>
+              <select
+                id="contact_method"
+                name="contact_method"
+                value={formData.contact_method}
+                onChange={handleInputChange}
+                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-majorelle focus:border-transparent"
+              >
+                {CONTACT_METHODS.map(({ label, value }) => (
+                  <option key={value} value={value}>
+                    {label}
+                  </option>
+                ))}
+              </select>
+            </div>
+            
+            <div>
+              <label htmlFor="contact_info" className="block text-sm font-medium text-space_cadet mb-1">
+                {formData.contact_method === 'instagram' ? 'Instagram Handle' : 
+                formData.contact_method === 'phone' ? 'Phone Number' : 'Contact Info'}
+              </label>
+              <input
+                type="text"
+                id="contact_info"
+                name="contact_info"
+                value={formData.contact_info}
+                onChange={handleInputChange}
+                placeholder={formData.contact_method === 'instagram' ? '@username' : 
+                            formData.contact_method === 'phone' ? 'Phone number' : 'Additional contact info'}
+                className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
+              />
+              <p className="text-xs text-space_cadet/50 mt-1">Leave blank to use your email.</p>
+            </div>
+          </div>
+          
+          <div>
+            <label htmlFor="description" className="block text-sm font-medium text-space_cadet mb-1">
+              Design Description <span className="text-bittersweet"> * </span>
+            </label>
+            <textarea
+              id="description"
+              name="description"
+              value={formData.description}
+              onChange={handleInputChange}
+              required
+              rows={4}
+              placeholder="Describe your design in detail. Include characters, symbols, colors, and any specific elements you want included."
+              className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label htmlFor="budget" className="block text-sm font-medium text-space_cadet mb-1">
+                Size & Budget Range <span className="text-bittersweet"> * </span>
+              </label>
+              <div className="min-w-[200px]">
+                <select
+                  id="budget"
+                  required
+                  value={formData?.budget}
+                  onChange={(e) => setFormData(prev => ({...prev, budget: e.target.value }) ) }
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-majorelle focus:border-transparent"
+                  aria-label="Rug Desired size + price range "
+                >
+                  {BUDGET_AND_TYPES.map(({ label, value }) => (
+                    <option key={label} value={value}>{label}</option>
+                  ))}        
+                </select>
+              </div>
+              <p className="text-xs text-bittersweet/70">Final pricing confirmed after design consultation</p>
+            </div>
+          </div>
+          <div>
+      <label htmlFor="image" className="block text-sm font-medium text-space_cadet mb-1">
+        Reference Image <span className="text-space_cadet/50 text-xs">(optional)</span>
+      </label>
+
+      <label
+        htmlFor="image"
+        className="flex items-center gap-3 w-full px-4 py-2 border border-space_cadet/30 rounded-md cursor-pointer hover:border-majorelle transition-colors"
+      >
+        <span className=" text-majorelle font-medium ">Choose File</span>
+        <span className=" text-space_cadet/50 truncate">
+          {image ? image.name : "No file chosen"}
+        </span>
+      </label>
+
+      <input
+        type="file"
+        id="image"
+        accept="image/*"
+        onChange={handleImageUpload}
+        className="sr-only" 
+      />
+
+          {image && (
+            <div className="mt-2 flex items-center gap-3">
+              <img
+                src={URL.createObjectURL(image)}
+                alt="Preview"
+                className="w-16 h-16 object-cover rounded-md border border-space_cadet/20"
+              />
+              <button
+                type="button"
+                onClick={removeImage}
+                className="text-sm text-bittersweet hover:underline"
+              >
+                Remove
+              </button>
             </div>
           )}
-        </div>
-      </div>
-    )}
-
-{/* Order Process Overview */}
-  <div className="bg-majorelle/10 p-6 w-4/5 text-center rounded-lg mb-8">
-    <h2 className="text-xl font-bold text-majorelle mb-4">How Custom Orders Work</h2>
-    <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-sm">
-      <div className="text-center">
-        <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">1</div>
-        <p className="font-semibold">Submit Your Request</p>
-        <p className="text-xs text-space_cadet/70">Share your design vision through our form</p>
-      </div>
-      <div className="text-center">
-        <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">2</div>
-        <p className="font-semibold">Receive Your Quote</p>
-        <p className="text-xs text-space_cadet/70">We'll review your request and provide pricing details</p>
-      </div>
-      <div className="text-center">
-        <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">3</div>
-        <p className="font-semibold">Confirm & Pay Deposit</p>
-        <p className="text-xs text-space_cadet/70">$50 deposit via <Link className="text-majorelle/90 font-bold hover:underline hover:text-majorelle" to="/shop"> Shop </Link> secures your spot. Remaining balance due upon completion</p>
-      </div>
-      <div className="text-center">
-        <div className="bg-majorelle text-white rounded-full w-8 h-8 flex items-center justify-center mx-auto mb-2 font-bold">4</div>
-        <p className="font-semibold">Creation & Delivery</p>
-        <p className="text-xs text-space_cadet/70">Your custom piece is crafted and shipped directly to you</p>
-      </div>
-    </div>
-  </div>
-
-  <section className="max-w-4/5 md:max-w-2/3 p-6 bg-white rounded-lg shadow-xl mb-12">
-  
-  <div className="mb-6 p-4 bg-bittersweet/30 rounded-lg border-l-4 border-bittersweet">
-    <p className="text-sm text-space_cadet">
-      <strong>Payment Info:</strong> A $50 down payment through our shop secures your order. Once your piece is 
-      ready, you'll receive a Stripe payment link for the remaining balance — please complete it within 
-      7 days to ensure timely shipping.
-    </p>
-  </div>
-  {/* <div className="mb-6 p-4 bg-bittersweet/30 rounded-lg border-l-4 border-bittersweet">
-    <h3 className="font-semibold text-space_cadet mb-1">Payment Info</h3>
-    <p className="text-sm text-space_cadet">
-      After we finalize your design together, a $50 deposit via Zelle or Venmo 
-      is all that's needed to get started. You won't be charged the remaining balance until your piece 
-      is complete and ready to ship.
-    </p>
-  </div> */}
-
-    {/* NEW: Production Timeline Notice */}
-    <div className="mb-6 p-4 bg-breeze/30 rounded-lg border-l-4 border-robin_egg">
-      <div className="flex items-start gap-3">
-        <div>
-          <h3 className="flex gap-1 font-semibold text-space_cadet mb-1">
-            <DangerIcon className=" size-6 text-robin_egg rotate-180"/>
-            Production Timeline & Reference Images
-          </h3>
-          <p className="text-sm text-space_cadet/80">
-            • Custom rugs take <strong>2-3 weeks to complete</strong> from design confirmation.<br/>
-            • Have reference more images? Email them once we start collaborating on your design!
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <form onSubmit={handleSubmit} className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="customer_name" className="block text-sm font-medium text-space_cadet mb-1">
-            Your Name <span className="text-bittersweet"> * </span>
-          </label>
-          <input
-            type="text"
-            id="customer_name"
-            name="customer_name"
-            value={formData.customer_name}
-            onChange={handleInputChange}
-            required
-            className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
-          />
-        </div>
-        
-        <div>
-          <label htmlFor="email" className="block text-sm font-medium text-space_cadet mb-1">
-            Email Address <span className="text-bittersweet"> * </span>
-          </label>
-          <input
-            autoComplete="off"
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleInputChange}
-            required
-            className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
-          />
-        </div>
-      </div>
-
-      {/* Contact Preference */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="contact_method" className="block text-sm font-medium text-space_cadet mb-1">
-            Preferred Contact Method
-          </label>
-          <select
-            id="contact_method"
-            name="contact_method"
-            value={formData.contact_method}
-            onChange={handleInputChange}
-            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-majorelle focus:border-transparent"
-          >
-            {CONTACT_METHODS.map(({ label, value }) => (
-              <option key={value} value={value}>
-                {label}
-              </option>
-            ))}
-          </select>
-        </div>
-        
-        <div>
-          <label htmlFor="contact_info" className="block text-sm font-medium text-space_cadet mb-1">
-            {formData.contact_method === 'instagram' ? 'Instagram Handle' : 
-            formData.contact_method === 'phone' ? 'Phone Number' : 'Contact Info'}
-          </label>
-          <input
-            type="text"
-            id="contact_info"
-            name="contact_info"
-            value={formData.contact_info}
-            onChange={handleInputChange}
-            placeholder={formData.contact_method === 'instagram' ? '@username' : 
-                        formData.contact_method === 'phone' ? 'Phone number' : 'Additional contact info'}
-            className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
-          />
-          <p className="text-xs text-space_cadet/50 mt-1">Leave blank to use your email.</p>
-        </div>
-      </div>
-      
-      <div>
-        <label htmlFor="description" className="block text-sm font-medium text-space_cadet mb-1">
-          Design Description <span className="text-bittersweet"> * </span>
-        </label>
-        <textarea
-          id="description"
-          name="description"
-          value={formData.description}
-          onChange={handleInputChange}
-          required
-          rows={4}
-          placeholder="Describe your design in detail. Include characters, symbols, colors, and any specific elements you want included."
-          className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
-        />
-      </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
-          <label htmlFor="budget" className="block text-sm font-medium text-space_cadet mb-1">
-            Size & Budget Range <span className="text-bittersweet"> * </span>
-          </label>
-          <div className="min-w-[200px]">
-            <select
-              id="budget"
-              required
-              value={formData?.budget}
-              onChange={(e) => setFormData(prev => ({...prev, budget: e.target.value }) ) }
-              className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-majorelle focus:border-transparent"
-              aria-label="Rug Desired size + price range "
-            >
-              {BUDGET_AND_TYPES.map(({ label, value }) => (
-                <option key={label} value={value}>{label}</option>
-              ))}        
-            </select>
           </div>
-          <p className="text-xs text-bittersweet/70">Final pricing confirmed after design consultation</p>
-        </div>
-      </div>
-      <div>
-  <label htmlFor="image" className="block text-sm font-medium text-space_cadet mb-1">
-    Reference Image <span className="text-space_cadet/50 text-xs">(optional)</span>
-  </label>
-
-  <label
-    htmlFor="image"
-    className="flex items-center gap-3 w-full px-4 py-2 border border-space_cadet/30 rounded-md cursor-pointer hover:border-majorelle transition-colors"
-  >
-    <span className=" text-majorelle font-medium ">Choose File</span>
-    <span className=" text-space_cadet/50 truncate">
-      {image ? image.name : "No file chosen"}
-    </span>
-  </label>
-
-  <input
-    type="file"
-    id="image"
-    accept="image/*"
-    onChange={handleImageUpload}
-    className="sr-only" 
-  />
-
-  {image && (
-    <div className="mt-2 flex items-center gap-3">
-      <img
-        src={URL.createObjectURL(image)}
-        alt="Preview"
-        className="w-16 h-16 object-cover rounded-md border border-space_cadet/20"
-      />
-      <button
-        type="button"
-        onClick={removeImage}
-        className="text-sm text-bittersweet hover:underline"
-      >
-        Remove
-      </button>
-    </div>
-  )}
-</div>
-      <div className="flex justify-center mt-8">
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className={`
-            bg-majorelle
-            w-auto h-[55px]
-            drop-shadow-sm rounded-lg
-            hover:bg-robin_egg hover:scale-105
-            active:bg-robin_egg active:scale-105 
-            focus:bg-robin_egg focus:scale-105
-            ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}
-          `}
-        >
-          {isSubmitting ? "Submitting..." : "Submit Request"}
-        </button>
-      </div>
-      <div className="text-center text-sm text-space_cadet/70">
-        <p>You'll receive a response within 1-2 business days to discuss your custom order</p>
-      </div>
-      <div className="flex gap-4">
-        <p className="text-xs text-space_cadet/50 text-center"> <span className="text-bittersweet"> * </span> = Required</p>
-        <p className="text-xs text-space_cadet/50 text-center"> <span className="text-bittersweet"> TBD </span> = To Be Discussed</p>
-      </div>
-    </form>
-  </section>
-</>
+          <div className="flex justify-center mt-8">
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`
+                bg-majorelle
+                w-auto h-[55px]
+                drop-shadow-sm rounded-lg
+                hover:bg-robin_egg hover:scale-105
+                active:bg-robin_egg active:scale-105 
+                focus:bg-robin_egg focus:scale-105
+                ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}
+              `}
+            >
+              {isSubmitting ? "Submitting..." : "Submit Request"}
+            </button>
+          </div>
+          <div className="text-center text-sm text-space_cadet/70">
+            <p>You'll receive a response within 1-2 business days to discuss your custom order</p>
+          </div>
+          <div className="flex gap-4">
+            <p className="text-xs text-space_cadet/50 text-center"> <span className="text-bittersweet"> * </span> = Required</p>
+            <p className="text-xs text-space_cadet/50 text-center"> <span className="text-bittersweet"> TBD </span> = To Be Discussed</p>
+          </div>
+        </form>
+      </section>
+    </>
   )
 }
