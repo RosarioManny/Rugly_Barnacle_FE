@@ -13,6 +13,14 @@ interface EventCardProps {
 export const EventCard = ({ event, onClick }: EventCardProps) => {
   const [imageError, setImageError] = useState(false);
 
+  const eventStatus = [
+    { status: 'upcoming', displayText: 'UPCOMING', style: 'bg-majorelle/10 text-majorelle' },
+    { status: 'cancelled', displayText: 'CANCELLED', style: 'bg-space_cadet/10 text-space_cadet/80' },
+    { status: 'past', displayText: 'PAST', style: 'bg-bittersweet/10 text-bittersweet/80' },
+    { status: 'ongoing', displayText: 'HAPPENING NOW', style: 'bg-midnight_green/10 text-midnight_green/80' },
+  ]
+
+  const currentStatus = eventStatus.find(s => s.status === event.status);
   const handleImageError = () => {
     setImageError(true);
   };
@@ -51,19 +59,10 @@ export const EventCard = ({ event, onClick }: EventCardProps) => {
               {getTagDisplayName(event.event_type)}
             </span>
             <div className="flex gap-2">
-              {event.status === 'upcoming' && (
-                <span className="text-xs font-medium bg-bittersweet/10 text-bittersweet px-3 py-1 rounded-full">
-                  UPCOMING
-                </span>
-              )}
-              {event.status === 'ongoing' && (
-                <span className="text-xs font-medium bg-green-100 text-green-800 px-3 py-1 rounded-full">
-                  HAPPENING NOW
-                </span>
-              )}
-              {event.status === 'cancelled' && (
-                <span className="text-xs font-medium bg-red-100 text-red-800 px-3 py-1 rounded-full">
-                  CANCELLED
+              
+              {currentStatus && (
+                <span className={`text-xs font-medium px-3 py-1 rounded-full ${currentStatus.style}`}>
+                  {currentStatus.displayText}
                 </span>
               )}
             </div>

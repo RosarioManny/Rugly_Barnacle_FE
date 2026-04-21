@@ -6,7 +6,7 @@ interface CardProps {
   link?: string;
 }
 
-export const CarouselItem = ({ img, title, link="" }: CardProps) => {
+export const CarouselItem = ({ img, title, link="shop" }: CardProps) => {
   return (
     <div className="flex h-full flex-col">
       <Link 

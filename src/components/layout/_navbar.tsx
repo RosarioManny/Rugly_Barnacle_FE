@@ -6,7 +6,7 @@ import { StartOrderBtn } from "../ui/buttons"
 import { useCart } from "../../hooks/cart/cartProvider"
 
 
-const aboutSubMenu = ["about", "contact", "FAQ", "newsletter", "events"]
+const aboutSubMenu = ["about", "contact", "FAQ", "events"]
 
 export const NavBar = () => {
   const {
