@@ -30,10 +30,10 @@ export const getCookie = (name: string) => {
 };
 
 // Simple session detection - uses csrf token as proxy for session
-const getSessionId = (): string | null => {
-    const csrfToken = getCookie('csrftoken');
-    return csrfToken ? 'authenticated' : null;
-};
+// const getSessionId = (): string | null => {
+//     const csrfToken = getCookie('csrftoken');
+//     return csrfToken ? 'authenticated' : null;
+// };
 
 export const ensureCSRFToken = async (): Promise<void> => {
     try {
