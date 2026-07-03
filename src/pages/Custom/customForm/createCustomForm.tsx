@@ -220,8 +220,28 @@ export const CreateCustomOrderForm = () => {
                 required
                 className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
               />
-          
-              <p className="text-xs text-bittersweet/70">Final pricing confirmed after design consultation</p>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="budget" className="block text-sm font-medium text-space_cadet mb-1">
+                  Size & Budget Range <span className="text-bittersweet"> * </span>
+                </label>
+                <div className="min-w-[200px]">
+                  <select
+                    id="budget"
+                    required
+                    value={formData?.budget}
+                    onChange={(e) => setFormData(prev => ({...prev, budget: e.target.value }) ) }
+                    className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-majorelle focus:border-transparent"
+                    aria-label="Rug Desired size + price range "
+                  >
+                    {BUDGET_AND_TYPES.map(({ label, value }) => (
+                      <option key={label} value={value}>{label}</option>
+                    ))}        
+                  </select>
+                </div>
+                <p className="text-xs text-bittersweet/70">Final pricing confirmed after design consultation</p>
+              </div>
             </div>
           </div>
           <div>
