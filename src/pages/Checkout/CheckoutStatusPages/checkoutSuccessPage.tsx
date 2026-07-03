@@ -14,57 +14,65 @@ export const CheckoutSuccessPage = () => {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    let isMounted = true;
+  let isMounted = true;
 
-    const handleSuccessfulCheckout = async () => {
-      if(!isMounted) return;
-      const sessionId = searchParams.get('session_id')
-      const cartId = searchParams.get('cart_id')
+  const handleSuccessfulCheckout = async () => {
+    if (!isMounted) return;
+    
+    const sessionId = searchParams.get('session_id')
+    const cartId = searchParams.get('cart_id')
 
-      console.log(`Checkout Success Page Loaded with session_id: ${sessionId} and cart_id: ${cartId}`)
-      // Check if session id is present
-      if (!sessionId) {
-        console.log("No session ID found in URL")
-        setError("No payment session found")
-        setIsLoading(false)
-        return
-      }
+    console.log(`Checkout Success Page Loaded with session_id: ${sessionId} and cart_id: ${cartId}`)
 
-      // Check if Cart id is present
-      if (!cartId) {
-        console.log("No cart ID found in URL")
-        setError("No cart information found")
-        setIsLoading(false)
-        return 
-      }
-
-      try {
-        await checkoutSuccess(sessionId, cartId)
-        setQuantitiesUpdated(true)
-        console.log("Product quantities updated successfully")
-
-        await clearCart();
-        setCartCleared(true)
-        console.log("Cart cleared successfully after checkout")
-
-      } catch (err: any) {
-        console.error("Error verifying payment:", err)
-
-        if (quantitiesUpdated && !cartCleared) {
-          setError("Payment processed but failed to clear cart. Please contact support.")
-        } else {
-          setError(err.message || 'Unable to complete checkout processing')
-        }
-      } finally {
-        setIsLoading(false)
-      }
+    if (!sessionId) {
+      console.log("No session ID found in URL")
+      setError("No payment session found")
+      setIsLoading(false)
+      return
     }
-    handleSuccessfulCheckout()
 
-    return () => {
-      isMounted = false;
+    if (!cartId) {
+      console.log("No cart ID found in URL")
+      setError("No cart information found")
+      setIsLoading(false)
+      return 
     }
-  }, [searchParams])
+
+    // 🔥 FIX: Use local flags instead of state for tracking
+    let quantitiesUpdatedFlag = false
+    let cartClearedFlag = false
+
+    try {
+      await checkoutSuccess(sessionId, cartId)
+      quantitiesUpdatedFlag = true
+      setQuantitiesUpdated(true)
+      console.log("Product quantities updated successfully")
+
+      await clearCart();
+      cartClearedFlag = true
+      setCartCleared(true)
+      console.log("Cart cleared successfully after checkout")
+
+    } catch (err: any) {
+      console.error("Error verifying payment:", err)
+
+      // 🔥 FIX: Use the local flags instead of state
+      if (quantitiesUpdatedFlag && !cartClearedFlag) {
+        setError("Payment processed but failed to clear cart. Please contact support.")
+      } else {
+        setError(err.message || 'Unable to complete checkout processing')
+      }
+    } finally {
+      setIsLoading(false)
+    }
+  }
+  
+  handleSuccessfulCheckout()
+
+  return () => {
+    isMounted = false;
+  }
+}, [searchParams])
 
   return (
     <main className="min-h-screen py-8" aria-label="Checkout Success Page">
