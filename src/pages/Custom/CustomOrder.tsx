@@ -1,9 +1,7 @@
 import { useState } from "react";
 import { Header } from "../../components/layout/_header";
-// import { ShopBtn } from "../../components/ui/buttons/index";
 import { CreateCustomOrderForm } from "./customForm/createCustomForm";
 import { CheckCustomOrderStatus } from "./customForm/checkCustomOrderStatus.tsx";
-// import { CtaWavesBg } from "../../components/ui/icons-svgs/ctaWavesBg";
 import { ReturnToTop } from "../../components/ui/buttons/btn_returnToTop.tsx";
 
 export const CustomOrder = () => {
@@ -72,21 +70,6 @@ export const CustomOrder = () => {
         <CheckCustomOrderStatus />
       )}
       
-      {/* <CtaWavesBg className="fill-mauve w-[100vw]" />
-      <section className="bg-mauve w-full pb-14 md:pb-24 flex font-medium flex-col items-center text-center ">
-        <p className="m-2 font-semibold subheading_text">
-          Not ready for a custom order? <br/> Check out my premade rugs!
-        </p>
-        <div className="flex flex-col gap-8 my-8 items-center ">
-          <ShopBtn/>
-          <img 
-            className="flex justify-start mx-4 h-10 w-10" 
-            src="/assets/design/icons/Cross_Star_White.webp" 
-            aria-hidden="true" 
-            alt="Cross Star Design Marker" 
-          />
-        </div>
-      </section> */}
       <ReturnToTop />
     </main>
   );

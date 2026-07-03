@@ -28,7 +28,7 @@ const getSessionId = (): string | null => {
     return getCookie('sessionid');
 };
 
-const ensureCSRFToken = async (): Promise<void> => {
+export const ensureCSRFToken = async (): Promise<void> => {
     try {
         await api.get('csrf/');
         console.log("✅ CSRF Token ensured");
@@ -91,7 +91,10 @@ api.interceptors.request.use(async (config) => {
 api.interceptors.response.use(
     (response) => response,
     async (error) => {
-        if (error.response?.status === 403 && error.config) {
+        const isCSRF = error.response?.status === 403;
+        const isMultipart = error.config?.headers?.['Content-Type']?.includes('multipart/form-data');
+        
+        if (isCSRF && !isMultipart) {
             console.error('❌ CSRF Error - attempting to refresh token and retry');
 
             await ensureCSRFToken();
@@ -99,9 +102,12 @@ api.interceptors.response.use(
             const csrfToken = getCookie('csrftoken');
             if (csrfToken) {
                 error.config.headers['X-CSRFToken'] = csrfToken;
-                console.log('🔁 Retrying request with new CSRF token');
                 return api.request(error.config);
             }
+        }
+
+        if (isCSRF && isMultipart) {
+            console.error('❌ CSRF Error on multipart request - cannot try safely');
         }
         return Promise.reject(error);
     }

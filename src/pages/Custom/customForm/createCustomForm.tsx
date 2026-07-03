@@ -3,6 +3,7 @@ import type { CustomOrderData } from "../../../lib/api/CustomOrder/customOrderSe
 import { createCustomOrder } from "../../../lib/api/CustomOrder/customOrderServices";
 import { DangerIcon } from "../../../components/ui/icons-svgs/SvgIcons";
 import { Link } from "react-router-dom"
+import { BUDGET_AND_TYPES, CONTACT_METHODS } from "./customFormData";
 
 export const CreateCustomOrderForm = () => {
   const [formData, setFormData] = useState({
@@ -16,23 +17,8 @@ export const CreateCustomOrderForm = () => {
   const [image, setImage] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submissionResult, setSubmissionResult] = useState<{success: boolean; referenceId?: string; message?: string} | null>(null);
-  const BUDGET_AND_TYPES = [
-    { label: "2ft - $200+", value: "2ft - $200+" },
-    { label: "3ft - $300+", value: "3ft - $300+" },
-    { label: "4ft - $400+", value: "4ft - $400+" },
-    { label: "5ft - $500+", value: "5ft - $500+" },
-    { label: "6ft - $600+", value: "6ft - $600+" },
-    { label: "Bag Chain - TBD", value: "Bag Chain" },
-    { label: "Mirror Rug - TBD", value: "Mirror Rug" },
-    { label: "Mug Rug - TBD", value: "Mug Rug" },
-    { label: "Wrist Rug - TBD", value: "Wrist Rug" },
-  ]
-  const CONTACT_METHODS = [
-    { label: "Email", value: "email" },
-    { label: "Instagram", value: "instagram" },
-    { label: "Phone", value: "phone" },
-    { label: "Other", value: "other"}
-  ]
+  const [imageError, setImageError] = useState<string | null>(null);
+  
 
   useEffect(() => {
     if (submissionResult) {
@@ -52,11 +38,13 @@ export const CreateCustomOrderForm = () => {
   const handleImageUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setImage(e.target.files[0]);
+      setImageError(null); 
     }
   };
 
   const removeImage = () => {
     setImage(null);
+    setImageError(null);
   };
 
   const formReset = () => {
@@ -74,6 +62,7 @@ export const CreateCustomOrderForm = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setImageError(null);
 
     const cleanText = (text: string) => text.replace(/\u00A0/g, ' '); 
 
@@ -89,21 +78,38 @@ export const CreateCustomOrderForm = () => {
       };
 
       const result = await createCustomOrder(apiData);
-      
-      setSubmissionResult({
-        success: true,
-        referenceId: result.reference_id,
-        message: "Thanks! Email confirmation sent. We'll contact you within 1-2 days."
-      });
+      const referenceId = result.reference_id || "N/A";
 
+      if (result.image_warning) {
+        setImageError("Image upload failed. Remove it and resubmit, or email it to us directly.");
+        setSubmissionResult({
+          success: true,
+          referenceId: referenceId,
+          message: "Image upload failed. Remove it and resubmit, or email it to us directly."
+        });
+      } else {
+        setSubmissionResult({
+          success: true,
+          referenceId: referenceId,
+          message: "Thanks! Email confirmation sent. We'll contact you within 1-2 days."
+        });
+      }
+    
       formReset()
 
     } catch (error: any) {
       console.error("Submission failed:", error);
-      setSubmissionResult({
+
+      const isImageError = error.response?.data?.field === "image" || error.response?.data?.error?.toLowerCase().includes("image");
+
+      if (isImageError) {
+        setImageError("Image upload failed. Please try a different file or remove it to submit without one.");
+      } else {
+        setSubmissionResult({
         success: false,
         message: error.response?.data?.error || "Failed to submit order. Please try again."
       });
+      }
     } finally {
       setIsSubmitting(false);
     }
@@ -310,12 +316,18 @@ export const CreateCustomOrderForm = () => {
   <label
     htmlFor="image"
     className="flex items-center gap-3 w-full px-4 py-2 border border-space_cadet/30 rounded-md cursor-pointer hover:border-majorelle transition-colors"
-  >
+    >
     <span className=" text-majorelle font-medium ">Choose File</span>
     <span className=" text-space_cadet/50 truncate">
       {image ? image.name : "No file chosen"}
     </span>
   </label>
+    {imageError && (
+      <p className="mt-2 text-sm text-bittersweet flex items-center justify-end gap-1">
+        <DangerIcon className="size-4 shrink-0" />
+        {imageError}
+      </p>
+    )}
 
   <input
     type="file"
@@ -345,7 +357,7 @@ export const CreateCustomOrderForm = () => {
       <div className="flex justify-center mt-8">
         <button
           type="submit"
-          disabled={isSubmitting}
+          disabled={isSubmitting || !!imageError}
           className={`
             bg-majorelle
             w-auto h-[55px]
