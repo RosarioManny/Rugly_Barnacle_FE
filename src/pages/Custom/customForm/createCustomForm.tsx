@@ -223,7 +223,7 @@ export const CreateCustomOrderForm = () => {
             </div>
 
             {/* Contact Preference */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6">
               <div>
                 <label htmlFor="contact_method" className="block text-sm font-medium text-space_cadet mb-1">
                   Preferred Contact Method
