@@ -221,6 +221,63 @@ export const CreateCustomOrderForm = () => {
                 className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
               />
             </div>
+
+            {/* Contact Preference */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="contact_method" className="block text-sm font-medium text-space_cadet mb-1">
+                  Preferred Contact Method
+                </label>
+                <select
+                  id="contact_method"
+                  name="contact_method"
+                  value={formData.contact_method}
+                  onChange={handleInputChange}
+                  className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-majorelle focus:border-transparent"
+                >
+                  {CONTACT_METHODS.map(({ label, value }) => (
+                    <option key={value} value={value}>
+                      {label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              
+              <div>
+                <label htmlFor="contact_info" className="block text-sm font-medium text-space_cadet mb-1">
+                  {formData.contact_method === 'instagram' ? 'Instagram Handle' : 
+                  formData.contact_method === 'phone' ? 'Phone Number' : 'Contact Info'}
+                </label>
+                <input
+                  type="text"
+                  id="contact_info"
+                  name="contact_info"
+                  value={formData.contact_info}
+                  onChange={handleInputChange}
+                  placeholder={formData.contact_method === 'instagram' ? '@username' : 
+                              formData.contact_method === 'phone' ? 'Phone number' : 'Additional contact info'}
+                  className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
+                />
+                <p className="text-xs text-space_cadet/50 mt-1">Leave blank to use your email.</p>
+              </div>
+            </div>
+            
+            <div>
+              <label htmlFor="description" className="block text-sm font-medium text-space_cadet mb-1">
+                Design Description <span className="text-bittersweet"> * </span>
+              </label>
+              <textarea
+                id="description"
+                name="description"
+                value={formData.description}
+                onChange={handleInputChange}
+                required
+                rows={4}
+                placeholder="Describe your design in detail. Include characters, symbols, colors, and any specific elements you want included."
+                className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
+              />
+            </div>
+            {/* BUDGET AND SIZE RANGE */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div>
                 <label htmlFor="budget" className="block text-sm font-medium text-space_cadet mb-1">
