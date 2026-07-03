@@ -162,7 +162,7 @@ export const CreateCustomOrderForm = () => {
         </div>
       </div>
 
-      <section className="max-w-4/5 md:max-w-2/3 p-6 bg-white rounded-lg shadow-xl mb-12">
+    <section className="max-w-4/5 md:max-w-2/3 p-6 bg-white rounded-lg shadow-xl mb-12">
       
       <div className="mb-6 p-4 bg-bittersweet/30 rounded-lg border-l-4 border-bittersweet ">
         <p className="text-sm text-space_cadet">
@@ -220,6 +220,8 @@ export const CreateCustomOrderForm = () => {
                 required
                 className="w-full px-4 py-2 border border-space_cadet/30 rounded-md focus:outline-none focus:ring-2 focus:ring-majorelle"
               />
+          
+              <p className="text-xs text-bittersweet/70">Final pricing confirmed after design consultation</p>
             </div>
           </div>
 
@@ -298,9 +300,11 @@ export const CreateCustomOrderForm = () => {
                   ))}        
                 </select>
               </div>
-              <p className="text-xs text-bittersweet/70">Final pricing confirmed after design consultation</p>
             </div>
           </div>
+
+              
+          <p className="text-xs text-bittersweet/70">Final pricing confirmed after design consultation</p>
           <div>
             <label htmlFor="image" className="block text-sm font-medium text-space_cadet mb-1">
               Reference Image <span className="text-space_cadet/50 text-xs">(optional)</span>
@@ -309,12 +313,18 @@ export const CreateCustomOrderForm = () => {
             <label
               htmlFor="image"
               className="flex items-center gap-3 w-full px-4 py-2 border border-space_cadet/30 rounded-md cursor-pointer hover:border-majorelle transition-colors"
-            >
+              >
               <span className=" text-majorelle font-medium ">Choose File</span>
               <span className=" text-space_cadet/50 truncate">
                 {image ? image.name : "No file chosen"}
               </span>
             </label>
+              {imageError && (
+                <p className="mt-2 text-sm text-bittersweet flex items-center justify-end gap-1">
+                  <DangerIcon className="size-4 shrink-0" />
+                  {imageError}
+                </p>
+              )}
 
             <input
               type="file"
@@ -341,79 +351,32 @@ export const CreateCustomOrderForm = () => {
               </div>
             )}
           </div>
-          <p className="text-xs text-bittersweet/70">Final pricing confirmed after design consultation</p>
-      <div>
-        <label htmlFor="image" className="block text-sm font-medium text-space_cadet mb-1">
-          Reference Image <span className="text-space_cadet/50 text-xs">(optional)</span>
-        </label>
-
-        <label
-          htmlFor="image"
-          className="flex items-center gap-3 w-full px-4 py-2 border border-space_cadet/30 rounded-md cursor-pointer hover:border-majorelle transition-colors"
-          >
-          <span className=" text-majorelle font-medium ">Choose File</span>
-          <span className=" text-space_cadet/50 truncate">
-            {image ? image.name : "No file chosen"}
-          </span>
-        </label>
-          {imageError && (
-            <p className="mt-2 text-sm text-bittersweet flex items-center justify-end gap-1">
-              <DangerIcon className="size-4 shrink-0" />
-              {imageError}
-            </p>
-          )}
-
-        <input
-          type="file"
-          id="image"
-          accept="image/*"
-          onChange={handleImageUpload}
-          className="sr-only" 
-        />
-
-        {image && (
-          <div className="mt-2 flex items-center gap-3">
-            <img
-              src={URL.createObjectURL(image)}
-              alt="Preview"
-              className="w-16 h-16 object-cover rounded-md border border-space_cadet/20"
-            />
+          <div className="flex justify-center mt-8">
             <button
-              type="button"
-              onClick={removeImage}
-              className="text-sm text-bittersweet hover:underline"
+              type="submit"
+              disabled={isSubmitting || !!imageError}
+              className={`
+                bg-majorelle
+                w-auto h-[55px]
+                drop-shadow-sm rounded-lg
+                hover:bg-robin_egg hover:scale-105
+                active:bg-robin_egg active:scale-105 
+                focus:bg-robin_egg focus:scale-105
+                ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}
+              `}
             >
-              Remove
+              {isSubmitting ? "Submitting..." : "Submit Request"}
             </button>
           </div>
-        )}
-      </div>
-      <div className="flex justify-center mt-8">
-        <button
-          type="submit"
-          disabled={isSubmitting || !!imageError}
-          className={`
-            bg-majorelle
-            w-auto h-[55px]
-            drop-shadow-sm rounded-lg
-            hover:bg-robin_egg hover:scale-105
-            active:bg-robin_egg active:scale-105 
-            focus:bg-robin_egg focus:scale-105
-            ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}
-          `}
-        >
-          {isSubmitting ? "Submitting..." : "Submit Request"}
-        </button>
-      </div>
-      <div className="text-center text-sm text-space_cadet/70">
-        <p>You'll receive a response within 1-2 business days to discuss your custom order</p>
-      </div>
-      <div className="flex gap-4">
-        <p className="text-xs text-space_cadet/50 text-center"> <span className="text-bittersweet"> * </span> = Required</p>
-        <p className="text-xs text-space_cadet/50 text-center"> <span className="text-bittersweet"> TBD </span> = To Be Discussed</p>
-      </div>
-    </form>
-  </section>
-</>
+          <div className="text-center text-sm text-space_cadet/70">
+            <p>You'll receive a response within 1-2 business days to discuss your custom order</p>
+          </div>
+          <div className="flex gap-4">
+            <p className="text-xs text-space_cadet/50 text-center"> <span className="text-bittersweet"> * </span> = Required</p>
+            <p className="text-xs text-space_cadet/50 text-center"> <span className="text-bittersweet"> TBD </span> = To Be Discussed</p>
+          </div>
+        </form>
+      </section>
+    </>
   )
 }
