@@ -4,9 +4,18 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { formatCartDate } from "../../../lib/utils/dateFormtater";
 import { TrashIcon } from "../../../components/ui/icons-svgs/SvgIcons";
+import { logColors } from "../../../lib/api/logFileStyles";
+
+const log = (type: 'info' | 'error' | 'success' | 'warn', message: string) => {
+  const style = logColors.find(c => c.logType === type);
+  const css = `color: ${style?.color}; font-weight: ${style?.fontWeight};`;
+  if (type === 'error') console.error(`%c ${message}`, css);
+  else if (type === 'warn') console.warn(`%c ${message}`, css);
+  else console.info(`%c ${message}`, css);
+};
 
 export const EmptyCart = () => {
-  return ( 
+  return (
     <div className="flex flex-col gap-4 justify-center items-center my-4">
       <p className="text-lg font-semibold">Your cart is empty</p>
       <p className="text-sm font-medium text-space_cadet/80">Let's get you started!</p>
@@ -15,8 +24,8 @@ export const EmptyCart = () => {
         <ShopBtn />
       </div>
     </div>
-  )
-}
+  );
+};
 
 // Occupied Cart Component
 interface OccupiedCartProps extends CartItem {
@@ -24,11 +33,11 @@ interface OccupiedCartProps extends CartItem {
   onAdd: (cartItemId: number) => void;
 }
 
-export const OccupiedCart = ({ 
-  product_name, 
-  product_price, 
-  quantity, 
-  added_at, 
+export const OccupiedCart = ({
+  product_name,
+  product_price,
+  quantity,
+  added_at,
   dimensions,
   product,
   id,
@@ -40,77 +49,75 @@ export const OccupiedCart = ({
   const [isRemoving, setIsRemoving] = useState(false);
   const navigate = useNavigate();
 
-
-  const handleRemove = async (e: React.MouseEvent) => {
-    e.stopPropagation(); // Prevent card click when removing
+  const handleRemove = (e: React.MouseEvent) => {
+    e.stopPropagation();
     e.preventDefault();
-    
+
     if (!id || !onRemove) {
-      console.error('Cannot remove: missing id or onRemove handler');
+      log('error', `[OccupiedCart] handleRemove — missing id or onRemove handler`);
       return;
     }
-    
+
     try {
-      console.log('Removing cart item ID:', id);
+      log('info', `[OccupiedCart] handleRemove — productId: ${id}, "${product_name}"`);
       setIsRemoving(true);
-      await onRemove(id); // Pass the cart item ID (not product ID)
+      onRemove(id);
+      log('success', `[OccupiedCart] Removed "${product_name}" from cart`);
     } catch (error) {
-      console.error('Remove failed:', error);
+      log('error', `[OccupiedCart] handleRemove failed — productId: ${id}`);
     } finally {
       setIsRemoving(false);
     }
   };
 
   const handleCardClick = () => {
-    navigate(`/shop/${product}`);
-  }
+    log('info', `[OccupiedCart] Navigating to product page — productId: ${product.id}`);
+    navigate(`/shop/${product.id}`); // fixed: was /shop/${product} which gave [object Object]
+  };
 
-  return ( 
-    <li 
+  return (
+    <li
       className="
-        flex flex-col md:flex-row gap-4 
-        p-4 md:p-6 mb-2 rounded-md 
+        flex flex-col md:flex-row gap-4
+        p-4 md:p-6 mb-2 rounded-md
         border-2 border-space_cadet/5
         hover:bg-majorelle/10 hover:scale-101
         transition-all duration-500
-        cursor-pointer relative 
+        cursor-pointer relative
       "
       onClick={handleCardClick}
     >
-      {/* Product Image with overlay link */}
-      <div className={`flex-shrink-0 relative `} >
-        { product_images?.primary ? (
-          <img 
+      {/* Product Image */}
+      <div className="flex-shrink-0 relative">
+        {product_images?.primary ? (
+          <img
             className="
-              w-full h-40 
-              md:h-32 md:w-32 lg:h-40 lg:w-40 
+              w-full h-40
+              md:h-32 md:w-32 lg:h-40 lg:w-40
               rounded-lg object-cover shadow-sm"
-            src={product_images?.primary}  
-            alt={product_name} 
+            src={product_images?.primary}
+            alt={product_name}
           />
         ) : (
-          <>
-            <img 
-              className="
-                py-2
-                opacity-80
-                bg-majorelle/60
-                w-full h-40 
-                md:h-32 md:w-32 lg:h-40 lg:w-40 
-                rounded-lg object-contain shadow-sm"
-              src="/assets/design/logo/Rugly_Barnacle_192x192.png" 
-              alt="Rugly Barnacle R & B Logo - Product image unavailable" 
-            />
-          </>
+          <img
+            className="
+              py-2 opacity-80 bg-majorelle/60
+              w-full h-40
+              md:h-32 md:w-32 lg:h-40 lg:w-40
+              rounded-lg object-contain shadow-sm"
+            src="/assets/design/logo/Rugly_Barnacle_192x192.png"
+            alt="Rugly Barnacle R & B Logo - Product image unavailable"
+          />
         )}
         <div className="absolute inset-0 cursor-pointer"></div>
       </div>
 
       {/* Product Details */}
       <div className="flex-1 flex flex-col justify-between min-w-0">
-        {/* Top Section - Product Info */}
+
+        {/* Top Section */}
         <div className="flex justify-between items-start gap-4 mb-3">
-          <div 
+          <div
             className="min-w-0 flex-1 cursor-pointer"
             onClick={handleCardClick}
           >
@@ -123,81 +130,86 @@ export const OccupiedCart = ({
             <p className="text-xs text-space_cadet/50 mt-1">Item #: {id}</p>
             <p className="text-xs text-space_cadet/50 mt-1">Added: {formatCartDate(String(added_at))}</p>
           </div>
-          
+
           {/* Delete Button */}
-          <button 
+          <button
             className="
-              group
-              absolute 
-              z-10 top-4 right-4
-              cursor-pointer rounded-full 
-              p-1.5
-              transition-all duration-200 
+              group absolute z-10 top-4 right-4
+              cursor-pointer rounded-full p-1.5
+              transition-all duration-200
               hover:bg-bittersweet/80 hover:scale-110
             "
             aria-label={`Remove ${product_name} from cart`}
             onClick={handleRemove}
             disabled={isRemoving}
           >
-            {isRemoving ? 
-              <p className="text-xs">Removing...</p> 
-              : 
-              <TrashIcon 
+            {isRemoving ? (
+              <p className="text-xs">Removing...</p>
+            ) : (
+              <TrashIcon
                 className="
-                  size-6 md:size-7 
-                  text-space_cadet 
+                  size-6 md:size-7
+                  text-space_cadet
                   transition-transform duration-200
                   group-hover:text-white
-                " 
-              /> 
-            }
+                "
+              />
+            )}
           </button>
         </div>
 
         {/* Bottom Section - Quantity and Price */}
-        <div 
+        <div
           className="flex justify-between items-center cursor-pointer"
           onClick={handleCardClick}
         >
-        <div className="flex items-center gap-2">
-          <button
-            onClick={(e) => { e.stopPropagation(); onRemove(id); }}
-            className="
-              w-7 h-7 flex items-center justify-center
-              rounded-full border border-space_cadet/20
-              hover:bg-bittersweet/80 hover:text-white hover:border-transparent
-              transition-all duration-200 text-space_cadet font-bold
-            "
-            aria-label="Remove one"
-          >
-            −
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                log('info', `[OccupiedCart] Decrement — productId: ${id}`);
+                onRemove(id);
+              }}
+              className="
+                w-7 h-7 flex items-center justify-center
+                rounded-full border border-space_cadet/20
+                hover:bg-bittersweet/80 hover:text-white hover:border-transparent
+                transition-all duration-200 text-space_cadet font-bold
+              "
+              aria-label="Remove one"
+            >
+              −
+            </button>
 
-          <span className="text-sm md:text-base text-space_cadet/70 w-6 text-center">
-            {quantity}
-          </span>
+            <span className="text-sm md:text-base text-space_cadet/70 w-6 text-center">
+              {quantity}
+            </span>
 
-          <button
-            onClick={(e) => { e.stopPropagation(); onAdd(id); }}
-            className="
-              w-7 h-7 flex items-center justify-center
-              rounded-full border border-space_cadet/20
-              hover:bg-majorelle hover:text-white hover:border-transparent
-              transition-all duration-200 text-space_cadet font-bold
-            "
-            aria-label="Add one"
-          >
-            +
-          </button>
-        </div>
-          
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                log('info', `[OccupiedCart] Increment — productId: ${id}`);
+                onAdd(id);
+              }}
+              className="
+                w-7 h-7 flex items-center justify-center
+                rounded-full border border-space_cadet/20
+                hover:bg-majorelle hover:text-white hover:border-transparent
+                transition-all duration-200 text-space_cadet font-bold
+              "
+              aria-label="Add one"
+            >
+              +
+            </button>
+          </div>
+
           <p className="font-bold text-lg md:text-xl lg:text-2xl text-majorelle">
             ${(parseFloat(product_price) * quantity).toFixed(2)}
           </p>
         </div>
 
         {/* Unit Price */}
-        <p 
+        <p
           className="text-sm text-midnight_green text-right mt-1 cursor-pointer"
           onClick={handleCardClick}
         >
@@ -205,5 +217,5 @@ export const OccupiedCart = ({
         </p>
       </div>
     </li>
-  )
-}
+  );
+};
