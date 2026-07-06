@@ -12,7 +12,7 @@ export const OrderSummary = ({
 
 }: OrderSummaryProps) => {
   return (
-    <div className="bg-white rounded-xl shadow-sm p-6">
+    <div className="bg-white rounded-xl shadow-sm w-full p-6">
       <h2 className="text-2xl font-semibold text-gray-900 mb-6">Order Summary</h2>
       
       {/* Cart Items */}

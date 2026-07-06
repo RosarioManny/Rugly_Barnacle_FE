@@ -107,9 +107,9 @@ export const CheckoutPage = () => {
           Back 
         </Link>
         {/* Checkout Content */}
-        <div className="flex flex-col lg:flex-row gap-8 max-w-6xl mx-auto">
+        <div className="flex flex-col max-w-[60vw] lg:flex-row gap-8 max-w-6xl mx-auto">
           {/* Order Summary */}
-          <div className="flex-1 max-w-5xl mx-auto ">
+          <div className="flex-1 w-full mx-auto ">
             <OrderSummary 
               cartItems={cartItems}
               subtotal={cartSubtotal}
@@ -117,7 +117,7 @@ export const CheckoutPage = () => {
           </div>
 
           {/* Payment Section */}
-          <div className="flex-1 max-w-5xl mx-auto ">
+          <div className="flex-1 max-w-[60vw] mx-auto ">
             <div className="bg-white rounded-xl shadow-md p-6 h-fit sticky top-8">
               <h2 className="text-xl font-semibold text-space_cadet/90 mb-4">Complete Purchase</h2>
               
