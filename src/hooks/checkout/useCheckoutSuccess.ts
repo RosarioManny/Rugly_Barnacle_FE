@@ -6,6 +6,15 @@ import { clearCart } from '../../lib/api/Cart/cartServices'
 import { checkoutSuccess } from '../../lib/api/Stripe/stripeservices'
 import { useCheckoutUrlParams } from './useCheckoutUrlParams'
 import { useCheckoutErrorHandler } from './useCheckoutErrorHandler'
+import { logColors } from '../../lib/api/logFileStyles'
+
+const log = (type: 'info' | 'error' | 'success' | 'warn', message: string) => {
+  const style = logColors.find(c => c.logType === type);
+  const css = `color: ${style?.color}; font-weight: ${style?.fontWeight};`;
+  if (type === 'error') console.error(`%c ${message}`, css);
+  else if (type === 'warn') console.warn(`%c ${message}`, css);
+  else console.info(`%c ${message}`, css);
+};
 
 interface CheckoutState {
   isLoading: boolean
@@ -18,18 +27,19 @@ export const useCheckoutSuccess = () => {
   const [searchParams] = useSearchParams()
   const { getUrlParams } = useCheckoutUrlParams()
   const { getErrorMessage } = useCheckoutErrorHandler()
-  
+
   const [state, setState] = useState<CheckoutState>({
     isLoading: true,
     cartCleared: false,
     quantitiesUpdated: false,
     error: null
   })
-  
+
   const [retryCount, setRetryCount] = useState(0)
   const [isProcessing, setIsProcessing] = useState(false)
 
   const handleRetry = () => {
+    log('info', `[useCheckoutSuccess] Retry triggered — attempt #${retryCount + 1}`)
     setRetryCount(prev => prev + 1)
     setState({
       isLoading: true,
@@ -41,22 +51,20 @@ export const useCheckoutSuccess = () => {
 
   useEffect(() => {
     let isMounted = true
-    const abortController = new AbortController()
 
     const handleSuccessfulCheckout = async () => {
       if (!isMounted || isProcessing) return
       setIsProcessing(true)
 
-      const { sessionId, cartId } = getUrlParams(searchParams.toString())
+      // cartId is gone — only sessionId needed now
+      const { sessionId } = getUrlParams(searchParams.toString())
+      log('info', `[useCheckoutSuccess] Processing checkout — sessionId: ${sessionId}`)
 
-      console.log(`Checkout Success Page Loaded with session_id: ${sessionId} and cart_id: ${cartId}`)
-
-      // Validate parameters
-      if (!sessionId || !cartId) {
+      if (!sessionId) {
         if (isMounted) {
           setState(prev => ({
             ...prev,
-            error: !sessionId ? "No payment session found" : "No cart information found",
+            error: 'No payment session found',
             isLoading: false
           }))
         }
@@ -68,35 +76,28 @@ export const useCheckoutSuccess = () => {
       let cartClearedFlag = false
 
       try {
-        // Process checkout
-        await checkoutSuccess(sessionId, cartId)
-        
+        // Verify payment and deduct stock on backend
+        await checkoutSuccess(sessionId)
+
         if (!isMounted) {
-          console.log("Component unmounted during checkoutSuccess, stopping...")
           setIsProcessing(false)
           return
         }
-        
+
         quantitiesUpdatedFlag = true
         setState(prev => ({ ...prev, quantitiesUpdated: true }))
-        console.log("Product quantities updated successfully")
+        log('success', `[useCheckoutSuccess] Stock quantities updated successfully`)
 
-        // Clear cart
-        await clearCart()
-        
-        if (!isMounted) {
-          console.log("Component unmounted during clearCart, stopping...")
-          setIsProcessing(false)
-          return
-        }
-        
+        // Clear localStorage cart — synchronous, no await needed
+        clearCart()
         cartClearedFlag = true
         setState(prev => ({ ...prev, cartCleared: true }))
-        console.log("Cart cleared successfully after checkout")
+        log('success', `[useCheckoutSuccess] Cart cleared from localStorage`)
 
       } catch (err: any) {
         const errorMessage = getErrorMessage(err, quantitiesUpdatedFlag, cartClearedFlag)
-        
+        log('error', `[useCheckoutSuccess] Checkout processing failed — ${errorMessage}`)
+
         if (isMounted) {
           setState(prev => ({
             ...prev,
@@ -108,42 +109,34 @@ export const useCheckoutSuccess = () => {
         if (isMounted) {
           setState(prev => ({ ...prev, isLoading: false }))
           setIsProcessing(false)
-          
-          // Background retry for cart clearing
+
+          // If stock was deducted but cart didn't clear, try once more
           if (quantitiesUpdatedFlag && !cartClearedFlag && isMounted) {
-            console.log('🔄 Attempting to clear cart in background...')
-            setTimeout(async () => {
-              try {
-                if (isMounted) {
-                  await clearCart()
-                  if (isMounted) {
-                    setState(prev => ({ ...prev, cartCleared: true }))
-                    console.log('✅ Cart cleared successfully in background')
-                  }
-                }
-              } catch (e) {
-                console.warn('⚠️ Background cart clear failed:', e)
+            log('warn', `[useCheckoutSuccess] Stock updated but cart not cleared — retrying cart clear`)
+            try {
+              clearCart()
+              if (isMounted) {
+                setState(prev => ({ ...prev, cartCleared: true }))
+                log('success', `[useCheckoutSuccess] Cart cleared on retry`)
               }
-            }, 3000)
+            } catch (e) {
+              log('error', `[useCheckoutSuccess] Cart clear retry failed`)
+            }
           }
         } else {
-          console.log("Skipping state updates - component unmounted")
           setIsProcessing(false)
         }
       }
     }
 
     const timeoutId = setTimeout(() => {
-      if (isMounted) {
-        handleSuccessfulCheckout()
-      }
+      if (isMounted) handleSuccessfulCheckout()
     }, 100)
 
     return () => {
       isMounted = false
-      abortController.abort()
       clearTimeout(timeoutId)
-      console.log("CheckoutSuccessPage unmounted - cleaning up")
+      log('info', `[useCheckoutSuccess] Cleanup — component unmounted`)
     }
   }, [searchParams, retryCount])
 

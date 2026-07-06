@@ -1,5 +1,5 @@
-import { CheckoutSuccessUI } from '../components/checkoutSuccessUI'
-import { useCheckoutSuccess } from '../../../hooks/checkout/useCheckoutSuccess'
+import { CheckoutSuccessUI } from '../../components/checkoutSuccessUI'
+import { useCheckoutSuccess } from '../../../../hooks/checkout/useCheckoutSuccess'
 export const CheckoutSuccessPage = () => {
   const { isLoading, cartCleared, error, sessionId, handleRetry } = useCheckoutSuccess()
 

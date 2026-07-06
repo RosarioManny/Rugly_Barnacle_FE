@@ -1,39 +1,41 @@
 // hooks/checkout/useCheckoutUrlParams.ts
 
-/**
- * Hook to safely extract URL parameters from the checkout success page
- * Handles edge cases where parameters might be missing from search
- */
+import { logColors } from '../../lib/api/logFileStyles';
+
+const log = (type: 'info' | 'error' | 'success' | 'warn', message: string) => {
+  const style = logColors.find(c => c.logType === type);
+  const css = `color: ${style?.color}; font-weight: ${style?.fontWeight};`;
+  if (type === 'error') console.error(`%c ${message}`, css);
+  else if (type === 'warn') console.warn(`%c ${message}`, css);
+  else console.info(`%c ${message}`, css);
+};
+
 export const useCheckoutUrlParams = () => {
   const getUrlParams = (search: string) => {
-    const params = new URLSearchParams(search)
-    const sessionId = params.get('session_id')
-    const cartId = params.get('cart_id')
-    
-    console.log('🔍 URL Parameters found:', { sessionId, cartId })
-    
-    // If parameters are missing from search, try checking the full URL
-    if (!sessionId || !cartId) {
-      console.warn('⚠️ Parameters missing from search, checking full URL...')
+    const params = new URLSearchParams(search);
+    let sessionId = params.get('session_id');
+
+    log('info', `[useCheckoutUrlParams] Parsed URL params — sessionId: ${sessionId}`);
+
+    // Fallback: check full URL if param missing from search string
+    if (!sessionId) {
+      log('warn', `[useCheckoutUrlParams] session_id missing from search, checking full URL`);
       try {
-        const fullUrl = window.location.href
-        const urlParams = new URLSearchParams(fullUrl.split('?')[1])
-        const fullSessionId = urlParams.get('session_id')
-        const fullCartId = urlParams.get('cart_id')
-        
-        console.log('📋 Parameters from full URL:', { fullSessionId, fullCartId })
-        
-        return {
-          sessionId: sessionId || fullSessionId,
-          cartId: cartId || fullCartId
-        }
+        const fullUrl = window.location.href;
+        const urlParams = new URLSearchParams(fullUrl.split('?')[1]);
+        sessionId = urlParams.get('session_id');
+        log('info', `[useCheckoutUrlParams] Full URL fallback — sessionId: ${sessionId}`);
       } catch (e) {
-        console.error('Error parsing full URL:', e)
+        log('error', `[useCheckoutUrlParams] Failed to parse full URL`);
       }
     }
-    
-    return { sessionId, cartId }
-  }
 
-  return { getUrlParams }
-}
+    if (!sessionId) {
+      log('warn', `[useCheckoutUrlParams] No session_id found in URL`);
+    }
+
+    return { sessionId };
+  };
+
+  return { getUrlParams };
+};

@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-import { DangerIcon } from '../../../components/ui/icons-svgs/SvgIcons'
+import { DangerIcon } from '../../../../components/ui/icons-svgs/SvgIcons'
 
 export const CheckoutCancelPage = () => {
   return (
