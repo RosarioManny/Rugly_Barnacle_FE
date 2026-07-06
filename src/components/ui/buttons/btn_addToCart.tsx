@@ -1,8 +1,18 @@
 import { useState } from "react";
 import { useCart } from "../../../hooks/cart/cartProvider";
+import type { Product } from "../../../lib/api/Product/productservices";
+import { logColors } from "../../../lib/api/logFileStyles";
+
+const log = (type: 'info' | 'error' | 'success' | 'warn', message: string) => {
+  const style = logColors.find(c => c.logType === type);
+  const css = `color: ${style?.color}; font-weight: ${style?.fontWeight};`;
+  if (type === 'error') console.error(`%c ${message}`, css);
+  else if (type === 'warn') console.warn(`%c ${message}`, css);
+  else console.info(`%c ${message}`, css);
+};
 
 interface AddToCartBtnProps {
-  productId: number;
+  product: Product;
   quantity?: number;
   isAvailable: boolean;
   onSuccess?: () => void;
@@ -10,7 +20,7 @@ interface AddToCartBtnProps {
 }
 
 export const AddToCartBtn = ({ 
-  productId, 
+  product, 
   quantity = 1, 
   onSuccess,
   onError,
@@ -19,13 +29,15 @@ export const AddToCartBtn = ({
   const [isAdding, setIsAdding] = useState(false);
   const { addItemToCart } = useCart();
 
-  const handleAddToCart = async () => {
+  const handleAddToCart = () => {
     try {
+      log('info', ` [AddToCartBtn] Clicked — product: "${product.name}" (id: ${product.id}), qty: ${quantity}`);
       setIsAdding(true);
-      await addItemToCart(productId, quantity);
+      addItemToCart(product, quantity);
+      log('success', ` [AddToCartBtn] Successfully added "${product.name}" to cart`);
       onSuccess?.();
     } catch (err: any) {
-      console.error("Failed to add item to cart:", err);
+      log('error', `[AddToCartBtn] Failed to add "${product.name}" to cart — ${err?.message}`);
       onError?.(err);
     } finally {
       setIsAdding(false);
@@ -45,7 +57,8 @@ export const AddToCartBtn = ({
         focus:bg-space_cadet focus:scale-102 focus:ring-2 focus:ring-mauve
         active:bg-space_cadet active:scale-102 active:ring-2 active:ring-mauve
         ${isAdding ? 'opacity-70 cursor-not-allowed' : ''}
-      `}> 
+      `}
+    > 
       <p className={`${isAdding ? "animate-pulse" : ""}`}>
         {isAdding ? "Adding..." : "Add to Cart"}
       </p>

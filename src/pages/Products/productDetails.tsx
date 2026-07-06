@@ -218,7 +218,7 @@ export const ProductDetails = () => {
         <div className="flex w-full justify-center">
           <AddToCartBtn 
             isAvailable={productDetails.quantity > 0}
-            productId={Number(id)}
+            product={productDetails}
             quantity={1}
             onSuccess={() => handleCartMessage("Item added to cart!", false)}
             onError={(error) => handleCartMessage(error, true)}

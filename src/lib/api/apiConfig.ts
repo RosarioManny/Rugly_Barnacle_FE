@@ -1,4 +1,5 @@
 import axios from "axios";
+import { logColors } from "./logFileStyles";
 
 const BACKEND_URL = import.meta.env.VITE_RENDER_BACKEND_URL;
 let currentSessionId: string | null = null;
@@ -9,8 +10,10 @@ const api = axios.create({
 });
 
 export const getCookie = (name: string) => {
-    console.log(`🔍 Looking for cookie: ${name}`);
-    console.log(`📝 All cookies: ${document.cookie}`);
+    console.info(`%c Looking for cookie: ${name}`, 
+        `color: ${logColors.find(c => c.logType === 'info')?.color}; 
+        font-weight: ${logColors.find(c => c.logType === 'info')?.fontWeight};`);
+    console.info(`All cookies: ${document.cookie}`);
     
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
@@ -25,22 +28,17 @@ export const getCookie = (name: string) => {
             }
         }
     }
-    console.log(`🎯 Found cookie ${name}:`, cookieValue);
+    console.log(`%c Found cookie ${name}:`,
+        `color: ${logColors.find(c => c.logType === 'info')?.color}; font-weight: ${logColors.find(c => c.logType === 'info')?.fontWeight};`, cookieValue);
     return cookieValue;
 };
-
-// Simple session detection - uses csrf token as proxy for session
-// const getSessionId = (): string | null => {
-//     const csrfToken = getCookie('csrftoken');
-//     return csrfToken ? 'authenticated' : null;
-// };
 
 export const ensureCSRFToken = async (): Promise<void> => {
     try {
         await api.get('csrf/');
-        console.log("✅ CSRF Token ensured");
+        console.log("%c CSRF Token ensured", `color: ${logColors.find(c => c.logType === 'success')?.color}; font-weight: ${logColors.find(c => c.logType === 'info')?.fontWeight};`);
     } catch (err) {
-        console.error("X >> Failed to ensure CSRF Token << X", err);
+        console.error("%c X >> Failed to ensure CSRF Token << X", `color: ${logColors.find(c => c.logType === 'error')?.color}; font-weight: ${logColors.find(c => c.logType === 'error')?.fontWeight};`, err);
     }
 };
 
@@ -139,15 +137,15 @@ api.interceptors.response.use(
             if (csrfToken) {
                 currentSessionId = 'authenticated';
                 error.config.headers['X-CSRFToken'] = csrfToken;
-                console.log('🔄 Retrying request with new CSRF token');
+                console.log('Retrying request with new CSRF token');
                 return api.request(error.config);
             } else {
-                console.error('❌ Still no CSRF token after refresh');
+                console.error('X Still no CSRF token after refresh');
             }
         }
 
         if (isCSRF && isMultipart) {
-            console.error('❌ CSRF Error on multipart request - cannot retry safely');
+            console.error('X CSRF Error on multipart request - cannot retry safely');
         }
 
         return Promise.reject(error);
@@ -155,19 +153,28 @@ api.interceptors.response.use(
 );
 
 export const initializeAPI = async (): Promise<void> => {
-    console.log('🚀 Initializing API...');
+    console.log('%c Initializing API...', 
+        `color: ${logColors.find(c => c.logType === 'info')?.color};
+        font-weight: ${logColors.find(c => c.logType === 'info')?.fontWeight};`);
+
     await ensureCSRFToken();
     
     const hasCsrfToken = !!getCookie('csrftoken');
     if (hasCsrfToken) {
         currentSessionId = 'authenticated';
-        console.log('🎯 User already authenticated (CSRF token found)');
+        console.log('%c O User already authenticated (CSRF token found)', 
+            `color: ${logColors.find(c => c.logType === 'success')?.color};
+            font-weight: ${logColors.find(c => c.logType === 'success')?.fontWeight};`);
     } else {
         currentSessionId = null;
-        console.log('👤 User not authenticated (no CSRF token)');
+        console.log('%c ? User not authenticated (no CSRF token)',
+            `color:${logColors.find(c => c.logType === 'warn')?.color}; 
+            font-weight: ${logColors.find(c => c.logType === 'warn')?.fontWeight};`);
     }
     
-    console.log('✅ API initialized');
+    console.log('%c API initialized', 
+        `color: ${logColors.find(c => c.logType === 'success')?.color}; 
+        font-weight: ${logColors.find(c => c.logType === 'success')?.fontWeight};`);
 };
 
 export default api;

@@ -1,101 +1,107 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { getCart, removeFromCart, addToCart, updateCartItem} from '../../lib/api/Cart/cartServices'
-import type { Cart } from '../../lib/api/Cart/cartServices';
+import React, { createContext, useContext, useState, useEffect } from "react";
+import {
+  getCart,
+  addToCart,
+  removeFromCart,
+  clearCart,
+} from "../../lib/api/Cart/cartServices";
+import type { Cart } from "../../lib/api/Cart/cartServices";
+import type { Product } from "../../lib/api/Product/productservices";
+import { logColors } from "../../lib/api/logFileStyles";
 
-// deleteCartItem is not being used currently
+const log = (type: 'info' | 'error' | 'success' | 'warn', message: string) => {
+  const style = logColors.find(c => c.logType === type);
+  const css = `color: ${style?.color}; font-weight: ${style?.fontWeight};`;
+  if (type === 'error') console.error(`%c ${message}`, css);
+  else if (type === 'warn') console.warn(`%c ${message}`, css);
+  else console.info(`%c ${message}`, css);
+};
 
-// Context Types
 interface CartContextType {
   cart: Cart | null;
-  status: 'idle' | 'loading' | 'success' | 'error';
-  fetchCart: () => Promise<void>;
-  addItemToCart: (productId: number, quantity?: number) => Promise<void>;
-  removeCartItem: (productId: number, quantity?: number) => Promise<void>;
-  updateCartItemQuantity: (itemId: number, quantity: number) => Promise<void>;
-  // removeCartItem: (itemId: number) => Promise<void>;
+  status: "idle" | "loading" | "success" | "error";
+  fetchCart: () => void;
+  addItemToCart: (product: Product, quantity?: number) => void;
+  removeCartItem: (productId: number, quantity?: number) => void;
+  updateCartItemQuantity: (productId: number, quantity: number) => void;
+  clearCartItems: () => void;
 }
 
-// Create Context
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-// Provider Props
 interface CartProviderProps {
   children: React.ReactNode;
 }
 
-// Provider Component
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }: CartProviderProps) => {
+export const CartProvider: React.FC<CartProviderProps> = ({ children }) => {
   const [cart, setCart] = useState<Cart | null>(null);
-  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
-  // Fetch Cart
-  const fetchCart = async () => {
+  const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
+
+  const fetchCart = () => {
     try {
-      setStatus('loading');
-      
-      const cartData = await getCart();
+      log('info', ` [cartProvider] fetchCart called`);
+      setStatus("loading");
+      const cartData = getCart();
       setCart(cartData);
-      setStatus('success');
-      // console.log('🛒 Cart loaded:', cartData);
-    } catch (err: any) {
-      setStatus('error');
-      if (status === 'error') {
-        console.error('❌ Error fetching cart:', err);
-      }
+      setStatus("success");
+      log('success', ` [cartProvider] Cart fetched — ${cartData.items.length} item(s), total: $${cartData.total}`);
+    } catch (err) {
+      log('error', `[cartProvider] fetchCart failed`);
+      setStatus("error");
     }
   };
 
-  // Add Item to Cart
-  const addItemToCart = async (productId: number, quantity: number = 1) => {
+  const addItemToCart = (product: Product, quantity: number = 1) => {
     try {
-      await addToCart(productId, quantity);
-      // Refresh cart after adding
-      await fetchCart();
-      console.log(`✅ Added product ${productId} to cart`);
-    } catch (err: any) {
-      setStatus('error');
-      if (status === 'error') {
-        console.error('❌ Error fetching cart:', err);
-      }
-      throw err; // Re-throw so calling component can handle it
+      log('info', ` [cartProvider] addItemToCart — "${product.name}", qty: ${quantity}`);
+      const updated = addToCart(product, quantity);
+      setCart(updated);
+      log('success', ` [cartProvider] Cart state updated — ${updated.items.length} item(s), total: $${updated.total}`);
+    } catch (err) {
+      log('error', `[cartProvider] addItemToCart failed for product: "${product.name}"`);
+      setStatus("error");
     }
   };
 
-  // Remove Item from Cart
-  const removeCartItem = async (productId: number, quantity: number = 1) => {
+  const removeCartItem = (productId: number, quantity: number = 1) => {
     try {
-      
-      const updatedCart = await removeFromCart(productId, quantity);
-      setCart(updatedCart);
-      console.log(`✅ Removed product ${productId} from cart`);
-    } catch (err: any) {
-      setStatus('error');
-      if (status === 'error') {
-        console.error('❌ Error fetching cart:', err);
-      }
-      throw err;
+      log('info', ` [cartProvider] removeCartItem — productId: ${productId}, qty: ${quantity}`);
+      const updated = removeFromCart(productId, quantity);
+      setCart(updated);
+      log('success', ` [cartProvider] Cart state updated — ${updated.items.length} item(s), total: $${updated.total}`);
+    } catch (err) {
+      log('error', `[cartProvider] removeCartItem failed for productId: ${productId}`);
+      setStatus("error");
     }
   };
 
-  // Update Cart Item Quantity (using CartItemDetailView)
-  const updateCartItemQuantity = async (itemId: number, quantity: number) => {
+  const updateCartItemQuantity = (productId: number, quantity: number) => {
     try {
-      
-      await updateCartItem(itemId, quantity);
-      // Refresh cart after update
-      await fetchCart();
-      console.log(`✅ Updated cart item ${itemId} quantity to ${quantity}`);
-    } catch (err: any) {
-      setStatus('error');
-      if (status === 'error') {
-        console.error('❌ Error fetching cart:', err);
+      log('info', ` [cartProvider] updateCartItemQuantity — productId: ${productId}, new qty: ${quantity}`);
+      removeFromCart(productId, Infinity);
+      const item = cart?.items.find(i => i.product_id === productId);
+      if (item) {
+        const updated = addToCart(item.product, quantity);
+        setCart(updated);
+        log('success', ` [cartProvider] Quantity updated — productId: ${productId} → qty: ${quantity}`);
+      } else {
+        log('warn', `[cartProvider] updateCartItemQuantity — product ${productId} not found in current cart state`);
       }
-      throw err;
+    } catch (err) {
+      log('error', `[cartProvider] updateCartItemQuantity failed for productId: ${productId}`);
+      setStatus("error");
     }
   };
 
+  const clearCartItems = () => {
+    log('warn', ` [cartProvider] clearCartItems called`);
+    const updated = clearCart();
+    setCart(updated);
+    log('success', ` [cartProvider] Cart cleared`);
+  };
 
-  // Fetch cart on mount
   useEffect(() => {
+    log('info', ` [cartProvider] Mounted — loading cart from localStorage`);
     fetchCart();
   }, []);
 
@@ -106,17 +112,16 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
     addItemToCart,
     removeCartItem,
     updateCartItemQuantity,
-    // removeCartItem,
+    clearCartItems,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };
 
-// Custom Hook
 export const useCart = () => {
   const context = useContext(CartContext);
   if (context === undefined) {
-    throw new Error('useCart must be used within a CartProvider');
+    throw new Error("useCart must be used within a CartProvider");
   }
   return context;
 };

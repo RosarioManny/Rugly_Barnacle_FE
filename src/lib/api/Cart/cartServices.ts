@@ -1,6 +1,15 @@
-import api from "../apiConfig";
-import { type Product } from "../Product/productservices";
-import { handleSessionChange } from "../apiConfig";
+import type { Product } from "../Product/productservices";
+import { logColors } from "../logFileStyles";
+
+const CART_KEY = "rugly_cart";
+
+const log = (type: 'info' | 'error' | 'success' | 'warn', message: string) => {
+  const style = logColors.find(c => c.logType === type);
+  const css = `color: ${style?.color}; font-weight: ${style?.fontWeight};`;
+  if (type === 'error') console.error(`%c ${message}`, css);
+  else if (type === 'warn') console.warn(`%c ${message}`, css);
+  else console.info(`%c ${message}`, css);
+};
 
 export interface CartItem {
   id: number;
@@ -25,124 +34,105 @@ export interface Cart {
   updated_at: string;
 }
 
-// API Response types
-interface AddToCartResponse {
-  id: number;
-  cart: number;
-  product: number;
-  quantity: number;
-  added_at: string;
-}
+// ── Helpers ───────────────────────────────────────────────────────────────────
 
-// Get Cart
-export const getCart = async (): Promise<Cart> => {
+const computeTotal = (items: CartItem[]): string => {
+  return items
+    .reduce((sum, item) => sum + parseFloat(item.product_price) * item.quantity, 0)
+    .toFixed(2);
+};
+
+const buildCart = (items: CartItem[]): Cart => ({
+  id: 1,
+  session_key: "local",
+  items,
+  total: computeTotal(items),
+  created_at: new Date().toISOString(),
+  updated_at: new Date().toISOString(),
+});
+
+const loadItems = (): CartItem[] => {
   try {
-    const response = await api.get<Cart>('/cart/');
-    // console.log("✅ Cart fetched successfully:", response.data);
-    return response.data;
-  } catch (error: any) {
-    console.error("❌ Failed to fetch cart:", error.response?.data || error.message);
-    throw error;
+    const raw = localStorage.getItem(CART_KEY);
+    const items = raw ? JSON.parse(raw) : [];
+    log('info', ` [cartServices] Loaded ${items.length} item(s) from localStorage`);
+    return items;
+  } catch (err) {
+    log('error', `[cartServices] Failed to parse localStorage cart — resetting`);
+    return [];
   }
 };
 
-// Add to Cart
-export const addToCart = async (
-  productId: number, 
-  quantity: number = 1
-): Promise<AddToCartResponse> => {
-  try {
+const saveItems = (items: CartItem[]): void => {
+  localStorage.setItem(CART_KEY, JSON.stringify(items));
+  log('info', ` [cartServices] Saved ${items.length} item(s) to localStorage`);
+};
 
-    handleSessionChange();
+// ── Public API ────────────────────────────────────────────────────────────────
 
-    const response = await api.post<AddToCartResponse>('/cart/add-to-cart/', {
-      product_id: productId,
-      quantity: quantity
+export const getCart = (): Cart => {
+  log('info', ` [cartServices] getCart called`);
+  const cart = buildCart(loadItems());
+  log('success', ` [cartServices] Cart loaded — ${cart.items.length} item(s), total: $${cart.total}`);
+  return cart;
+};
+
+export const addToCart = (product: Product, quantity: number = 1): Cart => {
+  log('info', ` [cartServices] addToCart — product: "${product.name}" (id: ${product.id}), qty: ${quantity}`);
+  const items = loadItems();
+  const existing = items.find(item => item.product_id === product.id);
+
+  if (existing) {
+    existing.quantity += quantity;
+    log('info', ` [cartServices] Product already in cart — updated qty to ${existing.quantity}`);
+  } else {
+    const primaryImage = product.images?.find(img => img.is_primary) ?? product.images?.[0];
+    items.push({
+      id: product.id,
+      product,
+      product_id: product.id,
+      product_name: product.name,
+      product_price: String(product.price),
+      product_images: primaryImage ? { primary: primaryImage.image } : undefined,
+      dimensions: product.dimensions,
+      quantity,
+      added_at: new Date().toISOString(),
     });
-    // console.log(`✅ Added ${quantity}x product ${productId} to cart:`, response.data);
-    return response.data;
-  } catch (error: any) {
-    const errorMsg = error.response?.data?.error || error.message;
-    console.error("❌ Failed to add to cart:", errorMsg);
-    throw new Error(errorMsg);
+    log('success', `✅ [cartServices] New item added — "${product.name}"`);
   }
+
+  saveItems(items);
+  const cart = buildCart(items);
+  log('success', `[cartServices] Cart updated — ${cart.items.length} item(s), total: $${cart.total}`);
+  return cart;
 };
 
-// Remove from Cart
-export const removeFromCart = async (
-  cartItemId: number, 
-  quantity: number = 1
-): Promise<Cart> => {
-  try {
-    console.log(`🔄 Removing cart item ${cartItemId}, quantity: ${quantity}`);
-    
-    const response = await api.delete<Cart>('/cart/remove-from-cart/', {
-      data: {
-        cart_item_id: cartItemId,  // Changed from product_id
-        quantity: quantity
-      }
-    });
-    
-    console.log(`✅ Successfully removed item ${cartItemId} from cart`);
-    return response.data;
-  } catch (error: any) {
-    const errorMsg = error.response?.data?.error || error.message;
-    console.error("❌ Failed to remove from cart:", errorMsg);
-    console.error("❌ Full error:", error.response?.data);
-    throw new Error(errorMsg);
+export const removeFromCart = (productId: number, quantity: number = 1): Cart => {
+  log('info', ` [cartServices] removeFromCart — productId: ${productId}, qty: ${quantity}`);
+  let items = loadItems();
+  const existing = items.find(item => item.product_id === productId);
+
+  if (existing) {
+    existing.quantity -= quantity;
+    log('info', ` [cartServices] New quantity for product ${productId}: ${existing.quantity}`);
+    if (existing.quantity <= 0) {
+      items = items.filter(item => item.product_id !== productId);
+      log('warn', ` [cartServices] Product ${productId} removed from cart (qty hit 0)`);
+    }
+  } else {
+    log('warn', ` [cartServices] removeFromCart — product ${productId} not found in cart`);
   }
+
+  saveItems(items);
+  const cart = buildCart(items);
+  log('success', `[cartServices] Cart updated — ${cart.items.length} item(s), total: $${cart.total}`);
+  return cart;
 };
 
-// Get single cart item (optional - for CartItemDetailView)
-export const getCartItem = async (itemId: number): Promise<CartItem> => {
-  try {
-    const response = await api.get<CartItem>(`/cart/items/${itemId}/`);
-    // console.log("✅ Cart item fetched:", response.data);
-    return response.data;
-  } catch (error: any) {
-    console.error("❌ Failed to fetch cart item:", error.response?.data || error.message);
-    throw error;
-  }
+export const clearCart = (): Cart => {
+  log('warn', `🧹 [cartServices] clearCart called — wiping all items`);
+  saveItems([]);
+  const cart = buildCart([]);
+  log('success', ` [cartServices] Cart cleared`);
+  return cart;
 };
-
-// Update cart item quantity (optional - for CartItemDetailView PATCH)
-export const updateCartItem = async (
-  itemId: number, 
-  quantity: number
-): Promise<CartItem> => {
-  try {
-    const response = await api.patch<CartItem>(`/cart/items/${itemId}/`, {
-      quantity: quantity
-    });
-    // console.log(`✅ Updated cart item ${itemId} to quantity ${quantity}:`, response.data);
-    return response.data;
-  } catch (error: any) {
-    const errorMsg = error.response?.data?.error || error.message;
-    console.error("❌ Failed to update cart item:", errorMsg);
-    throw new Error(errorMsg);
-  }
-};
-
-// Delete cart item completely (optional - for CartItemDetailView DELETE)
-export const deleteCartItem = async (itemId: number): Promise<void> => {
-  try {
-    await api.delete(`/cart/items/${itemId}/`);
-    // console.log(`✅ Deleted cart item ${itemId}`);
-  } catch (error: any) {
-    const errorMsg = error.response?.data?.error || error.message;
-    console.error("❌ Failed to delete cart item:", errorMsg);
-    throw new Error(errorMsg);
-  }
-};
-
-export const clearCart = async (): Promise<Cart> => {
-  try {
-    const response = await api.delete<Cart>('cart/clear-cart/');
-    console.log("Cart cleared successfully", response.data);
-    return response.data;
-  } catch (error: any) {
-    const errorMsg = error.response?.data?.error || error.message;
-    console.error("Failed to clear cart:", errorMsg);
-    throw new Error(errorMsg)
-  }
-}
