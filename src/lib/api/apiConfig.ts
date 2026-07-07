@@ -2,179 +2,101 @@ import axios from "axios";
 import { logColors } from "./logFileStyles";
 
 const BACKEND_URL = import.meta.env.VITE_RENDER_BACKEND_URL;
-let currentSessionId: string | null = null;
+
+const log = (type: 'info' | 'error' | 'success' | 'warn', message: string) => {
+    const style = logColors.find(c => c.logType === type);
+    const css = `color: ${style?.color}; font-weight: ${style?.fontWeight};`;
+    if (type === 'error') console.error(`%c ${message}`, css);
+    else if (type === 'warn') console.warn(`%c ${message}`, css);
+    else console.info(`%c ${message}`, css);
+};
 
 const api = axios.create({
     baseURL: BACKEND_URL,
     withCredentials: true,
 });
 
-export const getCookie = (name: string) => {
-    console.info(`%c Looking for cookie: ${name}`, 
-        `color: ${logColors.find(c => c.logType === 'info')?.color}; 
-        font-weight: ${logColors.find(c => c.logType === 'info')?.fontWeight};`);
-    console.info(`All cookies: ${document.cookie}`);
-    
-    let cookieValue = null;
-    if (document.cookie && document.cookie !== '') {
-        const cookies = document.cookie.split(';');
-        for (let i = 0; i < cookies.length; i++) {
-            const cookie = cookies[i].trim();
-            // Case-insensitive match
-            const cookieName = cookie.split('=')[0];
-            if (cookieName === name || cookieName.toLowerCase() === name.toLowerCase()) {
-                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                break;
-            }
-        }
-    }
-    console.log(`%c Found cookie ${name}:`,
-        `color: ${logColors.find(c => c.logType === 'info')?.color}; font-weight: ${logColors.find(c => c.logType === 'info')?.fontWeight};`, cookieValue);
-    return cookieValue;
+const getCookie = (name: string): string | null => {
+    if (!document.cookie) return null;
+    const match = document.cookie
+        .split(';')
+        .map(c => c.trim())
+        .find(c => c.startsWith(`${name}=`));
+    return match ? decodeURIComponent(match.split('=')[1]) : null;
 };
 
-export const ensureCSRFToken = async (): Promise<void> => {
+const ensureCSRFToken = async (): Promise<void> => {
     try {
         await api.get('csrf/');
-        console.log("%c CSRF Token ensured", `color: ${logColors.find(c => c.logType === 'success')?.color}; font-weight: ${logColors.find(c => c.logType === 'info')?.fontWeight};`);
+        log('success', `[apiConfig] CSRF token ensured`);
     } catch (err) {
-        console.error("%c X >> Failed to ensure CSRF Token << X", `color: ${logColors.find(c => c.logType === 'error')?.color}; font-weight: ${logColors.find(c => c.logType === 'error')?.fontWeight};`, err);
+        log('error', `[apiConfig] Failed to ensure CSRF token`);
     }
 };
 
-export const handleSessionChange = async (): Promise<boolean> => {
-    const hasCsrfToken = !!getCookie('csrftoken');
-    const wasLoggedIn = !!currentSessionId;
-    const isLoggedIn = hasCsrfToken;
-    
-    console.log('🔍 Auth check:', { wasLoggedIn, isLoggedIn, hasCsrfToken });
-    
-    if (!wasLoggedIn && isLoggedIn) {
-        currentSessionId = 'authenticated';
-        console.log('🆕 User authenticated - CSRF token detected');
-        await ensureCSRFToken();
-        return true;
-    }
-    
-    if (wasLoggedIn && !isLoggedIn) {
-        currentSessionId = null;
-        console.log('👋 User logged out - CSRF token gone');
-        return false;
-    }
-    
-    console.log('✅ Auth state unchanged');
-    return false;
-};
-
-// Request interceptor - ONLY ONE!
+// ── Request interceptor ───────────────────────────────────────────────────────
 const methodsThatNeedCSRF = ['post', 'put', 'delete', 'patch'];
 
 api.interceptors.request.use(async (config) => {
     if (methodsThatNeedCSRF.includes(config.method?.toLowerCase() ?? '')) {
-        await handleSessionChange();
-
         let csrfToken = getCookie('csrftoken');
 
-        if (csrfToken) {
-            config.headers['X-CSRFToken'] = csrfToken;
-            console.log(`🔑 CSRF attached to ${config.method} ${config.url}`);
-        } else {
-            console.warn("⚠️ No CSRF Token available - Ensuring token...");
-            await ensureCSRFToken();
-            const newCSRFToken = getCookie('csrftoken');
-            if (newCSRFToken) {
-                config.headers['X-CSRFToken'] = newCSRFToken;
-                console.log(`✅ CSRF attached after ensuring`);
-            } else {
-                console.error(`❌ Still no CSRF token for ${config.method} ${config.url}`);
-                try {
-                    await api.get('csrf/');
-                    const finalToken = getCookie('csrftoken');
-                    if (finalToken) {
-                        config.headers['X-CSRFToken'] = finalToken;
-                        console.log(`🔄 CSRF attached on retry`);
-                    }
-                } catch (e) {
-                    console.error('💥 Failed to get CSRF token:', e);
-                }
-            }
+        if (!csrfToken) {
+        log('warn', `[apiConfig] No CSRF token found — fetching one`);
+        await ensureCSRFToken();
+        csrfToken = getCookie('csrftoken');
         }
 
-        console.log(`📤 Final request to ${config.url}:`, {
-            method: config.method,
-            hasCSRF: !!config.headers['X-CSRFToken'],
-            headers: config.headers
-        });
+        if (csrfToken) {
+        config.headers['X-CSRFToken'] = csrfToken;
+        log('info', `[apiConfig] CSRF attached — ${config.method?.toUpperCase()} ${config.url}`);
+        } else {
+        log('error', `[apiConfig] Could not obtain CSRF token for ${config.method?.toUpperCase()} ${config.url}`);
+        }
     }
 
     return config;
 });
 
-// Response interceptor
+// ── Response interceptor ──────────────────────────────────────────────────────
 api.interceptors.response.use(
     (response) => {
-        console.log(`✅ ${response.config.method?.toUpperCase()} ${response.config.url} - ${response.status}`);
+        log('success', `[apiConfig] ${response.config.method?.toUpperCase()} ${response.config.url} — ${response.status}`);
         return response;
     },
     async (error) => {
-        console.error('❌ Response Error:', {
-            url: error.config?.url,
-            method: error.config?.method,
-            status: error.response?.status,
-            data: error.response?.data,
-            headers: error.response?.headers
-        });
-
-        const isCSRF = error.response?.status === 403;
+        const status = error.response?.status;
+        const url = error.config?.url;
+        const method = error.config?.method?.toUpperCase();
         const isMultipart = error.config?.headers?.['Content-Type']?.includes('multipart/form-data');
-        
-        if (isCSRF && !isMultipart) {
-            console.warn('🔄 CSRF Error - attempting to refresh token and retry');
-            currentSessionId = null;
-            await ensureCSRFToken();
 
-            const csrfToken = getCookie('csrftoken');
-            if (csrfToken) {
-                currentSessionId = 'authenticated';
-                error.config.headers['X-CSRFToken'] = csrfToken;
-                console.log('Retrying request with new CSRF token');
-                return api.request(error.config);
-            } else {
-                console.error('X Still no CSRF token after refresh');
-            }
-        }
+    log('error', `[apiConfig] ${method} ${url} failed — ${status}`);
 
-        if (isCSRF && isMultipart) {
-            console.error('X CSRF Error on multipart request - cannot retry safely');
-        }
-
-        return Promise.reject(error);
+    // Retry non-multipart 403s with a fresh CSRF token once
+    if (status === 403 && !isMultipart && error.config && !error.config._csrfRetried) {
+        log('warn', `[apiConfig] 403 on ${url} — refreshing CSRF and retrying`);
+        error.config._csrfRetried = true;
+        await ensureCSRFToken();
+        const csrfToken = getCookie('csrftoken');
+    if (csrfToken) {
+        error.config.headers['X-CSRFToken'] = csrfToken;
+        return api.request(error.config);
     }
+    }
+
+    if (status === 403 && isMultipart) {
+        log('warn', `[apiConfig] 403 on multipart request — cannot retry safely`);
+    }
+
+    return Promise.reject(error);
+}
 );
 
+// ── Initialize on app load ────────────────────────────────────────────────────
 export const initializeAPI = async (): Promise<void> => {
-    console.log('%c Initializing API...', 
-        `color: ${logColors.find(c => c.logType === 'info')?.color};
-        font-weight: ${logColors.find(c => c.logType === 'info')?.fontWeight};`);
-
+    log('info', `[apiConfig] Initializing API`);
     await ensureCSRFToken();
-    
-    const hasCsrfToken = !!getCookie('csrftoken');
-    if (hasCsrfToken) {
-        currentSessionId = 'authenticated';
-        console.log('%c O User already authenticated (CSRF token found)', 
-            `color: ${logColors.find(c => c.logType === 'success')?.color};
-            font-weight: ${logColors.find(c => c.logType === 'success')?.fontWeight};`);
-    } else {
-        currentSessionId = null;
-        console.log('%c ? User not authenticated (no CSRF token)',
-            `color:${logColors.find(c => c.logType === 'warn')?.color}; 
-            font-weight: ${logColors.find(c => c.logType === 'warn')?.fontWeight};`);
-    }
-    
-    console.log('%c API initialized', 
-        `color: ${logColors.find(c => c.logType === 'success')?.color}; 
-        font-weight: ${logColors.find(c => c.logType === 'success')?.fontWeight};`);
+    log('success', `[apiConfig] API ready`);
 };
 
 export default api;

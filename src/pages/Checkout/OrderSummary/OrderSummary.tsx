@@ -63,16 +63,12 @@ export const OrderSummary = ({
       <div className="border-t border-gray-200 pt-6">
         <div className="space-y-3">
           <div className="flex justify-between text-sm">
-            <span>Subtotal ({cartItems.length} items):</span>
-            <span>${subtotal.toFixed(2)}</span>
+            <span>Item(s): <span>{cartItems.length}</span> </span>
+            {/* <span>${subtotal.toFixed(2)}</span> */}
           </div>
           <div className="flex justify-between text-sm">
-            <span>Shipping:</span>
-            <span className="text-bittersweet">Calculated in Stripe </span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span>Tax:</span>
-            <span className="text-bittersweet">Calculated in Stripe </span>
+            <span>Shipping & Taxes:</span>
+            <span className="text-bittersweet text-end">Added at checkout </span>
           </div>
           <hr className="my-4" />
           <div className="flex justify-between text-lg font-bold">

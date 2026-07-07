@@ -1,5 +1,5 @@
 import api from "../apiConfig";
-import { ensureCSRFToken } from "../apiConfig";
+// import { ensureCSRFToken } from "../apiConfig";
 
 export interface CustomOrderData {
   customer_name: string,
@@ -34,7 +34,7 @@ export const getCustomOrder = async (referenceId: string) => {
 
 export  const createCustomOrder = async (orderData: CustomOrderData) => {
   try { 
-    await ensureCSRFToken();
+    // await ensureCSRFToken();
     const formData = new FormData()
 
     formData.append('customer_name', orderData.customer_name);

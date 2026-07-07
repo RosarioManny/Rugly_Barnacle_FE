@@ -146,12 +146,15 @@ export const Cart = () => {
           <div className="w-full lg:w-96 bg-white rounded-xl shadow-md p-6 h-fit sticky top-8">
             <div className="mb-6">
               <h2 className="text-xl font-semibold text-gray-900 mb-2">Order Summary</h2>
+              <p className="my-2 text-sm text-majorelle/60">
+                Review order before checking out.
+              </p>
               <div className="space-y-3">
                 <p className="text-sm font-semibold text-bittersweet/70 mb-4">
                   Taxes & shipping applied at checkout
                 </p>
                 <div className="flex justify-between text-sm">
-                  <span>Subtotal ({cartTotalItems} items):</span>
+                  <span>Item(s) : {cartTotalItems} items</span>
                   <span className="font-semibold">${cartTotal}</span>
                 </div>
                 <hr className="my-4" />
