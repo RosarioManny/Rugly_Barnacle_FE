@@ -15,6 +15,7 @@ const log = (type: 'info' | 'error' | 'success' | 'warn', message: string) => {
   else console.info(`%c ${message}`, css);
 };
 
+const isDev = false 
 export const Cart = () => {
   const { cart, status, fetchCart, removeCartItem, addItemToCart } = useCart();
   const [cartItems, setCartItems] = useState<CartItem[]>([]);
@@ -164,8 +165,23 @@ export const Cart = () => {
                 </div>
               </div>
             </div>
-            <div className="flex justify-center">
-              <CheckoutBtn />
+            <div className={`flex justify-center ${isDev ? 'gap-4 bg-bittersweet/10 text-center p-4 rounded-lg' : ''}`}>
+            {!isDev ? (
+                <CheckoutBtn /> 
+            ) : (
+              <>
+              <DangerIcon className="size-10 text-bittersweet/85  " />
+                <div className="text-sm text-bittersweet/85 flex flex-col gap-2">
+                <p className="font-semibold">
+                    Checkout temporarily disabled. 
+                  </p>
+                  <p >
+                    Please check back later or browse our shop. Apolgies for the inconvenience. 
+                  </p>
+              </div>
+              </>
+            )}
+              
             </div>
           </div>
         </div>
